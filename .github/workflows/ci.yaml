@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: composer install --no-dev
       - name: Static analysis
-        run: phpstan analyse
+        run: phpstan analyse src
       - name: Tests
         run: phpunit --coverage-html html
       - name: Install dependencies including dev
