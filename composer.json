@@ -26,12 +26,6 @@
         "ramsey/conventional-commits": "1.x-dev",
         "captainhook/plugin-composer": "^5.3"
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../data-interfaces"
-        }
-    ],
     "require": {
         "collecthor/data-interfaces": "dev-master"
     }
