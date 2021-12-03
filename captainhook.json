@@ -20,6 +20,11 @@
                 "conditions": []
             },
             {
+                "action": "vendor/bin/phpstan",
+                "options": [],
+                "conditions": []
+            },
+            {
                 "action": "vendor/bin/phpunit",
                 "options": [],
                 "conditions": []

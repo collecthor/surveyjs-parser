@@ -12,10 +12,6 @@ use PHPUnit\Framework\Assert;
  */
 trait SimpleValueTest
 {
-    private function createValue(string $class, mixed $param): ValueInterface
-    {
-        return new $class($param);
-    }
     private function getSubject(mixed $param = null): ValueInterface
     {
         $reflection = new \ReflectionClass($this);
@@ -31,7 +27,7 @@ trait SimpleValueTest
         foreach ($reflection->getAttributes(CoversClass::class) as $attribute) {
             /** @var CoversClass $coversClass */
             $coversClass = $attribute->newInstance();
-            $result = $this->createValue($coversClass->className, $param ?? $defaultValue);
+            $result = new ($coversClass->className)($param ?? $defaultValue);
             if ($result instanceof ValueInterface) {
                 return $result;
             }
