@@ -1,0 +1,38 @@
+{
+    "name": "collecthor/surveyjs-parser",
+    "description": "Parse SurveyJS survey structure into PHP classes",
+    "type": "library",
+    "license": "mit",
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Collecthor\\SurveyjsParser\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {},
+            "Collecthor\\SurveyjsParser\\Tests": "tests/"
+    },
+    "authors": [
+        {
+            "name": "Sam Mousa",
+            "email": "sam@mousa.nl"
+        }
+    ],
+    "require-dev": {
+        "symplify/easy-coding-standard": "^9.4",
+        "phpunit/phpunit": "^9.5",
+        "phpstan/phpstan": "^1.2",
+        "ramsey/conventional-commits": "1.x-dev",
+        "captainhook/plugin-composer": "^5.3"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../data-interfaces"
+        }
+    ],
+    "require": {
+        "collecthor/data-interfaces": "dev-master"
+    }
+}
