@@ -13,10 +13,13 @@ jobs:
           tools: symplify/easy-coding-standard, phpstan
       - name: Test code style
         run: ecs
+      - name: Install dependencies
+        run: composer install --no-dev
       - name: Static analysis
         run: phpstan
       - name: Tests
         run: phpunit --coverage-html html
+
       - name: Deploy coverage to pages
         uses: peaceiris/actions-gh-pages@v3
         with:
