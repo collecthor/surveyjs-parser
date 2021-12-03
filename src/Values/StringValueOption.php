@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Values;
 
 use Collecthor\DataInterfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Traits\GetDisplayValue;
 
 class StringValueOption implements ValueOptionInterface
 {
+    use GetDisplayValue;
     /**
      * @param array<string, string> $displayValues
      */
@@ -20,10 +22,5 @@ class StringValueOption implements ValueOptionInterface
     public function getRawValue(): string
     {
         return $this->rawValue;
-    }
-
-    public function getDisplayValue(?string $locale = null): string
-    {
-        return $this->displayValues[$locale] ?? $this->displayValues['default'] ?? $this->displayValues[array_keys($this->displayValues)[0]] ?? $this->rawValue;
     }
 }

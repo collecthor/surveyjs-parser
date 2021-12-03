@@ -10,8 +10,9 @@
         }
     },
     "autoload-dev": {
-        "psr-4": {},
-            "Collecthor\\SurveyjsParser\\Tests": "tests/"
+        "psr-4": {
+            "Collecthor\\SurveyjsParser\\Tests\\": "tests/"
+        }
     },
     "authors": [
         {
