@@ -23,6 +23,4 @@ class IntegerValueOption implements ValueOptionInterface
     {
         return $this->rawValue;
     }
-
-
 }
