@@ -8,6 +8,7 @@ use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Values\StringValue;
+use Collecthor\SurveyjsParser\Variables\NumericVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use PHPUnit\Framework\TestCase;
 
@@ -16,6 +17,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Collecthor\SurveyjsParser\ArrayRecord
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
+ * @uses \Collecthor\SurveyjsParser\Variables\NumericVariable
 
  */
 class TextQuestionParserTest extends TestCase
@@ -34,6 +36,7 @@ class TextQuestionParserTest extends TestCase
         }
         return $result;
     }
+
     public function testDataPathWithoutValueName(): void
     {
         $dummy = new DummyParser();
@@ -55,7 +58,6 @@ class TextQuestionParserTest extends TestCase
         $this->assertSame('abc', $value->getRawValue());
     }
 
-
     public function testDataPathWithValueName(): void
     {
         $dummy = new DummyParser();
@@ -76,5 +78,22 @@ class TextQuestionParserTest extends TestCase
         $value = $variable->getValue($record);
         $this->assertInstanceOf(StringValue::class, $value);
         $this->assertSame('abc', $value->getRawValue());
+    }
+
+    public function testNumberQuestion(): void
+    {
+        $dummy = new DummyParser();
+        $config = new SurveyConfiguration();
+        $parser = new TextQuestionParser();
+
+        $variables = $this->toArray($parser->parse($dummy, [
+            'name' => 'question1',
+            'inputType' => 'number'
+
+        ], $config, []));
+
+        /** @var NumericVariable $variable */
+        $variable = $variables[0];
+        $this->assertInstanceOf(NumericVariable::class, $variable);
     }
 }

@@ -19,7 +19,7 @@ trait ParserHelpers
     {
         $defaults = [];
         foreach ($surveyConfiguration->locales as $locale) {
-            if (is_string($config['name'])) {
+            if (isset($config['name']) && is_string($config['name'])) {
                 $defaults[$locale] = $config['name'];
             }
         }
@@ -98,5 +98,16 @@ trait ParserHelpers
         }
 
         return $config[$key];
+    }
+
+    /**
+     * @param array<mixed> $config
+     */
+    private function extractName(array $config): string
+    {
+        if (!isset($config['name']) || !is_string($config['name'])) {
+            throw new InvalidArgumentException("Expected to find a string at key `name`, inside: " . print_r($config, true));
+        }
+        return $config['name'];
     }
 }

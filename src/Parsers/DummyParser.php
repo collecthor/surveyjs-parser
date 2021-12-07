@@ -7,6 +7,9 @@ namespace Collecthor\SurveyjsParser\Parsers;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 
+/**
+ * @codeCoverageIgnore
+ */
 class DummyParser implements ElementParserInterface
 {
     public function parse(

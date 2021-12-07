@@ -18,7 +18,8 @@ class CommentParser implements ElementParserInterface
         if (($questionConfig['hasOther'] ?? false) || ($questionConfig['hasComment'] ?? false)) {
             $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
 
-            $name = implode('.', [...$dataPrefix, $questionConfig['name'], 'comment']);
+
+            $name = implode('.', [...$dataPrefix, $this->extractName($questionConfig), 'comment']);
             $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig) . $surveyConfiguration->commentPostfix];
 
 

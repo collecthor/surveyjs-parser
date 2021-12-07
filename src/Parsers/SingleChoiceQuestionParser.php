@@ -12,6 +12,7 @@ use Collecthor\SurveyjsParser\Values\IntegerValue;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValue;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
+use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 
 class SingleChoiceQuestionParser implements ElementParserInterface
 {
@@ -25,15 +26,14 @@ class SingleChoiceQuestionParser implements ElementParserInterface
     ): iterable {
         $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
 
-        $name = implode('.', [...$dataPrefix, $questionConfig['name']]);
+        $name = implode('.', [...$dataPrefix, $this->extractName($questionConfig)]);
         $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
 
         // Parse the answer options.
         $choices = $this->extractChoices($this->extractArray($questionConfig, 'choices'), $surveyConfiguration);
 
 
-
-        return [];
+        yield new SingleChoiceVariable($name, $titles, $choices, $dataPath);
     }
 
     /**
@@ -43,16 +43,19 @@ class SingleChoiceQuestionParser implements ElementParserInterface
      */
     private function extractChoices(array $choices, SurveyConfiguration $surveyConfiguration): array
     {
+        if (!array_is_list($choices)) {
+            throw new \InvalidArgumentException("Choices must be a list");
+        }
         $result = [];
         foreach ($choices as $choice) {
-            if (is_array($choice)) {
+            if (is_array($choice) && isset($choice['value'], $choice['text'])) {
                 $value = $choice['value'];
                 $displayValues = $this->extractLocalizedTexts($choice, $surveyConfiguration);
-            } elseif (is_string($choice)) {
+            } elseif (is_string($choice) || is_int($choice)) {
                 $value = $choice;
                 $displayValues = [];
             } else {
-                throw new \InvalidArgumentException("Each choice must be a string or an array with keys value and text");
+                throw new \InvalidArgumentException("Each choice must be a string or int or an array with keys value and text");
             }
 
             if (is_int($value)) {
