@@ -28,6 +28,6 @@
         "captainhook/plugin-composer": "^5.3"
     },
     "require": {
-        "collecthor/data-interfaces": "dev-master"
+        "collecthor/data-interfaces": "> 1.0.1"
     }
 }
