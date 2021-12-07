@@ -20,7 +20,7 @@ jobs:
       - name: Dump autoloader including dev rules
         run : composer dumpautoload --dev
       - name: Tests
-        run: phpunit --coverage-html html
+        run: phpunit --coverage-html html --coverage-clover coverage.xml
       - name: Install dependencies including dev
         run: composer install
       - name: Static analysis of tests
@@ -30,6 +30,11 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./html
+      - uses: codecov/codecov-action@v2
+        with:
+          files: ./coverage.xml
+          flags: unittests
+          name: codecov-umbrella
   commitlint:
     name: commit-lint
     runs-on: ubuntu-latest
