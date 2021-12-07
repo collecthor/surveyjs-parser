@@ -17,12 +17,10 @@ jobs:
         run: composer install --no-dev
       - name: Static analysis
         run: phpstan analyse src
-      - name: Dump autoloader including dev rules
-        run : composer dumpautoload --dev
-      - name: Tests
-        run: phpunit --coverage-html html --coverage-clover coverage.xml
       - name: Install dependencies including dev
         run: composer install
+      - name: Tests
+        run: phpunit --coverage-html html --coverage-clover coverage.xml
       - name: Static analysis of tests
         run: phpstan analyse tests
       - name: Deploy coverage to pages
