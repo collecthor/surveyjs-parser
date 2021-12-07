@@ -17,6 +17,8 @@ jobs:
         run: composer install --no-dev
       - name: Static analysis
         run: phpstan analyse src
+      - name: Dump autoloader including dev rules
+        run : composer dumpautoload --dev
       - name: Tests
         run: phpunit --coverage-html html
       - name: Install dependencies including dev
