@@ -32,7 +32,7 @@ class SingleChoiceVariable implements ClosedVariableInterface
         array $titles,
         array $valueOptions,
         /**
-         * @var non-empty-list<string>
+         * @phpstan-var non-empty-list<string>
          */
         private array $dataPath
     ) {

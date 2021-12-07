@@ -7,6 +7,11 @@ use Collecthor\DataInterfaces\VariableSetInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 
+/**
+ * An element parser that uses a closure to parse any given question configuration.
+ * The closure should have the same signature as `ElementParserInterface::parse`
+ * @see ElementParserInterface::parse()
+ */
 class CallbackElementParser implements ElementParserInterface
 {
     public function __construct(private \Closure $callback)

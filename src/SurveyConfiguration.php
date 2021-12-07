@@ -12,7 +12,7 @@ class SurveyConfiguration
     public string $commentPostfix = '-Comment';
 
     /**
-     * @var non-empty-list<string>
+     * @phpstan-var non-empty-list<string>
      */
     public array $locales = ['default'];
 }

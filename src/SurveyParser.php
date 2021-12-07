@@ -69,7 +69,7 @@ class SurveyParser
         }
         /**
          * Because of the IF clause above, the array is now non-empty
-         * @var non-empty-array<string, mixed> $config
+         * @phpstan-var non-empty-array<string, mixed> $config
          */
 
         $type = $config['type'];
@@ -80,7 +80,7 @@ class SurveyParser
     }
 
     /**
-     * @param array<string, non-empty-array<string, mixed>> $structure
+     * @phpstan-param array<string, non-empty-array<string, mixed>> $structure
      * @param SurveyConfiguration $surveyConfiguration
      * @return iterable<VariableInterface>
      */

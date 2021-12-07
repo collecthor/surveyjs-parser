@@ -3,3 +3,5 @@
 .phpunit.cache/
 html/
 composer.lock
+.phpdoc
+/docs/

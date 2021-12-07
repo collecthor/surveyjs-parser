@@ -26,7 +26,7 @@ class NumericVariable implements NumericVariableInterface
     /**
      * @param string $name
      * @param array<string, string> $titles
-     * @param non-empty-list<string> $dataPath
+     * @phpstan-param non-empty-list<string> $dataPath
      */
     public function __construct(
         string $name,

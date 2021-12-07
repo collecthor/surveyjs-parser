@@ -16,7 +16,7 @@ class OpenTextVariable implements VariableInterface
 {
     use GetName, GetTitle;
     /**
-     * @param non-empty-list<string> $dataPath
+     * @phpstan-param non-empty-list<string> $dataPath
      * @param array<string, string> $titles
      */
     public function __construct(

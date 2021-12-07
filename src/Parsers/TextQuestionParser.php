@@ -15,7 +15,7 @@ class TextQuestionParser implements ElementParserInterface
     use ParserHelpers;
     public function parse(ElementParserInterface $parent, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        /** @var non-empty-list<string> $dataPath */
+        /** @phpstan-var non-empty-list<string> $dataPath */
         $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
 
         $name = implode('.', [...$dataPrefix, $questionConfig['name']]);

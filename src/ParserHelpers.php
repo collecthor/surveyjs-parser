@@ -28,7 +28,7 @@ trait ParserHelpers
 
     /**
      * Parse the comment variable part of a question
-     * @param non-empty-array<string, mixed> $config
+     * @phpstan-param non-empty-array<string, mixed> $config
      * @param SurveyConfiguration $surveyConfiguration
      * @return iterable<VariableInterface>
      */

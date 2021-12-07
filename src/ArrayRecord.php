@@ -7,6 +7,9 @@ namespace Collecthor\SurveyjsParser;
 use Collecthor\DataInterfaces\RecordInterface;
 use DateTimeInterface;
 
+/**
+ * A simple array wrapper that implements `RecordInterface`
+ */
 class ArrayRecord implements RecordInterface
 {
     /**
