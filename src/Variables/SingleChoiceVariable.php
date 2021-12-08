@@ -19,14 +19,14 @@ class SingleChoiceVariable implements ClosedVariableInterface
     use GetName, GetTitle;
 
     /**
-     * @var array<string|int|float, ValueOptionInterface>
+     * @var array<string|int, ValueOptionInterface>
      */
     private array $valueMap = [];
 
     /**
      * @param string $name
      * @param array<string, string> $titles
-     * @param ValueOptionInterface[] $valueOptions
+     * @phpstan-param non-empty-list<ValueOptionInterface> $valueOptions
      */
     public function __construct(
         string $name,
@@ -40,7 +40,7 @@ class SingleChoiceVariable implements ClosedVariableInterface
         $this->name = $name;
 
         foreach ($valueOptions as $valueOption) {
-            $this->valueMap[$valueOption->getRawValue()] = $valueOption;
+            $this->valueMap[(string) $valueOption->getRawValue()] = $valueOption;
         }
 
         $this->titles = $titles;
@@ -55,11 +55,11 @@ class SingleChoiceVariable implements ClosedVariableInterface
     {
         // Match the value options.
         $rawValue = $record->getDataValue($this->dataPath);
-        if (is_array($rawValue) || !isset($this->valueMap[$rawValue])) {
+        if (is_array($rawValue) || !isset($this->valueMap[(string) $rawValue])) {
             return new InvalidValue($rawValue);
         }
 
-        return $this->valueMap[$rawValue];
+        return $this->valueMap[(string) $rawValue];
     }
 
     public function getDisplayValue(RecordInterface $record, ?string $locale = null): StringValueInterface

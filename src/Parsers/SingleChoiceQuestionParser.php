@@ -39,12 +39,12 @@ class SingleChoiceQuestionParser implements ElementParserInterface
     /**
      * @param list<mixed>  $choices
      * @param SurveyConfiguration $surveyConfiguration
-     * @return array<ValueOptionInterface>
+     * @phpstan-return non-empty-list<ValueOptionInterface>
      */
     private function extractChoices(array $choices, SurveyConfiguration $surveyConfiguration): array
     {
-        if (!array_is_list($choices)) {
-            throw new \InvalidArgumentException("Choices must be a list");
+        if (!array_is_list($choices) || $choices === []) {
+            throw new \InvalidArgumentException("Choices must be a non empty list");
         }
         $result = [];
         foreach ($choices as $choice) {
@@ -66,6 +66,7 @@ class SingleChoiceQuestionParser implements ElementParserInterface
                 throw new \InvalidArgumentException('Values must be scalar, got: ' . print_r($choice, true));
             }
         }
+
         return $result;
     }
 }
