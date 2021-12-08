@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
 use Collecthor\SurveyjsParser\ArrayRecord;
+use Collecthor\SurveyjsParser\Parsers\CommentParser;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
@@ -19,6 +20,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  * @uses \Collecthor\SurveyjsParser\Variables\NumericVariable
  * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
+ * @uses \Collecthor\SurveyjsParser\Parsers\CommentParser
  */
 class TextQuestionParserTest extends TestCase
 {
@@ -41,7 +43,7 @@ class TextQuestionParserTest extends TestCase
     {
         $dummy = new DummyParser();
         $config = new SurveyConfiguration();
-        $parser = new TextQuestionParser();
+        $parser = new TextQuestionParser(new CommentParser());
         $variables = $this->toArray($parser->parse($dummy, [
             'name' => 'question1',
         ], $config, []));
@@ -61,7 +63,7 @@ class TextQuestionParserTest extends TestCase
     {
         $dummy = new DummyParser();
         $config = new SurveyConfiguration();
-        $parser = new TextQuestionParser();
+        $parser = new TextQuestionParser(new CommentParser());
         $variables = $this->toArray($parser->parse($dummy, [
             'name' => 'question1',
             'valueName' => 'question2'
@@ -82,7 +84,7 @@ class TextQuestionParserTest extends TestCase
     {
         $dummy = new DummyParser();
         $config = new SurveyConfiguration();
-        $parser = new TextQuestionParser();
+        $parser = new TextQuestionParser(new CommentParser());
 
         $variables = $this->toArray($parser->parse($dummy, [
             'name' => 'question1',

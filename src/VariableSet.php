@@ -7,23 +7,27 @@ namespace Collecthor\SurveyjsParser;
 use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\DataInterfaces\VariableSetInterface;
 use InvalidArgumentException;
+use function iter\keys;
 
 class VariableSet implements VariableSetInterface
 {
     /**
-     * @var VariableInterface[]
+     * @var array<string, VariableInterface>
      */
     private array $variables = [];
 
+
     public function __construct(VariableInterface ...$variables)
     {
-        $this->variables = array_values($variables);
+        foreach ($variables as $variable) {
+            $this->variables[$variable->getName()] = $variable;
+        }
     }
 
     public function getVariableNames(): iterable
     {
-        foreach ($this->variables as $variable) {
-            yield $variable->getName();
+        foreach ($this->variables as $key => $dummy) {
+            yield $key;
         }
     }
 
@@ -37,6 +41,8 @@ class VariableSet implements VariableSetInterface
 
     public function getVariables(): iterable
     {
-        yield from $this->variables;
+        foreach ($this->variables as $variable) {
+            yield $variable;
+        };
     }
 }

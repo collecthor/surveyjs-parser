@@ -12,6 +12,11 @@ use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 
 class TextQuestionParser implements ElementParserInterface
 {
+    public function __construct(
+        private CommentParser $commentParser
+    ) {
+    }
+
     use ParserHelpers;
     public function parse(ElementParserInterface $parent, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
@@ -26,5 +31,8 @@ class TextQuestionParser implements ElementParserInterface
         } else {
             yield new OpenTextVariable($name, $titles, $dataPath);
         }
+
+        // Check if we have a comment field.
+        yield from $this->commentParser->parse($parent, $questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }

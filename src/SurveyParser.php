@@ -6,6 +6,7 @@ namespace Collecthor\SurveyjsParser;
 use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\DataInterfaces\VariableSetInterface;
 use Collecthor\SurveyjsParser\Parsers\CallbackElementParser;
+use Collecthor\SurveyjsParser\Parsers\CommentParser;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\PanelParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
@@ -25,24 +26,22 @@ class SurveyParser
     {
         // Recursive parser.
         $this->recursiveParser = new CallbackElementParser(
-        /**
-         * @param non-empty-array<string, mixed> $questionConfig
-         */
-
-        function (
-            ElementParserInterface $parent,
-            SurveyConfiguration $surveyConfiguration,
-            array $questionConfig,
-            array $dataPrefix = []
-        ) {
-            yield from $this->parseElement($questionConfig, $surveyConfiguration, $dataPrefix);
-        }
+            function (
+                ElementParserInterface $parent,
+                SurveyConfiguration $surveyConfiguration,
+                array $questionConfig,
+                array $dataPrefix = []
+            ) {
+                /** @phpstan-ignore-next-line */
+                yield from $this->parseElement($questionConfig, $surveyConfiguration, $dataPrefix);
+            }
         );
 
         // Configure default built-in parsers.
-        $this->parsers['text'] = new TextQuestionParser();
-        $this->parsers['comment'] = new TextQuestionParser();
-        $this->parsers['expression'] = new TextQuestionParser();
+        $textParser = new TextQuestionParser(new CommentParser());
+        $this->parsers['text'] = $textParser;
+        $this->parsers['comment'] = $textParser;
+        $this->parsers['expression'] = $textParser;
         $this->parsers['panel'] = new PanelParser();
 
         $this->parsers['html'] = new DummyParser();
@@ -57,39 +56,24 @@ class SurveyParser
     }
 
     /**
-     * @param array<string, mixed> $config
+     * @phpstan-param array{type: string} $config
      * @param SurveyConfiguration $surveyConfiguration
      * @param list<string> $dataPrefix
      * @return iterable<VariableInterface>
      */
     private function parseElement(array $config, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        if (!isset($config['type'], $this->parsers[$config['type']])) {
-            $config['type'] = self::UNKNOWN_ELEMENT_TYPE;
-        }
-        /**
-         * Because of the IF clause above, the array is now non-empty
-         * @phpstan-var non-empty-array<string, mixed> $config
-         */
-
-        $type = $config['type'];
-        if (!is_string($type)) {
-            throw new \InvalidArgumentException("Element type must be a strong, got: " . print_r($config, true));
-        }
-        yield from $this->getParser($type)->parse($this->recursiveParser, $config, $surveyConfiguration, $dataPrefix);
+        yield from $this->getParser($config['type'])->parse($this->recursiveParser, $config, $surveyConfiguration, $dataPrefix);
     }
 
     /**
-     * @phpstan-param array<string, non-empty-array<string, mixed>> $structure
+     * @phpstan-param array{elements: non-empty-list<array{"type": string}>} $structure
      * @param SurveyConfiguration $surveyConfiguration
      * @return iterable<VariableInterface>
      */
     private function parsePage(array $structure, SurveyConfiguration $surveyConfiguration): iterable
     {
         foreach ($structure['elements'] as $element) {
-            if (!is_array($element)) {
-                throw new \InvalidArgumentException("Element must be an array, got: " . print_r([$element], true));
-            }
             yield from $this->parseElement($element, $surveyConfiguration);
         }
     }
@@ -105,8 +89,7 @@ class SurveyParser
          * Get some global settings from the survey structure. Note surveyJS incorrectly calls this a prefix
          * https://surveyjs.io/Documentation/Library?id=surveymodel#commentPrefix
          */
-        $surveyConfiguration = new SurveyConfiguration();
-        $surveyConfiguration->commentPostfix = $this->extractString($structure, 'commentPrefix', '-Comment');
+        $surveyConfiguration = new SurveyConfiguration($this->extractString($structure, 'commentPrefix', '-Comment'));
 
         if (isset($structure['pages']) && is_array($structure['pages'])) {
             foreach ($structure['pages'] as $page) {
