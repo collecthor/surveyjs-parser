@@ -96,6 +96,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractName"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AextractOptionalBoolean\u0028\u0029",
+            "name": "extractOptionalBoolean",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractOptionalBoolean"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\CallbackElementParser",
             "name": "CallbackElementParser",
             "summary": "An\u0020element\u0020parser\u0020that\u0020uses\u0020a\u0020closure\u0020to\u0020parse\u0020any\u0020given\u0020question\u0020configuration.",
@@ -170,21 +175,6 @@ Search.appendIndex(
             "name": "parse",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-TextQuestionParser.html#method_parse"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyConfiguration",
-            "name": "SurveyConfiguration",
-            "summary": "All\u0020class\u0020properties\u0020will\u0020be\u0020readonly\u0020in\u0020PHP8.1",
-            "url": "classes/Collecthor-SurveyjsParser-SurveyConfiguration.html"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyConfiguration\u003A\u003A\u0024commentPostfix",
-            "name": "commentPostfix",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-SurveyConfiguration.html#property_commentPostfix"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyConfiguration\u003A\u003A\u0024locales",
-            "name": "locales",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-SurveyConfiguration.html#property_locales"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser",
             "name": "SurveyParser",

@@ -138,6 +138,13 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractOptionalBoolean">extractOptionalBoolean()</a>
+    <span>
+                        &nbsp;: bool|null    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractTitles">extractTitles()</a>
     <span>
                         &nbsp;: array&lt;string, string&gt;    </span>
@@ -238,7 +245,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                <span class="phpdocumentor-signature__name">extractLocalizedTexts</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-SurveyConfiguration.html"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$surveyConfiguration</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$field</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;text&#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$defaults</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, string&gt;</span></code>
+                <span class="phpdocumentor-signature__name">extractLocalizedTexts</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$surveyConfiguration</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$field</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;text&#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$defaults</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, string&gt;</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -252,7 +259,7 @@
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$surveyConfiguration</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-SurveyConfiguration.html"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr></a></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -331,6 +338,55 @@
             -private
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_extractOptionalBoolean">
+        extractOptionalBoolean()
+        <a href="classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractOptionalBoolean" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/ParserHelpers.php"><a href="files/src-parserhelpers.html"><abbr title="src/ParserHelpers.php">ParserHelpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">119</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__name">extractOptionalBoolean</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|null</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$config</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$key</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool|null</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_extractTitles">
         extractTitles()
         <a href="classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractTitles" class="headerlink"><i class="fas fa-link"></i></a>
@@ -345,7 +401,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                <span class="phpdocumentor-signature__name">extractTitles</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-SurveyConfiguration.html"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$surveyConfiguration</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, string&gt;</span></code>
+                <span class="phpdocumentor-signature__name">extractTitles</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$surveyConfiguration</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, string&gt;</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -359,7 +415,7 @@
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$surveyConfiguration</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-SurveyConfiguration.html"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr></a></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -437,7 +493,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                <span class="phpdocumentor-signature__name">parseComments</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-SurveyConfiguration.html"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$surveyConfiguration</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, <abbr title="\Collecthor\DataInterfaces\VariableInterface">VariableInterface</abbr>&gt;</span></code>
+                <span class="phpdocumentor-signature__name">parseComments</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$surveyConfiguration</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, <abbr title="\Collecthor\DataInterfaces\VariableInterface">VariableInterface</abbr>&gt;</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -452,7 +508,7 @@
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$surveyConfiguration</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-SurveyConfiguration.html"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr></a></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
