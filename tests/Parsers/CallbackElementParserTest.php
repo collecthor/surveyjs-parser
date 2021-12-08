@@ -15,6 +15,7 @@ use function PHPStan\dumpType;
 
 /**
  * @covers \Collecthor\SurveyjsParser\Parsers\CallbackElementParser
+ * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
  */
 class CallbackElementParserTest extends TestCase
 {

@@ -18,6 +18,7 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  * @uses \Collecthor\SurveyjsParser\ArrayRecord
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
+ * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
  */
 class CommentParserTest extends TestCase
 {

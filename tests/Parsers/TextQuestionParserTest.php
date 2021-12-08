@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  * @uses \Collecthor\SurveyjsParser\Variables\NumericVariable
-
+ * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
  */
 class TextQuestionParserTest extends TestCase
 {
