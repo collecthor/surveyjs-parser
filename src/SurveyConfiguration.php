@@ -5,14 +5,16 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser;
 
 /**
- * All class properties will be readonly in PHP8.1
+ * Survey wide configuration settings that affect parsing of individual questions
  */
 class SurveyConfiguration
 {
-    public string $commentPostfix = '-Comment';
-
-    /**
-     * @phpstan-var non-empty-list<string>
-     */
-    public array $locales = ['default'];
+    public function __construct(
+        public readonly string $commentPostfix = '-Comment',
+        /**
+         * @phpstan-var non-empty-list<string>
+         */
+        public array $locales = ['default']
+    ) {
+    }
 }

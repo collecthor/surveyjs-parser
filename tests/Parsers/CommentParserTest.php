@@ -51,8 +51,7 @@ class CommentParserTest extends TestCase
 
     public function testCustomPostfix(): void
     {
-        $surveyConfiguration = new SurveyConfiguration();
-        $surveyConfiguration->commentPostfix = '-' . random_bytes(15);
+        $surveyConfiguration = new SurveyConfiguration('-' . random_bytes(15));
 
         $parser = new CommentParser();
         $variable = toArray($parser->parse(new DummyParser(), ['hasComment' => true, 'name' => 'q1'], $surveyConfiguration))[0];
