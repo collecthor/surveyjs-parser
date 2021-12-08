@@ -19,7 +19,7 @@ class SingleChoiceVariable implements ClosedVariableInterface
     use GetName, GetTitle;
 
     /**
-     * @var array<string|int, ValueOptionInterface>
+     * @var array<string, ValueOptionInterface>
      */
     private array $valueMap = [];
 

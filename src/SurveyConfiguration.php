@@ -6,6 +6,7 @@ namespace Collecthor\SurveyjsParser;
 
 /**
  * Survey wide configuration settings that affect parsing of individual questions
+ * @codeCoverageIgnore
  */
 class SurveyConfiguration
 {
