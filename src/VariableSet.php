@@ -7,7 +7,6 @@ namespace Collecthor\SurveyjsParser;
 use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\DataInterfaces\VariableSetInterface;
 use InvalidArgumentException;
-use function iter\keys;
 
 class VariableSet implements VariableSetInterface
 {
