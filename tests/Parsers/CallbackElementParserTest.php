@@ -11,6 +11,7 @@ use Collecthor\SurveyjsParser\Parsers\PanelParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use PHPUnit\Framework\TestCase;
 use function iter\toArray;
+use function PHPStan\dumpType;
 
 /**
  * @covers \Collecthor\SurveyjsParser\Parsers\CallbackElementParser
@@ -24,11 +25,11 @@ class CallbackElementParserTest extends TestCase
         $surveyConfiguration = new SurveyConfiguration();
 
         $mock = $this->getMockBuilder(\stdClass::class)->addMethods(['__invoke'])->getMock();
+        /** @phpstan-ignore-next-line */
         $mock->expects($this->once())
             ->method('__invoke')
             ->with($this->equalTo($parent), $this->equalTo($config))
             ->willReturn([]);
-
         /** @var callable $mock */
         $this->assertIsCallable($mock);
         $closure = \Closure::fromCallable($mock);
