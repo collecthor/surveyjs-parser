@@ -10,7 +10,7 @@ trait GetDisplayValue
 {
     public function getDisplayValue(?string $locale = null): string
     {
-        if (!empty($this->displayValues)) {
+        if (count($this->displayValues) > 0) {
             $firstLabel = $this->displayValues[array_keys($this->displayValues)[0]];
         }
 

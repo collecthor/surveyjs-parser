@@ -20,7 +20,7 @@ trait TestValueOptionLabels
         $option = $factory($labels);
         Assert::assertInstanceOf(ValueOptionInterface::class, $option);
 
-        if (empty($labels)) {
+        if ($labels === []) {
             Assert::assertEquals((string) $option->getRawValue(), $option->getDisplayValue());
             Assert::assertEquals((string) $option->getRawValue(), $option->getDisplayValue($unknownLocale));
             return;

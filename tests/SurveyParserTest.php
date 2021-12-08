@@ -35,6 +35,6 @@ class SurveyParserTest extends TestCase
     {
         $parser = new SurveyParser();
         $variableSet = $parser->parseSurveyStructure($surveyConfig);
-        $this->assertInstanceOf(VariableSet::class, $variableSet);
+        self::assertInstanceOf(VariableSet::class, $variableSet);
     }
 }

@@ -22,37 +22,37 @@ class InvalidValueTest extends TestCase
     public function testArray(): void
     {
         $value = new InvalidValue(['abc', 'def' => 'ghi', 'jkl' => ['mno']]);
-        $this->assertStringContainsString('abc', $value->getRawValue());
-        $this->assertStringContainsString('def', $value->getRawValue());
-        $this->assertStringContainsString('ghi', $value->getRawValue());
-        $this->assertStringContainsString('jkl', $value->getRawValue());
-        $this->assertStringContainsString('mno', $value->getRawValue());
+        self::assertStringContainsString('abc', $value->getRawValue());
+        self::assertStringContainsString('def', $value->getRawValue());
+        self::assertStringContainsString('ghi', $value->getRawValue());
+        self::assertStringContainsString('jkl', $value->getRawValue());
+        self::assertStringContainsString('mno', $value->getRawValue());
 
-        $this->assertTrue($value->isSystemMissing());
+        self::assertTrue($value->isSystemMissing());
     }
 
     public function testFloat(): void
     {
         $value = new InvalidValue(15.4);
-        $this->assertSame("15.4", $value->getRawValue());
+        self::assertSame("15.4", $value->getRawValue());
 
-        $this->assertTrue($value->isSystemMissing());
+        self::assertTrue($value->isSystemMissing());
     }
 
     public function testInteger(): void
     {
         $value = new InvalidValue(14);
-        $this->assertSame("14", $value->getRawValue());
+        self::assertSame("14", $value->getRawValue());
 
-        $this->assertTrue($value->isSystemMissing());
+        self::assertTrue($value->isSystemMissing());
     }
 
     public function testString(): void
     {
         $randomString = random_bytes(15);
         $value = new InvalidValue($randomString);
-        $this->assertSame($randomString, $value->getRawValue());
+        self::assertSame($randomString, $value->getRawValue());
 
-        $this->assertTrue($value->isSystemMissing());
+        self::assertTrue($value->isSystemMissing());
     }
 }

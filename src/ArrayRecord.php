@@ -27,7 +27,7 @@ class ArrayRecord implements RecordInterface
     {
         $data = $this->data;
 
-        while (!empty($path) && is_array($data)) {
+        while (count($path) > 0 && is_array($data)) {
             $key = array_shift($path);
             $data = $data[$key] ?? null;
         }

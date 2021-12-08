@@ -46,7 +46,7 @@ class NumericVariableTest extends TestCase
 
         $value = $variable->getValue(new ArrayRecord($sample, 1, new \DateTime(), new \DateTime()));
 
-        $this->assertInstanceOf($expectedClass, $value);
-        $this->assertSame($expected, $value->getRawValue());
+        self::assertInstanceOf($expectedClass, $value);
+        self::assertSame($expected, $value->getRawValue());
     }
 }

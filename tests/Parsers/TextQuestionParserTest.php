@@ -46,16 +46,15 @@ class TextQuestionParserTest extends TestCase
             'name' => 'question1',
         ], $config, []));
 
-        /** @var OpenTextVariable $variable */
         $variable = $variables[0];
-        $this->assertInstanceOf(OpenTextVariable::class, $variable);
+        self::assertInstanceOf(OpenTextVariable::class, $variable);
 
 
         $record = new ArrayRecord(['question1' => 'abc'], 1, new \DateTimeImmutable(), new \DateTimeImmutable());
 
         $value = $variable->getValue($record);
-        $this->assertInstanceOf(StringValue::class, $value);
-        $this->assertSame('abc', $value->getRawValue());
+        self::assertInstanceOf(StringValue::class, $value);
+        self::assertSame('abc', $value->getRawValue());
     }
 
     public function testDataPathWithValueName(): void
@@ -68,16 +67,15 @@ class TextQuestionParserTest extends TestCase
             'valueName' => 'question2'
         ], $config, []));
 
-        /** @var OpenTextVariable $variable */
         $variable = $variables[0];
-        $this->assertInstanceOf(OpenTextVariable::class, $variable);
+        self::assertInstanceOf(OpenTextVariable::class, $variable);
 
 
         $record = new ArrayRecord(['question2' => 'abc'], 1, new \DateTimeImmutable(), new \DateTimeImmutable());
 
         $value = $variable->getValue($record);
-        $this->assertInstanceOf(StringValue::class, $value);
-        $this->assertSame('abc', $value->getRawValue());
+        self::assertInstanceOf(StringValue::class, $value);
+        self::assertSame('abc', $value->getRawValue());
     }
 
     public function testNumberQuestion(): void
@@ -92,8 +90,7 @@ class TextQuestionParserTest extends TestCase
 
         ], $config, []));
 
-        /** @var NumericVariable $variable */
         $variable = $variables[0];
-        $this->assertInstanceOf(NumericVariable::class, $variable);
+        self::assertInstanceOf(NumericVariable::class, $variable);
     }
 }

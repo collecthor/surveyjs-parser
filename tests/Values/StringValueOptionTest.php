@@ -47,6 +47,6 @@ class StringValueOptionTest extends TestCase
      */
     public function testLabelSet(array $labels): void
     {
-        $this->assertValueOptionLabels($this->createOption(...), $labels);
+        self::assertValueOptionLabels($this->createOption(...), $labels);
     }
 }

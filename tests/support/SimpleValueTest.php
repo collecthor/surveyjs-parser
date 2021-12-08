@@ -68,7 +68,6 @@ trait SimpleValueTest
 
         $reflector = new \ReflectionClass($subject);
 
-        /** @var \ReflectionMethod $constructor */
         $constructor = $reflector->getConstructor();
         Assert::assertInstanceOf(\ReflectionMethod::class, $constructor);
         $getterType = $reflector->getMethod('getRawValue')->getReturnType();

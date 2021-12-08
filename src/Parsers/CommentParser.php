@@ -15,7 +15,9 @@ class CommentParser implements ElementParserInterface
 
     public function parse(ElementParserInterface $parent, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        if (($questionConfig['hasOther'] ?? false) || ($questionConfig['hasComment'] ?? false)) {
+        if (($this->extractOptionalBoolean($questionConfig, 'hasOther') ?? false)
+            || ($this->extractOptionalBoolean($questionConfig, 'hasComment') ?? false)
+        ) {
             $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
 
 

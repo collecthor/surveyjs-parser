@@ -28,7 +28,8 @@
         "captainhook/plugin-composer": "^5.3",
         "nikic/iter": "dev-master",
         "phpstan/phpstan-phpunit": "1.0.x-dev",
-        "phpstan/extension-installer": "dev-master"
+        "phpstan/extension-installer": "dev-master",
+        "phpstan/phpstan-strict-rules": "1.1.x-dev"
     },
     "require": {
         "php": ">= 8.1",

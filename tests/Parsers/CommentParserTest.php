@@ -26,28 +26,28 @@ class CommentParserTest extends TestCase
     {
         $parser = new CommentParser();
         $variables = $parser->parse(new DummyParser(), ['abc' => 'def'], new SurveyConfiguration());
-        $this->assertEmpty(toArray($variables));
+        self::assertEmpty(toArray($variables));
     }
 
     public function testHasOther(): void
     {
         $parser = new CommentParser();
         $variables = $parser->parse(new DummyParser(), ['hasOther' => true, 'name' => 'q1'], new SurveyConfiguration());
-        $this->assertCount(1, toArray($variables));
+        self::assertCount(1, toArray($variables));
     }
 
     public function testHasComment(): void
     {
         $parser = new CommentParser();
         $variables = $parser->parse(new DummyParser(), ['hasComment' => true, 'name' => 'q1'], new SurveyConfiguration());
-        $this->assertCount(1, toArray($variables));
+        self::assertCount(1, toArray($variables));
     }
 
     public function testHasCommentAndOther(): void
     {
         $parser = new CommentParser();
         $variables = $parser->parse(new DummyParser(), ['hasComment' => true, 'hasOther' => true, 'name' => 'q1'], new SurveyConfiguration());
-        $this->assertCount(1, toArray($variables));
+        self::assertCount(1, toArray($variables));
     }
 
     public function testCustomPostfix(): void
@@ -56,15 +56,15 @@ class CommentParserTest extends TestCase
 
         $parser = new CommentParser();
         $variable = toArray($parser->parse(new DummyParser(), ['hasComment' => true, 'name' => 'q1'], $surveyConfiguration))[0];
-        $this->assertInstanceOf(OpenTextVariable::class, $variable);
+        self::assertInstanceOf(OpenTextVariable::class, $variable);
 
         $record = new ArrayRecord([
             "q1{$surveyConfiguration->commentPostfix}" => 'abcdef'
         ], 1, new \DateTime(), new \DateTime());
 
         $value = $variable->getValue($record);
-        $this->assertInstanceOf(StringValue::class, $value);
+        self::assertInstanceOf(StringValue::class, $value);
 
-        $this->assertSame('abcdef', $value->getRawValue());
+        self::assertSame('abcdef', $value->getRawValue());
     }
 }

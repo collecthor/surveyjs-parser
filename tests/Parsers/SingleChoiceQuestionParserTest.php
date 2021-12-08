@@ -89,18 +89,18 @@ class SingleChoiceQuestionParserTest extends TestCase
             'name' => 'q1',
 
         ], $surveyConfiguration))[0];
-        $this->assertInstanceOf(SingleChoiceVariable::class, $variable);
+        self::assertInstanceOf(SingleChoiceVariable::class, $variable);
 
         $options = $variable->getValueOptions();
-        $this->assertCount(4, $options);
-        $this->assertSame('a', $options[0]->getRawValue());
-        $this->assertSame('c', $options[1]->getRawValue());
-        $this->assertSame(15, $options[2]->getRawValue());
-        $this->assertSame(16, $options[3]->getRawValue());
+        self::assertCount(4, $options);
+        self::assertSame('a', $options[0]->getRawValue());
+        self::assertSame('c', $options[1]->getRawValue());
+        self::assertSame(15, $options[2]->getRawValue());
+        self::assertSame(16, $options[3]->getRawValue());
 
-        $this->assertSame('b', $options[0]->getDisplayValue());
-        $this->assertSame('c', $options[1]->getDisplayValue());
-        $this->assertSame("15", $options[2]->getDisplayValue());
-        $this->assertSame('abc', $options[3]->getDisplayValue());
+        self::assertSame('b', $options[0]->getDisplayValue());
+        self::assertSame('c', $options[1]->getDisplayValue());
+        self::assertSame("15", $options[2]->getDisplayValue());
+        self::assertSame('abc', $options[3]->getDisplayValue());
     }
 }

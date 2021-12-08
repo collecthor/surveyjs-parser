@@ -26,10 +26,10 @@ class PanelParserTest extends TestCase
         $config = new SurveyConfiguration();
         $parent = $this->getMockBuilder(ElementParserInterface::class)->getMock();
 
-        $parent->expects($this->exactly(2))
+        $parent->expects(self::exactly(2))
             ->method('parse')->withConsecutive(
-                [$this->equalTo($parent), $this->equalTo($elements[0]), $this->equalTo($config)],
-                [$this->equalTo($parent), $this->equalTo($elements[1]), $this->equalTo($config)]
+                [self::equalTo($parent), self::equalTo($elements[0]), self::equalTo($config)],
+                [self::equalTo($parent), self::equalTo($elements[1]), self::equalTo($config)]
             );
         $parser = new PanelParser();
 

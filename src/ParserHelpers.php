@@ -110,4 +110,21 @@ trait ParserHelpers
         }
         return $config['name'];
     }
+
+    /**
+     * @param array<string, mixed> $config
+     * @param string $key
+     * @return bool|null
+     */
+    private function extractOptionalBoolean(array $config, string $key): bool|null
+    {
+        if (!isset($config[$key])) {
+            return null;
+        }
+        if (is_bool($config[$key])) {
+            return $config[$key];
+        }
+
+        throw new InvalidArgumentException("Key $key in array is expected to be boolean or null, got: " . print_r($config, true));
+    }
 }

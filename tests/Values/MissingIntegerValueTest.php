@@ -18,7 +18,7 @@ class MissingIntegerValueTest extends IntegerValueTest
 {
     public function testSystemMissing(): void
     {
-        $this->assertTrue((new MissingIntegerValue(14, true))->isSystemMissing());
-        $this->assertFalse((new MissingIntegerValue(13, false))->isSystemMissing());
+        self::assertTrue((new MissingIntegerValue(14, true))->isSystemMissing());
+        self::assertFalse((new MissingIntegerValue(13, false))->isSystemMissing());
     }
 }

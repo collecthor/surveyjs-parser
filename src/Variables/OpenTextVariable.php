@@ -28,9 +28,6 @@ class OpenTextVariable implements VariableInterface
         $this->titles = $titles;
 
         $this->name = $name;
-        if (empty($this->dataPath)) {
-            throw new \InvalidArgumentException("dataPath must not be empty");
-        }
     }
 
 

@@ -46,10 +46,10 @@ class NumericVariable implements NumericVariableInterface
         }
 
         if (is_float($result)) {
-            return new FloatValue((float) $result);
+            return new FloatValue($result);
         }
         if (is_int($result)) {
-            return new IntegerValue((int) $result);
+            return new IntegerValue($result);
         }
 
         return new InvalidValue($result);

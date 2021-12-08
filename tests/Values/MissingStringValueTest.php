@@ -18,7 +18,7 @@ class MissingStringValueTest extends StringValueTest
 {
     public function testSystemMissing(): void
     {
-        $this->assertTrue((new MissingStringValue('', true))->isSystemMissing());
-        $this->assertFalse((new MissingStringValue('', false))->isSystemMissing());
+        self::assertTrue((new MissingStringValue('', true))->isSystemMissing());
+        self::assertFalse((new MissingStringValue('', false))->isSystemMissing());
     }
 }
