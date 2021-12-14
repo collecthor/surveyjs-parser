@@ -9,6 +9,7 @@ use Collecthor\SurveyjsParser\Parsers\CallbackElementParser;
 use Collecthor\SurveyjsParser\Parsers\CommentParser;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\PanelParser;
+use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
 
 class SurveyParser
@@ -38,12 +39,17 @@ class SurveyParser
         );
 
         // Configure default built-in parsers.
-        $textParser = new TextQuestionParser(new CommentParser());
+        $commentParser = new CommentParser();
+        $textParser = new TextQuestionParser($commentParser);
         $this->parsers['text'] = $textParser;
         $this->parsers['comment'] = $textParser;
         $this->parsers['expression'] = $textParser;
-        $this->parsers['panel'] = new PanelParser();
 
+        $singleChoiceParser = new SingleChoiceQuestionParser($commentParser);
+        $this->parsers['radiogroup'] = $singleChoiceParser;
+        $this->parsers['dropdown'] = $singleChoiceParser;
+
+        $this->parsers['panel'] = new PanelParser();
         $this->parsers['html'] = new DummyParser();
         $this->parsers['image'] = new DummyParser();
         $this->parsers[self::UNKNOWN_ELEMENT_TYPE] = new DummyParser();

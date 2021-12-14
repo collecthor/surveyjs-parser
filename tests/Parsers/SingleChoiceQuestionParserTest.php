@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
+use Collecthor\SurveyjsParser\Parsers\CommentParser;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
@@ -40,7 +41,7 @@ class SingleChoiceQuestionParserTest extends TestCase
     {
         $parent = new DummyParser();
         $surveyConfiguration = new SurveyConfiguration();
-        $parser = new SingleChoiceQuestionParser();
+        $parser = new SingleChoiceQuestionParser(new CommentParser());
 
         $this->expectException(\InvalidArgumentException::class);
         toArray($parser->parse($parent, [
@@ -57,7 +58,7 @@ class SingleChoiceQuestionParserTest extends TestCase
     {
         $parent = new DummyParser();
         $surveyConfiguration = new SurveyConfiguration();
-        $parser = new SingleChoiceQuestionParser();
+        $parser = new SingleChoiceQuestionParser(new CommentParser());
 
         $this->expectException(\InvalidArgumentException::class);
         toArray($parser->parse($parent, [
@@ -77,7 +78,7 @@ class SingleChoiceQuestionParserTest extends TestCase
         $surveyConfiguration = new SurveyConfiguration();
 
 
-        $parser = new SingleChoiceQuestionParser();
+        $parser = new SingleChoiceQuestionParser(new CommentParser());
 
         $variable = toArray($parser->parse($parent, [
             'choices' => [

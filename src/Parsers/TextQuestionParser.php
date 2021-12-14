@@ -12,12 +12,13 @@ use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 
 class TextQuestionParser implements ElementParserInterface
 {
+    use ParserHelpers;
+
     public function __construct(
         private CommentParser $commentParser
     ) {
     }
 
-    use ParserHelpers;
     public function parse(ElementParserInterface $parent, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
         /** @phpstan-var non-empty-list<string> $dataPath */
