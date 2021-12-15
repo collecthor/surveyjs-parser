@@ -17,19 +17,34 @@ trait ParserHelpers
      */
     private function parseCommentField(array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix): iterable
     {
-        if (($this->extractOptionalBoolean($questionConfig, 'hasOther') ?? false)
-            || ($this->extractOptionalBoolean($questionConfig, 'hasComment') ?? false)
-        ) {
-            $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
-
-
-            $name = implode('.', [...$dataPrefix, $this->extractName($questionConfig), 'comment']);
-            $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig) . $surveyConfiguration->commentPostfix];
-
-
-            yield new OpenTextVariable($name, $titles, $dataPath);
+        if ($this->extractOptionalBoolean($questionConfig, 'hasOther') ?? false) {
+            $defaultPostfix = "Other";
+            $postfixField = "otherText";
+        } elseif ($this->extractOptionalBoolean($questionConfig, 'hasComment') ?? false) {
+            $defaultPostfix = "Other (describe)";
+            $postfixField = "commentText";
+        } else {
+            return;
         }
+
+        $defaultPostfixes = [];
+        foreach ($surveyConfiguration->locales as $locale) {
+            $defaultPostfixes[$locale] = $defaultPostfix;
+        }
+        $postfixes = $this->extractLocalizedTexts($questionConfig, $surveyConfiguration, $postfixField, $defaultPostfixes);
+
+        $titles = [];
+        foreach ($this->extractTitles($questionConfig, $surveyConfiguration) as $locale => $title) {
+            $titles[$locale] = $title . " - " . $postfixes[$locale];
+        }
+
+
+        $name = implode('.', [...$dataPrefix, $this->extractName($questionConfig), 'comment']);
+        $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig) . $surveyConfiguration->commentPostfix];
+
+        yield new OpenTextVariable($name, $titles, $dataPath);
     }
+
     /**
      * @param array<string, mixed> $config
      * @param SurveyConfiguration $surveyConfiguration
