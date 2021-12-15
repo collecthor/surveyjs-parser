@@ -121,6 +121,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-CallbackElementParser.html#property_callback"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\ChainedParser",
+            "name": "ChainedParser",
+            "summary": "This\u0020parser\u0020wraps\u00200\u0020or\u0020more\u0020parsers\u0020and\u0020calls\u0020them\u0020in\u0020order.",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-ChainedParser.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\ChainedParser\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-ChainedParser.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\ChainedParser\u003A\u003Aparse\u0028\u0029",
+            "name": "parse",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-ChainedParser.html#method_parse"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\ChainedParser\u003A\u003A\u0024parsers",
+            "name": "parsers",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-ChainedParser.html#property_parsers"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\CommentParser",
             "name": "CommentParser",
             "summary": "",
@@ -156,11 +176,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-SingleChoiceQuestionParser.html"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\SingleChoiceQuestionParser\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Parsers-SingleChoiceQuestionParser.html#method___construct"
-        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\SingleChoiceQuestionParser\u003A\u003Aparse\u0028\u0029",
             "name": "parse",
             "summary": "",
@@ -171,30 +186,15 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-SingleChoiceQuestionParser.html#method_extractChoices"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\SingleChoiceQuestionParser\u003A\u003A\u0024commentParser",
-            "name": "commentParser",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Parsers-SingleChoiceQuestionParser.html#property_commentParser"
-        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\TextQuestionParser",
             "name": "TextQuestionParser",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-TextQuestionParser.html"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\TextQuestionParser\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Parsers-TextQuestionParser.html#method___construct"
-        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\TextQuestionParser\u003A\u003Aparse\u0028\u0029",
             "name": "parse",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-TextQuestionParser.html#method_parse"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\TextQuestionParser\u003A\u003A\u0024commentParser",
-            "name": "commentParser",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Parsers-TextQuestionParser.html#property_commentParser"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser",
             "name": "SurveyParser",
@@ -205,6 +205,11 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-SurveyParser.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser\u003A\u003AsetParser\u0028\u0029",
+            "name": "setParser",
+            "summary": "Sets\u0020a\u0020parser\u0020for\u0020a\u0020question\u0020type.\u0020Will\u0020override\u0020the\u0020previously\u0020configured\u0020or\u0020default\u0020parser.",
+            "url": "classes/Collecthor-SurveyjsParser-SurveyParser.html#method_setParser"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser\u003A\u003AgetParser\u0028\u0029",
             "name": "getParser",
