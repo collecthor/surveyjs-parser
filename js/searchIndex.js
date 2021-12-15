@@ -66,15 +66,15 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AparseCommentField\u0028\u0029",
+            "name": "parseCommentField",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_parseCommentField"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AextractTitles\u0028\u0029",
             "name": "extractTitles",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractTitles"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AparseComments\u0028\u0029",
-            "name": "parseComments",
-            "summary": "Parse\u0020the\u0020comment\u0020variable\u0020part\u0020of\u0020a\u0020question",
-            "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_parseComments"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AextractValueName\u0028\u0029",
             "name": "extractValueName",
