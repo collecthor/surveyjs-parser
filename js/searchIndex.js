@@ -156,6 +156,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-SingleChoiceQuestionParser.html"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\SingleChoiceQuestionParser\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-SingleChoiceQuestionParser.html#method___construct"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\SingleChoiceQuestionParser\u003A\u003Aparse\u0028\u0029",
             "name": "parse",
             "summary": "",
@@ -165,6 +170,11 @@ Search.appendIndex(
             "name": "extractChoices",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-SingleChoiceQuestionParser.html#method_extractChoices"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\SingleChoiceQuestionParser\u003A\u003A\u0024commentParser",
+            "name": "commentParser",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-SingleChoiceQuestionParser.html#property_commentParser"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\TextQuestionParser",
             "name": "TextQuestionParser",
