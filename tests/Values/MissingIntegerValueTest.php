@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Tests\Values;
 
 use Collecthor\SurveyjsParser\Tests\support\CoversClass;
-use Collecthor\SurveyjsParser\Tests\support\SimpleValueTest;
 use Collecthor\SurveyjsParser\Values\MissingIntegerValue;
-use Collecthor\SurveyjsParser\Values\MissingStringValue;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Collecthor\SurveyjsParser\Values\MissingIntegerValue

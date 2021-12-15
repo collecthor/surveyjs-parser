@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Values;
 
 use Collecthor\DataInterfaces\NumericValueInterface;
-use Collecthor\DataInterfaces\StringValueInterface;
 
 class IntegerValue implements NumericValueInterface
 {

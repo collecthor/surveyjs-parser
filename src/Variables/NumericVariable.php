@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Variables;
 
 use Collecthor\DataInterfaces\InvalidValueInterface;
-use Collecthor\DataInterfaces\Measure;
-use Collecthor\DataInterfaces\MissingValueInterface;
 use Collecthor\DataInterfaces\NumericValueInterface;
 use Collecthor\DataInterfaces\NumericVariableInterface;
 use Collecthor\DataInterfaces\RecordInterface;
 use Collecthor\DataInterfaces\StringValueInterface;
-use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Traits\GetName;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
 use Collecthor\SurveyjsParser\Values\FloatValue;

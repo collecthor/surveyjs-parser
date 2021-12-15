@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
-use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\Parsers\CallbackElementParser;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
-use Collecthor\SurveyjsParser\Parsers\PanelParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use PHPUnit\Framework\TestCase;
 use function iter\toArray;
-use function PHPStan\dumpType;
 
 /**
  * @covers \Collecthor\SurveyjsParser\Parsers\CallbackElementParser

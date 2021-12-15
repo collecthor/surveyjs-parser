@@ -6,7 +6,6 @@ namespace Collecthor\SurveyjsParser\Values;
 
 use Collecthor\DataInterfaces\MissingValueInterface;
 use Collecthor\DataInterfaces\NumericValueInterface;
-use Collecthor\DataInterfaces\StringValueInterface;
 
 class MissingIntegerValue implements MissingValueInterface, NumericValueInterface
 {

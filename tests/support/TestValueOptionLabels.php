@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\support;
 
-use Collecthor\DataInterfaces\ValueInterface;
 use Collecthor\DataInterfaces\ValueOptionInterface;
 use PHPUnit\Framework\Assert;
 

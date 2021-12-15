@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests;
 
-use Collecthor\SurveyjsParser\Parsers\CommentParser;
 use Collecthor\SurveyjsParser\SurveyParser;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use Collecthor\SurveyjsParser\VariableSet;
@@ -20,6 +19,7 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  * @uses \Collecthor\SurveyjsParser\Parsers\CommentParser
  * @uses \Collecthor\SurveyjsParser\Parsers\TextQuestionParser
+ * @uses \Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser
  */
 class SurveyParserTest extends TestCase
 {

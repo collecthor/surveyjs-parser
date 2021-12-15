@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests;
 
-use Collecthor\DataInterfaces\RecordInterface;
-use Collecthor\DataInterfaces\StringValueInterface;
-use Collecthor\DataInterfaces\ValueInterface;
-use Collecthor\DataInterfaces\ValueSetInterface;
 use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\VariableSet;
 use PHPUnit\Framework\TestCase;

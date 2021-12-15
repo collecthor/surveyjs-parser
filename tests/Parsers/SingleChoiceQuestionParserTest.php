@@ -19,6 +19,7 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\Values\IntegerValueOption
  * @uses \Collecthor\SurveyjsParser\Traits\GetDisplayValue
  * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
+ * @uses \Collecthor\SurveyjsParser\Parsers\CommentParser
  */
 class SingleChoiceQuestionParserTest extends TestCase
 {

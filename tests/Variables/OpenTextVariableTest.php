@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Variables;
 
-use Collecthor\DataInterfaces\InvalidValueInterface;
 use Collecthor\DataInterfaces\MissingValueInterface;
-use Collecthor\DataInterfaces\NumericValueInterface;
 use Collecthor\DataInterfaces\StringValueInterface;
 use Collecthor\SurveyjsParser\ArrayRecord;
-use Collecthor\SurveyjsParser\Variables\NumericVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use PHPUnit\Framework\TestCase;
 

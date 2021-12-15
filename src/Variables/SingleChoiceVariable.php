@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Variables;
 
 use Collecthor\DataInterfaces\ClosedVariableInterface;
-use Collecthor\DataInterfaces\Measure;
 use Collecthor\DataInterfaces\RecordInterface;
 use Collecthor\DataInterfaces\StringValueInterface;
 use Collecthor\DataInterfaces\ValueOptionInterface;

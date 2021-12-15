@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Tests\Values;
 
 use Collecthor\SurveyjsParser\Tests\support\CoversClass;
-use Collecthor\SurveyjsParser\Tests\support\SimpleValueTest;
-use Collecthor\SurveyjsParser\Values\FloatValue;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
-use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
 /**

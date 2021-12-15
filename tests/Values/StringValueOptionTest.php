@@ -6,7 +6,6 @@ namespace Collecthor\SurveyjsParser\Tests\Values;
 
 use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Tests\support\TestValueOptionLabels;
-use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use PHPUnit\Framework\TestCase;
 
