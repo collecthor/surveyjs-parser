@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
-use Collecthor\SurveyjsParser\Parsers\CommentParser;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
@@ -19,6 +18,7 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\Values\IntegerValueOption
  * @uses \Collecthor\SurveyjsParser\Traits\GetDisplayValue
  * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
+ * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  */
 class SingleChoiceQuestionParserTest extends TestCase
 {
@@ -103,5 +103,30 @@ class SingleChoiceQuestionParserTest extends TestCase
         self::assertSame('c', $options[1]->getDisplayValue());
         self::assertSame("15", $options[2]->getDisplayValue());
         self::assertSame('abc', $options[3]->getDisplayValue());
+    }
+
+    public function testHasNone(): void
+    {
+        $parent = new DummyParser();
+        $surveyConfiguration = new SurveyConfiguration();
+
+
+        $parser = new SingleChoiceQuestionParser();
+        $variable = toArray($parser->parse($parent, [
+            'name' => 'test',
+            'choices' => [
+                'a'
+            ],
+            'hasNone' => true,
+            'hasOther' => true,
+        ], $surveyConfiguration))[0];
+
+        self::assertInstanceOf(SingleChoiceVariable::class, $variable);
+        $options = $variable->getValueOptions();
+        self::assertCount(3, $options);
+        $rawValues = [$options[0]->getRawValue(), $options[1]->getRawValue(), $options[2]->getRawValue()];
+        self::assertContains('a', $rawValues);
+        self::assertContains('other', $rawValues);
+        self::assertContains('none', $rawValues);
     }
 }

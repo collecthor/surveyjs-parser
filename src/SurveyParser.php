@@ -6,8 +6,6 @@ namespace Collecthor\SurveyjsParser;
 use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\DataInterfaces\VariableSetInterface;
 use Collecthor\SurveyjsParser\Parsers\CallbackElementParser;
-use Collecthor\SurveyjsParser\Parsers\ChainedParser;
-use Collecthor\SurveyjsParser\Parsers\CommentParser;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\PanelParser;
 use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
@@ -40,13 +38,12 @@ class SurveyParser
         );
 
         // Configure default built-in parsers.
-        $commentParser = new CommentParser();
-        $textParser = new ChainedParser(new TextQuestionParser(), $commentParser);
+        $textParser = new TextQuestionParser();
         $this->parsers['text'] = $textParser;
         $this->parsers['comment'] = $textParser;
         $this->parsers['expression'] = $textParser;
 
-        $singleChoiceParser = new ChainedParser(new SingleChoiceQuestionParser(), $commentParser);
+        $singleChoiceParser = new SingleChoiceQuestionParser();
         $this->parsers['radiogroup'] = $singleChoiceParser;
         $this->parsers['dropdown'] = $singleChoiceParser;
 

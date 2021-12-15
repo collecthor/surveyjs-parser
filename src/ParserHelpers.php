@@ -5,11 +5,31 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser;
 
 use Collecthor\DataInterfaces\VariableInterface;
-use Collecthor\SurveyjsParser\Parsers\CommentParser;
+use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use InvalidArgumentException;
 
 trait ParserHelpers
 {
+    /**
+     * @phpstan-param non-empty-array<string, mixed> $questionConfig
+     * @param list<string> $dataPrefix
+     * @return iterable<VariableInterface>
+     */
+    private function parseCommentField(array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix): iterable
+    {
+        if (($this->extractOptionalBoolean($questionConfig, 'hasOther') ?? false)
+            || ($this->extractOptionalBoolean($questionConfig, 'hasComment') ?? false)
+        ) {
+            $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
+
+
+            $name = implode('.', [...$dataPrefix, $this->extractName($questionConfig), 'comment']);
+            $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig) . $surveyConfiguration->commentPostfix];
+
+
+            yield new OpenTextVariable($name, $titles, $dataPath);
+        }
+    }
     /**
      * @param array<string, mixed> $config
      * @param SurveyConfiguration $surveyConfiguration
@@ -24,18 +44,6 @@ trait ParserHelpers
             }
         }
         return $this->extractLocalizedTexts($config, $surveyConfiguration, 'title', $defaults);
-    }
-
-    /**
-     * Parse the comment variable part of a question
-     * @phpstan-param non-empty-array<string, mixed> $config
-     * @param SurveyConfiguration $surveyConfiguration
-     * @return iterable<VariableInterface>
-     */
-    private function parseComments(array $config, SurveyConfiguration $surveyConfiguration): iterable
-    {
-        $parser = new CommentParser();
-        yield from $parser->parse($this, $config, $surveyConfiguration);
     }
 
     /**

@@ -27,5 +27,7 @@ class TextQuestionParser implements ElementParserInterface
         } else {
             yield new OpenTextVariable($name, $titles, $dataPath);
         }
+
+        yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }

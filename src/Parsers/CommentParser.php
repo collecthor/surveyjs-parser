@@ -15,17 +15,6 @@ class CommentParser implements ElementParserInterface
 
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        if (($this->extractOptionalBoolean($questionConfig, 'hasOther') ?? false)
-            || ($this->extractOptionalBoolean($questionConfig, 'hasComment') ?? false)
-        ) {
-            $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
-
-
-            $name = implode('.', [...$dataPrefix, $this->extractName($questionConfig), 'comment']);
-            $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig) . $surveyConfiguration->commentPostfix];
-
-
-            yield new OpenTextVariable($name, $titles, $dataPath);
-        }
+        yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }
