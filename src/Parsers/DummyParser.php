@@ -14,7 +14,7 @@ use Collecthor\SurveyjsParser\SurveyConfiguration;
 class DummyParser implements ElementParserInterface
 {
     public function parse(
-        ElementParserInterface $parent,
+        ElementParserInterface $root,
         array $questionConfig,
         SurveyConfiguration $surveyConfiguration,
         array $dataPrefix = []

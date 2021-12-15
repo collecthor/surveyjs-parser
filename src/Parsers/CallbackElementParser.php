@@ -17,8 +17,8 @@ class CallbackElementParser implements ElementParserInterface
     {
     }
 
-    public function parse(ElementParserInterface $parent, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
+    public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        yield from ($this->callback)($parent, $questionConfig, $surveyConfiguration, $dataPrefix);
+        yield from ($this->callback)($root, $questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }

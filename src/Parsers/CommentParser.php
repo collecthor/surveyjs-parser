@@ -13,7 +13,7 @@ class CommentParser implements ElementParserInterface
 {
     use ParserHelpers;
 
-    public function parse(ElementParserInterface $parent, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
+    public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
         if (($this->extractOptionalBoolean($questionConfig, 'hasOther') ?? false)
             || ($this->extractOptionalBoolean($questionConfig, 'hasComment') ?? false)

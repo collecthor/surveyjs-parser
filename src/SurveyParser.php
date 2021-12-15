@@ -6,6 +6,7 @@ namespace Collecthor\SurveyjsParser;
 use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\DataInterfaces\VariableSetInterface;
 use Collecthor\SurveyjsParser\Parsers\CallbackElementParser;
+use Collecthor\SurveyjsParser\Parsers\ChainedParser;
 use Collecthor\SurveyjsParser\Parsers\CommentParser;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\PanelParser;
@@ -40,12 +41,12 @@ class SurveyParser
 
         // Configure default built-in parsers.
         $commentParser = new CommentParser();
-        $textParser = new TextQuestionParser($commentParser);
+        $textParser = new ChainedParser(new TextQuestionParser(), $commentParser);
         $this->parsers['text'] = $textParser;
         $this->parsers['comment'] = $textParser;
         $this->parsers['expression'] = $textParser;
 
-        $singleChoiceParser = new SingleChoiceQuestionParser($commentParser);
+        $singleChoiceParser = new ChainedParser(new SingleChoiceQuestionParser(), $commentParser);
         $this->parsers['radiogroup'] = $singleChoiceParser;
         $this->parsers['dropdown'] = $singleChoiceParser;
 
@@ -55,6 +56,16 @@ class SurveyParser
         $this->parsers[self::UNKNOWN_ELEMENT_TYPE] = new DummyParser();
     }
 
+    /**
+     * Sets a parser for a question type. Will override the previously configured or default parser.
+     * @param string $type
+     * @param ElementParserInterface $parser
+     * @return void
+     */
+    public function setParser(string $type, ElementParserInterface $parser): void
+    {
+        $this->parsers[$type] = $parser;
+    }
 
     private function getParser(string $type): ElementParserInterface
     {

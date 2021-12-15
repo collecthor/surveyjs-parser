@@ -9,7 +9,7 @@ use Collecthor\SurveyjsParser\SurveyConfiguration;
 
 class PanelParser implements ElementParserInterface
 {
-    public function parse(ElementParserInterface $parent, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
+    public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
         if (!isset($questionConfig['elements'])) {
             throw new \InvalidArgumentException('Elements key must be set and non-null');
@@ -18,7 +18,7 @@ class PanelParser implements ElementParserInterface
             throw new \InvalidArgumentException('Elements must be iterable, got: ' . print_r($questionConfig['elements'], true));
         }
         foreach ($questionConfig['elements'] as $elementConfig) {
-            yield from $parent->parse($parent, $elementConfig, $surveyConfiguration, $dataPrefix);
+            yield from $root->parse($root, $elementConfig, $surveyConfiguration, $dataPrefix);
         }
     }
 }

@@ -14,12 +14,7 @@ class TextQuestionParser implements ElementParserInterface
 {
     use ParserHelpers;
 
-    public function __construct(
-        private CommentParser $commentParser
-    ) {
-    }
-
-    public function parse(ElementParserInterface $parent, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
+    public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
         /** @phpstan-var non-empty-list<string> $dataPath */
         $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
@@ -32,8 +27,5 @@ class TextQuestionParser implements ElementParserInterface
         } else {
             yield new OpenTextVariable($name, $titles, $dataPath);
         }
-
-        // Check if we have a comment field.
-        yield from $this->commentParser->parse($parent, $questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }

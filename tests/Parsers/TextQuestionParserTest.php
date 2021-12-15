@@ -43,7 +43,7 @@ class TextQuestionParserTest extends TestCase
     {
         $dummy = new DummyParser();
         $config = new SurveyConfiguration();
-        $parser = new TextQuestionParser(new CommentParser());
+        $parser = new TextQuestionParser();
         $variables = $this->toArray($parser->parse($dummy, [
             'name' => 'question1',
         ], $config, []));
@@ -63,7 +63,7 @@ class TextQuestionParserTest extends TestCase
     {
         $dummy = new DummyParser();
         $config = new SurveyConfiguration();
-        $parser = new TextQuestionParser(new CommentParser());
+        $parser = new TextQuestionParser();
         $variables = $this->toArray($parser->parse($dummy, [
             'name' => 'question1',
             'valueName' => 'question2'
@@ -84,7 +84,7 @@ class TextQuestionParserTest extends TestCase
     {
         $dummy = new DummyParser();
         $config = new SurveyConfiguration();
-        $parser = new TextQuestionParser(new CommentParser());
+        $parser = new TextQuestionParser();
 
         $variables = $this->toArray($parser->parse($dummy, [
             'name' => 'question1',

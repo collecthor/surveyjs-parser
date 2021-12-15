@@ -16,13 +16,8 @@ class SingleChoiceQuestionParser implements ElementParserInterface
 {
     use ParserHelpers;
 
-    public function __construct(
-        private CommentParser $commentParser
-    ) {
-    }
-
     public function parse(
-        ElementParserInterface $parent,
+        ElementParserInterface $root,
         array $questionConfig,
         SurveyConfiguration $surveyConfiguration,
         array $dataPrefix = []
@@ -37,9 +32,6 @@ class SingleChoiceQuestionParser implements ElementParserInterface
 
 
         yield new SingleChoiceVariable($name, $titles, $choices, $dataPath);
-
-        // Check if we have a comment field.
-        yield from $this->commentParser->parse($parent, $questionConfig, $surveyConfiguration, $dataPrefix);
     }
 
     /**

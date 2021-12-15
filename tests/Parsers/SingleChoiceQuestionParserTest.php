@@ -19,7 +19,6 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\Values\IntegerValueOption
  * @uses \Collecthor\SurveyjsParser\Traits\GetDisplayValue
  * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
- * @uses \Collecthor\SurveyjsParser\Parsers\CommentParser
  */
 class SingleChoiceQuestionParserTest extends TestCase
 {
@@ -42,7 +41,7 @@ class SingleChoiceQuestionParserTest extends TestCase
     {
         $parent = new DummyParser();
         $surveyConfiguration = new SurveyConfiguration();
-        $parser = new SingleChoiceQuestionParser(new CommentParser());
+        $parser = new SingleChoiceQuestionParser();
 
         $this->expectException(\InvalidArgumentException::class);
         toArray($parser->parse($parent, [
@@ -59,7 +58,7 @@ class SingleChoiceQuestionParserTest extends TestCase
     {
         $parent = new DummyParser();
         $surveyConfiguration = new SurveyConfiguration();
-        $parser = new SingleChoiceQuestionParser(new CommentParser());
+        $parser = new SingleChoiceQuestionParser();
 
         $this->expectException(\InvalidArgumentException::class);
         toArray($parser->parse($parent, [
@@ -79,7 +78,7 @@ class SingleChoiceQuestionParserTest extends TestCase
         $surveyConfiguration = new SurveyConfiguration();
 
 
-        $parser = new SingleChoiceQuestionParser(new CommentParser());
+        $parser = new SingleChoiceQuestionParser();
 
         $variable = toArray($parser->parse($parent, [
             'choices' => [
