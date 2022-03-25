@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Variables;
 
 use Collecthor\DataInterfaces\InvalidValueInterface;
+use Collecthor\DataInterfaces\Measure;
 use Collecthor\DataInterfaces\NumericValueInterface;
 use Collecthor\DataInterfaces\NumericVariableInterface;
 use Collecthor\DataInterfaces\RecordInterface;
@@ -63,8 +64,8 @@ class NumericVariable implements NumericVariableInterface
     /**
      * Numerical variables are always ordered, they might even be scalar, but that depends on context.
      */
-    public function getMeasure(): string
+    public function getMeasure(): Measure
     {
-        return "ordinal";
+        return Measure::Ordinal;
     }
 }

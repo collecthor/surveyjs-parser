@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Tests\Variables;
 
 use Collecthor\DataInterfaces\InvalidValueInterface;
+use Collecthor\DataInterfaces\Measure;
 use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
@@ -26,7 +27,7 @@ class SingleChoiceVariableTest extends TestCase
     {
         $option = new IntegerValueOption(15, []);
         $subject = new SingleChoiceVariable("test", [], [$option], ['path']);
-        self::assertSame("nominal", $subject->getMeasure());
+        self::assertSame(Measure::Nominal, $subject->getMeasure());
     }
 
     public function testGetValueOptions(): void

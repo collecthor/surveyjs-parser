@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Variables;
 
+use Collecthor\DataInterfaces\Measure;
 use Collecthor\DataInterfaces\MissingValueInterface;
 use Collecthor\DataInterfaces\StringValueInterface;
 use Collecthor\SurveyjsParser\ArrayRecord;
@@ -48,7 +49,7 @@ class OpenTextVariableTest extends TestCase
     public function testGetMeasure(): void
     {
         $variable = new OpenTextVariable('abc', [], ['path']);
-        self::assertSame("nominal", $variable->getMeasure());
+        self::assertSame(Measure::Nominal, $variable->getMeasure());
     }
 
     /**

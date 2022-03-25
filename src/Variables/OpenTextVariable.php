@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Variables;
 
+use Collecthor\DataInterfaces\Measure;
 use Collecthor\DataInterfaces\RecordInterface;
 use Collecthor\DataInterfaces\StringValueInterface;
 use Collecthor\DataInterfaces\VariableInterface;
@@ -47,8 +48,8 @@ class OpenTextVariable implements VariableInterface
         return $this->getValue($record);
     }
 
-    public function getMeasure(): string
+    public function getMeasure(): Measure
     {
-        return "nominal";
+        return Measure::Nominal;
     }
 }

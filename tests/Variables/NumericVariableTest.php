@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Tests\Variables;
 
 use Collecthor\DataInterfaces\InvalidValueInterface;
+use Collecthor\DataInterfaces\Measure;
 use Collecthor\DataInterfaces\MissingValueInterface;
 use Collecthor\DataInterfaces\NumericValueInterface;
 use Collecthor\SurveyjsParser\ArrayRecord;
@@ -53,7 +54,7 @@ class NumericVariableTest extends TestCase
     public function testGetMeasure(): void
     {
         $variable = new NumericVariable('abc', [], ['path']);
-        self::assertSame("ordinal", $variable->getMeasure());
+        self::assertSame(Measure::Ordinal, $variable->getMeasure());
     }
 
     /**
