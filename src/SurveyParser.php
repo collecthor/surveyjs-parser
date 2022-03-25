@@ -11,14 +11,14 @@ use Collecthor\SurveyjsParser\Parsers\PanelParser;
 use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
 
-class SurveyParser
+class SurveyParser implements SurveyParserInterface
 {
-    public const UNKNOWN_ELEMENT_TYPE = '__unknown__';
-
     /**
-     * @var array<string, ElementParserInterface>
+     * @var array<string, list<ElementParserInterface>>
      */
     private array $parsers = [];
+
+    private ElementParserInterface $defaultParser;
 
     private ElementParserInterface $recursiveParser;
 
@@ -39,34 +39,49 @@ class SurveyParser
 
         // Configure default built-in parsers.
         $textParser = new TextQuestionParser();
-        $this->parsers['text'] = $textParser;
-        $this->parsers['comment'] = $textParser;
-        $this->parsers['expression'] = $textParser;
+        $this->parsers['text'] = [$textParser];
+        $this->parsers['comment'] = [$textParser];
+        $this->parsers['expression'] = [$textParser];
 
         $singleChoiceParser = new SingleChoiceQuestionParser();
-        $this->parsers['radiogroup'] = $singleChoiceParser;
-        $this->parsers['dropdown'] = $singleChoiceParser;
+        $this->parsers['radiogroup'] = [$singleChoiceParser];
+        $this->parsers['dropdown'] = [$singleChoiceParser];
 
-        $this->parsers['panel'] = new PanelParser();
-        $this->parsers['html'] = new DummyParser();
-        $this->parsers['image'] = new DummyParser();
-        $this->parsers[self::UNKNOWN_ELEMENT_TYPE] = new DummyParser();
+        $dummyParser = new DummyParser();
+        $this->parsers['panel'] = [new PanelParser()];
+        $this->parsers['html'] = [$dummyParser];
+        $this->parsers['image'] = [$dummyParser];
+        $this->defaultParser = $dummyParser;
     }
 
     /**
-     * Sets a parser for a question type. Will override the previously configured or default parser.
+     * Sets the parser for a specific question, removes all other registered parser for this question parser.
      * @param string $type
      * @param ElementParserInterface $parser
      * @return void
      */
     public function setParser(string $type, ElementParserInterface $parser): void
     {
-        $this->parsers[$type] = $parser;
+        $this->parsers[$type] = [$parser];
     }
 
-    private function getParser(string $type): ElementParserInterface
+    public function addParser(string $type, ElementParserInterface $parser): void
     {
-        return $this->parsers[$type] ?? $this->parsers[self::UNKNOWN_ELEMENT_TYPE];
+        $this->parsers[$type][] = $parser;
+    }
+
+    public function setDefaultParser(ElementParserInterface $parser): void
+    {
+        $this->defaultParser = $parser;
+    }
+
+    /**
+     * @param string $type
+     * @return list<ElementParserInterface>
+     */
+    private function getParsers(string $type): array
+    {
+        return $this->parsers[$type] ?? [$this->defaultParser];
     }
 
     /**
@@ -77,7 +92,9 @@ class SurveyParser
      */
     private function parseElement(array $config, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        yield from $this->getParser($config['type'])->parse($this->recursiveParser, $config, $surveyConfiguration, $dataPrefix);
+        foreach ($this->getParsers($config['type']) as $parser) {
+            yield from $parser->parse($this->recursiveParser, $config, $surveyConfiguration, $dataPrefix);
+        }
     }
 
     /**

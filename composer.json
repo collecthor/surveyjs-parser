@@ -3,7 +3,7 @@
     "description": "Parse SurveyJS survey structure into PHP classes",
     "type": "library",
     "license": "mit",
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Collecthor\\SurveyjsParser\\": "src/"
@@ -29,10 +29,17 @@
         "nikic/iter": "dev-master",
         "phpstan/phpstan-phpunit": "1.0.x-dev",
         "phpstan/extension-installer": "dev-master",
-        "phpstan/phpstan-strict-rules": "1.1.x-dev"
+        "phpstan/phpstan-strict-rules": "1.1.x-dev",
+        "symfony/console": "< 6"
     },
     "require": {
         "php": ">= 8.1",
         "collecthor/data-interfaces": "> 1.0.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "captainhook/plugin-composer": true,
+            "phpstan/extension-installer": true
+        }
     }
 }

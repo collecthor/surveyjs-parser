@@ -34,7 +34,11 @@ class TextQuestionParserTest extends TestCase
     {
         $result = [];
         foreach ($iterable as $key => $value) {
-            $result[$key] = $value;
+            if (is_int($key) || is_string($key)) {
+                $result[$key] = $value;
+            } else {
+                throw new \RuntimeException("Keys most be int or string for toArray");
+            }
         }
         return $result;
     }

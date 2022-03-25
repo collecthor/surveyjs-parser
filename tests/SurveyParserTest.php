@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests;
 
+use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\SurveyParser;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use Collecthor\SurveyjsParser\VariableSet;
@@ -84,5 +85,31 @@ class SurveyParserTest extends TestCase
         self::assertSame('question text', $variable->getTitle());
 
         self::assertInstanceOf(OpenTextVariable::class, $set->getVariable('question1.comment'));
+    }
+
+    public function testAllParsersAreCalled(): void
+    {
+        $parser = new SurveyParser();
+
+        $once = $this->getMockBuilder(ElementParserInterface::class)->getMock();
+        $twice = $this->getMockBuilder(ElementParserInterface::class)->getMock();
+
+        $once->expects(self::once())->method('parse');
+        $twice->expects(self::exactly(2))->method('parse');
+        $parser->addParser('test', $twice);
+        $parser->addParser('test', $once);
+        $parser->addParser('test', $twice);
+
+        $parser->parseSurveyStructure([
+            'pages' => [
+                [
+                    'elements' => [
+                        [
+                            'type' => 'test',
+                        ]
+                    ]
+                ]
+            ]
+        ]);
     }
 }
