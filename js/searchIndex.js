@@ -196,6 +196,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-TextQuestionParser.html#method_parse"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyConfiguration",
+            "name": "SurveyConfiguration",
+            "summary": "Survey\u0020wide\u0020configuration\u0020settings\u0020that\u0020affect\u0020parsing\u0020of\u0020individual\u0020questions",
+            "url": "classes/Collecthor-SurveyjsParser-SurveyConfiguration.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyConfiguration\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-SurveyConfiguration.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyConfiguration\u003A\u003A\u0024commentPostfix",
+            "name": "commentPostfix",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-SurveyConfiguration.html#property_commentPostfix"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyConfiguration\u003A\u003A\u0024locales",
+            "name": "locales",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-SurveyConfiguration.html#property_locales"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser",
             "name": "SurveyParser",
             "summary": "",
@@ -208,13 +228,23 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser\u003A\u003AsetParser\u0028\u0029",
             "name": "setParser",
-            "summary": "Sets\u0020a\u0020parser\u0020for\u0020a\u0020question\u0020type.\u0020Will\u0020override\u0020the\u0020previously\u0020configured\u0020or\u0020default\u0020parser.",
+            "summary": "Sets\u0020the\u0020parser\u0020for\u0020a\u0020specific\u0020question,\u0020removes\u0020all\u0020other\u0020registered\u0020parser\u0020for\u0020this\u0020question\u0020parser.",
             "url": "classes/Collecthor-SurveyjsParser-SurveyParser.html#method_setParser"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser\u003A\u003AgetParser\u0028\u0029",
-            "name": "getParser",
+            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser\u003A\u003AaddParser\u0028\u0029",
+            "name": "addParser",
             "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-SurveyParser.html#method_getParser"
+            "url": "classes/Collecthor-SurveyjsParser-SurveyParser.html#method_addParser"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser\u003A\u003AsetDefaultParser\u0028\u0029",
+            "name": "setDefaultParser",
+            "summary": "Sets\u0020the\u0020default\u0020parser",
+            "url": "classes/Collecthor-SurveyjsParser-SurveyParser.html#method_setDefaultParser"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser\u003A\u003AgetParsers\u0028\u0029",
+            "name": "getParsers",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-SurveyParser.html#method_getParsers"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser\u003A\u003AparseElement\u0028\u0029",
             "name": "parseElement",
@@ -241,20 +271,45 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-SurveyParser.html#method_extractString"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser\u003A\u003AUNKNOWN_ELEMENT_TYPE",
-            "name": "UNKNOWN_ELEMENT_TYPE",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-SurveyParser.html#constant_UNKNOWN_ELEMENT_TYPE"
-        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser\u003A\u003A\u0024parsers",
             "name": "parsers",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-SurveyParser.html#property_parsers"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser\u003A\u003A\u0024defaultParser",
+            "name": "defaultParser",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-SurveyParser.html#property_defaultParser"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser\u003A\u003A\u0024recursiveParser",
             "name": "recursiveParser",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-SurveyParser.html#property_recursiveParser"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParserInterface",
+            "name": "SurveyParserInterface",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-SurveyParserInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParserInterface\u003A\u003AsetParser\u0028\u0029",
+            "name": "setParser",
+            "summary": "Sets\u0020a\u0020parser\u0020for\u0020a\u0020question\u0020type.\u0020Will\u0020override\u0020the\u0020previously\u0020configured\u0020or\u0020default\u0020parser.",
+            "url": "classes/Collecthor-SurveyjsParser-SurveyParserInterface.html#method_setParser"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParserInterface\u003A\u003AsetDefaultParser\u0028\u0029",
+            "name": "setDefaultParser",
+            "summary": "Sets\u0020the\u0020default\u0020parser",
+            "url": "classes/Collecthor-SurveyjsParser-SurveyParserInterface.html#method_setDefaultParser"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParserInterface\u003A\u003AparseSurveyStructure\u0028\u0029",
+            "name": "parseSurveyStructure",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-SurveyParserInterface.html#method_parseSurveyStructure"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParserInterface\u003A\u003AparseJson\u0028\u0029",
+            "name": "parseJson",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-SurveyParserInterface.html#method_parseJson"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Traits\\GetDisplayValue",
             "name": "GetDisplayValue",

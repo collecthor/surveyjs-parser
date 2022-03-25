@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation</title>
+            <title>Documentation</title>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
     <link rel="icon" href="images/favicon.ico"/>
@@ -54,10 +55,12 @@
 <aside class="phpdocumentor-column -four phpdocumentor-sidebar">
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
-                                    <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/collecthor.html">Collecthor</a></h4>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/collecthor.html" class="">Collecthor</a>
+</h4>
     <ul class="phpdocumentor-list">
                     <li>
-                <a href="namespaces/collecthor-surveyjsparser.html">SurveyjsParser</a>
+                <a href="namespaces/collecthor-surveyjsparser.html" class="">SurveyjsParser</a>
                 
             </li>
             </ul>
@@ -65,7 +68,9 @@
                         </section>
                 <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
-                                    <h4 class="phpdocumentor-sidebar__root-namespace"><a href="packages/SurveyJSParser.html">SurveyJSParser</a></h4>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/SurveyJSParser.html" class="">SurveyJSParser</a>
+</h4>
 
                         </section>
             
@@ -100,6 +105,9 @@
                             </ul>
         </div>
     
+            <span class="phpdocumentor-element__implements">
+            implements
+                            <a href="classes/Collecthor-SurveyjsParser-SurveyParserInterface.html"><abbr title="\Collecthor\SurveyjsParser\SurveyParserInterface">SurveyParserInterface</abbr></a>                    </span>
     
     </h2>
 
@@ -118,6 +126,18 @@
 
 
 
+<h3 id="interfaces_class_traits">
+    Interfaces, Classes, Traits and Enums
+    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
+</h3>
+
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Collecthor-SurveyjsParser-SurveyParserInterface.html"><abbr title="\Collecthor\SurveyjsParser\SurveyParserInterface">SurveyParserInterface</abbr></a></dt>
+        <dd></dd>
+    
+    
+    
+    </dl>
 
 
 <h3 id="toc">
@@ -126,80 +146,94 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#constant_UNKNOWN_ELEMENT_TYPE">UNKNOWN_ELEMENT_TYPE</a>
+                    <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#property_defaultParser">$defaultParser</a>
     <span>
-        &nbsp;= &#039;__unknown__&#039;                    </span>
+                        &nbsp;: <a href="classes/Collecthor-SurveyjsParser-ElementParserInterface.html"><abbr title="\Collecthor\SurveyjsParser\ElementParserInterface">ElementParserInterface</abbr></a>            </span>
 </dt>
 <dd></dd>
 
-                <dt class="phpdocumentor-table-of-contents__entry -property -private">
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#property_parsers">$parsers</a>
     <span>
-                &nbsp;: array&lt;string|int, mixed&gt;            </span>
+                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#property_recursiveParser">$recursiveParser</a>
     <span>
-                &nbsp;: <a href="classes/Collecthor-SurveyjsParser-ElementParserInterface.html"><abbr title="\Collecthor\SurveyjsParser\ElementParserInterface">ElementParserInterface</abbr></a>            </span>
+                        &nbsp;: <a href="classes/Collecthor-SurveyjsParser-ElementParserInterface.html"><abbr title="\Collecthor\SurveyjsParser\ElementParserInterface">ElementParserInterface</abbr></a>            </span>
 </dt>
 <dd></dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method___construct">__construct()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                                &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method_addParser">addParser()</a>
+    <span>
+                                &nbsp;: void    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method_parseJson">parseJson()</a>
     <span>
-                        &nbsp;: <abbr title="\Collecthor\DataInterfaces\VariableSetInterface">VariableSetInterface</abbr>    </span>
+                                &nbsp;: <abbr title="\Collecthor\DataInterfaces\VariableSetInterface">VariableSetInterface</abbr>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method_parseSurveyStructure">parseSurveyStructure()</a>
     <span>
-                        &nbsp;: <abbr title="\Collecthor\DataInterfaces\VariableSetInterface">VariableSetInterface</abbr>    </span>
+                                &nbsp;: <abbr title="\Collecthor\DataInterfaces\VariableSetInterface">VariableSetInterface</abbr>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method_setDefaultParser">setDefaultParser()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the default parser</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method_setParser">setParser()</a>
     <span>
-                        &nbsp;: void    </span>
+                                &nbsp;: void    </span>
 </dt>
-<dd>Sets a parser for a question type. Will override the previously configured or default parser.</dd>
+<dd>Sets the parser for a specific question, removes all other registered parser for this question parser.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method_extractString">extractString()</a>
     <span>
-                        &nbsp;: string    </span>
+                                &nbsp;: string    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method_getParser">getParser()</a>
+    <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method_getParsers">getParsers()</a>
     <span>
-                        &nbsp;: <a href="classes/Collecthor-SurveyjsParser-ElementParserInterface.html"><abbr title="\Collecthor\SurveyjsParser\ElementParserInterface">ElementParserInterface</abbr></a>    </span>
+                                &nbsp;: <abbr title="\Collecthor\SurveyjsParser\list">list</abbr>&lt;string|int, <a href="classes/Collecthor-SurveyjsParser-ElementParserInterface.html"><abbr title="\Collecthor\SurveyjsParser\ElementParserInterface">ElementParserInterface</abbr></a>&gt;    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method_parseElement">parseElement()</a>
     <span>
-                        &nbsp;: iteratable&lt;string|int, <abbr title="\Collecthor\DataInterfaces\VariableInterface">VariableInterface</abbr>&gt;    </span>
+                                &nbsp;: iteratable&lt;string|int, <abbr title="\Collecthor\DataInterfaces\VariableInterface">VariableInterface</abbr>&gt;    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method_parsePage">parsePage()</a>
     <span>
-                        &nbsp;: iteratable&lt;string|int, <abbr title="\Collecthor\DataInterfaces\VariableInterface">VariableInterface</abbr>&gt;    </span>
+                                &nbsp;: iteratable&lt;string|int, <abbr title="\Collecthor\DataInterfaces\VariableInterface">VariableInterface</abbr>&gt;    </span>
 </dt>
 <dd></dd>
 
@@ -208,32 +242,39 @@
 
 
         
-    <section class="phpdocumentor-constants">
-        <h3 class="phpdocumentor-elements__header" id="constants">
-            Constants
-            <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
-        </h3>
-                    <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_UNKNOWN_ELEMENT_TYPE">
-        UNKNOWN_ELEMENT_TYPE
-        <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#constant_UNKNOWN_ELEMENT_TYPE" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
 
+        
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_defaultParser">
+        $defaultParser
+        <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#property_defaultParser" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/SurveyParser.php"><a href="files/src-surveyparser.html"><abbr title="src/SurveyParser.php">SurveyParser.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
     
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">UNKNOWN_ELEMENT_TYPE</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;__unknown__&#039;</span>
-</code>
-
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/Collecthor-SurveyjsParser-ElementParserInterface.html"><abbr title="\Collecthor\SurveyjsParser\ElementParserInterface">ElementParserInterface</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$defaultParser</span>
+    </code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -242,14 +283,6 @@
     
 
 </article>
-            </section>
-
-        
-    <section class="phpdocumentor-properties">
-        <h3 class="phpdocumentor-elements__header" id="properties">
-            Properties
-            <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
-        </h3>
                     <article
         class="
             phpdocumentor-element
@@ -266,7 +299,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/SurveyParser.php"><a href="files/src-surveyparser.html"><abbr title="src/SurveyParser.php">SurveyParser.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
@@ -362,6 +395,58 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_addParser">
+        addParser()
+        <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method_addParser" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/SurveyParser.php"><a href="files/src-surveyparser.html"><abbr title="src/SurveyParser.php">SurveyParser.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">68</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">addParser</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-ElementParserInterface.html"><abbr title="\Collecthor\SurveyjsParser\ElementParserInterface">ElementParserInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$parser</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$type</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$parser</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-ElementParserInterface.html"><abbr title="\Collecthor\SurveyjsParser\ElementParserInterface">ElementParserInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_parseJson">
         parseJson()
         <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method_parseJson" class="headerlink"><i class="fas fa-link"></i></a>
@@ -369,7 +454,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/SurveyParser.php"><a href="files/src-surveyparser.html"><abbr title="src/SurveyParser.php">SurveyParser.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">119</span>
+    <span class="phpdocumentor-element-found-in__line">136</span>
 
     </aside>
 
@@ -413,7 +498,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/SurveyParser.php"><a href="files/src-surveyparser.html"><abbr title="src/SurveyParser.php">SurveyParser.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">98</span>
+    <span class="phpdocumentor-element-found-in__line">115</span>
 
     </aside>
 
@@ -448,6 +533,50 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setDefaultParser">
+        setDefaultParser()
+        <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method_setDefaultParser" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/SurveyParser.php"><a href="files/src-surveyparser.html"><abbr title="src/SurveyParser.php">SurveyParser.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">73</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the default parser</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">setDefaultParser</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-ElementParserInterface.html"><abbr title="\Collecthor\SurveyjsParser\ElementParserInterface">ElementParserInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$parser</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$parser</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-ElementParserInterface.html"><abbr title="\Collecthor\SurveyjsParser\ElementParserInterface">ElementParserInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setParser">
         setParser()
         <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method_setParser" class="headerlink"><i class="fas fa-link"></i></a>
@@ -455,11 +584,11 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/SurveyParser.php"><a href="files/src-surveyparser.html"><abbr title="src/SurveyParser.php">SurveyParser.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">62</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Sets a parser for a question type. Will override the previously configured or default parser.</p>
+        <p class="phpdocumentor-summary">Sets the parser for a specific question, removes all other registered parser for this question parser.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -505,7 +634,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/SurveyParser.php"><a href="files/src-surveyparser.html"><abbr title="src/SurveyParser.php">SurveyParser.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">131</span>
+    <span class="phpdocumentor-element-found-in__line">148</span>
 
     </aside>
 
@@ -556,24 +685,23 @@
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getParser">
-        getParser()
-        <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method_getParser" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getParsers">
+        getParsers()
+        <a href="classes/Collecthor-SurveyjsParser-SurveyParser.html#method_getParsers" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/SurveyParser.php"><a href="files/src-surveyparser.html"><abbr title="src/SurveyParser.php">SurveyParser.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                <span class="phpdocumentor-signature__name">getParser</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Collecthor-SurveyjsParser-ElementParserInterface.html"><abbr title="\Collecthor\SurveyjsParser\ElementParserInterface">ElementParserInterface</abbr></a></span></code>
+                <span class="phpdocumentor-signature__name">getParsers</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Collecthor\SurveyjsParser\list">list</abbr>&lt;string|int, <a href="classes/Collecthor-SurveyjsParser-ElementParserInterface.html"><abbr title="\Collecthor\SurveyjsParser\ElementParserInterface">ElementParserInterface</abbr></a>&gt;</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -581,15 +709,14 @@
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Collecthor-SurveyjsParser-ElementParserInterface.html"><abbr title="\Collecthor\SurveyjsParser\ElementParserInterface">ElementParserInterface</abbr></a></span>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Collecthor\SurveyjsParser\list">list</abbr>&lt;string|int, <a href="classes/Collecthor-SurveyjsParser-ElementParserInterface.html"><abbr title="\Collecthor\SurveyjsParser\ElementParserInterface">ElementParserInterface</abbr></a>&gt;</span>
             &mdash;
         
     
@@ -607,14 +734,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/SurveyParser.php"><a href="files/src-surveyparser.html"><abbr title="src/SurveyParser.php">SurveyParser.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">78</span>
+    <span class="phpdocumentor-element-found-in__line">93</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                <span class="phpdocumentor-signature__name">parseElement</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$surveyConfiguration</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\SurveyjsParser\list">list</abbr>&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dataPrefix</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, <abbr title="\Collecthor\DataInterfaces\VariableInterface">VariableInterface</abbr>&gt;</span></code>
+                <span class="phpdocumentor-signature__name">parseElement</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$config</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-SurveyConfiguration.html"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$surveyConfiguration</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\SurveyjsParser\list">list</abbr>&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dataPrefix</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, <abbr title="\Collecthor\DataInterfaces\VariableInterface">VariableInterface</abbr>&gt;</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -629,7 +756,7 @@
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$surveyConfiguration</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-SurveyConfiguration.html"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -679,14 +806,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/SurveyParser.php"><a href="files/src-surveyparser.html"><abbr title="src/SurveyParser.php">SurveyParser.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">88</span>
+    <span class="phpdocumentor-element-found-in__line">105</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                <span class="phpdocumentor-signature__name">parsePage</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$structure</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$surveyConfiguration</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, <abbr title="\Collecthor\DataInterfaces\VariableInterface">VariableInterface</abbr>&gt;</span></code>
+                <span class="phpdocumentor-signature__name">parsePage</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$structure</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-SurveyConfiguration.html"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$surveyConfiguration</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, <abbr title="\Collecthor\DataInterfaces\VariableInterface">VariableInterface</abbr>&gt;</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -701,7 +828,7 @@
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$surveyConfiguration</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-SurveyConfiguration.html"><abbr title="\Collecthor\SurveyjsParser\SurveyConfiguration">SurveyConfiguration</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
