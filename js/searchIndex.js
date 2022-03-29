@@ -31,6 +31,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ArrayRecord.html#method_getLastUpdate"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayRecord\u003A\u003AasArray\u0028\u0029",
+            "name": "asArray",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ArrayRecord.html#method_asArray"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayRecord\u003A\u003A\u0024data",
             "name": "data",
             "summary": "",
