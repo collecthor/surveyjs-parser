@@ -21,20 +21,20 @@
         }
     ],
     "require-dev": {
-        "symplify/easy-coding-standard": "^9.4",
+        "symplify/easy-coding-standard": "^9",
         "phpunit/phpunit": "^9.5",
-        "phpstan/phpstan": "^1.2",
-        "ramsey/conventional-commits": "1.x-dev",
+        "phpstan/phpstan": "^1",
+        "ramsey/conventional-commits": "^1",
         "captainhook/plugin-composer": "^5.3",
-        "nikic/iter": "dev-master",
-        "phpstan/phpstan-phpunit": "1.0.x-dev",
-        "phpstan/extension-installer": "dev-master",
-        "phpstan/phpstan-strict-rules": "1.1.x-dev",
+        "nikic/iter": "^2",
+        "phpstan/phpstan-phpunit": "^1",
+        "phpstan/extension-installer": "^1",
+        "phpstan/phpstan-strict-rules": "^1",
         "symfony/console": "< 6"
     },
     "require": {
         "php": ">= 8.1",
-        "collecthor/data-interfaces": ">= 1.1"
+        "collecthor/data-interfaces": ">= 2"
     },
     "config": {
         "allow-plugins": {

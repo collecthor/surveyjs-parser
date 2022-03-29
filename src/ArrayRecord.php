@@ -48,4 +48,14 @@ class ArrayRecord implements RecordInterface
     {
         return clone $this->lastUpdate;
     }
+
+    public function asArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'started' => $this->started,
+            'lastUpdate' => $this->lastUpdate,
+            'data' => $this->data
+        ];
+    }
 }
