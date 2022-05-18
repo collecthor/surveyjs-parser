@@ -21,7 +21,7 @@
         }
     ],
     "require-dev": {
-        "symplify/easy-coding-standard": "^9",
+        "symplify/easy-coding-standard": "^10",
         "phpunit/phpunit": "^9.5",
         "phpstan/phpstan": "^1",
         "ramsey/conventional-commits": "^1",

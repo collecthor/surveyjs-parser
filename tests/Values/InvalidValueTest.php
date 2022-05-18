@@ -25,6 +25,7 @@ class InvalidValueTest extends TestCase
         self::assertStringContainsString('jkl', $value->getRawValue());
         self::assertStringContainsString('mno', $value->getRawValue());
 
+        /** @phpstan-ignore-next-line  */
         self::assertTrue($value->isSystemMissing());
     }
 
@@ -32,7 +33,7 @@ class InvalidValueTest extends TestCase
     {
         $value = new InvalidValue(15.4);
         self::assertSame("15.4", $value->getRawValue());
-
+        /** @phpstan-ignore-next-line  */
         self::assertTrue($value->isSystemMissing());
     }
 
@@ -40,7 +41,7 @@ class InvalidValueTest extends TestCase
     {
         $value = new InvalidValue(14);
         self::assertSame("14", $value->getRawValue());
-
+        /** @phpstan-ignore-next-line  */
         self::assertTrue($value->isSystemMissing());
     }
 
@@ -49,7 +50,7 @@ class InvalidValueTest extends TestCase
         $randomString = random_bytes(15);
         $value = new InvalidValue($randomString);
         self::assertSame($randomString, $value->getRawValue());
-
+        /** @phpstan-ignore-next-line  */
         self::assertTrue($value->isSystemMissing());
     }
 }

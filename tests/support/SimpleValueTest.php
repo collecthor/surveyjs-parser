@@ -7,9 +7,6 @@ namespace Collecthor\SurveyjsParser\Tests\support;
 use Collecthor\DataInterfaces\ValueInterface;
 use PHPUnit\Framework\Assert;
 
-/**
- * @method iterable<scalar> getValidSamples()
- */
 trait SimpleValueTest
 {
     private function getSubject(mixed $param = null): ValueInterface

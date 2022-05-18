@@ -5,11 +5,12 @@ declare(strict_types=1);
 // ecs.php
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $parameters = $containerConfigurator->parameters();
+return static function (ECSConfig $ecsConfig): void {
+    $parameters = $ecsConfig->parameters();
     // Parallel
     $parameters->set(Option::PARALLEL, true);
 
@@ -21,11 +22,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     ]);
     // A. full sets
-    $containerConfigurator->import(SetList::PSR_12);
+    $ecsConfig->import(SetList::PSR_12);
 
 
     // B. standalone rule
-    $services = $containerConfigurator->services();
+    $services = $ecsConfig->services();
     $services->set(ArraySyntaxFixer::class)
         ->call('configure', [[
             'syntax' => 'short',
