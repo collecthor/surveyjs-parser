@@ -18,7 +18,7 @@ jobs:
       - name: Static analysis
         run: vendor/bin/phpstan
       - name: Tests
-        run: phpunit --coverage-clover coverage.xml
+        run: vendor/bin/phpunit --coverage-clover coverage.xml
       - name: Generate docs
         run: phpdoc run
       - name: Deploy docs to pages
