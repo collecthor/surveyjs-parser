@@ -66,6 +66,51 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ElementParserInterface.html#method_parse"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\OptionGenerator",
+            "name": "OptionGenerator",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Helpers-OptionGenerator.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\OptionGenerator\u003A\u003AgenerateOptionsFromUnitEnum\u0028\u0029",
+            "name": "generateOptionsFromUnitEnum",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Helpers-OptionGenerator.html#method_generateOptionsFromUnitEnum"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\OptionGenerator\u003A\u003AgenerateOptionsFromBackedEnum\u0028\u0029",
+            "name": "generateOptionsFromBackedEnum",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Helpers-OptionGenerator.html#method_generateOptionsFromBackedEnum"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\JavascriptVariableSet",
+            "name": "JavascriptVariableSet",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\JavascriptVariableSet\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\JavascriptVariableSet\u003A\u003AgetVariableNames\u0028\u0029",
+            "name": "getVariableNames",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#method_getVariableNames"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\JavascriptVariableSet\u003A\u003AgetVariable\u0028\u0029",
+            "name": "getVariable",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#method_getVariable"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\JavascriptVariableSet\u003A\u003AgetVariables\u0028\u0029",
+            "name": "getVariables",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#method_getVariables"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\JavascriptVariableSet\u003A\u003A\u0024variables",
+            "name": "variables",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#property_variables"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers",
             "name": "ParserHelpers",
             "summary": "",
@@ -326,6 +371,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Traits-GetDisplayValue.html#method_getDisplayValue"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Traits\\GetDisplayValue\u003A\u003AgetDisplayValues\u0028\u0029",
+            "name": "getDisplayValues",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Traits-GetDisplayValue.html#method_getDisplayValues"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Traits\\GetName",
             "name": "GetName",
             "summary": "",
@@ -566,6 +616,11 @@ Search.appendIndex(
             "summary": "Numerical\u0020variables\u0020are\u0020always\u0020ordered,\u0020they\u0020might\u0020even\u0020be\u0020scalar,\u0020but\u0020that\u0020depends\u0020on\u0020context.",
             "url": "classes/Collecthor-SurveyjsParser-Variables-NumericVariable.html#method_getMeasure"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\NumericVariable\u003A\u003AgetJavascriptRepresentation\u0028\u0029",
+            "name": "getJavascriptRepresentation",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-NumericVariable.html#method_getJavascriptRepresentation"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\NumericVariable\u003A\u003A\u0024dataPath",
             "name": "dataPath",
             "summary": "",
@@ -595,6 +650,11 @@ Search.appendIndex(
             "name": "getMeasure",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Variables-OpenTextVariable.html#method_getMeasure"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OpenTextVariable\u003A\u003AgetJavascriptRepresentation\u0028\u0029",
+            "name": "getJavascriptRepresentation",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-OpenTextVariable.html#method_getJavascriptRepresentation"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OpenTextVariable\u003A\u003A\u0024dataPath",
             "name": "dataPath",
@@ -630,6 +690,11 @@ Search.appendIndex(
             "name": "getMeasure",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Variables-SingleChoiceVariable.html#method_getMeasure"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceVariable\u003A\u003AgetJavascriptRepresentation\u0028\u0029",
+            "name": "getJavascriptRepresentation",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-SingleChoiceVariable.html#method_getJavascriptRepresentation"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceVariable\u003A\u003A\u0024valueMap",
             "name": "valueMap",
@@ -685,6 +750,11 @@ Search.appendIndex(
             "name": "Collecthor",
             "summary": "",
             "url": "namespaces/collecthor.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers",
+            "name": "Helpers",
+            "summary": "",
+            "url": "namespaces/collecthor-surveyjsparser-helpers.html"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers",
             "name": "Parsers",

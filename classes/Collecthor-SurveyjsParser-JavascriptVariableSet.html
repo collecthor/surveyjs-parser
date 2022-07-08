@@ -91,12 +91,11 @@
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/collecthor.html">Collecthor</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/collecthor-surveyjsparser.html">SurveyjsParser</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/collecthor-surveyjsparser-values.html">Values</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    IntegerValueOption
+    JavascriptVariableSet
 
     
             <div class="phpdocumentor-element__package">
@@ -108,17 +107,14 @@
     
             <span class="phpdocumentor-element__implements">
             implements
-                            <abbr title="\Collecthor\DataInterfaces\ValueOptionInterface">ValueOptionInterface</abbr>                    </span>
+                            <abbr title="\Collecthor\DataInterfaces\JavascriptVariableSetInterface">JavascriptVariableSetInterface</abbr>                    </span>
     
-            <span class="phpdocumentor-element__extends">
-            Uses
-                            <a href="classes/Collecthor-SurveyjsParser-Traits-GetDisplayValue.html"><abbr title="\Collecthor\SurveyjsParser\Traits\GetDisplayValue">GetDisplayValue</abbr></a>                    </span>
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Values/IntegerValueOption.php"><a href="files/src-values-integervalueoption.html"><abbr title="src/Values/IntegerValueOption.php">IntegerValueOption.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/JavascriptVariableSet.php"><a href="files/src-javascriptvariableset.html"><abbr title="src/JavascriptVariableSet.php">JavascriptVariableSet.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">11</span>
 
     </aside>
 
@@ -136,7 +132,7 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Collecthor\DataInterfaces\ValueOptionInterface">ValueOptionInterface</abbr></dt>
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Collecthor\DataInterfaces\JavascriptVariableSetInterface">JavascriptVariableSetInterface</abbr></dt>
         <dd></dd>
     
     
@@ -151,44 +147,37 @@
 
 <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#property_displayValues">$displayValues</a>
+    <a href="classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#property_variables">$variables</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
 <dd></dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#property_rawValue">$rawValue</a>
-    <span>
-                        &nbsp;: int            </span>
-</dt>
-<dd></dd>
-
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#method___construct">__construct()</a>
+    <a href="classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Collecthor-SurveyjsParser-Traits-GetDisplayValue.html#method_getDisplayValue">getDisplayValue()</a>
+    <a href="classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#method_getVariable">getVariable()</a>
     <span>
-                                &nbsp;: string    </span>
+                                &nbsp;: <abbr title="\Collecthor\DataInterfaces\JavascriptVariableInterface">JavascriptVariableInterface</abbr>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Collecthor-SurveyjsParser-Traits-GetDisplayValue.html#method_getDisplayValues">getDisplayValues()</a>
+    <a href="classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#method_getVariableNames">getVariableNames()</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: iteratable&lt;string|int, mixed&gt;    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#method_getRawValue">getRawValue()</a>
+    <a href="classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#method_getVariables">getVariables()</a>
     <span>
-                                &nbsp;: int    </span>
+                                &nbsp;: iteratable&lt;string|int, mixed&gt;    </span>
 </dt>
 <dd></dd>
 
@@ -202,7 +191,7 @@
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="
@@ -211,16 +200,16 @@
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_displayValues">
-        $displayValues
-        <a href="classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#property_displayValues" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_variables">
+        $variables
+        <a href="classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#property_variables" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Values/IntegerValueOption.php"><a href="files/src-values-integervalueoption.html"><abbr title="src/Values/IntegerValueOption.php">IntegerValueOption.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/JavascriptVariableSet.php"><a href="files/src-javascriptvariableset.html"><abbr title="src/JavascriptVariableSet.php">JavascriptVariableSet.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
@@ -228,47 +217,11 @@
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$displayValues</span>
-    </code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
+    <span class="phpdocumentor-signature__name">$variables</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
     
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_rawValue">
-        $rawValue
-        <a href="classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#property_rawValue" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Values/IntegerValueOption.php"><a href="files/src-values-integervalueoption.html"><abbr title="src/Values/IntegerValueOption.php">IntegerValueOption.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">17</span>
-
-    </aside>
-
     
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">int</span>
-    <span class="phpdocumentor-signature__name">$rawValue</span>
-    </code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
     
 
 </article>
@@ -277,7 +230,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -287,37 +240,31 @@
 >
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
-        <a href="classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Values/IntegerValueOption.php"><a href="files/src-values-integervalueoption.html"><abbr title="src/Values/IntegerValueOption.php">IntegerValueOption.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/JavascriptVariableSet.php"><a href="files/src-javascriptvariableset.html"><abbr title="src/JavascriptVariableSet.php">JavascriptVariableSet.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$rawValue</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$displayValues</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\DataInterfaces\JavascriptVariableInterface">JavascriptVariableInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__variadic-operator">...</span><span class="phpdocumentor-signature__argument__name">$variables</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$rawValue</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                <span class="phpdocumentor-signature__argument__name">$variables</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\DataInterfaces\JavascriptVariableInterface">JavascriptVariableInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
 
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$displayValues</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
             </dd>
             </dl>
 
@@ -335,30 +282,30 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getDisplayValue">
-        getDisplayValue()
-        <a href="classes/Collecthor-SurveyjsParser-Traits-GetDisplayValue.html#method_getDisplayValue" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getVariable">
+        getVariable()
+        <a href="classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#method_getVariable" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Traits/GetDisplayValue.php"><a href="files/src-traits-getdisplayvalue.html"><abbr title="src/Traits/GetDisplayValue.php">GetDisplayValue.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/JavascriptVariableSet.php"><a href="files/src-javascriptvariableset.html"><abbr title="src/JavascriptVariableSet.php">JavascriptVariableSet.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getDisplayValue</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$locale</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">getVariable</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Collecthor\DataInterfaces\JavascriptVariableInterface">JavascriptVariableInterface</abbr></span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$locale</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+                <span class="phpdocumentor-signature__argument__name">$name</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
 
@@ -368,7 +315,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Collecthor\DataInterfaces\JavascriptVariableInterface">JavascriptVariableInterface</abbr></span>
             &mdash;
         
     
@@ -379,21 +326,21 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getDisplayValues">
-        getDisplayValues()
-        <a href="classes/Collecthor-SurveyjsParser-Traits-GetDisplayValue.html#method_getDisplayValues" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getVariableNames">
+        getVariableNames()
+        <a href="classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#method_getVariableNames" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Traits/GetDisplayValue.php"><a href="files/src-traits-getdisplayvalue.html"><abbr title="src/Traits/GetDisplayValue.php">GetDisplayValue.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/JavascriptVariableSet.php"><a href="files/src-javascriptvariableset.html"><abbr title="src/JavascriptVariableSet.php">JavascriptVariableSet.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getDisplayValues</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getVariableNames</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, mixed&gt;</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -401,7 +348,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, mixed&gt;</span>
             &mdash;
         
     
@@ -412,21 +359,21 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getRawValue">
-        getRawValue()
-        <a href="classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#method_getRawValue" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getVariables">
+        getVariables()
+        <a href="classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#method_getVariables" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Values/IntegerValueOption.php"><a href="files/src-values-integervalueoption.html"><abbr title="src/Values/IntegerValueOption.php">IntegerValueOption.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/JavascriptVariableSet.php"><a href="files/src-javascriptvariableset.html"><abbr title="src/JavascriptVariableSet.php">JavascriptVariableSet.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getRawValue</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+                    <span class="phpdocumentor-signature__name">getVariables</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, mixed&gt;</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -434,7 +381,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int</span>
+    <span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, mixed&gt;</span>
             &mdash;
         
     
@@ -517,7 +464,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
