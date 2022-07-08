@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Variables;
 
 use Collecthor\DataInterfaces\InvalidValueInterface;
+use Collecthor\DataInterfaces\JavascriptVariableInterface;
 use Collecthor\DataInterfaces\Measure;
 use Collecthor\DataInterfaces\NumericValueInterface;
 use Collecthor\DataInterfaces\NumericVariableInterface;
@@ -18,7 +19,7 @@ use Collecthor\SurveyjsParser\Values\InvalidValue;
 use Collecthor\SurveyjsParser\Values\MissingIntegerValue;
 use Collecthor\SurveyjsParser\Values\StringValue;
 
-class NumericVariable implements NumericVariableInterface
+class NumericVariable implements NumericVariableInterface, JavascriptVariableInterface
 {
     use GetTitle, GetName;
 
@@ -67,5 +68,56 @@ class NumericVariable implements NumericVariableInterface
     public function getMeasure(): Measure
     {
         return Measure::Ordinal;
+    }
+
+    public function getJavascriptRepresentation(): string
+    {
+        $config = json_encode([
+            'titles' => $this->titles,
+            'dataPath' => $this->dataPath,
+            'measure' => $this->getMeasure()->value,
+
+        ], JSON_THROW_ON_ERROR);
+        return <<<JS
+            (() => {
+                const config = $config;
+                const getDataValue = (record, path) => {
+                    const length = path.length;
+                    let subject = record;
+                    for(let i = 0; i < length; i ++) {
+                        subject = record[path[i]] ?? null;
+                    }
+                    return subject;                    
+                }
+                
+                return {
+                    getTitle(locale = null) => config.titles[locale ?? 'default'] ?? Object.values(config.titles)[0],
+                    getMeasure() => config.measure,
+                    getValue(record) => {
+                        const raw = getDataValue(record, path)
+                        if (raw === null) {
+                            return null;
+                        }
+                        if (typeof raw !== 'number') {
+                            return 'INVALID_VALUE';
+                        }
+                        return raw;                       
+                    },
+                    getDisplayValue(record) => {
+                        const raw = getDataValue(record, path)
+                        if (raw === null) {
+                            return null;
+                        }
+                        if (typeof raw !== 'number') {
+                            return 'INVALID_VALUE';
+                        }
+                        return raw; 
+                    }
+                    
+                }
+    
+            })()
+
+JS;
     }
 }

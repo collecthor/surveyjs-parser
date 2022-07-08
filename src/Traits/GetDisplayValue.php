@@ -16,4 +16,9 @@ trait GetDisplayValue
 
         return $this->displayValues[$locale] ?? $this->displayValues[ValueOptionInterface::DEFAULT_LOCALE] ?? $firstLabel ?? (string) $this->rawValue;
     }
+
+    public function getDisplayValues(): array
+    {
+        return $this->displayValues;
+    }
 }

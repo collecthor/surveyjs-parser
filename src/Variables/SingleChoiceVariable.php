@@ -75,4 +75,44 @@ class SingleChoiceVariable implements ClosedVariableInterface
     {
         return Measure::Nominal;
     }
+
+    public function getJavascriptRepresentation(): string
+    {
+        $valueMap = [];
+        foreach ($this->valueMap as $option) {
+            $valueMap[(string) $option->getRawValue()] = [
+                'raw' => $option->getRawValue(),
+                'displayValues' => $option->getDisplayValues()
+            ];
+        }
+        $config = json_encode([
+            'titles' => $this->titles,
+            'dataPath' => $this->dataPath,
+            'valueMap' => $valueMap,
+            'measure' => $this->getMeasure()->value,
+
+        ], JSON_THROW_ON_ERROR);
+        return <<<JS
+            (() => {
+                const config = $config;
+                const getDataValue = (record, path) => {
+                    const length = path.length;
+                    let subject = record;
+                    for(let i = 0; i < length; i ++) {
+                        subject = record[path[i]] ?? null;
+                    }
+                    return subject;                    
+                }
+                
+                return {
+                    getTitle(locale = null) => config.titles[locale ?? 'default'] ?? Object.values(config.titles)[0],
+                    getMeasure() => config.measure,
+                    getValue(record) => getDataValue(record, path),
+                    getDisplayValue(record) => getDataValue(record, path)                    
+                }
+    
+            })()
+
+JS;
+    }
 }
