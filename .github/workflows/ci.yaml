@@ -12,7 +12,7 @@ jobs:
           php-version: '8.1'
           tools: phpDocumentor
       - name: Test code style
-        run: ecs
+        run: vendor/bin/ecs
       - name: Install dependencies
         run: composer install
       - name: Static analysis
