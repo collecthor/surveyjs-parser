@@ -10,19 +10,15 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
-          tools: symplify/easy-coding-standard, phpstan, phpunit, phpDocumentor
+          tools: phpDocumentor
       - name: Test code style
         run: ecs
       - name: Install dependencies
-        run: composer install --no-dev
-      - name: Static analysis
-        run: phpstan analyse src
-      - name: Install dependencies including dev
         run: composer install
+      - name: Static analysis
+        run: vendor/bin/phpstan
       - name: Tests
         run: phpunit --coverage-clover coverage.xml
-      - name: Static analysis of tests
-        run: phpstan analyse tests
       - name: Generate docs
         run: phpdoc run
       - name: Deploy docs to pages
