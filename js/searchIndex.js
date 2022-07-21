@@ -1,6 +1,31 @@
 Search.appendIndex(
     [
                 {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayDataRecord",
+            "name": "ArrayDataRecord",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ArrayDataRecord.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayDataRecord\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayDataRecord\u003A\u003AgetDataValue\u0028\u0029",
+            "name": "getDataValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#method_getDataValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayDataRecord\u003A\u003AallData\u0028\u0029",
+            "name": "allData",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#method_allData"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayDataRecord\u003A\u003A\u0024data",
+            "name": "data",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#property_data"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayRecord",
             "name": "ArrayRecord",
             "summary": "A\u0020simple\u0020array\u0020wrapper\u0020that\u0020implements\u0020\u0060RecordInterface\u0060",
@@ -10,11 +35,6 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ArrayRecord.html#method___construct"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayRecord\u003A\u003AgetDataValue\u0028\u0029",
-            "name": "getDataValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-ArrayRecord.html#method_getDataValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayRecord\u003A\u003AgetRecordId\u0028\u0029",
             "name": "getRecordId",
@@ -30,16 +50,6 @@ Search.appendIndex(
             "name": "getLastUpdate",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ArrayRecord.html#method_getLastUpdate"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayRecord\u003A\u003AasArray\u0028\u0029",
-            "name": "asArray",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-ArrayRecord.html#method_asArray"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayRecord\u003A\u003A\u0024data",
-            "name": "data",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-ArrayRecord.html#property_data"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayRecord\u003A\u003A\u0024id",
             "name": "id",
