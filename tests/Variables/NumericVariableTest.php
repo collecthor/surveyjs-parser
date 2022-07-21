@@ -21,6 +21,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Collecthor\DataInterfaces\MissingValueInterface
  * @uses \Collecthor\SurveyjsParser\Values\MissingIntegerValue
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
+ * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  */
 class NumericVariableTest extends TestCase
 {

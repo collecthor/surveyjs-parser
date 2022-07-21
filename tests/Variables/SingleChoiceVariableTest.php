@@ -20,6 +20,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Collecthor\SurveyjsParser\ArrayRecord
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
  * @uses \Collecthor\SurveyjsParser\Values\InvalidValue
+ * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  */
 class SingleChoiceVariableTest extends TestCase
 {

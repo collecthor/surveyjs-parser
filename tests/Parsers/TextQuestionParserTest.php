@@ -21,6 +21,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Collecthor\SurveyjsParser\Variables\NumericVariable
  * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
  * @uses \Collecthor\SurveyjsParser\Parsers\CommentParser
+ * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  */
 class TextQuestionParserTest extends TestCase
 {

@@ -17,6 +17,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Collecthor\SurveyjsParser\ArrayRecord
  * @uses \Collecthor\DataInterfaces\MissingValueInterface
  * @uses \Collecthor\SurveyjsParser\Values\MissingStringValue
+ * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
  */
 class OpenTextVariableTest extends TestCase

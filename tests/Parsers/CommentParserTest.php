@@ -19,6 +19,7 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\ArrayRecord
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
  * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
+ * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  */
 class CommentParserTest extends TestCase
 {

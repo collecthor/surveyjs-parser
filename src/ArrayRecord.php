@@ -5,34 +5,27 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser;
 
 use Collecthor\DataInterfaces\RecordInterface;
+use Collecthor\DataInterfaces\StoredRecordInterface;
 use DateTimeInterface;
 
 /**
  * A simple array wrapper that implements `RecordInterface`
  */
-class ArrayRecord implements RecordInterface
+class ArrayRecord extends ArrayDataRecord implements StoredRecordInterface
 {
     /**
-     * @param array<mixed> $data
+     * @param array<string, mixed> $data
      */
     public function __construct(
-        private array $data,
-        private int $id,
-        private DateTimeInterface $started,
-        private DateTimeInterface $lastUpdate
+        array $data,
+        private readonly int $id,
+        private readonly DateTimeInterface $started,
+        private readonly DateTimeInterface $lastUpdate
     ) {
+        parent::__construct($data);
     }
 
-    public function getDataValue(array $path): string|int|float|null|array
-    {
-        $data = $this->data;
 
-        while (count($path) > 0 && is_array($data)) {
-            $key = array_shift($path);
-            $data = $data[$key] ?? null;
-        }
-        return $data;
-    }
 
     public function getRecordId(): int
     {
@@ -47,15 +40,5 @@ class ArrayRecord implements RecordInterface
     public function getLastUpdate(): DateTimeInterface
     {
         return clone $this->lastUpdate;
-    }
-
-    public function asArray(): array
-    {
-        return [
-            'id' => $this->id,
-            'started' => $this->started,
-            'lastUpdate' => $this->lastUpdate,
-            'data' => $this->data
-        ];
     }
 }

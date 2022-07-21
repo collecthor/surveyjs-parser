@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Collecthor\SurveyjsParser\ArrayRecord
+ * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  */
 class ArrayRecordTest extends TestCase
 {
