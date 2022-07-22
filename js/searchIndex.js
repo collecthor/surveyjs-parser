@@ -416,6 +416,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Traits-GetTitle.html#property_titles"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\ArrayValue",
+            "name": "ArrayValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-ArrayValue.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\ArrayValue\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-ArrayValue.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\ArrayValue\u003A\u003AgetRawValue\u0028\u0029",
+            "name": "getRawValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-ArrayValue.html#method_getRawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\ArrayValue\u003A\u003A\u0024rawValue",
+            "name": "rawValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-ArrayValue.html#property_rawValue"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\FloatValue",
             "name": "FloatValue",
             "summary": "",
