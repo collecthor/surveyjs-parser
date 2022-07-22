@@ -8,7 +8,7 @@ use Collecthor\DataInterfaces\NumericValueInterface;
 
 class IntegerValue implements NumericValueInterface
 {
-    public function __construct(private int $rawValue)
+    public function __construct(private readonly int $rawValue)
     {
     }
 

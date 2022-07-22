@@ -10,8 +10,8 @@ use Collecthor\DataInterfaces\StringValueInterface;
 class MissingStringValue implements MissingValueInterface, StringValueInterface
 {
     public function __construct(
-        private string $rawValue = '',
-        private bool $isSystemMissing = true
+        private readonly string $rawValue = '',
+        private readonly bool $isSystemMissing = true
     ) {
     }
 

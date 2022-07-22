@@ -8,7 +8,7 @@ use Collecthor\DataInterfaces\NumericValueInterface;
 
 class FloatValue implements NumericValueInterface
 {
-    public function __construct(private float $rawValue)
+    public function __construct(private readonly float $rawValue)
     {
     }
 

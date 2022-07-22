@@ -10,8 +10,8 @@ use Collecthor\DataInterfaces\NumericValueInterface;
 class MissingIntegerValue implements MissingValueInterface, NumericValueInterface
 {
     public function __construct(
-        private int $rawValue,
-        private bool $isSystemMissing = true
+        private readonly int $rawValue,
+        private readonly bool $isSystemMissing = true
     ) {
     }
 

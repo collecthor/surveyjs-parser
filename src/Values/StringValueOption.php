@@ -14,8 +14,8 @@ class StringValueOption implements ValueOptionInterface
      * @param array<string, string> $displayValues
      */
     public function __construct(
-        private string $rawValue,
-        private array $displayValues
+        private readonly string $rawValue,
+        private readonly array $displayValues
     ) {
     }
 

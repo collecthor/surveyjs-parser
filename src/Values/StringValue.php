@@ -8,7 +8,7 @@ use Collecthor\DataInterfaces\StringValueInterface;
 
 class StringValue implements StringValueInterface
 {
-    public function __construct(private string $rawValue)
+    public function __construct(private readonly string $rawValue)
     {
     }
 

@@ -14,8 +14,8 @@ class IntegerValueOption implements ValueOptionInterface
      * @param array<string, string> $displayValues
      */
     public function __construct(
-        private int $rawValue,
-        private array $displayValues
+        private readonly int $rawValue,
+        private readonly array $displayValues
     ) {
     }
 

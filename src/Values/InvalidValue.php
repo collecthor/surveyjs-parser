@@ -10,7 +10,7 @@ use Collecthor\DataInterfaces\StringValueInterface;
 class InvalidValue implements InvalidValueInterface, StringValueInterface
 {
     public function __construct(
-        private mixed $rawValue
+        private readonly mixed $rawValue
     ) {
     }
 
