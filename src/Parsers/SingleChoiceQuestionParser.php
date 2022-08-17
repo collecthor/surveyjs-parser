@@ -43,38 +43,4 @@ class SingleChoiceQuestionParser implements ElementParserInterface
         yield new SingleChoiceVariable($name, $titles, $choices, $dataPath);
         yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
     }
-
-    /**
-     * @param list<mixed>  $choices
-     * @param SurveyConfiguration $surveyConfiguration
-     * @phpstan-return non-empty-list<ValueOptionInterface>
-     */
-    private function extractChoices(array $choices, SurveyConfiguration $surveyConfiguration): array
-    {
-        if (!array_is_list($choices) || $choices === []) {
-            throw new \InvalidArgumentException("Choices must be a non empty list");
-        }
-        $result = [];
-        foreach ($choices as $choice) {
-            if (is_array($choice) && isset($choice['value'], $choice['text'])) {
-                $value = $choice['value'];
-                $displayValues = $this->extractLocalizedTexts($choice, $surveyConfiguration);
-            } elseif (is_string($choice) || is_int($choice)) {
-                $value = $choice;
-                $displayValues = [];
-            } else {
-                throw new \InvalidArgumentException("Each choice must be a string or int or an array with keys value and text");
-            }
-
-            if (is_int($value)) {
-                $result[] = new IntegerValueOption($value, $displayValues);
-            } elseif (is_scalar($value)) {
-                $result[] = new StringValueOption((string) $value, $displayValues);
-            } else {
-                throw new \InvalidArgumentException('Values must be scalar, got: ' . print_r($choice, true));
-            }
-        }
-
-        return $result;
-    }
 }

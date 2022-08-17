@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser;
 
 use Collecthor\DataInterfaces\VariableInterface;
+use Collecthor\SurveyjsParser\Values\IntegerValueOption;
+use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use InvalidArgumentException;
 
@@ -149,5 +151,39 @@ trait ParserHelpers
         }
 
         throw new InvalidArgumentException("Key $key in array is expected to be boolean or null, got: " . print_r($config, true));
+    }
+
+    /**
+     * @param array<mixed>  $choices
+     * @param SurveyConfiguration $surveyConfiguration
+     * @phpstan-return non-empty-list<ValueOptionInterface>
+     */
+    private function extractChoices(array $choices, SurveyConfiguration $surveyConfiguration): array
+    {
+        if (!array_is_list($choices) || $choices === []) {
+            throw new \InvalidArgumentException("Choices must be a non empty list");
+        }
+        $result = [];
+        foreach ($choices as $choice) {
+            if (is_array($choice) && isset($choice['value'], $choice['text'])) {
+                $value = $choice['value'];
+                $displayValues = $this->extractLocalizedTexts($choice, $surveyConfiguration);
+            } elseif (is_string($choice) || is_int($choice)) {
+                $value = $choice;
+                $displayValues = [];
+            } else {
+                throw new \InvalidArgumentException("Each choice must be a string or int or an array with keys value and text");
+            }
+
+            if (is_int($value)) {
+                $result[] = new IntegerValueOption($value, $displayValues);
+            } elseif (is_scalar($value)) {
+                $result[] = new StringValueOption((string) $value, $displayValues);
+            } else {
+                throw new \InvalidArgumentException('Values must be scalar, got: ' . print_r($choice, true));
+            }
+        }
+
+        return $result;
     }
 }
