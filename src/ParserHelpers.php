@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser;
 
+use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
@@ -14,7 +15,7 @@ trait ParserHelpers
 {
     /**
      * @phpstan-param non-empty-array<string, mixed> $questionConfig
-     * @param list<string> $dataPrefix
+     * @param array<string> $dataPrefix
      * @return iterable<VariableInterface>
      */
     private function parseCommentField(array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix): iterable
@@ -156,13 +157,14 @@ trait ParserHelpers
     /**
      * @param array<mixed>  $choices
      * @param SurveyConfiguration $surveyConfiguration
-     * @phpstan-return non-empty-list<ValueOptionInterface>
+     * @phpstan-return array<ValueOptionInterface>
      */
     private function extractChoices(array $choices, SurveyConfiguration $surveyConfiguration): array
     {
         if (!array_is_list($choices) || $choices === []) {
             throw new \InvalidArgumentException("Choices must be a non empty list");
         }
+        /** @var ValueOptionInterface[] $result */
         $result = [];
         foreach ($choices as $choice) {
             if (is_array($choice) && isset($choice['value'], $choice['text'])) {
