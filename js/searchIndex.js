@@ -161,6 +161,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractOptionalBoolean"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AextractChoices\u0028\u0029",
+            "name": "extractChoices",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractChoices"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\CallbackElementParser",
             "name": "CallbackElementParser",
             "summary": "An\u0020element\u0020parser\u0020that\u0020uses\u0020a\u0020closure\u0020to\u0020parse\u0020any\u0020given\u0020question\u0020configuration.",
@@ -240,11 +245,6 @@ Search.appendIndex(
             "name": "parse",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-SingleChoiceQuestionParser.html#method_parse"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\SingleChoiceQuestionParser\u003A\u003AextractChoices\u0028\u0029",
-            "name": "extractChoices",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Parsers-SingleChoiceQuestionParser.html#method_extractChoices"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\TextQuestionParser",
             "name": "TextQuestionParser",
