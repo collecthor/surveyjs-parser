@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Collecthor\SurveyjsParser\parsers;
+namespace Collecthor\SurveyjsParser\Parsers;
 
-use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
@@ -12,7 +11,7 @@ use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 
-class MultipleChoiceParser implements ElementParserInterface
+class MultipleChoiceQuestionParser implements ElementParserInterface
 {
     use ParserHelpers;
 

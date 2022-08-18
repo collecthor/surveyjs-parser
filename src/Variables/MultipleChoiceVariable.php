@@ -17,6 +17,7 @@ use Collecthor\SurveyjsParser\Values\InvalidValue;
 use Collecthor\SurveyjsParser\Values\StringValue;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Values\ValueSet;
+use Exception;
 
 class MultipleChoiceVariable implements ClosedVariableInterface
 {
@@ -59,14 +60,18 @@ class MultipleChoiceVariable implements ClosedVariableInterface
     {
         $rawValues = $record->getDataValue($this->dataPath);
         if (!is_array($rawValues)) {
-            return new InvalidValue($rawValues);
+            return new ValueSet([new InvalidValue($rawValues)]);
         }
 
         $values = [];
 
         foreach ($rawValues as $value) {
             /** @var string $value */
-            $values[] = $this->valueMap[(string) $value];
+            try {
+                $values[] = $this->valueMap[(string) $value];
+            } catch (Exception $e) {
+                $values[] = new InvalidValue($value);
+            }
         }
         return new ValueSet($values);
     }
@@ -77,7 +82,7 @@ class MultipleChoiceVariable implements ClosedVariableInterface
         $valueSet = $this->getValue($record);
         $values = $valueSet->getValues();
 
-        $displayValues = array_map(fn (ValueOptionInterface $val) => $val->getDisplayValue(), $values);
+        $displayValues = array_map(fn (ValueOptionInterface $val) => $val->getDisplayValue($locale), $values);
         return new StringValue(implode(", ", $displayValues));
     }
 
