@@ -60,17 +60,17 @@ class MultipleChoiceVariable implements ClosedVariableInterface
     {
         $rawValues = $record->getDataValue($this->dataPath);
         if (!is_array($rawValues)) {
-            return new ValueSet([new InvalidValue($rawValues)]);
+            return new InvalidValue($rawValues);
         }
 
         $values = [];
 
         foreach ($rawValues as $value) {
             /** @var string $value */
-            try {
+            if (isset($this->valueMap[(string) $value])) {
                 $values[] = $this->valueMap[(string) $value];
-            } catch (Exception $e) {
-                $values[] = new InvalidValue($value);
+            } else {
+                return new InvalidValue($rawValues);
             }
         }
         return new ValueSet($values);

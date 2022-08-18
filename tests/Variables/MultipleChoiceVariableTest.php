@@ -47,12 +47,7 @@ class MultipleChoiceVariableTest extends TestCase
 
         $foundValue = $subject->getValue($data);
 
-        self::assertInstanceOf(ValueSet::class, $foundValue);
-
-        /** @var StringValueOption[] $values */
-        $values = $foundValue->getValues();
-
-        self::assertInstanceOf(InvalidValue::class, $values[1]);
+        self::assertInstanceOf(InvalidValue::class, $foundValue);
     }
 
     public function testGetValidValues(): void

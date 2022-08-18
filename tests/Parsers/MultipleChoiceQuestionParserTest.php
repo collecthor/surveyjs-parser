@@ -23,7 +23,7 @@ use function iter\toArray;
 
 class MultipleChoiceQuestionParserTest extends TestCase
 {
-    public function testMultipleChoice()
+    public function testMultipleChoice(): void
     {
         $parent = new DummyParser();
         $surveyConfiguration = new SurveyConfiguration();

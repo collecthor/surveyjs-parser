@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Parsers;
 
+use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
