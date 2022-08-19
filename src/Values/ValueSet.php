@@ -9,9 +9,12 @@ use Collecthor\DataInterfaces\ValueSetInterface;
 
 class ValueSet implements ValueSetInterface
 {
-    /** @param ValueOptionInterface[] $values */
-    public function __construct(private array $values)
+    /** @var array<ValueOptionInterface> $values */
+    private array $values = [];
+    
+    public function __construct(ValueOptionInterface ...$values)
     {
+        $this->values = $values;
     }
 
     public function getValues(): array

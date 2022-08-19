@@ -73,7 +73,7 @@ class MultipleChoiceVariable implements ClosedVariableInterface
                 return new InvalidValue($rawValues);
             }
         }
-        return new ValueSet($values);
+        return new ValueSet(...$values);
     }
 
     public function getDisplayValue(RecordInterface $record, ?string $locale = null): StringValueInterface
