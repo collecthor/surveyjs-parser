@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 use function PHPUnit\Framework\assertEquals;
 
 /**
- * @covers \Collecthor\SurveyjsParser\Variables\ValueSet
+ * @covers \Collecthor\SurveyjsParser\Values\ValueSet
  * @uses \Collecthor\SurveyjsParser\Values\IntegerValueOption
  * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
  * @uses \Collecthor\SurveyjsParser\ArrayRecord
