@@ -23,6 +23,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
  * @uses \Collecthor\SurveyjsParser\Values\InvalidValue
  * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
+ * @uses \Collecthor\SurveyjsParser\Values\ValueSet
  */
 class MultipleChoiceVariableTest extends TestCase
 {
