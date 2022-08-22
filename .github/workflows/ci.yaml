@@ -34,10 +34,11 @@ jobs:
   commitlint:
     name: commit-lint
     runs-on: ubuntu-latest
-    steps:
-      - uses: ahmadnassri/action-commit-lint@v1
-        with:
-         config: conventional
+      steps:
+        - uses: actions/checkout@v3
+          with:
+            fetch-depth: 0
+        - uses: wagoid/commitlint-github-action@v5
   release:
     name: Automated release
     needs: [code_checks]
