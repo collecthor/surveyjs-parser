@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
 use Collecthor\SurveyjsParser\ArrayRecord;
+use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\Parsers\CommentParser;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
+use Collecthor\SurveyjsParser\Tests\support\ValueNameTests;
 use Collecthor\SurveyjsParser\Values\StringValue;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use PHPUnit\Framework\TestCase;
@@ -42,6 +44,14 @@ class CommentParserTest extends TestCase
         $parser = new CommentParser();
         $variables = $parser->parse(new DummyParser(), ['hasComment' => true, 'name' => 'q1'], new SurveyConfiguration());
         self::assertCount(1, toArray($variables));
+    }
+
+    public function testHasCommentInvalidValue(): void
+    {
+        $parser = new CommentParser();
+        $variables = $parser->parse(new DummyParser(), ['hasComment' => 15, 'name' => 'q1'], new SurveyConfiguration());
+        $this->expectException(\InvalidArgumentException::class);
+        toArray($variables);
     }
 
     public function testHasCommentAndOther(): void

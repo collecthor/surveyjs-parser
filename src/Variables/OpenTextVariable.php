@@ -10,25 +10,28 @@ use Collecthor\DataInterfaces\RecordInterface;
 use Collecthor\DataInterfaces\StringValueInterface;
 use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Traits\GetName;
+use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
 use Collecthor\SurveyjsParser\Values\MissingStringValue;
 use Collecthor\SurveyjsParser\Values\StringValue;
 
 class OpenTextVariable implements VariableInterface, JavascriptVariableInterface
 {
-    use GetName, GetTitle;
+    use GetName, GetTitle, GetRawConfiguration;
     /**
-     * @phpstan-param non-empty-list<string> $dataPath
      * @param array<string, string> $titles
+     * @param array<string, mixed> $rawConfiguration
+     * @phpstan-param non-empty-list<string> $dataPath
      */
     public function __construct(
         string $name,
         array $titles,
-        private array $dataPath
+        private readonly array $dataPath,
+        array $rawConfiguration = []
     ) {
-        $this->titles = $titles;
-
         $this->name = $name;
+        $this->titles = $titles;
+        $this->rawConfiguration = $rawConfiguration;
     }
 
 

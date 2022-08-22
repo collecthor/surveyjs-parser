@@ -45,17 +45,4 @@ class ArrayRecordTest extends TestCase
         yield [['a' => 'b'], ['a'], 'b'];
         yield [['a' => ['b' => 'c']], ['a', 'b'], 'c'];
     }
-
-    /**
-     * @dataProvider dataProvider
-     * @param array<string, mixed> $exampleData
-     * @param non-empty-list<string> $path
-     * @param mixed $value
-     * @return void
-     */
-    public function testGetDataValue(array $exampleData, array $path, mixed $value): void
-    {
-        $subject = new ArrayRecord($exampleData, 0, new \DateTime(), new \DateTime());
-        self::assertSame($value, $subject->getDataValue($path));
-    }
 }
