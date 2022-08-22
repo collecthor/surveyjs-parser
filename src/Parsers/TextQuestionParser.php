@@ -16,10 +16,9 @@ class TextQuestionParser implements ElementParserInterface
 
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        /** @phpstan-var non-empty-list<string> $dataPath */
         $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
 
-        $name = implode('.', [...$dataPrefix, $questionConfig['name']]);
+        $name = implode('.', [...$dataPrefix, $this->extractName($questionConfig)]);
         $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
 
         if (($questionConfig['inputType'] ?? 'text') === 'number') {
