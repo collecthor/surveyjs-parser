@@ -39,7 +39,8 @@ class MultipleChoiceQuestionParserTest extends TestCase
             ],
             'name' => 'q1',
         ];
-        /** @var MultipleChoiceVariable $variable */
+
+        
         $variable = toArray($parser->parse($parent, $questionConfig, $surveyConfiguration))[0];
         self::assertInstanceOf(MultipleChoiceVariable::class, $variable);
         self::assertCount(4, $variable->getValueOptions());
