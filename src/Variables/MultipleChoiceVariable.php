@@ -31,7 +31,7 @@ class MultipleChoiceVariable implements ClosedVariableInterface
     /**
      * @param string $name
      * @param array<string, string> $titles
-     * @phpstan-param non-empty-list<ValueOptionInterface> $valueOptions
+     * @param non-empty-list<ValueOptionInterface> $valueOptions
      */
     public function __construct(
         string $name,
