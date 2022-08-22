@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Tests\Variables;
 
 use Collecthor\DataInterfaces\InvalidValueInterface;
+use Collecthor\DataInterfaces\JavascriptVariableInterface;
 use Collecthor\DataInterfaces\Measure;
 use Collecthor\DataInterfaces\MissingValueInterface;
 use Collecthor\DataInterfaces\NumericValueInterface;
+use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\Variables\NumericVariable;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Collecthor\SurveyjsParser\Variables\NumericVariable
@@ -23,7 +24,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
  * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  */
-class NumericVariableTest extends TestCase
+class NumericVariableTest extends VariableTest
 {
     /**
      * @return iterable<list<mixed>>
@@ -70,5 +71,21 @@ class NumericVariableTest extends TestCase
         $value = $variable->getDisplayValue(new ArrayRecord($sample, 1, new \DateTime(), new \DateTime()));
 
         self::assertSame((string) $expected, $value->getRawValue());
+    }
+
+    protected function getVariableWithRawConfiguration(array $rawConfiguration): VariableInterface
+    {
+        return new NumericVariable('abc', ['en' => 'English', 'nl' => 'Dutch'], ['path'], $rawConfiguration);
+    }
+
+
+    protected function getVariableWithName(string $name): JavascriptVariableInterface
+    {
+        return new NumericVariable($name, ['en' => 'English', 'nl' => 'Dutch'], ['path']);
+    }
+
+    protected function getVariableWithTitles(array $titles): VariableInterface
+    {
+        return new NumericVariable('abc', $titles, ['path']);
     }
 }

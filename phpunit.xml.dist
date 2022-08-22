@@ -23,5 +23,9 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
+        <report>
+            <html outputDirectory="html" lowUpperBound="50" highLowerBound="90"/>
+            <text showOnlySummary="true" outputFile="/dev/null"/>
+        </report>
     </coverage>
 </phpunit>

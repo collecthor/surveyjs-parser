@@ -7,7 +7,7 @@ namespace Collecthor\SurveyjsParser\Values;
 use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Traits\GetDisplayValue;
 
-class IntegerValueOption implements ValueOptionInterface
+final class IntegerValueOption implements ValueOptionInterface
 {
     use GetDisplayValue;
     /**
