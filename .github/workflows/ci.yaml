@@ -39,6 +39,9 @@ jobs:
     name: commit-lint
     runs-on: ubuntu-latest
     steps:
-      - uses: ahmadnassri/action-commit-lint@v1
+      - uses: actions/checkout@v3
         with:
-         config: conventional
+          fetch-depth: 0
+      - uses: wagoid/commitlint-github-action@v5
+        with:
+          configFile: ../../commitlint.config.js
