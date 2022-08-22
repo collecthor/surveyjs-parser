@@ -108,17 +108,17 @@
     
             <span class="phpdocumentor-element__implements">
             implements
-                            <abbr title="\Collecthor\DataInterfaces\ClosedVariableInterface">ClosedVariableInterface</abbr>                    </span>
+                            <abbr title="\Collecthor\DataInterfaces\ClosedVariableInterface">ClosedVariableInterface</abbr>,                             <abbr title="\Collecthor\DataInterfaces\JavascriptVariableInterface">JavascriptVariableInterface</abbr>                    </span>
     
             <span class="phpdocumentor-element__extends">
             Uses
-                            <a href="classes/Collecthor-SurveyjsParser-Traits-GetName.html"><abbr title="\Collecthor\SurveyjsParser\Traits\GetName">GetName</abbr></a>,                             <a href="classes/Collecthor-SurveyjsParser-Traits-GetTitle.html"><abbr title="\Collecthor\SurveyjsParser\Traits\GetTitle">GetTitle</abbr></a>                    </span>
+                            <a href="classes/Collecthor-SurveyjsParser-Traits-GetName.html"><abbr title="\Collecthor\SurveyjsParser\Traits\GetName">GetName</abbr></a>,                             <a href="classes/Collecthor-SurveyjsParser-Traits-GetTitle.html"><abbr title="\Collecthor\SurveyjsParser\Traits\GetTitle">GetTitle</abbr></a>,                             <a href="classes/Collecthor-SurveyjsParser-Traits-GetRawConfiguration.html"><abbr title="\Collecthor\SurveyjsParser\Traits\GetRawConfiguration">GetRawConfiguration</abbr></a>                    </span>
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Variables/SingleChoiceVariable.php"><a href="files/src-variables-singlechoicevariable.html"><abbr title="src/Variables/SingleChoiceVariable.php">SingleChoiceVariable.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
@@ -137,6 +137,8 @@
 
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Collecthor\DataInterfaces\ClosedVariableInterface">ClosedVariableInterface</abbr></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Collecthor\DataInterfaces\JavascriptVariableInterface">JavascriptVariableInterface</abbr></dt>
         <dd></dd>
     
     
@@ -161,6 +163,13 @@
     <a href="classes/Collecthor-SurveyjsParser-Traits-GetName.html#property_name">$name</a>
     <span>
                         &nbsp;: string            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Collecthor-SurveyjsParser-Traits-GetRawConfiguration.html#property_rawConfiguration">$rawConfiguration</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
 <dd></dd>
 
@@ -214,6 +223,13 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Collecthor-SurveyjsParser-Traits-GetRawConfiguration.html#method_getRawConfigurationValue">getRawConfigurationValue()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Collecthor-SurveyjsParser-Traits-GetTitle.html#method_getTitle">getTitle()</a>
     <span>
                                 &nbsp;: string    </span>
@@ -251,18 +267,18 @@
             phpdocumentor-element
             -property
             -private
-                                                        "
+                                                -read-only        "
 >
     <h4 class="phpdocumentor-element__name" id="property_dataPath">
         $dataPath
         <a href="classes/Collecthor-SurveyjsParser-Variables-SingleChoiceVariable.html#property_dataPath" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
-                                </span>
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Variables/SingleChoiceVariable.php"><a href="files/src-variables-singlechoicevariable.html"><abbr title="src/Variables/SingleChoiceVariable.php">SingleChoiceVariable.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
@@ -273,25 +289,11 @@
     <span class="phpdocumentor-signature__name">$dataPath</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
         <section class="phpdocumentor-description"></section>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">phpstan-var</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p>non-empty-list<string></p>
-</section>
-
-                                    </dd>
-                        </dl>
 
 </article>
                     <article
@@ -335,6 +337,38 @@
             -private
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="property_rawConfiguration">
+        $rawConfiguration
+        <a href="classes/Collecthor-SurveyjsParser-Traits-GetRawConfiguration.html#property_rawConfiguration" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Traits/GetRawConfiguration.php"><a href="files/src-traits-getrawconfiguration.html"><abbr title="src/Traits/GetRawConfiguration.php">GetRawConfiguration.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">12</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$rawConfiguration</span>
+    </code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="property_titles">
         $titles
         <a href="classes/Collecthor-SurveyjsParser-Traits-GetTitle.html#property_titles" class="headerlink"><i class="fas fa-link"></i></a>
@@ -344,7 +378,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Traits/GetTitle.php"><a href="files/src-traits-gettitle.html"><abbr title="src/Traits/GetTitle.php">GetTitle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
@@ -376,7 +410,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Variables/SingleChoiceVariable.php"><a href="files/src-variables-singlechoicevariable.html"><abbr title="src/Variables/SingleChoiceVariable.php">SingleChoiceVariable.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
@@ -412,14 +446,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Variables/SingleChoiceVariable.php"><a href="files/src-variables-singlechoicevariable.html"><abbr title="src/Variables/SingleChoiceVariable.php">SingleChoiceVariable.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$titles</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$valueOptions</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dataPath</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$titles</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$valueOptions</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dataPath</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$rawConfiguration</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -454,24 +488,16 @@
                     <section class="phpdocumentor-description"></section>
 
             </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$rawConfiguration</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">phpstan-param</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p>array&lt;ValueOptionInterface&gt; $valueOptions</p>
-</section>
-
-                                    </dd>
-                        </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">mixed</span>
@@ -492,7 +518,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Variables/SingleChoiceVariable.php"><a href="files/src-variables-singlechoicevariable.html"><abbr title="src/Variables/SingleChoiceVariable.php">SingleChoiceVariable.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">65</span>
+    <span class="phpdocumentor-element-found-in__line">68</span>
 
     </aside>
 
@@ -544,7 +570,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Variables/SingleChoiceVariable.php"><a href="files/src-variables-singlechoicevariable.html"><abbr title="src/Variables/SingleChoiceVariable.php">SingleChoiceVariable.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">79</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
     </aside>
 
@@ -577,7 +603,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Variables/SingleChoiceVariable.php"><a href="files/src-variables-singlechoicevariable.html"><abbr title="src/Variables/SingleChoiceVariable.php">SingleChoiceVariable.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">77</span>
 
     </aside>
 
@@ -636,6 +662,50 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getRawConfigurationValue">
+        getRawConfigurationValue()
+        <a href="classes/Collecthor-SurveyjsParser-Traits-GetRawConfiguration.html#method_getRawConfigurationValue" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Traits/GetRawConfiguration.php"><a href="files/src-traits-getrawconfiguration.html"><abbr title="src/Traits/GetRawConfiguration.php">GetRawConfiguration.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">14</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getRawConfigurationValue</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$key</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getTitle">
         getTitle()
         <a href="classes/Collecthor-SurveyjsParser-Traits-GetTitle.html#method_getTitle" class="headerlink"><i class="fas fa-link"></i></a>
@@ -643,7 +713,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Traits/GetTitle.php"><a href="files/src-traits-gettitle.html"><abbr title="src/Traits/GetTitle.php">GetTitle.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
@@ -687,7 +757,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Variables/SingleChoiceVariable.php"><a href="files/src-variables-singlechoicevariable.html"><abbr title="src/Variables/SingleChoiceVariable.php">SingleChoiceVariable.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">54</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
     </aside>
 
@@ -731,7 +801,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Variables/SingleChoiceVariable.php"><a href="files/src-variables-singlechoicevariable.html"><abbr title="src/Variables/SingleChoiceVariable.php">SingleChoiceVariable.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">52</span>
 
     </aside>
 
