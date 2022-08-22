@@ -12,6 +12,7 @@ use Collecthor\DataInterfaces\ValueInterface;
 use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\DataInterfaces\ValueSetInterface;
 use Collecthor\SurveyjsParser\Traits\GetName;
+use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
 use Collecthor\SurveyjsParser\Values\StringValue;
@@ -21,7 +22,7 @@ use Exception;
 
 class MultipleChoiceVariable implements ClosedVariableInterface
 {
-    use GetName, GetTitle;
+    use GetName, GetTitle, GetRawConfiguration;
 
     /**
      * @var array<string, ValueOptionInterface>
@@ -32,6 +33,7 @@ class MultipleChoiceVariable implements ClosedVariableInterface
      * @param string $name
      * @param array<string, string> $titles
      * @param non-empty-list<ValueOptionInterface> $valueOptions
+     * @param array<string, mixed> $rawConfiguration
      */
     public function __construct(
         string $name,
@@ -40,7 +42,8 @@ class MultipleChoiceVariable implements ClosedVariableInterface
         /**
          * @phpstan-var non-empty-list<string>
          */
-        private array $dataPath
+        private array $dataPath,
+        array $rawConfiguration = []
     ) {
         $this->name = $name;
 
@@ -49,6 +52,7 @@ class MultipleChoiceVariable implements ClosedVariableInterface
         }
 
         $this->titles = $titles;
+        $this->rawConfiguration = $rawConfiguration;
     }
 
     public function getValueOptions(): array
