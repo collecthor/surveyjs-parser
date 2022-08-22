@@ -12,6 +12,7 @@ use Collecthor\DataInterfaces\NumericVariableInterface;
 use Collecthor\DataInterfaces\RecordInterface;
 use Collecthor\DataInterfaces\StringValueInterface;
 use Collecthor\SurveyjsParser\Traits\GetName;
+use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
 use Collecthor\SurveyjsParser\Values\FloatValue;
 use Collecthor\SurveyjsParser\Values\IntegerValue;
@@ -21,20 +22,22 @@ use Collecthor\SurveyjsParser\Values\StringValue;
 
 class NumericVariable implements NumericVariableInterface, JavascriptVariableInterface
 {
-    use GetTitle, GetName;
+    use GetTitle, GetName, GetRawConfiguration;
 
     /**
-     * @param string $name
      * @param array<string, string> $titles
+     * @param array<string, mixed> $rawConfiguration
      * @phpstan-param non-empty-list<string> $dataPath
      */
     public function __construct(
         string $name,
         array $titles,
-        private array $dataPath
+        private readonly array $dataPath,
+        array $rawConfiguration = [],
     ) {
         $this->titles = $titles;
         $this->name = $name;
+        $this->rawConfiguration = $rawConfiguration;
     }
 
     public function getValue(RecordInterface $record): NumericValueInterface|InvalidValueInterface

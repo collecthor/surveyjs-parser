@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Variables;
 
+use Collecthor\DataInterfaces\JavascriptVariableInterface;
 use Collecthor\DataInterfaces\Measure;
 use Collecthor\DataInterfaces\MissingValueInterface;
 use Collecthor\DataInterfaces\StringValueInterface;
+use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Collecthor\SurveyjsParser\Variables\OpenTextVariable
@@ -20,7 +21,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
  */
-class OpenTextVariableTest extends TestCase
+final class OpenTextVariableTest extends VariableTest
 {
     /**
      * @return iterable<list<mixed>>
@@ -65,5 +66,20 @@ class OpenTextVariableTest extends TestCase
         $value = $variable->getDisplayValue(new ArrayRecord($sample, 1, new \DateTime(), new \DateTime()));
 
         self::assertSame($expected, $value->getRawValue());
+    }
+
+    protected function getVariableWithRawConfiguration(array $rawConfiguration): VariableInterface
+    {
+        return new OpenTextVariable('abc', ['en' => 'English', 'nl' => 'Dutch'], ['path'], $rawConfiguration);
+    }
+
+    protected function getVariableWithName(string $name): JavascriptVariableInterface
+    {
+        return new OpenTextVariable($name, ['en' => 'English', 'nl' => 'Dutch'], ['path']);
+    }
+
+    protected function getVariableWithTitles(array $titles): VariableInterface
+    {
+        return new OpenTextVariable('abc', $titles, ['path']);
     }
 }

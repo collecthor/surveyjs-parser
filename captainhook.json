@@ -25,6 +25,11 @@
                 "conditions": []
             },
             {
+                "action": "vendor/bin/psalm",
+                "options": [],
+                "conditions": []
+            },
+            {
                 "action": "vendor/bin/phpunit --coverage-text",
                 "options": [],
                 "conditions": []
