@@ -1,6 +1,6 @@
 const Configuration = {
   rules: {
-    'subject-case': ['pascal-case', 'upper-case'],
+    'subject-case': [2, 'never', ['pascal-case', 'upper-case']],
   }
 };
 
