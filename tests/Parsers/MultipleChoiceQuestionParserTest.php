@@ -21,7 +21,7 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  */
 
-class MultipleChoiceQuestionParserTest extends TestCase
+final class MultipleChoiceQuestionParserTest extends TestCase
 {
     public function testMultipleChoice(): void
     {
