@@ -21,7 +21,7 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  */
 
-class MultipleChoiceQuestionParserTest extends TestCase
+final class MultipleChoiceQuestionParserTest extends TestCase
 {
     public function testMultipleChoice(): void
     {
@@ -40,7 +40,16 @@ class MultipleChoiceQuestionParserTest extends TestCase
             'name' => 'q1',
         ];
 
-        $variable = toArray($parser->parse($parent, $questionConfig, $surveyConfiguration));
-        self::assertInstanceOf(MultipleChoiceVariable::class, $variable[0]);
+        
+        $variable = toArray($parser->parse($parent, $questionConfig, $surveyConfiguration))[0];
+        self::assertInstanceOf(MultipleChoiceVariable::class, $variable);
+        self::assertCount(4, $variable->getValueOptions());
+
+        $options = $variable->getValueOptions();
+
+        self::assertSame('b', $options[0]->getDisplayValue());
+        self::assertSame('c', $options[1]->getDisplayValue());
+        self::assertSame('15', $options[2]->getDisplayValue());
+        self::assertSame('abc', $options[3]->getDisplayValue());
     }
 }

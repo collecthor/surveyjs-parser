@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Variables;
 
-use Collecthor\SurveyjsParser\Values\StringValue;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Values\ValueSet;
 use PHPUnit\Framework\TestCase;
-
-use function PHPUnit\Framework\assertEquals;
 
 /**
  * @covers \Collecthor\SurveyjsParser\Values\ValueSet
@@ -21,7 +18,7 @@ use function PHPUnit\Framework\assertEquals;
  * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  */
 
-class ValueSetTest extends TestCase
+final class ValueSetTest extends TestCase
 {
     public function testCreateValueSet(): void
     {
@@ -42,6 +39,6 @@ class ValueSetTest extends TestCase
         ];
         $set = new ValueSet(...$values);
 
-        self:assertEquals($values, $set->getValues());
+        self::assertEquals($values, $set->getValues());
     }
 }

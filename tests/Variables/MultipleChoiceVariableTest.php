@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Variables;
 
-use Collecthor\DataInterfaces\InvalidValueInterface;
 use Collecthor\DataInterfaces\Measure;
-use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
@@ -25,7 +23,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  * @uses \Collecthor\SurveyjsParser\Values\ValueSet
  */
-class MultipleChoiceVariableTest extends TestCase
+final class MultipleChoiceVariableTest extends TestCase
 {
     public function testMeasureIsNominal(): void
     {
