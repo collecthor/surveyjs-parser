@@ -15,7 +15,10 @@ class ArrayDataRecord implements RecordInterface
     {
     }
 
-
+    /**
+     * @param array<mixed> $path
+     * @return string|int|float|null|array<mixed>
+     */
     public function getDataValue(array $path): string|int|float|null|array
     {
         $data = $this->data;
