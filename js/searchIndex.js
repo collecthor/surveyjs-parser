@@ -161,6 +161,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractOptionalBoolean"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AextractChoices\u0028\u0029",
+            "name": "extractChoices",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractChoices"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\CallbackElementParser",
             "name": "CallbackElementParser",
             "summary": "An\u0020element\u0020parser\u0020that\u0020uses\u0020a\u0020closure\u0020to\u0020parse\u0020any\u0020given\u0020question\u0020configuration.",
@@ -201,6 +206,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-DummyParser.html#method_parse"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\MultipleChoiceQuestionParser",
+            "name": "MultipleChoiceQuestionParser",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-MultipleChoiceQuestionParser.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\MultipleChoiceQuestionParser\u003A\u003Aparse\u0028\u0029",
+            "name": "parse",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-MultipleChoiceQuestionParser.html#method_parse"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\PanelParser",
             "name": "PanelParser",
             "summary": "",
@@ -220,11 +235,6 @@ Search.appendIndex(
             "name": "parse",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-SingleChoiceQuestionParser.html#method_parse"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\SingleChoiceQuestionParser\u003A\u003AextractChoices\u0028\u0029",
-            "name": "extractChoices",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Parsers-SingleChoiceQuestionParser.html#method_extractChoices"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\TextQuestionParser",
             "name": "TextQuestionParser",
@@ -595,6 +605,66 @@ Search.appendIndex(
             "name": "displayValues",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-StringValueOption.html#property_displayValues"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\ValueSet",
+            "name": "ValueSet",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-ValueSet.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\ValueSet\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-ValueSet.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\ValueSet\u003A\u003AgetValues\u0028\u0029",
+            "name": "getValues",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-ValueSet.html#method_getValues"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\ValueSet\u003A\u003A\u0024values",
+            "name": "values",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-ValueSet.html#property_values"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable",
+            "name": "MultipleChoiceVariable",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003AgetValueOptions\u0028\u0029",
+            "name": "getValueOptions",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_getValueOptions"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003AgetDisplayValue\u0028\u0029",
+            "name": "getDisplayValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_getDisplayValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003AgetMeasure\u0028\u0029",
+            "name": "getMeasure",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_getMeasure"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003A\u0024valueMap",
+            "name": "valueMap",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#property_valueMap"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003A\u0024dataPath",
+            "name": "dataPath",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#property_dataPath"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\NumericVariable",
             "name": "NumericVariable",
