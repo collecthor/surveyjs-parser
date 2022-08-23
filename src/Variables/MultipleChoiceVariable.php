@@ -12,16 +12,15 @@ use Collecthor\DataInterfaces\ValueInterface;
 use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\DataInterfaces\ValueSetInterface;
 use Collecthor\SurveyjsParser\Traits\GetName;
+use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
 use Collecthor\SurveyjsParser\Values\StringValue;
-use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Values\ValueSet;
-use Exception;
 
 class MultipleChoiceVariable implements ClosedVariableInterface
 {
-    use GetName, GetTitle;
+    use GetName, GetTitle, GetRawConfiguration;
 
     /**
      * @var array<string, ValueOptionInterface>

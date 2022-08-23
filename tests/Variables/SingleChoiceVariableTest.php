@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Tests\Variables;
 
 use Collecthor\DataInterfaces\InvalidValueInterface;
+use Collecthor\DataInterfaces\JavascriptVariableInterface;
 use Collecthor\DataInterfaces\Measure;
 use Collecthor\DataInterfaces\ValueOptionInterface;
+use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
@@ -22,7 +24,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Collecthor\SurveyjsParser\Values\InvalidValue
  * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  */
-class SingleChoiceVariableTest extends TestCase
+class SingleChoiceVariableTest extends VariableTest
 {
     public function testMeasureIsNominal(): void
     {
@@ -119,5 +121,20 @@ class SingleChoiceVariableTest extends TestCase
 
         self::assertSame((string) $value, $displayValue->getRawValue());
         self::assertInstanceOf(InvalidValueInterface::class, $displayValue);
+    }
+
+    protected function getVariableWithRawConfiguration(array $rawConfiguration): VariableInterface
+    {
+        return new SingleChoiceVariable("test", [], [new IntegerValueOption(15, ['en' => 'test'])], ['path'], $rawConfiguration);
+    }
+
+    protected function getVariableWithName(string $name): JavascriptVariableInterface
+    {
+        return new SingleChoiceVariable($name, [], [new IntegerValueOption(15, ['en' => 'test'])], ['path']);
+    }
+
+    protected function getVariableWithTitles(array $titles): VariableInterface
+    {
+        return new SingleChoiceVariable('test', $titles, [new IntegerValueOption(15, ['en' => 'test'])], ['path']);
     }
 }

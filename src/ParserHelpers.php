@@ -157,7 +157,7 @@ trait ParserHelpers
     /**
      * @param array<mixed>  $choices
      * @param SurveyConfiguration $surveyConfiguration
-     * @phpstan-return array<ValueOptionInterface>
+     * @return non-empty-list<ValueOptionInterface>
      */
     private function extractChoices(array $choices, SurveyConfiguration $surveyConfiguration): array
     {

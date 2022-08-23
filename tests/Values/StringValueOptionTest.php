@@ -48,4 +48,13 @@ class StringValueOptionTest extends TestCase
     {
         self::assertValueOptionLabels($this->createOption(...), $labels);
     }
+
+    /**
+     * @dataProvider labelProvider
+     * @param array<string,string> $labels
+     */
+    public function testDisplayValues(array $labels): void
+    {
+        self::assertSame($labels, $this->createOption($labels)->getDisplayValues());
+    }
 }

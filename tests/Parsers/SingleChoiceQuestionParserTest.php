@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
+use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
+use Collecthor\SurveyjsParser\Tests\support\NameTests;
+use Collecthor\SurveyjsParser\Tests\support\ValueNameTests;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use PHPUnit\Framework\TestCase;
 use function iter\toArray;
@@ -22,6 +25,8 @@ use function iter\toArray;
  */
 class SingleChoiceQuestionParserTest extends TestCase
 {
+    use ValueNameTests;
+    use NameTests;
     /**
      * @return iterable<array<mixed>>
      */
@@ -128,5 +133,30 @@ class SingleChoiceQuestionParserTest extends TestCase
         self::assertContains('a', $rawValues);
         self::assertContains('other', $rawValues);
         self::assertContains('none', $rawValues);
+    }
+
+    public function testChoicesWrongType(): void
+    {
+        $parser = new SingleChoiceQuestionParser();
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage("Expected to find an array at key choices");
+        toArray($parser->parse(new DummyParser(), [
+            'name' => 'test',
+            'choices' => 15
+        ], new SurveyConfiguration()));
+    }
+
+    public function testMissingChoices(): void
+    {
+        $parser = new SingleChoiceQuestionParser();
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage("Choices must be a non empty list");
+        toArray($parser->parse(new DummyParser(), [
+            'name' => 'test',
+        ], new SurveyConfiguration()));
+    }
+    protected function getParser(): ElementParserInterface
+    {
+        return new SingleChoiceQuestionParser();
     }
 }
