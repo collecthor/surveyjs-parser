@@ -154,11 +154,11 @@ trait ParserHelpers
     /**
      * Format an array of localized strings with a prefix and a suffix
      * @param array<string,string> $localizedStrings
-     * @param string $prefix 
-     * @param string $suffix 
-     * @return array<string, string> 
+     * @param string $prefix
+     * @param string $suffix
+     * @return array<string, string>
      */
-    private function formatLocalizedStrings(array $localizedStrings, string $prefix = "", string $suffix=""): array
+    private function formatLocalizedStrings(array $localizedStrings, string $prefix = "", string $suffix = ""): array
     {
         foreach ($localizedStrings as $locale => $item) {
             $localizedStrings[$locale] = "{$prefix}{$item}{$suffix}";
