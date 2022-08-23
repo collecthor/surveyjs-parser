@@ -16,8 +16,8 @@ class ArrayDataRecord implements RecordInterface
     }
 
     /**
-     * @param non-empty-list<mixed> $path
-     * @return string|int|float|null|list<mixed>
+     * @param array<mixed> $path
+     * @return string|int|float|null|array<mixed>
      */
     public function getDataValue(array $path): string|int|float|null|array
     {

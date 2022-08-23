@@ -155,6 +155,21 @@ trait ParserHelpers
     }
 
     /**
+     * Format an array of localized strings with a prefix and a suffix
+     * @param array<string,string> $localizedStrings
+     * @param string $prefix
+     * @param string $suffix
+     * @return array<string, string>
+     */
+    private function formatLocalizedStrings(array $localizedStrings, string $prefix = "", string $suffix = ""): array
+    {
+        foreach ($localizedStrings as $locale => $item) {
+            $localizedStrings[$locale] = "{$prefix}{$item}{$suffix}";
+        }
+        return $localizedStrings;
+    }
+
+    /**
      * @param array<mixed>  $choices
      * @param SurveyConfiguration $surveyConfiguration
      * @return non-empty-list<ValueOptionInterface>
