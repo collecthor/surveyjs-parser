@@ -9,26 +9,21 @@ use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
-use Collecthor\SurveyjsParser\Values\StringValue;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
-use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
+use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 
-class SingleChoiceQuestionParser implements ElementParserInterface
+class MultipleChoiceQuestionParser implements ElementParserInterface
 {
     use ParserHelpers;
 
-    public function parse(
-        ElementParserInterface $root,
-        array $questionConfig,
-        SurveyConfiguration $surveyConfiguration,
-        array $dataPrefix = []
-    ): iterable {
+    public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
+    {
         $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
 
-        $name = implode('.', [...$dataPrefix, $this->extractName($questionConfig)]);
+        $name = $this->extractName($questionConfig);
+
         $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
 
-        // Parse the answer options.
         $choices = $this->extractChoices($this->extractArray($questionConfig, 'choices'), $surveyConfiguration);
 
         // Check if we need to add options for `hasNone` or `hasOther`
@@ -40,7 +35,7 @@ class SingleChoiceQuestionParser implements ElementParserInterface
             $choices[] = new StringValueOption('other', $this->extractLocalizedTexts($questionConfig, $surveyConfiguration, 'otherText'));
         }
 
-        yield new SingleChoiceVariable($name, $titles, $choices, $dataPath);
+        yield new MultipleChoiceVariable($name, $titles, $choices, $dataPath);
         yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }
