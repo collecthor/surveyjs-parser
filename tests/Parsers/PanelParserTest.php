@@ -14,7 +14,7 @@ use function iter\toArray;
  * @covers \Collecthor\SurveyjsParser\Parsers\PanelParser
  * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
  */
-class PanelParserTest extends TestCase
+final class PanelParserTest extends TestCase
 {
     public function testRecursionOnElements(): void
     {

@@ -23,7 +23,7 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
  * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  */
-class CommentParserTest extends TestCase
+final class CommentParserTest extends TestCase
 {
     public function testEmpty(): void
     {

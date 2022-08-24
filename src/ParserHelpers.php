@@ -45,7 +45,7 @@ trait ParserHelpers
         $name = implode('.', [...$dataPrefix, $this->extractName($questionConfig), 'comment']);
         $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig) . $surveyConfiguration->commentPostfix];
 
-        yield new OpenTextVariable($name, $titles, $dataPath);
+        yield new OpenTextVariable($name, $titles, $dataPath, $questionConfig);
     }
 
     /**
