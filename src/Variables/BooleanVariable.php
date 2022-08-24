@@ -56,10 +56,18 @@ final class BooleanVariable implements ClosedVariableInterface
         return new BooleanValue($dataValue);
     }
 
-    public function getDisplayValue(RecordInterface $record, ?string $locale = null): StringValueInterface
+    public function getDisplayValue(RecordInterface $record, ?string $locale = 'default'): StringValueInterface
     {
         $result = $this->getValue($record);
-        return new StringValue((string) $result->getRawValue());
+        if ($result instanceof InvalidValue) {
+            return new StringValue((string) $result->getRawValue());
+        } else {
+            if ($result->getRawValue()) {
+                return new StringValue($this->booleanNames['true'][$locale]);
+            } else {
+                return new StringValue($this->booleanNames['false'][$locale]);
+            }
+        }
     }
 
     public function getMeasure(): Measure
