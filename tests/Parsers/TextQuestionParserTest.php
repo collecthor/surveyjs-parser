@@ -28,7 +28,7 @@ use function iter\take;
  * @uses \Collecthor\SurveyjsParser\Parsers\CommentParser
  * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  */
-class TextQuestionParserTest extends TestCase
+final class TextQuestionParserTest extends TestCase
 {
     use RawConfigurationTests;
     use ValueNameTests;
