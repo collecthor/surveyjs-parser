@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Parsers;
 
+use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
@@ -16,11 +17,14 @@ class RatingParser implements ElementParserInterface
     use ParserHelpers;
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        $dataPath = [...$dataPrefix, $questionConfig['valueName'] ?? $questionConfig['name']];
+        $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
         $id = implode('.', $dataPath);
-        if (isset($questionConfig['rateValues'])) {
+        /** @var ?list<array<string, string>|string> $values */
+        $values = $questionConfig['rateValues'];
+        if (isset($values)) {
+            /** @var non-empty-array<int, ValueOptionInterface> $answers */
             $answers = [];
-            foreach ($questionConfig['rateValues'] as $value) {
+            foreach ($values as $value) {
                 if (is_array($value)) {
                     $texts = $this->extractLocalizedTexts($value, $surveyConfiguration);
                     $value = $value['value'];

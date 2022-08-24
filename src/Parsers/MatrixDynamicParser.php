@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Parsers;
 
+use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
@@ -21,46 +22,53 @@ class MatrixDynamicParser implements ElementParserInterface
 
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
+        /** @var non-empty-array<int, ValueOptionInterface> $answers */
         $answers = [];
-        foreach ($questionConfig['choices'] ?? [] as $answer) {
+        $choices = [];
+        if (isset($questionConfig['choices'])) {
+            $choices = (array) $questionConfig['choices'];
+        }
+        foreach ($choices as $answer) {
             if (is_scalar($answer)) {
                 $answer = [
                     'value' => $answer,
                     'text' => $answer
                 ];
             }
+            /** @var array<string, string> $answer */
             $answers[] = new StringValueOption($answer['value'], $this->extractLocalizedTexts($answer, $surveyConfiguration));
         }
 
         $rowLimit = $questionConfig['maxRowCount'] ?? 10;
 
         $valueName = $this->extractValueName($questionConfig);
-
-        foreach ($questionConfig['columns'] as $column) {
+        /** @var array<string, mixed> $column */
+        foreach ((array)$questionConfig['columns'] as $column) {
+            /** @var string $cellType */
             $cellType = $column['cellType'] ?? $questionConfig['cellType'] ?? 'dropdown';
             switch ($cellType) {
                 case 'text':
                     for ($r = 0; $r < $rowLimit; $r++) {
-                        $path = [...$dataPrefix, $valueName, $r, $column['valueName'] ?? $column['name']];
+                        $path = [...$dataPrefix, $valueName, (string)$r, $this->extractValueName($column)];
                         $name = implode('.', [...$dataPrefix, $questionConfig['name'], $r, $column['name']]);
-                        $titles = $this->formatLocalizedStrings($this->extractTitles($column, $surveyConfiguration), suffix:" (Row {$r})");
+                        $titles = $this->formatLocalizedStrings($this->extractTitles($column, $surveyConfiguration), suffix:" ({$this->rowLabel} {$r})");
                         yield new OpenTextVariable($name, $titles, $path);
                     }
                     break;
                 case 'dropdown':
                 case 'radiogroup':
                     for ($r = 0; $r < $rowLimit; $r++) {
-                        $path = [...$dataPrefix, $valueName, $r, $column['valueName'] ?? $column['name']];
+                        $path = [...$dataPrefix, $valueName, (string)$r, $this->extractValueName($column)];
                         $name = implode('.', [...$dataPrefix, $questionConfig['name'], $r, $column['name']]);
-                        $titles = $this->formatLocalizedStrings($this->extractTitles($column, $surveyConfiguration), suffix:" (Row {$r})");
+                        $titles = $this->formatLocalizedStrings($this->extractTitles($column, $surveyConfiguration), suffix:" ({$this->rowLabel} {$r})");
                         yield new SingleChoiceVariable($name, $titles, $answers, $path);
                     }
                     break;
                 case 'checkbox':
                     for ($r = 0; $r < $rowLimit; $r++) {
-                        $path = [...$dataPrefix, $valueName, $r, $column['valueName'] ?? $column['name']];
+                        $path = [...$dataPrefix, $valueName, (string)$r, $this->extractValueName($column)];
                         $name = implode('.', [...$dataPrefix, $questionConfig['name'], $r, $column['name']]);
-                        $titles = $this->formatLocalizedStrings($this->extractTitles($column, $surveyConfiguration), suffix:" (Row {$r})");
+                        $titles = $this->formatLocalizedStrings($this->extractTitles($column, $surveyConfiguration), suffix:" ({$this->rowLabel} {$r})");
                         yield new MultipleChoiceVariable($name, $titles, $answers, $path);
                     }
                     break;

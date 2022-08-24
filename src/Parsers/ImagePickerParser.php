@@ -17,7 +17,7 @@ class ImagePickerParser implements ElementParserInterface
     }
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        if ($questionConfig['multiSelect'] ?? false) {
+        if (is_bool($questionConfig['multiSelect']) && $questionConfig['multiSelect']) {
             yield from $this->multipleChoiceParser->parse($root, $questionConfig, $surveyConfiguration, $dataPrefix);
         } else {
             yield from $this->singleChoiceParser->parse($root, $questionConfig, $surveyConfiguration, $dataPrefix);

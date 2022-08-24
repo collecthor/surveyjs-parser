@@ -15,10 +15,12 @@ class MultipleTextParser implements ElementParserInterface
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
         $itemNames = [];
-        foreach ($questionConfig['items'] as $item) {
+        /** @var list<array<string, string>> $items */
+        $items = $questionConfig['items'];
+        foreach ($items as $item) {
             $fullPath = [...$dataPrefix, $this->extractValueName($questionConfig), $item['name']];
             $itemName = implode('.', $fullPath);
-            if (in_array($itemName, $itemNames)) {
+            if (in_array($itemName, $itemNames, true)) {
                 throw new \RuntimeException("Duplicate question code: {$itemName}");
             }
             yield new OpenTextVariable($itemName, $this->extractTitles($item, $surveyConfiguration), $fullPath);
