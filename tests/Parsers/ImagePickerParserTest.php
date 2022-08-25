@@ -16,6 +16,7 @@ use function iter\toArray;
 /**
  * @covers \Collecthor\SurveyjsParser\Parsers\ImagePickerParser
  * @uses \Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable
+ * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
  * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
  * @uses \Collecthor\SurveyjsParser\Values\IntegerValueOption
  * @uses \Collecthor\SurveyjsParser\Traits\GetDisplayValue
