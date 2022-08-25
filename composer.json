@@ -42,5 +42,9 @@
             "captainhook/plugin-composer": true,
             "phpstan/extension-installer": true
         }
+    },
+    "scripts": {
+        "test": "XDEBUG_MODE=coverage ./vendor/bin/phpunit",
+        "analyse": "./vendor/bin/phpstan"
     }
 }
