@@ -19,11 +19,13 @@ class RatingParser implements ElementParserInterface
     {
         $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
         $id = implode('.', $dataPath);
-        /** @var ?list<array<string, string>|string> $values */
-        $values = $questionConfig['rateValues'];
-        if (isset($values)) {
+        if (isset($questionConfig['rateValues'])) {
             /** @var non-empty-array<int, ValueOptionInterface> $answers */
             $answers = [];
+
+            /** @var list<mixed> $values */
+            $values = $questionConfig['rateValues'];
+
             foreach ($values as $value) {
                 if (is_array($value)) {
                     $texts = $this->extractLocalizedTexts($value, $surveyConfiguration);
