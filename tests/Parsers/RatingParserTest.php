@@ -22,9 +22,14 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  * @uses \Collecthor\SurveyjsParser\Variables\NumericVariable
+ * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
+ * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
+ * @uses \Collecthor\SurveyjsParser\ArrayRecord
+ * @uses \Collecthor\SurveyjsParser\Values\StringValue
+ *
  */
 
-class RatingParserTest extends TestCase
+final class RatingParserTest extends TestCase
 {
     public function testDefaultRating(): void
     {

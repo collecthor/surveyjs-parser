@@ -157,14 +157,27 @@ trait ParserHelpers
     /**
      * Format an array of localized strings with a prefix and a suffix
      * @param array<string,string> $localizedStrings
-     * @param string $prefix
-     * @param string $suffix
+     * @param string|array<string, string> $prefix
+     * @param string|array<string, string> $suffix
      * @return array<string, string>
      */
-    private function formatLocalizedStrings(array $localizedStrings, string $prefix = "", string $suffix = ""): array
+    private function formatLocalizedStrings(array $localizedStrings, string|array $prefix = "", string|array $suffix = ""): array
     {
         foreach ($localizedStrings as $locale => $item) {
-            $localizedStrings[$locale] = "{$prefix}{$item}{$suffix}";
+            if (is_array($prefix)) {
+                $localizedPrefix = $prefix[$locale] ?? "";
+                $localizedStrings[$locale] = "{$localizedPrefix}{$item}";
+            } else {
+                $localizedStrings[$locale] = "{$prefix}{$item}";
+            }
+
+            $item = $localizedStrings[$locale];
+            if (is_array($suffix)) {
+                $localizedSuffix = $prefix[$locale] ?? "";
+                $localizedStrings[$locale] = "{$item}{$localizedSuffix}";
+            } else {
+                $localizedStrings[$locale] = "{$item}{$suffix}";
+            }
         }
         return $localizedStrings;
     }
