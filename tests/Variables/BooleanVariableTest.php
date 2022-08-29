@@ -8,6 +8,7 @@ use Collecthor\DataInterfaces\Measure;
 use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\Values\BooleanValue;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
+use Collecthor\SurveyjsParser\Values\MissingBooleanValue;
 use Collecthor\SurveyjsParser\Variables\BooleanVariable;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
@@ -19,6 +20,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Collecthor\SurveyjsParser\Values\InvalidValue
  * @uses \Collecthor\SurveyjsParser\Values\BooleanValue
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
+ * @uses \Collecthor\SurveyjsParser\Values\MissingBooleanValue
  */
 
 final class BooleanVariableTest extends TestCase
@@ -115,5 +117,25 @@ final class BooleanVariableTest extends TestCase
 
         $displayValue = $subject->getDisplayValue($record, 'nl')->getRawValue();
         self::assertEquals('waar', $displayValue);
+    }
+
+    public function testNullValue(): void
+    {
+        $subject = new BooleanVariable("test", [], [
+            "true" => [
+                "default" => "true",
+                "nl" => "waar",
+            ],
+            "false" => [
+                "default" => "false",
+                "nl" => "onwaar",
+            ],
+        ], ['path']);
+
+        $record = new ArrayRecord(['path' => null], 1, new \DateTime(), new \DateTime());
+
+        $value = $subject->getValue($record);
+
+        self::assertInstanceOf(MissingBooleanValue::class, $value);
     }
 }
