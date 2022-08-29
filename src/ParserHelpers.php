@@ -155,18 +155,24 @@ trait ParserHelpers
     }
 
     /**
-     * Format an array of localized strings with a prefix and a suffix
-     * @param array<string,string> $localizedStrings
-     * @param string $prefix
-     * @param string $suffix
+     * Concat a combination of localized strings and normal ones
+     * @param SurveyConfiguration $surveyConfiguration
+     * @param (array<string, string>|string)[] $variables
      * @return array<string, string>
      */
-    private function formatLocalizedStrings(array $localizedStrings, string $prefix = "", string $suffix = ""): array
+    private function arrayFormat(SurveyConfiguration $surveyConfiguration, array|string ...$variables): array
     {
-        foreach ($localizedStrings as $locale => $item) {
-            $localizedStrings[$locale] = "{$prefix}{$item}{$suffix}";
+        $result = [];
+        foreach ($surveyConfiguration->locales as $locale) {
+            foreach ($variables as $variable) {
+                if (is_array($variable)) {
+                    $result[$locale] .= $variable[$locale] ?? $variable['default'];
+                } else {
+                    $result[$locale] .= $variable;
+                }
+            }
         }
-        return $localizedStrings;
+        return $result;
     }
 
     /**
