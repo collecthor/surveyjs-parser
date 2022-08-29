@@ -13,18 +13,18 @@ final class BooleanParser implements ElementParserInterface
 {
     use ParserHelpers;
 
+    /**
+     * @param array<string, array<string, string>> $booleanNames
+     * @return self
+     */
+    public function __construct(private readonly array $booleanNames)
+    {
+    }
+
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        $booleanNames = [
-            'true' => [
-                'default' => 'true',
-            ],
-            'false' => [
-                'default' => 'false',
-            ],
-        ];
         $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
         $valueName = $this->extractValueName($questionConfig);
-        yield new BooleanVariable($valueName, $titles, $booleanNames, [...$dataPrefix, $valueName]);
+        yield new BooleanVariable($valueName, $titles, $this->booleanNames, [...$dataPrefix, $valueName]);
     }
 }

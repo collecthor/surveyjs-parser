@@ -16,7 +16,12 @@ use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 class MatrixDynamicParser implements ElementParserInterface
 {
     use ParserHelpers;
-    public function __construct(private string $rowLabel)
+    /**
+     *
+     * @param array<string, string> $rowLabels
+     * @return void
+     */
+    public function __construct(private array $rowLabels)
     {
     }
 
@@ -56,7 +61,8 @@ class MatrixDynamicParser implements ElementParserInterface
                     for ($r = 0; $r < $rowLimit; $r++) {
                         $path = [...$dataPrefix, $valueName, (string)$r, $this->extractValueName($column)];
                         $name = implode('.', [...$dataPrefix, $questionConfig['name'], $r, $column['name']]);
-                        $titles = $this->formatLocalizedStrings($this->extractTitles($column, $surveyConfiguration), suffix: " ({$this->rowLabel} {$r})");
+                        $rowLabels = $this->formatLocalizedStrings($this->rowLabels, '(', " {$r})");
+                        $titles = $this->formatLocalizedStrings($this->extractTitles($column, $surveyConfiguration), suffix: $rowLabels);
                         yield new OpenTextVariable($name, $titles, $path);
                     }
                     break;
@@ -65,7 +71,8 @@ class MatrixDynamicParser implements ElementParserInterface
                     for ($r = 0; $r < $rowLimit; $r++) {
                         $path = [...$dataPrefix, $valueName, (string)$r, $this->extractValueName($column)];
                         $name = implode('.', [...$dataPrefix, $questionConfig['name'], $r, $column['name']]);
-                        $titles = $this->formatLocalizedStrings($this->extractTitles($column, $surveyConfiguration), suffix: " ({$this->rowLabel} {$r})");
+                        $rowLabels = $this->formatLocalizedStrings($this->rowLabels, '(', " {$r})");
+                        $titles = $this->formatLocalizedStrings($this->extractTitles($column, $surveyConfiguration), suffix: $rowLabels);
                         yield new SingleChoiceVariable($name, $titles, $answers, $path);
                     }
                     break;
@@ -73,7 +80,8 @@ class MatrixDynamicParser implements ElementParserInterface
                     for ($r = 0; $r < $rowLimit; $r++) {
                         $path = [...$dataPrefix, $valueName, (string)$r, $this->extractValueName($column)];
                         $name = implode('.', [...$dataPrefix, $questionConfig['name'], $r, $column['name']]);
-                        $titles = $this->formatLocalizedStrings($this->extractTitles($column, $surveyConfiguration), suffix: " ({$this->rowLabel} {$r})");
+                        $rowLabels = $this->formatLocalizedStrings($this->rowLabels, '(', " {$r})");
+                        $titles = $this->formatLocalizedStrings($this->extractTitles($column, $surveyConfiguration), suffix: $rowLabels);
                         yield new MultipleChoiceVariable($name, $titles, $answers, $path);
                     }
                     break;

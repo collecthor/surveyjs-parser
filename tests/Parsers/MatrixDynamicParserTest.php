@@ -58,7 +58,9 @@ class MatrixDynamicParserTest extends TestCase
             ]
         ];
 
-        $parser = new MatrixDynamicParser('row');
+        $parser = new MatrixDynamicParser([
+            'default' => 'row',
+        ]);
 
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
 
@@ -94,7 +96,9 @@ class MatrixDynamicParserTest extends TestCase
             "maxRowCount" => 5,
         ];
 
-        $parser = new MatrixDynamicParser('row');
+        $parser = new MatrixDynamicParser([
+            'default' => 'row',
+        ]);
 
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
 
@@ -133,7 +137,9 @@ class MatrixDynamicParserTest extends TestCase
             ]
         ];
 
-        $parser = new MatrixDynamicParser('row');
+        $parser = new MatrixDynamicParser([
+            'default' => 'row',
+        ]);
 
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
 

@@ -26,7 +26,14 @@ final class BooleanParserTest extends TestCase
             'name' => 'question1',
         ];
 
-        $parser = new BooleanParser();
+        $parser = new BooleanParser([
+            'true' => [
+                'default' => 'true',
+            ],
+            'false' => [
+                'default' => 'false',
+            ],
+        ]);
 
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
         self::assertInstanceOf(BooleanVariable::class, $result[0]);
