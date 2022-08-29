@@ -37,10 +37,3 @@ jobs:
       - uses: wagoid/commitlint-github-action@v5
         with:
           configFile: ../../commitlint.config.js
-  release:
-    name: Automated release
-    needs: [code_checks]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
