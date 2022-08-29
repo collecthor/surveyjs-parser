@@ -16,7 +16,7 @@ use function iter\toArray;
  * @covers \Collecthor\SurveyjsParser\Parsers\BooleanParser
  * @uses \Collecthor\SurveyjsParser\Variables\BooleanVariable
  */
-class BooleanParserTest extends TestCase
+final class BooleanParserTest extends TestCase
 {
     public function testParseBooleanQuestion(): void
     {
