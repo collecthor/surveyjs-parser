@@ -40,7 +40,7 @@ class SingleChoiceQuestionParser implements ElementParserInterface
             $choices[] = new StringValueOption('other', $this->extractLocalizedTexts($questionConfig, $surveyConfiguration, 'otherText'));
         }
 
-        yield new SingleChoiceVariable($name, $titles, $choices, $dataPath);
+        yield new SingleChoiceVariable($name, $titles, $choices, $dataPath, $questionConfig);
         yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }
