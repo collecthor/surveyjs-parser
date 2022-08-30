@@ -23,7 +23,7 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  */
-class SingleChoiceQuestionParserTest extends TestCase
+final class SingleChoiceQuestionParserTest extends TestCase
 {
     use ValueNameTests;
     use NameTests;
