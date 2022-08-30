@@ -166,6 +166,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractChoices"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AarrayFormat\u0028\u0029",
+            "name": "arrayFormat",
+            "summary": "Concat\u0020a\u0020combination\u0020of\u0020localized\u0020strings\u0020and\u0020normal\u0020ones",
+            "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_arrayFormat"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\CallbackElementParser",
             "name": "CallbackElementParser",
             "summary": "An\u0020element\u0020parser\u0020that\u0020uses\u0020a\u0020closure\u0020to\u0020parse\u0020any\u0020given\u0020question\u0020configuration.",
