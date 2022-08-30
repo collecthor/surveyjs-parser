@@ -164,6 +164,7 @@ trait ParserHelpers
     {
         $result = [];
         foreach($surveyConfiguration->locales as $locale) {
+            $result[$locale] = '';
             foreach($variables as $variable) {
                 if (is_array($variable)) {
                     $result[$locale] .= $variable[$locale] ?? $variable['default'];

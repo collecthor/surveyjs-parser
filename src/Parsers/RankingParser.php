@@ -22,10 +22,9 @@ final class RankingParser implements ElementParserInterface
 
         $questionIndex = 0;
         foreach ($choices as $choice) {
-            $suffixedTitles = $this->formatLocalizedStrings($titles, suffix:" ({$questionIndex})");
             yield new SingleChoiceVariable(
                 "{$valueName}.{$questionIndex}",
-                $suffixedTitles,
+                $this->arrayFormat($surveyConfiguration, $titles, " ({$questionIndex})"),
                 $choices,
                 [...$dataPrefix, $valueName, (string)$questionIndex],
             );

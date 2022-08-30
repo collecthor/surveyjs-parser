@@ -61,8 +61,7 @@ class MatrixDynamicParser implements ElementParserInterface
                     for ($r = 0; $r < $rowLimit; $r++) {
                         $path = [...$dataPrefix, $valueName, (string)$r, $this->extractValueName($column)];
                         $name = implode('.', [...$dataPrefix, $questionConfig['name'], $r, $column['name']]);
-                        $rowLabels = $this->formatLocalizedStrings($this->rowLabels, '(', " {$r})");
-                        $titles = $this->formatLocalizedStrings($this->extractTitles($column, $surveyConfiguration), suffix: $rowLabels);
+                        $titles = $this->arrayFormat($surveyConfiguration, $this->extractTitles($column, $surveyConfiguration), ' ', $this->rowLabels, "($r)");
                         yield new OpenTextVariable($name, $titles, $path);
                     }
                     break;
@@ -71,8 +70,7 @@ class MatrixDynamicParser implements ElementParserInterface
                     for ($r = 0; $r < $rowLimit; $r++) {
                         $path = [...$dataPrefix, $valueName, (string)$r, $this->extractValueName($column)];
                         $name = implode('.', [...$dataPrefix, $questionConfig['name'], $r, $column['name']]);
-                        $rowLabels = $this->formatLocalizedStrings($this->rowLabels, '(', " {$r})");
-                        $titles = $this->formatLocalizedStrings($this->extractTitles($column, $surveyConfiguration), suffix: $rowLabels);
+                        $titles = $this->arrayFormat($surveyConfiguration, $this->extractTitles($column, $surveyConfiguration), ' ', $this->rowLabels, "($r)");
                         yield new SingleChoiceVariable($name, $titles, $answers, $path);
                     }
                     break;
@@ -80,8 +78,7 @@ class MatrixDynamicParser implements ElementParserInterface
                     for ($r = 0; $r < $rowLimit; $r++) {
                         $path = [...$dataPrefix, $valueName, (string)$r, $this->extractValueName($column)];
                         $name = implode('.', [...$dataPrefix, $questionConfig['name'], $r, $column['name']]);
-                        $rowLabels = $this->formatLocalizedStrings($this->rowLabels, '(', " {$r})");
-                        $titles = $this->formatLocalizedStrings($this->extractTitles($column, $surveyConfiguration), suffix: $rowLabels);
+                        $titles = $this->arrayFormat($surveyConfiguration, $this->extractTitles($column, $surveyConfiguration), ' ', $this->rowLabels, "($r)");
                         yield new MultipleChoiceVariable($name, $titles, $answers, $path);
                     }
                     break;

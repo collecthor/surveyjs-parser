@@ -32,12 +32,10 @@ final class ImageFeedbackParser implements ElementParserInterface
         $name = implode('.', $dataPath);
         $maxItems = $questionConfig['max'] ?? 10;
         for ($i = 0; $i < $maxItems; $i++) {
-            $textLabels = $this->formatLocalizedStrings($this->textLabels, " ", " ({$i})");
-            $positiveLabels = $this->formatLocalizedStrings($this->positiveLabels, " ", " ({$i})");
-            yield new NumericVariable("{$name}.{$i}.x", $this->formatLocalizedStrings($titles, suffix:" X ({$i})"), [...$dataPath, (string)$i, 'x']);
-            yield new NumericVariable("{$name}.{$i}.y", $this->formatLocalizedStrings($titles, suffix:" Y ({$i})"), [...$dataPath, (string)$i, 'y']);
-            yield new BooleanVariable("{$name}.{$i}.positive", $this->formatLocalizedStrings($titles, suffix: $positiveLabels), $this->booleanNames, [...$dataPath, (string)$i, 'positive']);
-            yield new OpenTextVariable("{$name}.{$i}.text", $this->formatLocalizedStrings($titles, suffix: $textLabels), [...$dataPath, (string)$i, 'text']);
+            yield new NumericVariable("{$name}.{$i}.x", $this->arrayFormat($surveyConfiguration, $titles, " X($i)"), [...$dataPath, (string)$i, 'x']);
+            yield new NumericVariable("{$name}.{$i}.y", $this->arrayFormat($surveyConfiguration, $titles, " Y($i)"), [...$dataPath, (string)$i, 'y']);
+            yield new BooleanVariable("{$name}.{$i}.positive", $this->arrayFormat($surveyConfiguration, $titles, " ", $this->positiveLabels, " ($i)"), $this->booleanNames, [...$dataPath, (string)$i, 'positive']);
+            yield new OpenTextVariable("{$name}.{$i}.text", $this->arrayFormat($surveyConfiguration, $titles, " ", $this->textLabels, " ($i)"), [...$dataPath, (string)$i, 'text']);
         }
     }
 }

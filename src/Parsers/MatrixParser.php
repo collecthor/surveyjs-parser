@@ -30,22 +30,10 @@ final class MatrixParser implements ElementParserInterface
                     'value' => $row,
                 ];
             }
-            /** @var array{value: string, text: string|array<string,string>} $row */
-            $formattedTitles = [];
-
-            if (is_array($row['text'])) {
-                $suffixes = [];
-                foreach ($row['text'] as $locale => $label) {
-                    $suffixes[$locale] = " - {$label}";
-                }
-                $formattedTitles = $this->formatLocalizedStrings($titles, suffix:$suffixes);
-            } else {
-                $formattedTitles = $this->formatLocalizedStrings($titles, suffix:" - {$row['text']}");
-            }
 
             yield new SingleChoiceVariable(
                 "{$valueName}.{$row['value']}",
-                $formattedTitles,
+                $this->arrayFormat($surveyConfiguration, $titles, " - ", $row['text']),
                 $answers,
                 [...$dataPrefix, $valueName, $row['value']]
             );

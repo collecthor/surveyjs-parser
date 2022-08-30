@@ -60,6 +60,7 @@ class MatrixDynamicParserTest extends TestCase
 
         $parser = new MatrixDynamicParser([
             'default' => 'row',
+            'nl' => 'rij',
         ]);
 
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
@@ -98,6 +99,7 @@ class MatrixDynamicParserTest extends TestCase
 
         $parser = new MatrixDynamicParser([
             'default' => 'row',
+            'nl' => 'rij',
         ]);
 
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
