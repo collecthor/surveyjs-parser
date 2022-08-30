@@ -57,24 +57,13 @@ final class ParserLocalizer implements LocalizerInterface
 
     public function getAllTranslationsForString(string $translateString): array
     {
-        switch (strtolower($translateString)) {
-            case 'row':
-                return $this->rowLabels;
-
-            case 'positive':
-                return $this->positiveLabels;
-
-            case 'text':
-                return $this->textLabels;
-
-            case 'true':
-                return $this->trueLabels;
-
-            case 'false':
-                return $this->falseLabels;
-
-            default:
-                throw new \InvalidArgumentException("Could not find translation for {$translateString}");
-        }
+        return match (strtolower($translateString)) {
+            'row' => $this->rowLabels,
+            'positive' => $this->positiveLabels,
+            'text' => $this->textLabels,
+            'true' => $this->trueLabels,
+            'false' => $this->falseLabels,
+            default => throw new \InvalidArgumentException("Could not find translation for {$translateString}"),
+        };
     }
 }
