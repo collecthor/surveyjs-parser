@@ -7,7 +7,7 @@ namespace Collecthor\SurveyjsParser\Values;
 use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Traits\GetDisplayValue;
 
-class BooleanValueOption implements ValueOptionInterface
+final class BooleanValueOption implements ValueOptionInterface
 {
     use GetDisplayValue;
     /**

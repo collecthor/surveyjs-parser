@@ -13,7 +13,7 @@ use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use function iter\map;
 use function iter\toArray;
 
-class ImagePickerParser implements ElementParserInterface
+final class ImagePickerParser implements ElementParserInterface
 {
     use ParserHelpers;
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable

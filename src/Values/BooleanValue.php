@@ -6,7 +6,7 @@ namespace Collecthor\SurveyjsParser\Values;
 
 use Collecthor\DataInterfaces\ValueInterface;
 
-class BooleanValue implements ValueInterface
+final class BooleanValue implements ValueInterface
 {
     public function __construct(private readonly bool $rawValue)
     {

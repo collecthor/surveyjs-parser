@@ -13,7 +13,7 @@ use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 
-class MatrixDynamicParser implements ElementParserInterface
+final class MatrixDynamicParser implements ElementParserInterface
 {
     use ParserHelpers;
     /**

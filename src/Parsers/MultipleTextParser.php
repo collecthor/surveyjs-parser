@@ -9,7 +9,7 @@ use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 
-class MultipleTextParser implements ElementParserInterface
+final class MultipleTextParser implements ElementParserInterface
 {
     use ParserHelpers;
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable

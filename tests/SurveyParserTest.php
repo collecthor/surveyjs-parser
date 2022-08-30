@@ -26,7 +26,7 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\Parsers\MatrixDynamicParser
  * @uses \Collecthor\SurveyjsParser\ParserLocalizer
  */
-class SurveyParserTest extends TestCase
+final class SurveyParserTest extends TestCase
 {
     /**
      * @return iterable<non-empty-list<mixed>>

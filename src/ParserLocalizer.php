@@ -34,30 +34,30 @@ final class ParserLocalizer implements LocalizerInterface
         ?array $falseLabels = null,
     ) {
         $this->rowLabels = $rowLabels ?? [
-            "default" => "row",
+            "default" => "Row",
         ];
 
         $this->positiveLabels = $positiveLabels ?? [
-            "default" => "positive",
+            "default" => "Positive",
         ];
 
         $this->textLabels = $textLabels ?? [
-            "default" => "text",
+            "default" => "Text",
         ];
 
         $this->trueLabels = $trueLabels ?? [
-            "default" => "true",
+            "default" => "True",
         ];
 
 
         $this->falseLabels = $falseLabels ?? [
-            "default" => "false",
+            "default" => "False",
         ];
     }
 
     public function getAllTranslationsForString(string $translateString): array
     {
-        switch ($translateString) {
+        switch (strtolower($translateString)) {
             case 'row':
                 return $this->rowLabels;
 

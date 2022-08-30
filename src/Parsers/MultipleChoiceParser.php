@@ -12,7 +12,7 @@ use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 
-class MultipleChoiceParser implements ElementParserInterface
+final class MultipleChoiceParser implements ElementParserInterface
 {
     use ParserHelpers;
 

@@ -24,7 +24,7 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  */
-class MatrixDynamicParserTest extends TestCase
+final class MatrixDynamicParserTest extends TestCase
 {
     public function testGenerateAmountOfRows(): void
     {

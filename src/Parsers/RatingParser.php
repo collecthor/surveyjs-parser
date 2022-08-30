@@ -12,7 +12,7 @@ use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\NumericVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 
-class RatingParser implements ElementParserInterface
+final class RatingParser implements ElementParserInterface
 {
     use ParserHelpers;
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable

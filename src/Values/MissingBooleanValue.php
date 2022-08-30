@@ -7,7 +7,7 @@ namespace Collecthor\SurveyjsParser\Values;
 use Collecthor\DataInterfaces\MissingValueInterface;
 use Collecthor\DataInterfaces\ValueInterface;
 
-class MissingBooleanValue implements MissingValueInterface, ValueInterface
+final class MissingBooleanValue implements MissingValueInterface, ValueInterface
 {
     public function __construct(
         private readonly bool|null $rawValue = null,
