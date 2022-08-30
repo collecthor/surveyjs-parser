@@ -426,6 +426,51 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Traits-GetTitle.html#property_titles"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValue",
+            "name": "BooleanValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValue.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValue\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValue.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValue\u003A\u003AgetRawValue\u0028\u0029",
+            "name": "getRawValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValue.html#method_getRawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValue\u003A\u003A\u0024rawValue",
+            "name": "rawValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValue.html#property_rawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValueOption",
+            "name": "BooleanValueOption",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValueOption.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValueOption\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValueOption.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValueOption\u003A\u003AgetRawValue\u0028\u0029",
+            "name": "getRawValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValueOption.html#method_getRawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValueOption\u003A\u003A\u0024rawValue",
+            "name": "rawValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValueOption.html#property_rawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValueOption\u003A\u003A\u0024displayValues",
+            "name": "displayValues",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValueOption.html#property_displayValues"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\FloatValue",
             "name": "FloatValue",
             "summary": "",
@@ -515,6 +560,31 @@ Search.appendIndex(
             "name": "rawValue",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-InvalidValue.html#property_rawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingBooleanValue",
+            "name": "MissingBooleanValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-MissingBooleanValue.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingBooleanValue\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-MissingBooleanValue.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingBooleanValue\u003A\u003A\u0024isSystemMissing",
+            "name": "isSystemMissing",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-MissingBooleanValue.html#property_isSystemMissing"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingBooleanValue\u003A\u003AgetRawValue\u0028\u0029",
+            "name": "getRawValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-MissingBooleanValue.html#method_getRawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingBooleanValue\u003A\u003A\u0024rawValue",
+            "name": "rawValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-MissingBooleanValue.html#property_rawValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingIntegerValue",
             "name": "MissingIntegerValue",
@@ -630,6 +700,66 @@ Search.appendIndex(
             "name": "values",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-ValueSet.html#property_values"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable",
+            "name": "BooleanVariable",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003AgetValueOptions\u0028\u0029",
+            "name": "getValueOptions",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#method_getValueOptions"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003AgetDisplayValue\u0028\u0029",
+            "name": "getDisplayValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#method_getDisplayValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003AgetMeasure\u0028\u0029",
+            "name": "getMeasure",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#method_getMeasure"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#property_name"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003A\u0024titles",
+            "name": "titles",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#property_titles"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003A\u0024trueLabels",
+            "name": "trueLabels",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#property_trueLabels"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003A\u0024falseLabels",
+            "name": "falseLabels",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#property_falseLabels"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003A\u0024dataPath",
+            "name": "dataPath",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#property_dataPath"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003A\u0024rawConfiguration",
+            "name": "rawConfiguration",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#property_rawConfiguration"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable",
             "name": "MultipleChoiceVariable",

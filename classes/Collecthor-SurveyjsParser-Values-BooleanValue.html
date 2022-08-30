@@ -91,11 +91,12 @@
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/collecthor.html">Collecthor</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/collecthor-surveyjsparser.html">SurveyjsParser</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/collecthor-surveyjsparser-values.html">Values</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    ArrayDataRecord
+    BooleanValue
 
     
             <div class="phpdocumentor-element__package">
@@ -107,12 +108,12 @@
     
             <span class="phpdocumentor-element__implements">
             implements
-                            <abbr title="\Collecthor\DataInterfaces\RecordInterface">RecordInterface</abbr>                    </span>
+                            <abbr title="\Collecthor\DataInterfaces\ValueInterface">ValueInterface</abbr>                    </span>
     
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/ArrayDataRecord.php"><a href="files/src-arraydatarecord.html"><abbr title="src/ArrayDataRecord.php">ArrayDataRecord.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Values/BooleanValue.php"><a href="files/src-values-booleanvalue.html"><abbr title="src/Values/BooleanValue.php">BooleanValue.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">9</span>
 
@@ -132,7 +133,7 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Collecthor\DataInterfaces\RecordInterface">RecordInterface</abbr></dt>
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Collecthor\DataInterfaces\ValueInterface">ValueInterface</abbr></dt>
         <dd></dd>
     
     
@@ -147,30 +148,23 @@
 
 <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#property_data">$data</a>
+    <a href="classes/Collecthor-SurveyjsParser-Values-BooleanValue.html#property_rawValue">$rawValue</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
+                        &nbsp;: bool            </span>
 </dt>
 <dd></dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#method___construct">__construct()</a>
+    <a href="classes/Collecthor-SurveyjsParser-Values-BooleanValue.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#method_allData">allData()</a>
+    <a href="classes/Collecthor-SurveyjsParser-Values-BooleanValue.html#method_getRawValue">getRawValue()</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#method_getDataValue">getDataValue()</a>
-    <span>
-                                &nbsp;: string|int|float|bool|null|array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: bool    </span>
 </dt>
 <dd></dd>
 
@@ -184,7 +178,7 @@
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Collecthor-SurveyjsParser-Values-BooleanValue.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="
@@ -193,24 +187,24 @@
             -private
                                                 -read-only        "
 >
-    <h4 class="phpdocumentor-element__name" id="property_data">
-        $data
-        <a href="classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#property_data" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_rawValue">
+        $rawValue
+        <a href="classes/Collecthor-SurveyjsParser-Values-BooleanValue.html#property_rawValue" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>        </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/ArrayDataRecord.php"><a href="files/src-arraydatarecord.html"><abbr title="src/ArrayDataRecord.php">ArrayDataRecord.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Values/BooleanValue.php"><a href="files/src-values-booleanvalue.html"><abbr title="src/Values/BooleanValue.php">BooleanValue.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">11</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$data</span>
+        <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$rawValue</span>
     </code>
 
         <section class="phpdocumentor-description"></section>
@@ -225,7 +219,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Collecthor-SurveyjsParser-Values-BooleanValue.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -235,29 +229,31 @@
 >
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
-        <a href="classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Collecthor-SurveyjsParser-Values-BooleanValue.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/ArrayDataRecord.php"><a href="files/src-arraydatarecord.html"><abbr title="src/ArrayDataRecord.php">ArrayDataRecord.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Values/BooleanValue.php"><a href="files/src-values-booleanvalue.html"><abbr title="src/Values/BooleanValue.php">BooleanValue.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">11</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$data</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$rawValue</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$data</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;</span>
+                <span class="phpdocumentor-signature__argument__name">$rawValue</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"></section>
+
             </dd>
             </dl>
 
@@ -275,21 +271,21 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_allData">
-        allData()
-        <a href="classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#method_allData" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getRawValue">
+        getRawValue()
+        <a href="classes/Collecthor-SurveyjsParser-Values-BooleanValue.html#method_getRawValue" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/ArrayDataRecord.php"><a href="files/src-arraydatarecord.html"><abbr title="src/ArrayDataRecord.php">ArrayDataRecord.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Values/BooleanValue.php"><a href="files/src-values-booleanvalue.html"><abbr title="src/Values/BooleanValue.php">BooleanValue.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">allData</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getRawValue</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -297,49 +293,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getDataValue">
-        getDataValue()
-        <a href="classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#method_getDataValue" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/ArrayDataRecord.php"><a href="files/src-arraydatarecord.html"><abbr title="src/ArrayDataRecord.php">ArrayDataRecord.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">22</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getDataValue</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$path</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|int|float|bool|null|array&lt;string|int, mixed&gt;</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$path</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|int|float|bool|null|array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__response_type">bool</span>
             &mdash;
         
     
@@ -422,7 +376,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Collecthor-SurveyjsParser-Values-BooleanValue.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
