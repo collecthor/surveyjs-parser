@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
+use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\MultipleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
+use Collecthor\SurveyjsParser\Tests\support\RawConfigurationTests;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use PHPUnit\Framework\TestCase;
 use function iter\toArray;
@@ -23,6 +25,7 @@ use function iter\toArray;
 
 final class MultipleChoiceQuestionParserTest extends TestCase
 {
+    use RawConfigurationTests;
     public function testMultipleChoice(): void
     {
         $parent = new DummyParser();
@@ -51,5 +54,39 @@ final class MultipleChoiceQuestionParserTest extends TestCase
         self::assertSame('c', $options[1]->getDisplayValue());
         self::assertSame('15', $options[2]->getDisplayValue());
         self::assertSame('abc', $options[3]->getDisplayValue());
+    }
+
+    protected function getParser(): ElementParserInterface
+    {
+        return new MultipleChoiceQuestionParser();
+    }
+
+    /**
+     * @return non-empty-list<non-empty-array<string, mixed>>
+     */
+    protected function validConfigs(): array
+    {
+        return [
+            [
+                'choices' => [
+                    ['value' => 'a', 'text' => 'b'],
+                    'c',
+                    15,
+                    ['value' => 16, 'text' => 'abc']
+                ],
+                'name' => 'q1',
+            ],
+            [
+                'choices' => [
+                    ['value' => 'a', 'text' => 'b'],
+                    'c',
+                    15,
+                    ['value' => 16, 'text' => 'abc']
+                ],
+                'name' => 'q1',
+                'hasComment' => true,
+                'hasOther' => true,
+            ]
+        ];
     }
 }
