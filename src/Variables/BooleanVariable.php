@@ -16,7 +16,6 @@ use Collecthor\SurveyjsParser\Values\BooleanValueOption;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
 use Collecthor\SurveyjsParser\Values\MissingBooleanValue;
 use Collecthor\SurveyjsParser\Values\StringValue;
-use InvalidArgumentException;
 
 final class BooleanVariable implements ClosedVariableInterface
 {
@@ -24,27 +23,26 @@ final class BooleanVariable implements ClosedVariableInterface
     /**
      * @param string $name
      * @param array<string, string> $titles
-     * @param array<string,array<string,string>> $booleanNames
+     * @param array<string, string> $trueLabels
+     * @param array<string, string> $falseLabels
      * @param array<string, mixed> $rawConfiguration
      * @param non-empty-list<string> $dataPath
      */
     public function __construct(
         private string $name,
         private array $titles,
-        readonly array $booleanNames,
+        private readonly array $trueLabels,
+        private readonly array $falseLabels,
         private readonly array $dataPath,
         private array $rawConfiguration = []
     ) {
-        if (!isset($booleanNames['true']) || !isset($booleanNames['false'])) {
-            throw new InvalidArgumentException("Titles for BooleanVariable must contain values for true and false");
-        }
     }
 
     public function getValueOptions(): array
     {
         return [
-            new BooleanValueOption(true, $this->booleanNames['true']),
-            new BooleanValueOption(false, $this->booleanNames['false']),
+            new BooleanValueOption(true, $this->trueLabels),
+            new BooleanValueOption(false, $this->trueLabels),
         ];
     }
 
@@ -67,9 +65,9 @@ final class BooleanVariable implements ClosedVariableInterface
             return new StringValue((string) $result->getRawValue());
         } else {
             if ($result->getRawValue()) {
-                return new StringValue($this->booleanNames['true'][$locale]);
+                return new StringValue($this->trueLabels[$locale]);
             } else {
-                return new StringValue($this->booleanNames['false'][$locale]);
+                return new StringValue($this->falseLabels[$locale]);
             }
         }
     }

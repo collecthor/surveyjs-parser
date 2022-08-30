@@ -73,20 +73,18 @@ class SurveyParser implements SurveyParserInterface
         $imageFeedbackParser = new ImageFeedbackParser(
             $localizer->getAllTranslationsForString('positive'),
             $localizer->getAllTranslationsForString('text'),
-            [
-                'true' => $localizer->getAllTranslationsForString('true'),
-                'false' => $localizer->getAllTranslationsForString('false'),
-            ]
+            $localizer->getAllTranslationsForString('true'),
+            $localizer->getAllTranslationsForString('false'),
         );
         $this->parsers['imagefeedback'] = [$imageFeedbackParser];
 
         $matrixParser = new MatrixParser();
         $this->parsers['matrix'] = [$matrixParser];
 
-        $booleanParser = new BooleanParser([
-            'true' => $localizer->getAllTranslationsForString('true'),
-            'false' => $localizer->getAllTranslationsForString('false'),
-        ]);
+        $booleanParser = new BooleanParser(
+            $localizer->getAllTranslationsForString('true'),
+            $localizer->getAllTranslationsForString('false'),
+        );
         $this->parsers['boolean'] = [$booleanParser];
 
         $rankingParser = new RankingParser();

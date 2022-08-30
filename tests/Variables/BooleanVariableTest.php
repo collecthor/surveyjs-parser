@@ -10,7 +10,6 @@ use Collecthor\SurveyjsParser\Values\BooleanValue;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
 use Collecthor\SurveyjsParser\Values\MissingBooleanValue;
 use Collecthor\SurveyjsParser\Variables\BooleanVariable;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -27,32 +26,38 @@ final class BooleanVariableTest extends TestCase
 {
     public function testMeasureIsNominal(): void
     {
-        $subject = new BooleanVariable("test", [], [
-            "true" => [
+        $subject = new BooleanVariable(
+            "test",
+            [],
+            [
                 "default" => "true",
                 "nl" => "waar",
             ],
-            "false" => [
+            [
                 "default" => "false",
                 "nl" => "onwaar",
             ],
-        ], ['path']);
+            ['path']
+        );
 
         self::assertSame(Measure::Nominal, $subject->getMeasure());
     }
 
     public function testInvalidValue(): void
     {
-        $subject = new BooleanVariable("test", [], [
-            "true" => [
+        $subject = new BooleanVariable(
+            "test",
+            [],
+            [
                 "default" => "true",
                 "nl" => "waar",
             ],
-            "false" => [
+            [
                 "default" => "false",
                 "nl" => "onwaar",
             ],
-        ], ['path']);
+            ['path']
+        );
 
         $record = new ArrayRecord(['path' => 'some string'], 1, new \DateTime(), new \DateTime());
 
@@ -61,29 +66,21 @@ final class BooleanVariableTest extends TestCase
         self::assertInstanceOf(InvalidValue::class, $value);
     }
 
-    public function testInvalidBooleanNames(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $subject = new BooleanVariable("test", [], [
-            "false" => [
-                "default" => "false",
-                "nl" => "onwaar",
-            ],
-        ], ['path']);
-    }
-
     public function testValidValue(): void
     {
-        $subject = new BooleanVariable("test", [], [
-            "true" => [
+        $subject = new BooleanVariable(
+            "test",
+            [],
+            [
                 "default" => "true",
                 "nl" => "waar",
             ],
-            "false" => [
+            [
                 "default" => "false",
                 "nl" => "onwaar",
             ],
-        ], ['path']);
+            ['path']
+        );
 
         $record = new ArrayRecord(['path' => true], 1, new \DateTime(), new \DateTime());
 
@@ -95,16 +92,19 @@ final class BooleanVariableTest extends TestCase
 
     public function testDisplayValue(): void
     {
-        $subject = new BooleanVariable("test", [], [
-            "true" => [
+        $subject = new BooleanVariable(
+            "test",
+            [],
+            [
                 "default" => "true",
                 "nl" => "waar",
             ],
-            "false" => [
+            [
                 "default" => "false",
                 "nl" => "onwaar",
             ],
-        ], ['path']);
+            ['path']
+        );
 
         $record = new ArrayRecord(['path' => true], 1, new \DateTime(), new \DateTime());
 
@@ -121,16 +121,19 @@ final class BooleanVariableTest extends TestCase
 
     public function testNullValue(): void
     {
-        $subject = new BooleanVariable("test", [], [
-            "true" => [
+        $subject = new BooleanVariable(
+            "test",
+            [],
+            [
                 "default" => "true",
                 "nl" => "waar",
             ],
-            "false" => [
+            [
                 "default" => "false",
                 "nl" => "onwaar",
             ],
-        ], ['path']);
+            ['path']
+        );
 
         $record = new ArrayRecord(['path' => null], 1, new \DateTime(), new \DateTime());
 

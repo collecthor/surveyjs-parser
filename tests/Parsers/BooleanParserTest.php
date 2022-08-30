@@ -20,20 +20,20 @@ final class BooleanParserTest extends TestCase
 {
     public function testParseBooleanQuestion(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales:['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
         $questionConfig = [
             'type' => 'boolean',
             'name' => 'question1',
         ];
 
-        $parser = new BooleanParser([
-            'true' => [
+        $parser = new BooleanParser(
+            [
                 'default' => 'true',
             ],
-            'false' => [
+            [
                 'default' => 'false',
-            ],
-        ]);
+            ]
+        );
 
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
         self::assertInstanceOf(BooleanVariable::class, $result[0]);

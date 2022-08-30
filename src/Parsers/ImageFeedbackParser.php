@@ -18,10 +18,11 @@ final class ImageFeedbackParser implements ElementParserInterface
     /**
      * @param array<string, string> $positiveLabels
      * @param array<string, string> $textLabels
-     * @param array<string,array<string, string>> $booleanNames
+     * @param array<string, string> $trueLabels
+     * @param array<string, string> $falseLabels
      * @return void
      */
-    public function __construct(private array $positiveLabels, private array $textLabels, private array $booleanNames)
+    public function __construct(private array $positiveLabels, private array $textLabels, private readonly array $trueLabels, private readonly array $falseLabels)
     {
     }
 
@@ -34,7 +35,7 @@ final class ImageFeedbackParser implements ElementParserInterface
         for ($i = 0; $i < $maxItems; $i++) {
             yield new NumericVariable("{$name}.{$i}.x", $this->arrayFormat($surveyConfiguration, $titles, " X($i)"), [...$dataPath, (string)$i, 'x']);
             yield new NumericVariable("{$name}.{$i}.y", $this->arrayFormat($surveyConfiguration, $titles, " Y($i)"), [...$dataPath, (string)$i, 'y']);
-            yield new BooleanVariable("{$name}.{$i}.positive", $this->arrayFormat($surveyConfiguration, $titles, " ", $this->positiveLabels, " ($i)"), $this->booleanNames, [...$dataPath, (string)$i, 'positive']);
+            yield new BooleanVariable("{$name}.{$i}.positive", $this->arrayFormat($surveyConfiguration, $titles, " ", $this->positiveLabels, " ($i)"), $this->trueLabels, $this->falseLabels, [...$dataPath, (string)$i, 'positive']);
             yield new OpenTextVariable("{$name}.{$i}.text", $this->arrayFormat($surveyConfiguration, $titles, " ", $this->textLabels, " ($i)"), [...$dataPath, (string)$i, 'text']);
         }
     }
