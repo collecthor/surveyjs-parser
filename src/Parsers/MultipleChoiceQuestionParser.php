@@ -12,7 +12,7 @@ use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 
-class MultipleChoiceQuestionParser implements ElementParserInterface
+final class MultipleChoiceQuestionParser implements ElementParserInterface
 {
     use ParserHelpers;
 
@@ -35,7 +35,7 @@ class MultipleChoiceQuestionParser implements ElementParserInterface
             $choices[] = new StringValueOption('other', $this->extractLocalizedTexts($questionConfig, $surveyConfiguration, 'otherText'));
         }
 
-        yield new MultipleChoiceVariable($name, $titles, $choices, $dataPath);
+        yield new MultipleChoiceVariable($name, $titles, $choices, $dataPath, $questionConfig);
         yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }

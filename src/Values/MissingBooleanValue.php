@@ -11,7 +11,7 @@ final class MissingBooleanValue implements MissingValueInterface, ValueInterface
 {
     public function __construct(
         private readonly bool|null $rawValue = null,
-        private readonly bool $isSystemMissing = false,
+        private readonly bool $isSystemMissing = true,
     ) {
     }
 

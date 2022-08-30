@@ -10,11 +10,13 @@ use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Tests\support\NameTests;
+use Collecthor\SurveyjsParser\Tests\support\RawConfigurationTests;
 use Collecthor\SurveyjsParser\Tests\support\ValueNameTests;
 use Collecthor\SurveyjsParser\Values\StringValue;
 use Collecthor\SurveyjsParser\Variables\NumericVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use PHPUnit\Framework\TestCase;
+use function iter\take;
 
 /**
  * @covers \Collecthor\SurveyjsParser\Parsers\TextQuestionParser
@@ -26,8 +28,9 @@ use PHPUnit\Framework\TestCase;
  * @uses \Collecthor\SurveyjsParser\Parsers\CommentParser
  * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  */
-class TextQuestionParserTest extends TestCase
+final class TextQuestionParserTest extends TestCase
 {
+    use RawConfigurationTests;
     use ValueNameTests;
     use NameTests;
 
@@ -107,8 +110,29 @@ class TextQuestionParserTest extends TestCase
         self::assertInstanceOf(NumericVariable::class, $variable);
     }
 
+
     protected function getParser(): ElementParserInterface
     {
         return new TextQuestionParser();
+    }
+
+    /**
+     * @return non-empty-list<non-empty-array<string, mixed>>
+     */
+    protected function validConfigs(): array
+    {
+        return [
+            [
+                'name' => 'test',
+            ],
+            [
+                'name' => 'test',
+                'hasComment' => true,
+            ],
+            [
+                'name' => 'test',
+                'inputType' => 'number'
+            ]
+        ];
     }
 }

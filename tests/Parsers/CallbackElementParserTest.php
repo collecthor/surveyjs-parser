@@ -14,7 +14,7 @@ use function iter\toArray;
  * @covers \Collecthor\SurveyjsParser\Parsers\CallbackElementParser
  * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
  */
-class CallbackElementParserTest extends TestCase
+final class CallbackElementParserTest extends TestCase
 {
     public function testCallbackIsCalled(): void
     {

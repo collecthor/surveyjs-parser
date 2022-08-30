@@ -22,9 +22,9 @@ class TextQuestionParser implements ElementParserInterface
         $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
 
         if (($questionConfig['inputType'] ?? 'text') === 'number') {
-            yield new NumericVariable($name, $titles, $dataPath);
+            yield new NumericVariable($name, $titles, $dataPath, $questionConfig);
         } else {
-            yield new OpenTextVariable($name, $titles, $dataPath);
+            yield new OpenTextVariable($name, $titles, $dataPath, $questionConfig);
         }
 
         yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
