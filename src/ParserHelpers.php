@@ -156,16 +156,16 @@ trait ParserHelpers
 
     /**
      * Concat a combination of localized strings and normal ones
-     * @param SurveyConfiguration $surveyConfiguration 
-     * @param (array<string, string>|string)[] $variables 
+     * @param SurveyConfiguration $surveyConfiguration
+     * @param (array<string, string>|string)[] $variables
      * @return array<string, string>
      */
     private function arrayFormat(SurveyConfiguration $surveyConfiguration, array|string ...$variables): array
     {
         $result = [];
-        foreach($surveyConfiguration->locales as $locale) {
+        foreach ($surveyConfiguration->locales as $locale) {
             $result[$locale] = '';
-            foreach($variables as $variable) {
+            foreach ($variables as $variable) {
                 if (is_array($variable)) {
                     $result[$locale] .= $variable[$locale] ?? $variable['default'];
                 } else {
