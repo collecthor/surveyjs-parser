@@ -121,6 +121,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#property_variables"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\LocalizerInterface",
+            "name": "LocalizerInterface",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-LocalizerInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\LocalizerInterface\u003A\u003AgetAllTranslationsForString\u0028\u0029",
+            "name": "getAllTranslationsForString",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-LocalizerInterface.html#method_getAllTranslationsForString"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers",
             "name": "ParserHelpers",
             "summary": "",
@@ -170,6 +180,46 @@ Search.appendIndex(
             "name": "arrayFormat",
             "summary": "Concat\u0020a\u0020combination\u0020of\u0020localized\u0020strings\u0020and\u0020normal\u0020ones",
             "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_arrayFormat"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserLocalizer",
+            "name": "ParserLocalizer",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ParserLocalizer.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserLocalizer\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Create\u0020a\u0020new\u0020ParserLocalizer",
+            "url": "classes/Collecthor-SurveyjsParser-ParserLocalizer.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserLocalizer\u003A\u003AgetAllTranslationsForString\u0028\u0029",
+            "name": "getAllTranslationsForString",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ParserLocalizer.html#method_getAllTranslationsForString"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserLocalizer\u003A\u003A\u0024rowLabels",
+            "name": "rowLabels",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ParserLocalizer.html#property_rowLabels"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserLocalizer\u003A\u003A\u0024positiveLabels",
+            "name": "positiveLabels",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ParserLocalizer.html#property_positiveLabels"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserLocalizer\u003A\u003A\u0024textLabels",
+            "name": "textLabels",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ParserLocalizer.html#property_textLabels"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserLocalizer\u003A\u003A\u0024trueLabels",
+            "name": "trueLabels",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ParserLocalizer.html#property_trueLabels"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserLocalizer\u003A\u003A\u0024falseLabels",
+            "name": "falseLabels",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ParserLocalizer.html#property_falseLabels"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\CallbackElementParser",
             "name": "CallbackElementParser",
