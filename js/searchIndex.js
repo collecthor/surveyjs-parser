@@ -221,6 +221,31 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ParserLocalizer.html#property_falseLabels"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\BooleanParser",
+            "name": "BooleanParser",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-BooleanParser.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\BooleanParser\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-BooleanParser.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\BooleanParser\u003A\u003Aparse\u0028\u0029",
+            "name": "parse",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-BooleanParser.html#method_parse"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\BooleanParser\u003A\u003A\u0024trueLabels",
+            "name": "trueLabels",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-BooleanParser.html#property_trueLabels"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\BooleanParser\u003A\u003A\u0024falseLabels",
+            "name": "falseLabels",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-BooleanParser.html#property_falseLabels"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\CallbackElementParser",
             "name": "CallbackElementParser",
             "summary": "An\u0020element\u0020parser\u0020that\u0020uses\u0020a\u0020closure\u0020to\u0020parse\u0020any\u0020given\u0020question\u0020configuration.",
