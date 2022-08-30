@@ -14,8 +14,8 @@ use Collecthor\SurveyjsParser\Traits\GetTitle;
 use Collecthor\SurveyjsParser\Values\BooleanValue;
 use Collecthor\SurveyjsParser\Values\BooleanValueOption;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
+use Collecthor\SurveyjsParser\Values\MissingBooleanValue;
 use Collecthor\SurveyjsParser\Values\StringValue;
-use InvalidArgumentException;
 
 final class BooleanVariable implements ClosedVariableInterface
 {
@@ -23,33 +23,35 @@ final class BooleanVariable implements ClosedVariableInterface
     /**
      * @param string $name
      * @param array<string, string> $titles
-     * @param array<string,array<string,string>> $booleanNames
+     * @param array<string, string> $trueLabels
+     * @param array<string, string> $falseLabels
      * @param array<string, mixed> $rawConfiguration
      * @param non-empty-list<string> $dataPath
      */
     public function __construct(
         private string $name,
         private array $titles,
-        readonly array $booleanNames,
+        private readonly array $trueLabels,
+        private readonly array $falseLabels,
         private readonly array $dataPath,
         private array $rawConfiguration = []
     ) {
-        if (!isset($booleanNames['true']) || !isset($booleanNames['false'])) {
-            throw new InvalidArgumentException("Titles for BooleanVariable must contain values for true and false");
-        }
     }
 
     public function getValueOptions(): array
     {
         return [
-            new BooleanValueOption(true, $this->booleanNames['true']),
-            new BooleanValueOption(false, $this->booleanNames['false']),
+            new BooleanValueOption(true, $this->trueLabels),
+            new BooleanValueOption(false, $this->trueLabels),
         ];
     }
 
-    public function getValue(RecordInterface $record): BooleanValue | InvalidValue
+    public function getValue(RecordInterface $record): BooleanValue | MissingBooleanValue | InvalidValue
     {
         $dataValue = $record->getDataValue($this->dataPath);
+        if (is_null($dataValue)) {
+            return new MissingBooleanValue();
+        }
         if (!is_bool($dataValue)) {
             return new InvalidValue($dataValue);
         }
@@ -59,13 +61,13 @@ final class BooleanVariable implements ClosedVariableInterface
     public function getDisplayValue(RecordInterface $record, ?string $locale = 'default'): StringValueInterface
     {
         $result = $this->getValue($record);
-        if ($result instanceof InvalidValue) {
+        if ($result instanceof InvalidValue || $result instanceof MissingBooleanValue) {
             return new StringValue((string) $result->getRawValue());
         } else {
             if ($result->getRawValue()) {
-                return new StringValue($this->booleanNames['true'][$locale]);
+                return new StringValue($this->trueLabels[$locale]);
             } else {
-                return new StringValue($this->booleanNames['false'][$locale]);
+                return new StringValue($this->falseLabels[$locale]);
             }
         }
     }
