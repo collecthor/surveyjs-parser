@@ -21,6 +21,10 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\Parsers\CommentParser
  * @uses \Collecthor\SurveyjsParser\Parsers\TextQuestionParser
  * @uses \Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser
+ * @uses \Collecthor\SurveyjsParser\Parsers\BooleanParser
+ * @uses \Collecthor\SurveyjsParser\Parsers\ImageFeedbackParser
+ * @uses \Collecthor\SurveyjsParser\Parsers\MatrixDynamicParser
+ * @uses \Collecthor\SurveyjsParser\ParserLocalizer
  */
 class SurveyParserTest extends TestCase
 {
