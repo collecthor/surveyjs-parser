@@ -316,6 +316,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-MultipleTextParser.html#method_parse"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\OrderedVariableParser",
+            "name": "OrderedVariableParser",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-OrderedVariableParser.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\OrderedVariableParser\u003A\u003Aparse\u0028\u0029",
+            "name": "parse",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-OrderedVariableParser.html#method_parse"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\PanelParser",
             "name": "PanelParser",
             "summary": "",
@@ -985,6 +995,46 @@ Search.appendIndex(
             "name": "dataPath",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Variables-OpenTextVariable.html#property_dataPath"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable",
+            "name": "OrderedVariable",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable\u003A\u003AgetValueOptions\u0028\u0029",
+            "name": "getValueOptions",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html#method_getValueOptions"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable\u003A\u003AgetDisplayValue\u0028\u0029",
+            "name": "getDisplayValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html#method_getDisplayValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable\u003A\u003AgetMeasure\u0028\u0029",
+            "name": "getMeasure",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html#method_getMeasure"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable\u003A\u003A\u0024valueMap",
+            "name": "valueMap",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html#property_valueMap"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable\u003A\u003A\u0024dataPath",
+            "name": "dataPath",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html#property_dataPath"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceVariable",
             "name": "SingleChoiceVariable",
