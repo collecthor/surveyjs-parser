@@ -18,14 +18,23 @@ final class ImagePickerParser implements ElementParserInterface
     use ParserHelpers;
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        /** @var list<array<string, string>> $rawChoices */
+        /** @var array<mixed> $rawChoices */
         $rawChoices = $questionConfig['choices'];
+        $formattedChoices = [];
+        /** @var array{value: string, text?: string} $choice*/
+        foreach ($rawChoices as $choice) {
+            if (!isset($choice['text'])) {
+                $formattedChoices[] = [
+                    'text' => $choice['value'],
+                    'value' => $choice['value'],
+                ];
+            } else {
+                $formattedChoices[] = $choice;
+            }
+        }
         $name = $this->extractName($questionConfig);
         $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
-        $choices = $this->extractChoices(
-            toArray(map(fn ($choice) => $choice['value'], $rawChoices)),
-            $surveyConfiguration
-        );
+        $choices = $this->extractChoices($formattedChoices, $surveyConfiguration);
         $valueName = $this->extractValueName($questionConfig);
 
 
