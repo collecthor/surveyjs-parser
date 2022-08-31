@@ -8,6 +8,7 @@ use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\RatingParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
+use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Variables\NumericVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use PHPUnit\Framework\TestCase;
@@ -43,7 +44,76 @@ final class RatingParserTest extends TestCase
 
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
 
-        self::assertInstanceOf(NumericVariable::class, $result[0]);
+        self::assertInstanceOf(SingleChoiceVariable::class, $result[0]);
+
+        /** @var SingleChoiceVariable $variable */
+        $variable = $result[0];
+
+        $choices = $variable->getValueOptions();
+
+        for ($i = 1; $i < 6; $i++) {
+            self::assertSame($i, $choices[$i - 1]->getRawValue());
+            self::assertInstanceOf(IntegerValueOption::class, $choices[$i - 1]);
+        }
+    }
+
+    public function testCustomRange(): void
+    {
+        $surveyConfig = new SurveyConfiguration(locales:['default', 'nl']);
+        $questionConfig = [
+            'type' => 'rating',
+            'name' => 'question3',
+            'rateMin' => 2,
+            'rateMax' => 10,
+        ];
+
+        $parser = new RatingParser();
+
+        $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
+
+        self::assertInstanceOf(SingleChoiceVariable::class, $result[0]);
+
+        /** @var SingleChoiceVariable $variable */
+        $variable = $result[0];
+
+        $choices = $variable->getValueOptions();
+
+        for ($i = 2; $i <= 10; $i++) {
+            self::assertSame($i, $choices[$i - 2]->getRawValue());
+            self::assertInstanceOf(IntegerValueOption::class, $choices[$i - 2]);
+        }
+    }
+
+    public function testCustomStep(): void
+    {
+        $surveyConfig = new SurveyConfiguration(locales:['default', 'nl']);
+        $questionConfig = [
+            'type' => 'rating',
+            'name' => 'question3',
+            'rateMin' => 2,
+            'rateMax' => 10,
+            'rateStep' => 3,
+        ];
+
+        $parser = new RatingParser();
+
+        $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
+
+        self::assertInstanceOf(SingleChoiceVariable::class, $result[0]);
+
+        /** @var SingleChoiceVariable $variable */
+        $variable = $result[0];
+
+        $choices = $variable->getValueOptions();
+
+        self::assertCount(3, $choices);
+        self::assertSame(2, $choices[0]->getRawValue());
+        self::assertSame(5, $choices[1]->getRawValue());
+        self::assertSame(8, $choices[2]->getRawValue());
+
+        foreach ($choices as $choice) {
+            self::assertInstanceOf(IntegerValueOption::class, $choice);
+        }
     }
 
     public function testCustomRangeRating(): void

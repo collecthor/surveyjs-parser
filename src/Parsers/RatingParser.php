@@ -8,6 +8,8 @@ use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
+use Collecthor\SurveyjsParser\Values\IntegerValue;
+use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\NumericVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
@@ -19,10 +21,11 @@ final class RatingParser implements ElementParserInterface
     {
         $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
         $id = implode('.', $dataPath);
-        if (isset($questionConfig['rateValues'])) {
-            /** @var non-empty-array<int, ValueOptionInterface> $answers */
-            $answers = [];
 
+        /** @var non-empty-array<int, ValueOptionInterface> $answers */
+        $answers = [];
+
+        if (isset($questionConfig['rateValues'])) {
             /** @var list<mixed> $values */
             $values = $questionConfig['rateValues'];
 
@@ -33,9 +36,20 @@ final class RatingParser implements ElementParserInterface
                 }
                 $answers[] = new StringValueOption($value, $texts ?? [ 'default' => (string) $value]);
             }
-            yield new SingleChoiceVariable($id, $this->extractTitles($questionConfig, $surveyConfiguration), $answers, $dataPath);
         } else {
-            yield new NumericVariable($id, $this->extractTitles($questionConfig, $surveyConfiguration), $dataPath);
+            /** @var int $rateMin */
+            $rateMin = $questionConfig['rateMin'] ?? 1;
+            $rateMax = $questionConfig['rateMax'] ?? 5;
+            /** @var int $rateStep */
+            $rateStep = $questionConfig['rateStep'] ?? 1;
+
+            for ($i = $rateMin; $i <= $rateMax; $i += $rateStep) {
+                $answers[] = new IntegerValueOption($i, [
+                    'default' => (string) $i,
+                ]);
+            }
         }
+
+        yield new SingleChoiceVariable($id, $this->extractTitles($questionConfig, $surveyConfiguration), $answers, $dataPath);
     }
 }
