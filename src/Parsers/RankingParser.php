@@ -20,15 +20,13 @@ final class RankingParser implements ElementParserInterface
         /** @var array{choices: list<string>|array<string, array<string, string>>} $questionConfig */
         $choices = $this->extractChoices($questionConfig['choices'], $surveyConfiguration);
 
-        $questionIndex = 0;
-        foreach ($choices as $choice) {
+        for ($i = 0; $i < count($choices); $i++) {
             yield new SingleChoiceVariable(
-                "{$valueName}.{$questionIndex}",
-                $this->arrayFormat($surveyConfiguration, $titles, " ({$questionIndex})"),
+                "{$valueName}.{$i}",
+                $this->arrayFormat($surveyConfiguration, $titles, " ({$i})"),
                 $choices,
-                [...$dataPrefix, $valueName, (string)$questionIndex],
+                [...$dataPrefix, $valueName, (string)$i],
             );
-            $questionIndex++;
         }
     }
 }
