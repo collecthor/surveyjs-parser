@@ -25,7 +25,7 @@ final class ParserLocalizerTest extends TestCase
 
     public function testSingleCustomValue(): void
     {
-        $localizer = new ParserLocalizer(trueLabels:['default' => 'True test']);
+        $localizer = new ParserLocalizer(trueLabels: ['default' => 'True test']);
 
         self::assertSame('Row', $localizer->getAllTranslationsForString('Row')['default']);
         self::assertSame('Positive', $localizer->getAllTranslationsForString('Positive')['default']);
@@ -36,7 +36,7 @@ final class ParserLocalizerTest extends TestCase
 
     public function testMultipleLanguages(): void
     {
-        $localizer = new ParserLocalizer(trueLabels:['default' => 'True', 'nl' => 'Waar']);
+        $localizer = new ParserLocalizer(trueLabels: ['default' => 'True', 'nl' => 'Waar']);
 
         self::assertSame('Row', $localizer->getAllTranslationsForString('Row')['default']);
         self::assertSame('Positive', $localizer->getAllTranslationsForString('Positive')['default']);
