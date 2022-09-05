@@ -52,11 +52,80 @@ final class MatrixParserTest extends TestCase
         foreach ($result as $variable) {
             self::assertInstanceOf(SingleChoiceVariable::class, $variable);
         }
+
+        self::assertEquals("question4 - Row 1", $result[0]->getTitle());
+    }
+
+    public function testVariableNames(): void
+    {
+        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $questionConfig = [
+            "type" => "matrix",
+            "name" => "question4",
+            "columns" => [
+                "Column 1",
+                "Column 2",
+                "Column 3"
+            ],
+            "rows" => [
+                "Row 1",
+                "Row 2",
+                "Row 3",
+                "Row 4",
+                "Row 5"
+            ]
+        ];
+
+        $parser = new MatrixParser();
+
+        $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
+
+        self::assertEquals("question4 - Row 1", $result[0]->getTitle());
+        self::assertEquals("question4 - Row 2", $result[1]->getTitle());
+        self::assertEquals("question4 - Row 3", $result[2]->getTitle());
+        self::assertEquals("question4 - Row 4", $result[3]->getTitle());
+        self::assertEquals("question4 - Row 5", $result[4]->getTitle());
+    }
+
+    public function testVariableOptions(): void
+    {
+        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $questionConfig = [
+            "type" => "matrix",
+            "name" => "question4",
+            "columns" => [
+                "Column 1",
+                "Column 2",
+                "Column 3"
+            ],
+            "rows" => [
+                "Row 1",
+                "Row 2",
+                "Row 3",
+                "Row 4",
+                "Row 5"
+            ]
+        ];
+
+        $parser = new MatrixParser();
+
+        $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
+
+        self::assertEquals("question4 - Row 1", $result[0]->getTitle());
+
+        $options = $result[0]->getValueOptions();
+
+        self::assertEquals("Column 1", $options[0]->getRawValue());
+        self::assertEquals("Column 1", $options[0]->getDisplayValue());
+        self::assertEquals("Column 2", $options[1]->getRawValue());
+        self::assertEquals("Column 2", $options[1]->getDisplayValue());
+        self::assertEquals("Column 3", $options[2]->getRawValue());
+        self::assertEquals("Column 3", $options[2]->getDisplayValue());
     }
 
     public function testExtractNames(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales:['nl', 'default']);
+        $surveyConfig = new SurveyConfiguration(locales: ['nl', 'default']);
         $questionConfig = [
             "type" => "matrix",
             "name" => "question4",
