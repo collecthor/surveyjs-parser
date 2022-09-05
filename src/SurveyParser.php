@@ -7,6 +7,7 @@ use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\DataInterfaces\VariableSetInterface;
 use Collecthor\SurveyjsParser\Parsers\CallbackElementParser;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
+use Collecthor\SurveyjsParser\Parsers\MultipleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\PanelParser;
 use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
@@ -46,6 +47,9 @@ class SurveyParser implements SurveyParserInterface
         $singleChoiceParser = new SingleChoiceQuestionParser();
         $this->parsers['radiogroup'] = [$singleChoiceParser];
         $this->parsers['dropdown'] = [$singleChoiceParser];
+
+        $multipleChoiceParser = new MultipleChoiceQuestionParser();
+        $this->parsers['checkbox'] = [$multipleChoiceParser];
 
         $dummyParser = new DummyParser();
         $this->parsers['panel'] = [new PanelParser()];
