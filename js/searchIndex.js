@@ -296,6 +296,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-ImagePickerParser.html#method_parse"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\MatrixParser",
+            "name": "MatrixParser",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-MatrixParser.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\MatrixParser\u003A\u003Aparse\u0028\u0029",
+            "name": "parse",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-MatrixParser.html#method_parse"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\MultipleChoiceQuestionParser",
             "name": "MultipleChoiceQuestionParser",
             "summary": "",
