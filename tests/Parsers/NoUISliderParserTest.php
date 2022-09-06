@@ -14,6 +14,7 @@ use function iter\toArray;
 
 /**
  * @covers \Collecthor\SurveyjsParser\Parsers\NoUISliderParser
+ * @uses \Collecthor\SurveyjsParser\Variables\NumericVariable
  */
 final class NoUISliderParserTest extends TestCase
 {
