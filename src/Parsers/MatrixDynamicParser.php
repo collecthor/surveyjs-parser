@@ -46,9 +46,9 @@ final class MatrixDynamicParser implements ElementParserInterface
         $valueName = $this->extractValueName($questionConfig);
         /** @var array<string, mixed> $column */
         foreach ((array)$questionConfig['columns'] as $column) {
+            /** @var string $columnName */
+            $columnName = $column['name'];
             for ($r = 0; $r < $rowLimit; $r++) {
-                /** @var string $columnName */
-                $columnName = $column['name'];
                 $rowConfig = $column;
                 $rowConfig['type'] = $column['cellType'] ?? $questionConfig['cellType'] ?? 'dropdown';
                 $rowConfig['choices'] = $column['choices'] ?? $answers;
