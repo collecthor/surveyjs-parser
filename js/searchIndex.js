@@ -326,6 +326,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-MultipleTextParser.html#method_parse"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\NoUISliderParser",
+            "name": "NoUISliderParser",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-NoUISliderParser.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\NoUISliderParser\u003A\u003Aparse\u0028\u0029",
+            "name": "parse",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-NoUISliderParser.html#method_parse"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\OrderedVariableParser",
             "name": "OrderedVariableParser",
             "summary": "",
