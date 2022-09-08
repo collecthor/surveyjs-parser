@@ -10,9 +10,6 @@ use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 
-use function iter\map;
-use function iter\toArray;
-
 final class ImagePickerParser implements ElementParserInterface
 {
     use ParserHelpers;

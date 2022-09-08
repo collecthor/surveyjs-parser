@@ -7,7 +7,6 @@ namespace Collecthor\SurveyjsParser\Parsers;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
-use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 
 class CommentParser implements ElementParserInterface
 {
