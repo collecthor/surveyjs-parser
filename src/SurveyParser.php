@@ -48,9 +48,6 @@ class SurveyParser implements SurveyParserInterface
         $this->parsers['radiogroup'] = [$singleChoiceParser];
         $this->parsers['dropdown'] = [$singleChoiceParser];
 
-        $multipleChoiceParser = new MultipleChoiceQuestionParser();
-        $this->parsers['checkbox'] = [$multipleChoiceParser];
-
         $dummyParser = new DummyParser();
         $this->parsers['panel'] = [new PanelParser()];
         $this->parsers['html'] = [$dummyParser];
