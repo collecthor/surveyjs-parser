@@ -15,6 +15,9 @@ use function iter\toArray;
 /**
  * @covers \Collecthor\SurveyjsParser\Parsers\DynamicPanelParser
  * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
+ * @uses \Collecthor\SurveyjsParser\Parsers\TextQuestionParser
+ * @uses \Collecthor\SurveyjsParser\Traits\GetTitle
+ * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  */
 final class DynamicPanelParserTest extends TestCase
 {
