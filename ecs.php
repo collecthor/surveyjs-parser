@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 // ecs.php
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
@@ -31,4 +30,5 @@ return static function (ECSConfig $ecsConfig): void {
         ->call('configure', [[
             'syntax' => 'short',
         ]]);
+    $services->set(\PhpCsFixer\Fixer\Import\NoUnusedImportsFixer::class);
 };

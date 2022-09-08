@@ -13,7 +13,6 @@ use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable

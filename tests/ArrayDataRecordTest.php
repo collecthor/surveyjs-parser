@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Tests;
 
 use Collecthor\SurveyjsParser\ArrayDataRecord;
-use Collecthor\SurveyjsParser\ArrayRecord;
 use PHPUnit\Framework\TestCase;
 
 /**
