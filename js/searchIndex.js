@@ -296,6 +296,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-ImagePickerParser.html#method_parse"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\MatrixDynamicParser",
+            "name": "MatrixDynamicParser",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-MatrixDynamicParser.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\MatrixDynamicParser\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-MatrixDynamicParser.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\MatrixDynamicParser\u003A\u003Aparse\u0028\u0029",
+            "name": "parse",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-MatrixDynamicParser.html#method_parse"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\MatrixDynamicParser\u003A\u003A\u0024rowLabels",
+            "name": "rowLabels",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-MatrixDynamicParser.html#property_rowLabels"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\MatrixParser",
             "name": "MatrixParser",
             "summary": "",
