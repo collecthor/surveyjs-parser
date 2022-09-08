@@ -8,10 +8,6 @@ use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
-use Collecthor\SurveyjsParser\Values\StringValueOption;
-use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
-use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
-use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 
 final class MatrixDynamicParser implements ElementParserInterface
 {
