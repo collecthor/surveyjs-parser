@@ -97,7 +97,6 @@ class SurveyParser implements SurveyParserInterface
         $this->parsers['paneldynamic'] = [$dynamicPanelParser];
         
         $dummyParser = new DummyParser();
-        $this->parsers['panel'] = [new PanelParser()];
         $this->parsers['html'] = [$dummyParser];
         $this->parsers['image'] = [$dummyParser];
         $this->defaultParser = $dummyParser;
