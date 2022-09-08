@@ -286,6 +286,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-DummyParser.html#method_parse"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\DynamicPanelParser",
+            "name": "DynamicPanelParser",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-DynamicPanelParser.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\DynamicPanelParser\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-DynamicPanelParser.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\DynamicPanelParser\u003A\u003Aparse\u0028\u0029",
+            "name": "parse",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-DynamicPanelParser.html#method_parse"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\DynamicPanelParser\u003A\u003A\u0024rowLabels",
+            "name": "rowLabels",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Parsers-DynamicPanelParser.html#property_rowLabels"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers\\ImagePickerParser",
             "name": "ImagePickerParser",
             "summary": "",
