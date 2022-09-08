@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
 use Collecthor\SurveyjsParser\ArrayRecord;
-use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\Parsers\CommentParser;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
-use Collecthor\SurveyjsParser\Tests\support\ValueNameTests;
 use Collecthor\SurveyjsParser\Values\StringValue;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use PHPUnit\Framework\TestCase;

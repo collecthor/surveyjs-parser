@@ -8,10 +8,8 @@ use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
-use Collecthor\SurveyjsParser\Values\IntegerValue;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
-use Collecthor\SurveyjsParser\Variables\NumericVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 
 final class RatingParser implements ElementParserInterface

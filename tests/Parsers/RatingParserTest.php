@@ -9,7 +9,6 @@ use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\RatingParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
-use Collecthor\SurveyjsParser\Variables\NumericVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use PHPUnit\Framework\TestCase;
 

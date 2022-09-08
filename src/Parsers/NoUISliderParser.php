@@ -7,13 +7,16 @@ namespace Collecthor\SurveyjsParser\Parsers;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
+use Collecthor\SurveyjsParser\Variables\NumericVariable;
 
-class CommentParser implements ElementParserInterface
+final class NoUISliderParser implements ElementParserInterface
 {
     use ParserHelpers;
-
+    
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
+        $valueName = $this->extractValueName($questionConfig);
+        $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
+        yield new NumericVariable($valueName, $titles, [...$dataPrefix, $valueName]);
     }
 }
