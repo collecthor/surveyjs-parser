@@ -5,9 +5,19 @@ namespace Collecthor\SurveyjsParser;
 
 use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\DataInterfaces\VariableSetInterface;
+use Collecthor\SurveyjsParser\Parsers\BooleanParser;
 use Collecthor\SurveyjsParser\Parsers\CallbackElementParser;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
+use Collecthor\SurveyjsParser\Parsers\DynamicPanelParser;
+use Collecthor\SurveyjsParser\Parsers\ImagePickerParser;
+use Collecthor\SurveyjsParser\Parsers\MatrixDynamicParser;
+use Collecthor\SurveyjsParser\Parsers\MatrixParser;
+use Collecthor\SurveyjsParser\Parsers\MultipleChoiceQuestionParser;
+use Collecthor\SurveyjsParser\Parsers\MultipleTextParser;
+use Collecthor\SurveyjsParser\Parsers\NoUISliderParser;
 use Collecthor\SurveyjsParser\Parsers\PanelParser;
+use Collecthor\SurveyjsParser\Parsers\RankingParser;
+use Collecthor\SurveyjsParser\Parsers\RatingParser;
 use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
 
@@ -22,7 +32,7 @@ class SurveyParser implements SurveyParserInterface
 
     private ElementParserInterface $recursiveParser;
 
-    public function __construct()
+    public function __construct(LocalizerInterface $localizer = new ParserLocalizer())
     {
         // Recursive parser.
         $this->recursiveParser = new CallbackElementParser(
@@ -47,6 +57,45 @@ class SurveyParser implements SurveyParserInterface
         $this->parsers['radiogroup'] = [$singleChoiceParser];
         $this->parsers['dropdown'] = [$singleChoiceParser];
 
+        $booleanParser = new BooleanParser(
+            $localizer->getAllTranslationsForString('true'),
+            $localizer->getAllTranslationsForString('false')
+        );
+        $this->parsers['boolean'] = [$booleanParser];
+
+        $imagePickerParser = new ImagePickerParser();
+        $this->parsers['imagepicker'] = [$imagePickerParser];
+
+        $matrixDynamicParser = new MatrixDynamicParser($localizer->getAllTranslationsForString('row'));
+        $this->parsers['matrixdynamic'] = [$matrixDynamicParser];
+
+        $multipleChoiceQuestionParser = new MultipleChoiceQuestionParser();
+        $this->parsers['checkbox'] = [$multipleChoiceQuestionParser];
+        $this->parsers['imagemap'] = [$multipleChoiceQuestionParser];
+        $this->parsers['tagbox'] = [$multipleChoiceQuestionParser];
+
+        $multipleTextParser = new MultipleTextParser();
+        $this->parsers['multipletext'] = [$multipleTextParser];
+
+        $panelParser = new PanelParser();
+        $this->parsers['panel'] = [$panelParser];
+
+        $rankingParser = new RankingParser();
+        $this->parsers['ranking'] = [$rankingParser];
+        $this->parsers['sortablelist'] = [$rankingParser];
+
+        $ratingParser = new RatingParser();
+        $this->parsers['rating'] = [$ratingParser];
+
+        $noUISliderParser = new NoUISliderParser();
+        $this->parsers['nouislider'] = [$noUISliderParser];
+
+        $matrixParser = new MatrixParser();
+        $this->parsers['matrix'] = [$matrixParser];
+
+        $dynamicPanelParser = new DynamicPanelParser($localizer->getAllTranslationsForString('row'));
+        $this->parsers['paneldynamic'] = [$dynamicPanelParser];
+        
         $dummyParser = new DummyParser();
         $this->parsers['panel'] = [new PanelParser()];
         $this->parsers['html'] = [$dummyParser];
