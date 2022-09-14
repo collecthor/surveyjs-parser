@@ -39,35 +39,16 @@ final class FlattenResponseHelperTest extends TestCase
      * @param array<string, mixed>[] $response
      * @param array<string, array<string, string>> $result
      */
-    public function testFlattenResponse(VariableSetInterface $variables, array $response, array $result): void
+    public function testFlattenResponse(VariableSetInterface $variables, array $response, string $locale, array $result): void
     {
-        $helper = new FlattenResponseHelper($variables);
+        $helper = new FlattenResponseHelper($variables, $locale);
         $records = [];
         for ($i = 0; $i < count($response); $i++) {
             $records[] = new ArrayRecord($response[$i], $i, new \DateTime(), new \DateTime());
         }
 
         $flattened = toArray($helper->flattenAll($records));
-
-        self::assertSame($result['default'], $flattened);
-    }
-
-    /**
-     * @dataProvider provider
-     * @param array<string, mixed>[] $response
-     * @param array<string, array<string, string>> $result
-     */
-    public function testLocalizedFlattenResponse(VariableSetInterface $variables, array $response, array $result): void
-    {
-        $helper = new FlattenResponseHelper($variables, 'nl');
-        $records = [];
-        for ($i = 0; $i < count($response); $i++) {
-            $records[] = new ArrayRecord($response[$i], $i, new \DateTime(), new \DateTime());
-        }
-
-        $flattened = toArray($helper->flattenAll($records));
-
-        self::assertSame($result['nl'], $flattened);
+        self::assertSame($result, $flattened);
     }
 
     /**
@@ -75,7 +56,7 @@ final class FlattenResponseHelperTest extends TestCase
      */
     public function provider(): iterable
     {
-        yield [
+        $openText = [
             new VariableSet(
                 new OpenTextVariable(
                     'question1',
@@ -89,16 +70,18 @@ final class FlattenResponseHelperTest extends TestCase
             [
                 ['question1' => 'test', ],
             ],
+            'default',
             [
-                'default' => [
-                    ['question1' => 'test', ],
-                ],
-                'nl' => [
-                    ['vraag1' => 'test', ],
-                ],
+                ['question1' => 'test', ],
             ],
         ];
-        yield [
+        yield $openText;
+        $openText[2] = 'nl';
+        $openText[3] = [
+            ['vraag1' => 'test'],
+        ];
+        yield $openText;
+        $numeric = [
             new VariableSet(
                 new NumericVariable(
                     'question1',
@@ -112,17 +95,19 @@ final class FlattenResponseHelperTest extends TestCase
             [
                 ['question1' => 6, ],
             ],
+            'default',
             [
-                'default' => [
-                    ['question1' => '6', ],
-                ],
-                'nl' => [
-                    ['vraag1' => '6', ],
-                ],
+                ['question1' => '6', ],
             ],
         ];
+        yield $numeric;
+        $numeric[2] = 'nl';
+        $numeric[3] = [
+            ['vraag1' => '6'],
+        ];
+        yield $numeric;
 
-        yield [
+        $multipleResponse = [
             new VariableSet(
                 new OpenTextVariable(
                     'question1',
@@ -137,17 +122,20 @@ final class FlattenResponseHelperTest extends TestCase
                 ['question1' => 'test', ],
                 ['question1' => 'test 2', ],
             ],
+            'default',
             [
-                'default' => [
-                    ['question1' => 'test', ],
-                    ['question1' => 'test 2', ],
-                ],
-                'nl' => [
-                    ['vraag1' => 'test', ],
-                    ['vraag1' => 'test 2', ],
-                ],
+                ['question1' => 'test', ],
+                ['question1' => 'test 2', ],
             ],
         ];
+        yield $multipleResponse;
+        $multipleResponse[2] = 'nl';
+        $multipleResponse[3] = [
+            ['vraag1' => 'test'],
+            ['vraag1' => 'test 2'],
+        ];
+        yield $multipleResponse;
+
         $options = [
             new StringValueOption('option1', [
                 'default' => 'option 1',
@@ -162,7 +150,7 @@ final class FlattenResponseHelperTest extends TestCase
                 'nl' => 'optie 3',
             ]),
         ];
-        yield [
+        $singleChoice = [
             new VariableSet(
                 new SingleChoiceVariable(
                     'question1',
@@ -177,16 +165,20 @@ final class FlattenResponseHelperTest extends TestCase
             [
                 ['question1' => 'option2', ],
             ],
+            'default',
             [
-                'default' => [
-                    ['question1' => 'option 2', ],
-                ],
-                'nl' => [
-                    ['vraag1' => 'optie 2', ],
-                ],
+                ['question1' => 'option 2', ],
             ],
         ];
-        yield [
+
+        yield $singleChoice;
+        $singleChoice[2] = 'nl';
+        $singleChoice[3] = [
+            ['vraag1' => 'optie 2'],
+        ];
+        yield $singleChoice;
+
+        $multipleChoice = [
             new VariableSet(
                 new MultipleChoiceVariable(
                     'question1',
@@ -201,14 +193,17 @@ final class FlattenResponseHelperTest extends TestCase
             [
                 ['question1' => ['option2', 'option3'], ],
             ],
+            'default',
             [
-                'default' => [
-                    ['question1' => 'option 2, option 3', ],
-                ],
-                'nl' => [
-                    ['vraag1' => 'optie 2, optie 3', ],
-                ],
+                ['question1' => 'option 2, option 3', ],
             ],
         ];
+
+        yield $multipleChoice;
+        $multipleChoice[2] = 'nl';
+        $multipleChoice[3] = [
+            ['vraag1' => 'optie 2, optie 3'],
+        ];
+        yield $multipleChoice;
     }
 }
