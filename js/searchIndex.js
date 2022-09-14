@@ -76,6 +76,41 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ElementParserInterface.html#method_parse"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\FlattenResponseInterface",
+            "name": "FlattenResponseInterface",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-FlattenResponseInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\FlattenResponseInterface\u003A\u003AflattenAll\u0028\u0029",
+            "name": "flattenAll",
+            "summary": "Convert\u0020all\u0020records\u0020to\u0020a\u0020flat\u0020array",
+            "url": "classes/Collecthor-SurveyjsParser-FlattenResponseInterface.html#method_flattenAll"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\FlattenResponseHelper",
+            "name": "FlattenResponseHelper",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\FlattenResponseHelper\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\FlattenResponseHelper\u003A\u003AflattenAll\u0028\u0029",
+            "name": "flattenAll",
+            "summary": "Convert\u0020all\u0020records\u0020to\u0020a\u0020flat\u0020array",
+            "url": "classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#method_flattenAll"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\FlattenResponseHelper\u003A\u003A\u0024variables",
+            "name": "variables",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#property_variables"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\FlattenResponseHelper\u003A\u003A\u0024locale",
+            "name": "locale",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#property_locale"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\OptionGenerator",
             "name": "OptionGenerator",
             "summary": "",
