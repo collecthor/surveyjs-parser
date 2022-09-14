@@ -18,9 +18,11 @@ final class FlattenResponseHelper implements FlattenResponseInterface
     public function flattenAll(iterable $records): iterable
     {
         foreach ($records as $record) {
+            $flattened = [];
             foreach ($this->variables->getVariables() as $variable) {
-                yield [ $variable->getTitle($this->locale) => $variable->getDisplayValue($record, $this->locale)->getRawValue()];
+                $flattened[$variable->getTitle($this->locale)] = $variable->getDisplayValue($record, $this->locale)->getRawValue();
             }
+            yield $flattened;
         }
     }
 }

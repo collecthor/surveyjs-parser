@@ -205,5 +205,160 @@ final class FlattenResponseHelperTest extends TestCase
             ['vraag1' => 'optie 2, optie 3'],
         ];
         yield $multipleChoice;
+
+        $multipleVariable = [
+            new VariableSet(
+                new OpenTextVariable(
+                    'question1',
+                    [
+                        'default' => 'question1',
+                        'nl' => 'vraag1',
+                    ],
+                    ['question1'],
+                ),
+                new OpenTextVariable(
+                    'question2',
+                    [
+                        'default' => 'question2',
+                        'nl' => 'vraag2',
+                    ],
+                    ['question2'],
+                ),
+            ),
+            [
+                [
+                    'question1' => 'test',
+                    'question2' => 'test 2',
+                ],
+            ],
+            'default',
+            [
+                [
+                    'question1' => 'test',
+                    'question2' => 'test 2',
+                ],
+            ],
+        ];
+        yield $multipleVariable;
+        $multipleVariable[2] = 'nl';
+        $multipleVariable[3] = [
+            [
+                'vraag1' => 'test',
+                'vraag2' => 'test 2',
+            ],
+        ];
+        yield $multipleVariable;
+
+        $multipleVariableMultipleRecords = [
+            new VariableSet(
+                new OpenTextVariable(
+                    'question1',
+                    [
+                        'default' => 'question1',
+                        'nl' => 'vraag1',
+                    ],
+                    ['question1'],
+                ),
+                new OpenTextVariable(
+                    'question2',
+                    [
+                        'default' => 'question2',
+                        'nl' => 'vraag2',
+                    ],
+                    ['question2'],
+                ),
+            ),
+            [
+                [
+                    'question1' => 'test',
+                    'question2' => 'test 2',
+                ],
+                [
+                    'question1' => 'second answer',
+                    'question2' => 'second answer 2',
+                ],
+            ],
+            'default',
+            [
+                [
+                    'question1' => 'test',
+                    'question2' => 'test 2',
+                ],
+                [
+                    'question1' => 'second answer',
+                    'question2' => 'second answer 2',
+                ],
+            ],
+        ];
+        yield $multipleVariableMultipleRecords;
+        $multipleVariableMultipleRecords[2] = 'nl';
+        $multipleVariableMultipleRecords[3] = [
+            [
+                'vraag1' => 'test',
+                'vraag2' => 'test 2',
+            ],
+            [
+                'vraag1' => 'second answer',
+                'vraag2' => 'second answer 2',
+            ],
+        ];
+        yield $multipleVariableMultipleRecords;
+
+        $multipleVariableMultipleRecordsMultipleChoice = [
+            new VariableSet(
+                new MultipleChoiceVariable(
+                    'question1',
+                    [
+                        'default' => 'question1',
+                        'nl' => 'vraag1',
+                    ],
+                    $options,
+                    ['question1'],
+                ),
+                new MultipleChoiceVariable(
+                    'question2',
+                    [
+                        'default' => 'question2',
+                        'nl' => 'vraag2',
+                    ],
+                    $options,
+                    ['question2'],
+                ),
+            ),
+            [
+                [
+                    'question1' => ['option1'],
+                    'question2' => ['option1', 'option2', 'option3'],
+                ],
+                [
+                    'question1' => [],
+                    'question2' => ['option1', 'option3'],
+                ],
+            ],
+            'default',
+            [
+                [
+                    'question1' => 'option 1',
+                    'question2' => 'option 1, option 2, option 3',
+                ],
+                [
+                    'question1' => '',
+                    'question2' => 'option 1, option 3',
+                ],
+            ],
+        ];
+        yield $multipleVariableMultipleRecordsMultipleChoice;
+        $multipleVariableMultipleRecordsMultipleChoice[2] = 'nl';
+        $multipleVariableMultipleRecordsMultipleChoice[3] = [
+            [
+                'vraag1' => 'optie 1',
+                'vraag2' => 'optie 1, optie 2, optie 3',
+            ],
+            [
+                'vraag1' => '',
+                'vraag2' => 'optie 1, optie 3',
+            ],
+        ];
+        yield $multipleVariableMultipleRecordsMultipleChoice;
     }
 }
