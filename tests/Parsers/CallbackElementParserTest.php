@@ -26,7 +26,7 @@ final class CallbackElementParserTest extends TestCase
         /** @phpstan-ignore-next-line */
         $mock->expects($this->once())
             ->method('__invoke')
-            ->with(self::equalTo($parent), self::equalTo($config))
+            ->with(self::equalTo($parent), self::equalTo($surveyConfiguration), self::equalTo($config))
             ->willReturn([]);
         self::assertIsCallable($mock);
         $closure = \Closure::fromCallable($mock);

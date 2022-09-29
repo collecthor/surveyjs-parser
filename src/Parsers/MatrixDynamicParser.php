@@ -50,7 +50,7 @@ final class MatrixDynamicParser implements ElementParserInterface
                 $rowConfig['choices'] = $column['choices'] ?? $answers;
                 $rowConfig['name'] = $this->arrayFormat($surveyConfiguration, $questionTitles, ' ', $columnName, ' ', $this->rowLabels, " $r");
                 $rowConfig['valueName'] = $columnName;
-                yield from $root->parse($root, $rowConfig, $surveyConfiguration, [...$dataPrefix, $valueName, $r]);
+                yield from $root->parse($root, $rowConfig, $surveyConfiguration, [...$dataPrefix, $valueName, (string)$r]);
             }
         }
     }
