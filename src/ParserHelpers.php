@@ -129,9 +129,12 @@ trait ParserHelpers
     /**
      * @param array<mixed> $config
      */
-    private function extractName(array $config): string
+    private function extractName(array $config, string $locale = 'default'): string
     {
         if (!isset($config['name']) || !is_string($config['name'])) {
+            if (isset($config['name'][$locale]) && is_string($config['name'][$locale])){
+                return $config['name'][$locale];
+            }
             throw new InvalidArgumentException("Expected to find a string at key `name`, inside: " . print_r($config, true));
         }
         return $config['name'];
