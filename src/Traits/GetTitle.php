@@ -15,6 +15,6 @@ trait GetTitle
 
     public function getTitle(?string $locale = null): string
     {
-        return $this->titles[$locale] ?? $this->titles[ValueOptionInterface::DEFAULT_LOCALE] ?? $this->titles[array_keys($this->titles)[0]] ?? "No title";
+        return $this->titles[$locale] ?? $this->titles[ValueOptionInterface::DEFAULT_LOCALE] ?? $this->titles[array_keys($this->titles)[0] ?? 'default'] ?? "No title";
     }
 }
