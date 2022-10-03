@@ -24,8 +24,10 @@ final class BooleanParser implements ElementParserInterface
 
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
+        $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
+        $id = implode('.', $dataPath);
+
         $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
-        $valueName = $this->extractValueName($questionConfig);
-        yield new BooleanVariable($valueName, $titles, $this->trueLabels, $this->falseLabels, [...$dataPrefix, $valueName]);
+        yield new BooleanVariable($id, $titles, $this->trueLabels, $this->falseLabels, $dataPath);
     }
 }
