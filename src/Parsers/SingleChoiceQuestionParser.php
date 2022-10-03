@@ -21,8 +21,7 @@ class SingleChoiceQuestionParser implements ElementParserInterface
         array $dataPrefix = []
     ): iterable {
         $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
-
-        $name = implode('.', [...$dataPrefix, $this->extractName($questionConfig)]);
+        $id = implode('.', $dataPath);
         $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
 
         // Parse the answer options.
@@ -37,7 +36,7 @@ class SingleChoiceQuestionParser implements ElementParserInterface
             $choices[] = new StringValueOption('other', $this->extractLocalizedTexts($questionConfig, $surveyConfiguration, 'otherText'));
         }
 
-        yield new SingleChoiceVariable($name, $titles, $choices, $dataPath, $questionConfig);
+        yield new SingleChoiceVariable($id, $titles, $choices, $dataPath, $questionConfig);
         yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }

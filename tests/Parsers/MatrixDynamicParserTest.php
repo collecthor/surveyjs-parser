@@ -326,7 +326,7 @@ final class MatrixDynamicParserTest extends TestCase
             [
                 self::anything(),
                 self::callback(function ($columnConfig) {
-                    return $columnConfig['name']['default'] === 'question1 - Column 1 Row 0';
+                    return $columnConfig['name']['default'] === 'question1 Column 1 Row 0';
                 }),
                 self::anything(),
                 self::anything()
@@ -334,7 +334,7 @@ final class MatrixDynamicParserTest extends TestCase
             [
                 self::anything(),
                 self::callback(function ($columnConfig) {
-                    return $columnConfig['name']['default'] === 'question1 - Column 2 Row 0';
+                    return $columnConfig['name']['default'] === 'question1 Column 2 Row 0';
                 }),
                 self::anything(),
                 self::anything()
@@ -342,7 +342,7 @@ final class MatrixDynamicParserTest extends TestCase
             [
                 self::anything(),
                 self::callback(function ($columnConfig) {
-                    return $columnConfig['name']['default'] === 'question1 - Column 3 Row 0';
+                    return $columnConfig['name']['default'] === 'question1 Column 3 Row 0';
                 }),
                 self::anything(),
                 self::anything()
@@ -350,7 +350,7 @@ final class MatrixDynamicParserTest extends TestCase
             [
                 self::anything(),
                 self::callback(function ($columnConfig) {
-                    return $columnConfig['name']['default'] === 'question1 - Column 4 Row 0';
+                    return $columnConfig['name']['default'] === 'question1 Column 4 Row 0';
                 }),
                 self::anything(),
                 self::anything()

@@ -42,7 +42,7 @@ final class BooleanVariable implements ClosedVariableInterface
     {
         return [
             new BooleanValueOption(true, $this->trueLabels),
-            new BooleanValueOption(false, $this->trueLabels),
+            new BooleanValueOption(false, $this->falseLabels),
         ];
     }
 
