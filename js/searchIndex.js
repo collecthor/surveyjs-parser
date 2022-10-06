@@ -486,11 +486,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-SurveyConfiguration.html#property_commentPostfix"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyConfiguration\u003A\u003A\u0024locales",
-            "name": "locales",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-SurveyConfiguration.html#property_locales"
-        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser",
             "name": "SurveyParser",
             "summary": "",
