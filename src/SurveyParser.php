@@ -159,8 +159,9 @@ class SurveyParser implements SurveyParserInterface
 
     /**
      * @param array<string, mixed> $structure
+     * @param non-empty-array<string> $locales
      */
-    public function parseSurveyStructure(array $structure): VariableSetInterface
+    public function parseSurveyStructure(array $structure, array $locales = ['default']): VariableSetInterface
     {
         $variables = [];
 
@@ -168,7 +169,7 @@ class SurveyParser implements SurveyParserInterface
          * Get some global settings from the survey structure. Note surveyJS incorrectly calls this a prefix
          * https://surveyjs.io/Documentation/Library?id=surveymodel#commentPrefix
          */
-        $surveyConfiguration = new SurveyConfiguration($this->extractString($structure, 'commentPrefix', '-Comment'));
+        $surveyConfiguration = new SurveyConfiguration($this->extractString($structure, 'commentPrefix', '-Comment'), $locales);
 
         if (isset($structure['pages']) && is_array($structure['pages'])) {
             foreach ($structure['pages'] as $page) {
