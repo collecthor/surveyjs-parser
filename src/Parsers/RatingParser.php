@@ -29,7 +29,7 @@ final class RatingParser implements ElementParserInterface
 
             foreach ($values as $value) {
                 if (is_array($value)) {
-                    $texts = $this->extractLocalizedTexts($value, $surveyConfiguration);
+                    $texts = $this->extractLocalizedTexts($value);
                     $value = $value['value'];
                 }
                 $answers[] = new StringValueOption($value, $texts ?? [ 'default' => (string) $value]);
@@ -48,6 +48,6 @@ final class RatingParser implements ElementParserInterface
             }
         }
 
-        yield new SingleChoiceVariable($id, $this->extractTitles($questionConfig, $surveyConfiguration), $answers, $dataPath);
+        yield new SingleChoiceVariable($id, $this->extractTitles($questionConfig), $answers, $dataPath);
     }
 }

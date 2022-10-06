@@ -27,7 +27,7 @@ final class BooleanParser implements ElementParserInterface
         $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
         $id = implode('.', $dataPath);
 
-        $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
+        $titles = $this->extractTitles($questionConfig);
         yield new BooleanVariable($id, $titles, $this->trueLabels, $this->falseLabels, $dataPath);
     }
 }

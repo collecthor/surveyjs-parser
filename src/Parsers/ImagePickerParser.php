@@ -30,8 +30,8 @@ final class ImagePickerParser implements ElementParserInterface
             }
         }
         $name = $this->extractName($questionConfig);
-        $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
-        $choices = $this->extractChoices($formattedChoices, $surveyConfiguration);
+        $titles = $this->extractTitles($questionConfig);
+        $choices = $this->extractChoices($formattedChoices);
         $valueName = $this->extractValueName($questionConfig);
 
 

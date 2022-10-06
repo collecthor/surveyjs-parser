@@ -33,7 +33,7 @@ final class RatingParserTest extends TestCase
 {
     public function testDefaultRating(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             'type' => 'rating',
             'name' => 'question3',
@@ -58,7 +58,7 @@ final class RatingParserTest extends TestCase
 
     public function testCustomRange(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             'type' => 'rating',
             'name' => 'question3',
@@ -85,7 +85,7 @@ final class RatingParserTest extends TestCase
 
     public function testCustomStep(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             'type' => 'rating',
             'name' => 'question3',
@@ -117,7 +117,7 @@ final class RatingParserTest extends TestCase
 
     public function testCustomRangeRating(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "rating",
             "name" => "question3",
@@ -150,7 +150,7 @@ final class RatingParserTest extends TestCase
 
     public function testCustomRangeRatingAnswers(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "rating",
             "name" => "question3",
@@ -192,7 +192,7 @@ final class RatingParserTest extends TestCase
 
     public function testCustomRangeRatingAnswersLocalized(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "rating",
             "name" => "question3",

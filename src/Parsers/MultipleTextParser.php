@@ -23,7 +23,7 @@ final class MultipleTextParser implements ElementParserInterface
             if (in_array($itemName, $itemNames, true)) {
                 throw new \RuntimeException("Duplicate question code: {$itemName}");
             }
-            yield new OpenTextVariable($itemName, $this->extractTitles($item, $surveyConfiguration), $fullPath);
+            yield new OpenTextVariable($itemName, $this->extractTitles($item), $fullPath);
             $itemNames[] = $itemName;
         }
     }

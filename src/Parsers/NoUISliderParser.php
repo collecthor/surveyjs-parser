@@ -16,7 +16,7 @@ final class NoUISliderParser implements ElementParserInterface
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
         $valueName = $this->extractValueName($questionConfig);
-        $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
+        $titles = $this->extractTitles($questionConfig);
         yield new NumericVariable($valueName, $titles, [...$dataPrefix, $valueName]);
     }
 }

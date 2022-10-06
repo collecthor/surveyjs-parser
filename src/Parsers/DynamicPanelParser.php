@@ -28,7 +28,8 @@ final class DynamicPanelParser implements ElementParserInterface
                 /** @var array<string, mixed> $rowElement */
                 $rowElement = $element;
                 $valueName = $this->extractValueName($rowElement);
-                $rowElement['title'] = $this->arrayFormat($surveyConfiguration, $valueName, " ", $this->rowLabels, " ", (string)$r);
+                $titles = $this->extractTitles($rowElement);
+                $rowElement['title'] = $this->arrayFormat($titles, " ", $this->rowLabels, " ", (string)$r);
                 $rowElement['name'] = implode('.', [...$dataPrefix, $valueName, (string)$r]);
                 yield from $root->parse($root, $rowElement, $surveyConfiguration, $dataPrefix);
             }

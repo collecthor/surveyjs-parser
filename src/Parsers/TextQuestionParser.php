@@ -19,7 +19,7 @@ class TextQuestionParser implements ElementParserInterface
         $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
 
         $name = implode('.', [...$dataPrefix, $this->extractName($questionConfig)]);
-        $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
+        $titles = $this->extractTitles($questionConfig);
 
         if (($questionConfig['inputType'] ?? 'text') === 'number') {
             yield new NumericVariable($name, $titles, $dataPath, $questionConfig);
