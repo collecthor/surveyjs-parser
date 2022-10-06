@@ -362,4 +362,218 @@ final class MatrixDynamicParserTest extends TestCase
         ]);
         toArray($parser->parse($rootParser, $questionConfig, $surveyConfig));
     }
+
+    public function testGenerateRightDataPaths(): void
+    {
+        $surveyConfig = new SurveyConfiguration();
+        $questionConfig = [
+            "type" => "matrixdynamic",
+            "name" => "question1",
+            "columns" => [
+                [
+                    "name" => "Column 1",
+                    "cellType" => "dropdown",
+                    "colCount" => 0,
+                    "choices" => [
+                        [
+                            "value" => "item1",
+                            "text" => "One"
+                        ],
+                        [
+                            "value" => "item2",
+                            "text" => "Two"
+                        ],
+                        [
+                            "value" => "item3",
+                            "text" => "Three"
+                        ],
+                        [
+                            "value" => "item4",
+                            "text" => "Four"
+                        ],
+                        [
+                            "value" => "item5",
+                            "text" => "Five"
+                        ]
+                    ],
+                    "storeOthersAsComment" => true
+                ],
+                [
+                    "name" => "Column 2",
+                    "cellType" => "checkbox"
+                ],
+                [
+                    "name" => "Column 3",
+                    "cellType" => "radiogroup"
+                ],
+                [
+                    "name" => "Column 4",
+                    "cellType" => "text"
+                ]
+            ],
+            "choices" => [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "rowCount" => 1,
+            "maxRowCount" => 1
+        ];
+
+
+        $rootParser = $this->createMock(ElementParserInterface::class);
+
+        $rootParser->expects(self::exactly(4))->method('parse')->withConsecutive(
+            [
+                self::anything(),
+                self::anything(),
+                self::anything(),
+                self::callback(function ($dataPath) {
+                    return $dataPath === ['question1', '0'];
+                }),
+            ],
+            [
+                self::anything(),
+                self::anything(),
+                self::anything(),
+                self::callback(function ($dataPath) {
+                    return $dataPath === ['question1', '0'];
+                }),
+            ],
+            [
+                self::anything(),
+                self::anything(),
+                self::anything(),
+                self::callback(function ($dataPath) {
+                    return $dataPath === ['question1', '0'];
+                }),
+            ],
+            [
+                self::anything(),
+                self::anything(),
+                self::anything(),
+                self::callback(function ($dataPath) {
+                    return $dataPath === ['question1', '0'];
+                }),
+            ],
+        );
+
+        $parser = new MatrixDynamicParser([
+            'default' => 'Row',
+        ]);
+        toArray($parser->parse($rootParser, $questionConfig, $surveyConfig));
+    }
+
+    public function testCallWithRightClasses(): void
+    {
+        $surveyConfig = new SurveyConfiguration();
+        $questionConfig = [
+            "type" => "matrixdynamic",
+            "name" => "question1",
+            "columns" => [
+                [
+                    "name" => "Column 1",
+                    "cellType" => "dropdown",
+                    "colCount" => 0,
+                    "choices" => [
+                        [
+                            "value" => "item1",
+                            "text" => "One"
+                        ],
+                        [
+                            "value" => "item2",
+                            "text" => "Two"
+                        ],
+                        [
+                            "value" => "item3",
+                            "text" => "Three"
+                        ],
+                        [
+                            "value" => "item4",
+                            "text" => "Four"
+                        ],
+                        [
+                            "value" => "item5",
+                            "text" => "Five"
+                        ]
+                    ],
+                    "storeOthersAsComment" => true
+                ],
+                [
+                    "name" => "Column 2",
+                    "cellType" => "checkbox"
+                ],
+                [
+                    "name" => "Column 3",
+                    "cellType" => "radiogroup"
+                ],
+                [
+                    "name" => "Column 4",
+                    "cellType" => "text"
+                ]
+            ],
+            "choices" => [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "rowCount" => 1,
+            "maxRowCount" => 1
+        ];
+
+
+        $rootParser = $this->createMock(ElementParserInterface::class);
+
+        $rootParser->expects(self::exactly(4))->method('parse')->withConsecutive(
+            [
+                self::isInstanceOf(ElementParserInterface::class),
+                self::callback(function ($questionConfig) {
+                    return is_array($questionConfig);
+                }),
+                self::isInstanceOf(SurveyConfiguration::class),
+                self::callback(function ($dataPath) {
+                    return is_array($dataPath);
+                }),
+            ],
+            [
+                self::isInstanceOf(ElementParserInterface::class),
+                self::callback(function ($questionConfig) {
+                    return is_array($questionConfig);
+                }),
+                self::isInstanceOf(SurveyConfiguration::class),
+                self::callback(function ($dataPath) {
+                    return is_array($dataPath);
+                }),
+            ],
+            [
+                self::isInstanceOf(ElementParserInterface::class),
+                self::callback(function ($questionConfig) {
+                    return is_array($questionConfig);
+                }),
+                self::isInstanceOf(SurveyConfiguration::class),
+                self::callback(function ($dataPath) {
+                    return is_array($dataPath);
+                }),
+            ],
+            [
+                self::isInstanceOf(ElementParserInterface::class),
+                self::callback(function ($questionConfig) {
+                    return is_array($questionConfig);
+                }),
+                self::isInstanceOf(SurveyConfiguration::class),
+                self::callback(function ($dataPath) {
+                    return is_array($dataPath);
+                }),
+            ],
+        );
+
+        $parser = new MatrixDynamicParser([
+            'default' => 'Row',
+        ]);
+        toArray($parser->parse($rootParser, $questionConfig, $surveyConfig));
+    }
 }
