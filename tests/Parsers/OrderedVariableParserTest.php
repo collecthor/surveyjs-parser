@@ -21,7 +21,7 @@ final class OrderedVariableParserTest extends TestCase
 {
     public function testParseRanking(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             'type' => 'ranking',
             'name' => 'question1',

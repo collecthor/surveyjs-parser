@@ -15,10 +15,10 @@ final class MatrixParser implements ElementParserInterface
 
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
+        $titles = $this->extractTitles($questionConfig);
         $valueName = $this->extractValueName($questionConfig);
         /** @var array{columns: list<string|array<string, string>>, rows: list<string|array<string, string>> } $questionConfig */
-        $answers = $this->extractChoices($questionConfig['columns'], $surveyConfiguration);
+        $answers = $this->extractChoices($questionConfig['columns']);
 
         /** @var array{value: string, text:string|array<string, string>} $rows */
         $rows = $questionConfig['rows'];
@@ -33,7 +33,7 @@ final class MatrixParser implements ElementParserInterface
 
             yield new SingleChoiceVariable(
                 "{$valueName}.{$row['value']}",
-                $this->arrayFormat($surveyConfiguration, $titles, " - ", $row['text']),
+                $this->arrayFormat($titles, " - ", $row['text']),
                 $answers,
                 [...$dataPrefix, $valueName, $row['value']]
             );

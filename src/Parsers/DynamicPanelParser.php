@@ -21,6 +21,7 @@ final class DynamicPanelParser implements ElementParserInterface
 
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
+        $titles = $this->extractTitles($questionConfig);
         $limit = $questionConfig['maxPanelCount'] ?? 10;
 
         for ($r = 0; $r < $limit; $r++) {
@@ -28,7 +29,8 @@ final class DynamicPanelParser implements ElementParserInterface
                 /** @var array<string, mixed> $rowElement */
                 $rowElement = $element;
                 $valueName = $this->extractValueName($rowElement);
-                $rowElement['title'] = $this->arrayFormat($surveyConfiguration, $valueName, " ", $this->rowLabels, " ", (string)$r);
+                $rowTitles = $this->extractTitles($rowElement);
+                $rowElement['title'] = $this->arrayFormat($titles, " ", $this->rowLabels, " ", (string)$r, " ", $rowTitles);
                 $rowElement['name'] = implode('.', [...$dataPrefix, $valueName, (string)$r]);
                 yield from $root->parse($root, $rowElement, $surveyConfiguration, $dataPrefix);
             }

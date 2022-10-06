@@ -20,7 +20,7 @@ final class BooleanParserTest extends TestCase
 {
     public function testParseBooleanQuestion(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             'type' => 'boolean',
             'name' => 'question1',

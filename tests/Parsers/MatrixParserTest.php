@@ -25,7 +25,7 @@ final class MatrixParserTest extends TestCase
 {
     public function testVariableCount(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "matrix",
             "name" => "question4",
@@ -58,7 +58,7 @@ final class MatrixParserTest extends TestCase
 
     public function testVariableNames(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "matrix",
             "name" => "question4",
@@ -89,7 +89,7 @@ final class MatrixParserTest extends TestCase
 
     public function testVariableOptions(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "matrix",
             "name" => "question4",
@@ -125,7 +125,7 @@ final class MatrixParserTest extends TestCase
 
     public function testExtractNames(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['nl', 'default']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "matrix",
             "name" => "question4",

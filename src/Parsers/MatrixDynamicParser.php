@@ -35,7 +35,7 @@ final class MatrixDynamicParser implements ElementParserInterface
             $answers[] = $answer;
         }
 
-        $questionTitles = $this->extractTitles($questionConfig, $surveyConfiguration);
+        $questionTitles = $this->extractTitles($questionConfig);
 
         $rowLimit = $questionConfig['maxRowCount'] ?? 10;
 
@@ -48,7 +48,7 @@ final class MatrixDynamicParser implements ElementParserInterface
                 $rowConfig = $column;
                 $rowConfig['type'] = $column['cellType'] ?? $questionConfig['cellType'] ?? 'dropdown';
                 $rowConfig['choices'] = $column['choices'] ?? $answers;
-                $rowConfig['name'] = $this->arrayFormat($surveyConfiguration, $questionTitles, ' ', $columnName, ' ', $this->rowLabels, " $r");
+                $rowConfig['name'] = $this->arrayFormat($questionTitles, ' ', $columnName, ' ', $this->rowLabels, " $r");
                 $rowConfig['valueName'] = $columnName;
                 yield from $root->parse($root, $rowConfig, $surveyConfiguration, [...$dataPrefix, $valueName, (string)$r]);
             }

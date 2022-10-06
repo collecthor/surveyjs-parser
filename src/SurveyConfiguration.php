@@ -12,10 +12,6 @@ class SurveyConfiguration
 {
     public function __construct(
         public readonly string $commentPostfix = '-Comment',
-        /**
-         * @phpstan-var non-empty-list<string>
-         */
-        public array $locales = ['default']
     ) {
     }
 }

@@ -27,7 +27,7 @@ final class MultipleTextParserTest extends TestCase
 {
     public function testGetRightAmountOfVariables(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "multipletext",
             "name" => "question4",
@@ -49,7 +49,7 @@ final class MultipleTextParserTest extends TestCase
 
     public function testGetTranslations(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['nl', 'default']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "multipletext",
             "name" => "question4",
@@ -80,7 +80,7 @@ final class MultipleTextParserTest extends TestCase
 
     public function testGetRightVariableType(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['nl', 'default']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "multipletext",
             "name" => "question4",

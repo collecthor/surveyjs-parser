@@ -27,7 +27,7 @@ final class ImagePickerParserTest extends TestCase
 {
     public function testParseSingleImagePicker(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "imagepicker",
             "name" => "question3",
@@ -59,7 +59,7 @@ final class ImagePickerParserTest extends TestCase
 
     public function testParseMultipleImagePicker(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "imagepicker",
             "name" => "question3",
@@ -92,7 +92,7 @@ final class ImagePickerParserTest extends TestCase
 
     public function testValueOptions(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "imagepicker",
             "name" => "question3",
@@ -128,7 +128,7 @@ final class ImagePickerParserTest extends TestCase
 
     public function testDisplayValueOptions(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "imagepicker",
             "name" => "question3",
@@ -164,7 +164,7 @@ final class ImagePickerParserTest extends TestCase
 
     public function testTextValueOptions(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "imagepicker",
             "name" => "question3",
@@ -204,7 +204,7 @@ final class ImagePickerParserTest extends TestCase
 
     public function testLocalizedDisplayValueOptions(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "imagepicker",
             "name" => "question3",

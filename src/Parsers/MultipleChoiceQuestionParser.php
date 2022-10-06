@@ -20,17 +20,17 @@ final class MultipleChoiceQuestionParser implements ElementParserInterface
 
         $name = $this->extractName($questionConfig);
 
-        $titles = $this->extractTitles($questionConfig, $surveyConfiguration);
+        $titles = $this->extractTitles($questionConfig);
 
-        $choices = $this->extractChoices($this->extractArray($questionConfig, 'choices'), $surveyConfiguration);
+        $choices = $this->extractChoices($this->extractArray($questionConfig, 'choices'));
 
         // Check if we need to add options for `hasNone` or `hasOther`
         if ($this->extractOptionalBoolean($questionConfig, 'hasNone') ?? false) {
-            $choices[] = new StringValueOption('none', $this->extractLocalizedTexts($questionConfig, $surveyConfiguration, 'noneText'));
+            $choices[] = new StringValueOption('none', $this->extractLocalizedTexts($questionConfig, 'noneText'));
         }
 
         if ($this->extractOptionalBoolean($questionConfig, 'hasOther') ?? false) {
-            $choices[] = new StringValueOption('other', $this->extractLocalizedTexts($questionConfig, $surveyConfiguration, 'otherText'));
+            $choices[] = new StringValueOption('other', $this->extractLocalizedTexts($questionConfig, 'otherText'));
         }
 
         yield new MultipleChoiceVariable($name, $titles, $choices, $dataPath, $questionConfig);

@@ -22,7 +22,7 @@ final class RankingParserTest extends TestCase
 {
     public function testNumVariables(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "ranking",
             "name" => "question5",
@@ -46,7 +46,7 @@ final class RankingParserTest extends TestCase
 
     public function testVariableTitles(): void
     {
-        $surveyConfig = new SurveyConfiguration(locales: ['default', 'nl']);
+        $surveyConfig = new SurveyConfiguration();
         $questionConfig = [
             "type" => "ranking",
             "name" => "question5",

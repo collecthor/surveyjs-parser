@@ -30,14 +30,14 @@ trait ParserHelpers
             return;
         }
 
-        $defaultPostfixes = [];
-        foreach ($surveyConfiguration->locales as $locale) {
-            $defaultPostfixes[$locale] = $defaultPostfix;
-        }
-        $postfixes = $this->extractLocalizedTexts($questionConfig, $surveyConfiguration, $postfixField, $defaultPostfixes);
+        $defaultPostfixes = [
+            'default' => $defaultPostfix,
+        ];
+
+        $postfixes = $this->extractLocalizedTexts($questionConfig, $postfixField, $defaultPostfixes);
 
         $titles = [];
-        foreach ($this->extractTitles($questionConfig, $surveyConfiguration) as $locale => $title) {
+        foreach ($this->extractTitles($questionConfig) as $locale => $title) {
             $titles[$locale] = $title . " - " . $postfixes[$locale];
         }
 
@@ -50,18 +50,13 @@ trait ParserHelpers
 
     /**
      * @param array<string, mixed> $config
-     * @param SurveyConfiguration $surveyConfiguration
      * @return array<string, string>
      */
-    private function extractTitles(array $config, SurveyConfiguration $surveyConfiguration): array
+    private function extractTitles(array $config): array
     {
-        $defaults = [];
-        foreach ($surveyConfiguration->locales as $locale) {
-            if (isset($config['name']) && is_string($config['name'])) {
-                $defaults[$locale] = $config['name'];
-            }
-        }
-        return $this->extractLocalizedTexts($config, $surveyConfiguration, 'title', $defaults);
+        return $this->extractLocalizedTexts($config, 'title', [
+            'default' => $this->extractName($config)
+        ]);
     }
 
     /**
@@ -82,25 +77,23 @@ trait ParserHelpers
      * @param array<string, string> $defaults
      * @return array<string, string>
      */
-    private function extractLocalizedTexts(array $config, SurveyConfiguration $surveyConfiguration, string $field = 'text', array $defaults = []): array
+    private function extractLocalizedTexts(array $config, string $field = 'text', array $defaults = []): array
     {
         if (!isset($config[$field])) {
             return $defaults;
         }
 
         if (is_string($config[$field])) {
-            $result = [];
-            foreach ($surveyConfiguration->locales as $locale) {
-                $result[$locale] = $config[$field];
-            }
-            return $result;
+            return [
+                'default' => $config[$field],
+            ];
         }
 
         if (is_array($config[$field])) {
             $result = [];
-            foreach ($surveyConfiguration->locales as $locale) {
-                if (isset($config[$field][$locale]) && !is_array($config[$field][$locale])) {
-                    $result[$locale] = (string) $config[$field][$locale];
+            foreach ($config[$field] as $locale => $data) {
+                if (!is_array($data)) {
+                    $result[$locale] = (string) $data;
                 }
             }
             return $result;
@@ -163,10 +156,9 @@ trait ParserHelpers
 
     /**
      * @param array<mixed>  $choices
-     * @param SurveyConfiguration $surveyConfiguration
      * @return non-empty-list<ValueOptionInterface>
      */
-    private function extractChoices(array $choices, SurveyConfiguration $surveyConfiguration): array
+    private function extractChoices(array $choices): array
     {
         if (!array_is_list($choices) || $choices === []) {
             throw new \InvalidArgumentException("Choices must be a non empty list");
@@ -176,7 +168,7 @@ trait ParserHelpers
         foreach ($choices as $choice) {
             if (is_array($choice) && isset($choice['value'], $choice['text'])) {
                 $value = $choice['value'];
-                $displayValues = $this->extractLocalizedTexts($choice, $surveyConfiguration);
+                $displayValues = $this->extractLocalizedTexts($choice);
             } elseif (is_string($choice) || is_int($choice)) {
                 $value = $choice;
                 $displayValues = [];
@@ -198,16 +190,18 @@ trait ParserHelpers
 
     /**
      * Concat a combination of localized strings and normal ones
-     * @param SurveyConfiguration $surveyConfiguration
+     * @param array<string> $titles
      * @param (array<string, string>|string)[] $variables
      * @return array<string, string>
      */
-    private function arrayFormat(SurveyConfiguration $surveyConfiguration, array|string ...$variables): array
+    private function arrayFormat(array $titles, array|string ...$variables): array
     {
+        $locales = array_keys($titles);
+
         $result = [];
-        foreach ($surveyConfiguration->locales as $locale) {
+        foreach ($locales as $locale) {
             $result[$locale] = '';
-            foreach ($variables as $variable) {
+            foreach ([$titles, ...$variables] as $variable) {
                 if (is_array($variable)) {
                     $result[$locale] .= $variable[$locale] ?? $variable['default'];
                 } else {
