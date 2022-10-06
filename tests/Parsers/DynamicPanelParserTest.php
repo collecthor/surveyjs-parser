@@ -126,6 +126,6 @@ final class DynamicPanelParserTest extends TestCase
         $parser = new DynamicPanelParser(['default' => 'row']);
 
         $result = toArray($parser->parse($rootParser, $questionConfig, $surveyConfig));
-        self::assertSame("question2 row 0", $result[0]->getTitle());
+        self::assertSame("question1 row 0 question2", $result[0]->getTitle());
     }
 }

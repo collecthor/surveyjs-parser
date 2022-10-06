@@ -30,7 +30,11 @@ trait ParserHelpers
             return;
         }
 
-        $postfixes = $this->extractLocalizedTexts($questionConfig, $postfixField);
+        $defaultPostfixes = [
+            'default' => $defaultPostfix,
+        ];
+
+        $postfixes = $this->extractLocalizedTexts($questionConfig, $postfixField, $defaultPostfixes);
 
         $titles = [];
         foreach ($this->extractTitles($questionConfig) as $locale => $title) {
@@ -50,7 +54,9 @@ trait ParserHelpers
      */
     private function extractTitles(array $config): array
     {
-        return $this->extractLocalizedTexts($config, 'title');
+        return $this->extractLocalizedTexts($config, 'title', [
+            'default' => $this->extractName($config)
+        ]);
     }
 
     /**
