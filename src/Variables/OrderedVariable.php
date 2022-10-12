@@ -8,7 +8,6 @@ use Collecthor\DataInterfaces\ClosedVariableInterface;
 use Collecthor\DataInterfaces\Measure;
 use Collecthor\DataInterfaces\RecordInterface;
 use Collecthor\DataInterfaces\StringValueInterface;
-use Collecthor\DataInterfaces\ValueInterface;
 use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\DataInterfaces\ValueSetInterface;
 use Collecthor\SurveyjsParser\Traits\GetName;
@@ -58,7 +57,7 @@ final class OrderedVariable implements ClosedVariableInterface
         return array_values($this->valueMap);
     }
 
-    public function getValue(RecordInterface $record): ValueInterface|ValueSetInterface
+    public function getValue(RecordInterface $record): InvalidValue | ValueSetInterface
     {
         $rawValues = $record->getDataValue($this->dataPath);
         if (!is_array($rawValues)) {
