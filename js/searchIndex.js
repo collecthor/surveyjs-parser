@@ -896,6 +896,21 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-StringValueOption.html#property_displayValues"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\SystemMissingValue",
+            "name": "SystemMissingValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-SystemMissingValue.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\SystemMissingValue\u003A\u003AisSystemMissing\u0028\u0029",
+            "name": "isSystemMissing",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-SystemMissingValue.html#method_isSystemMissing"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\SystemMissingValue\u003A\u003AgetRawValue\u0028\u0029",
+            "name": "getRawValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-SystemMissingValue.html#method_getRawValue"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\ValueSet",
             "name": "ValueSet",
             "summary": "",
