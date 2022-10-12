@@ -152,7 +152,7 @@ class SurveyParser implements SurveyParserInterface
      */
     private function parsePage(array $structure, SurveyConfiguration $surveyConfiguration): iterable
     {
-        foreach ($structure['elements'] as $element) {
+        foreach ($structure['elements'] ?? [] as $element) {
             yield from $this->parseElement($element, $surveyConfiguration);
         }
     }
