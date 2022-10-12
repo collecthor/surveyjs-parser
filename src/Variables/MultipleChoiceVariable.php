@@ -16,6 +16,7 @@ use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
 use Collecthor\SurveyjsParser\Values\StringValue;
+use Collecthor\SurveyjsParser\Values\SystemMissingValue;
 use Collecthor\SurveyjsParser\Values\ValueSet;
 
 class MultipleChoiceVariable implements ClosedVariableInterface
@@ -61,7 +62,9 @@ class MultipleChoiceVariable implements ClosedVariableInterface
     public function getValue(RecordInterface $record): ValueInterface|ValueSetInterface
     {
         $rawValues = $record->getDataValue($this->dataPath);
-        if (!is_array($rawValues)) {
+        if ($rawValues === null) {
+            return new SystemMissingValue();
+        } elseif (!is_array($rawValues)) {
             return new InvalidValue($rawValues);
         }
 
