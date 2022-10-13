@@ -90,7 +90,7 @@ trait ParserHelpers
         }
 
         if (is_array($config[$field])) {
-            $result = [];
+            $result = $defaults;
             foreach ($config[$field] as $locale => $data) {
                 if (!is_array($data)) {
                     $result[$locale] = (string) $data;
