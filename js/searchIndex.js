@@ -206,6 +206,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractName"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AextractOptionalName\u0028\u0029",
+            "name": "extractOptionalName",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractOptionalName"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AextractOptionalBoolean\u0028\u0029",
             "name": "extractOptionalBoolean",
             "summary": "",
