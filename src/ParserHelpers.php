@@ -122,7 +122,7 @@ trait ParserHelpers
     /**
      * @param array<string, mixed> $config
      * @param string $key
-     * @return array<mixed>
+     * @return array<string, mixed>|null
      */
     private function extractOptionalArray(array $config, string $key): array|null
     {

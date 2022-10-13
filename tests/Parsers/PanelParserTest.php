@@ -36,13 +36,6 @@ final class PanelParserTest extends TestCase
         toArray($parser->parse($parent, ['elements' => $elements], $config));
     }
 
-    public function testMissingElements(): void
-    {
-        $parser = new PanelParser();
-        $this->expectException(\InvalidArgumentException::class);
-        toArray($parser->parse($parser, ['a' => 'b'], new SurveyConfiguration()));
-    }
-
     public function testInvalidElements(): void
     {
         $parser = new PanelParser();
