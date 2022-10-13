@@ -196,6 +196,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractArray"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AextractOptionalArray\u0028\u0029",
+            "name": "extractOptionalArray",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractOptionalArray"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AextractName\u0028\u0029",
             "name": "extractName",
             "summary": "",
@@ -206,9 +211,14 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractOptionalBoolean"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AextractOptionalInteger\u0028\u0029",
+            "name": "extractOptionalInteger",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractOptionalInteger"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AextractChoices\u0028\u0029",
             "name": "extractChoices",
-            "summary": "",
+            "summary": "We\u0020use\u0020a\u0020mixed\u0020type\u0020here\u003B\u0020since\u0020we\u0027re\u0020parsing\u0020user\u0020data.",
             "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractChoices"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AarrayFormat\u0028\u0029",
