@@ -213,7 +213,10 @@ trait ParserHelpers
         foreach ($choices as $choice) {
             if (is_array($choice) && isset($choice['value'])) {
                 $value = $choice['value'];
-                $displayValues = $this->extractLocalizedTexts($choice, 'text', ['default' => $choice['value']]);
+                if (!is_scalar($value)) {
+                    throw new \InvalidArgumentException('Values must be scalar, got: ' . print_r($choice, true));
+                }
+                $displayValues = $this->extractLocalizedTexts($choice, 'text', ['default' => (string) $value]);
             } elseif (is_string($choice) || is_int($choice)) {
                 $value = $choice;
                 $displayValues = [];
@@ -225,10 +228,8 @@ trait ParserHelpers
 
             if (is_int($value)) {
                 $result[] = new IntegerValueOption($value, $displayValues);
-            } elseif (is_scalar($value)) {
-                $result[] = new StringValueOption((string) $value, $displayValues);
             } else {
-                throw new \InvalidArgumentException('Values must be scalar, got: ' . print_r($choice, true));
+                $result[] = new StringValueOption((string) $value, $displayValues);
             }
         }
 
