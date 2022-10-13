@@ -32,7 +32,7 @@ final class RatingParser implements ElementParserInterface
                     $texts = $this->extractLocalizedTexts($value);
                     $value = $value['value'];
                 }
-                $answers[] = new StringValueOption($value, $texts ?? [ 'default' => (string) $value]);
+                $answers[] = new StringValueOption((string) $value, $texts ?? [ 'default' => (string) $value]);
             }
         } else {
             /** @var int $rateMin */
