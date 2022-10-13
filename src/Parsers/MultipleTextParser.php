@@ -24,7 +24,7 @@ final class MultipleTextParser implements ElementParserInterface
                 continue;
             }
 
-            $fullPath = [...$dataPrefix, $this->extractValueName($questionConfig), $this->extractName($item)];
+            $fullPath = [...$dataPrefix, $this->extractValueName($questionConfig), $this->extractOptionalName($item)];
             $itemName = implode('.', $fullPath);
             if (in_array($itemName, $itemNames, true)) {
                 throw new \RuntimeException("Duplicate question code: {$itemName}");
