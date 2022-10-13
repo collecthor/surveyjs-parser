@@ -55,7 +55,7 @@ trait ParserHelpers
     private function extractTitles(array $config): array
     {
         return $this->extractLocalizedTexts($config, 'title', [
-            'default' => $this->extractName($config)
+            'default' => $this->extractOptionalName($config)
         ]);
     }
 
@@ -146,6 +146,22 @@ trait ParserHelpers
             throw new InvalidArgumentException("Expected to find a string at key `name`, inside: " . print_r($config, true));
         }
         return $config['name'];
+    }
+
+    /**
+     * @param array<mixed> $config
+     * @return string
+     * @throws InvalidArgumentException
+     */
+    private function extractOptionalName(array $config): string
+    {
+        if (isset($config['name']) && !is_string($config['name'])) {
+            throw new InvalidArgumentException("Expected to find a string at key `name`, inside: " . print_r($config, true));
+        } elseif (!isset($config['name']) && isset($config['title']) && is_scalar($config['title'])) {
+            return (string) $config['title'];
+        }
+
+        return $config['name'] ?? "";
     }
 
     /**
