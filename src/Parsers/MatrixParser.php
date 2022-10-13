@@ -43,11 +43,11 @@ final class MatrixParser implements ElementParserInterface
                 if ($row === []) {
                     continue;
                 }
-                if (!isset($row['value']) || !is_string($row['value'])) {
-                    throw new \InvalidArgumentException("Matrix rows MUST contain a 'value' key with a string value");
+                if (!isset($row['value']) || !is_scalar($row['value'])) {
+                    throw new \InvalidArgumentException("Matrix rows MUST contain a 'value' key with a scalar value");
                 }
 
-                $rowTexts = $this->extractLocalizedTexts($row, defaults: ['default' => $row['value']]);
+                $rowTexts = $this->extractLocalizedTexts($row, defaults: ['default' => (string) $row['value']]);
 
                 yield new SingleChoiceVariable(
                     "{$valueName}.{$row['value']}",
