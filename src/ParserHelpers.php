@@ -38,7 +38,7 @@ trait ParserHelpers
 
         $titles = [];
         foreach ($this->extractTitles($questionConfig) as $locale => $title) {
-            $titles[$locale] = $title . " - " . $postfixes[$locale];
+            $titles[$locale] = $title . " - " . ($postfixes[$locale] ?? $postfixes['default']);
         }
 
 
@@ -118,6 +118,23 @@ trait ParserHelpers
 
         return $config[$key];
     }
+
+    /**
+     * @param array<string, mixed> $config
+     * @param string $key
+     * @return array<mixed>
+     */
+    private function extractOptionalArray(array $config, string $key): array|null
+    {
+        if (!isset($config[$key])) {
+            return null;
+        }
+        if (!is_array($config[$key])) {
+            throw new InvalidArgumentException("Expected to find an array at key $key, inside: " . print_r($config, true));
+        }
+
+        return $config[$key];
+    }
     /**
      * @param array<mixed> $config
      * @return string
@@ -149,23 +166,43 @@ trait ParserHelpers
     }
 
     /**
-     * @param array<mixed>  $choices
-     * @return non-empty-list<ValueOptionInterface>
+     * @param array<string, mixed> $config
      */
-    private function extractChoices(array $choices): array
+    private function extractOptionalInteger(array $config, string $key): int|null
     {
-        if (!array_is_list($choices) || $choices === []) {
-            throw new \InvalidArgumentException("Choices must be a non empty list");
+        if (!isset($config[$key])) {
+            return null;
+        }
+
+        if (is_int($config[$key])) {
+            return $config[$key];
+        }
+        throw new InvalidArgumentException("Key $key in array is expected to be integer or null, got: " . print_r($config, true));
+    }
+
+    /**
+     * We use a mixed type here; since we're parsing user data.
+     * We expect / hope for a list, but might get anything.
+     * @return list<ValueOptionInterface>
+     */
+    private function extractChoices(mixed $choices): array
+    {
+        if ($choices === null) {
+            return [];
+        } elseif (!is_array($choices) || !array_is_list($choices)) {
+            throw new \InvalidArgumentException("Choices must be a list");
         }
         /** @var ValueOptionInterface[] $result */
         $result = [];
         foreach ($choices as $choice) {
-            if (is_array($choice) && isset($choice['value'], $choice['text'])) {
+            if (is_array($choice) && isset($choice['value'])) {
                 $value = $choice['value'];
-                $displayValues = $this->extractLocalizedTexts($choice);
+                $displayValues = $this->extractLocalizedTexts($choice, 'text', ['default' => $choice['value']]);
             } elseif (is_string($choice) || is_int($choice)) {
                 $value = $choice;
                 $displayValues = [];
+            } elseif ($choice === []) {
+                continue;
             } else {
                 throw new \InvalidArgumentException("Each choice must be a string or int or an array with keys value and text");
             }

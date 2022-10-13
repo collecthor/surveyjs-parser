@@ -25,7 +25,7 @@ final class MatrixDynamicParser implements ElementParserInterface
     {
         /** @var non-empty-array<int, ValueOptionInterface> $answers */
         $answers = [];
-        foreach ((array)($questionConfig['choices'] ?? []) as $answer) {
+        foreach ($this->extractOptionalArray($questionConfig, 'choices') ?? [] as $answer) {
             if (is_scalar($answer)) {
                 $answer = [
                     'value' => $answer,
@@ -47,7 +47,7 @@ final class MatrixDynamicParser implements ElementParserInterface
             for ($r = 0; $r < $rowLimit; $r++) {
                 $rowConfig = $column;
                 $rowConfig['type'] = $column['cellType'] ?? $questionConfig['cellType'] ?? 'dropdown';
-                $rowConfig['choices'] = $column['choices'] ?? $answers;
+                $rowConfig['choices'] = $this->extractOptionalArray($column, 'choices') ?? $answers;
                 $rowConfig['title'] = $this->arrayFormat($questionTitles, ' ', $columnName, ' ', $this->rowLabels, " $r");
                 $rowConfig['valueName'] = $columnName;
                 yield from $root->parse($root, $rowConfig, $surveyConfiguration, [...$dataPrefix, $valueName, (string)$r]);

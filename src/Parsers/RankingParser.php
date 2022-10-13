@@ -17,8 +17,7 @@ final class RankingParser implements ElementParserInterface
     {
         $titles = $this->extractTitles($questionConfig);
         $valueName = $this->extractValueName($questionConfig);
-        /** @var array{choices: list<string>|array<string, array<string, string>>} $questionConfig */
-        $choices = $this->extractChoices($questionConfig['choices']);
+        $choices = $this->extractChoices($this->extractOptionalArray($questionConfig, 'choices'));
 
         for ($i = 0; $i < count($choices); $i++) {
             yield new SingleChoiceVariable(
