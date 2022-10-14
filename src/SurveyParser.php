@@ -20,6 +20,7 @@ use Collecthor\SurveyjsParser\Parsers\RankingParser;
 use Collecthor\SurveyjsParser\Parsers\RatingParser;
 use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
+use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 
 class SurveyParser implements SurveyParserInterface
 {
@@ -174,6 +175,19 @@ class SurveyParser implements SurveyParserInterface
             foreach ($structure['pages'] as $page) {
                 foreach ($this->parsePage($page, $surveyConfiguration) as $variable) {
                     $variables[] = $variable;
+                }
+            }
+        }
+
+        /**
+         * Parse calculated values
+         */
+        if (isset($structure['calculatedValues']) && is_array($structure['calculatedValues'])) {
+            foreach ($structure['calculatedValues'] ?? [] as $calculatedValue) {
+                if (isset($calculatedValue['includeIntoResult'], $calculatedValue['name'])
+                    && $calculatedValue['includeIntoResult'] === true && is_string($calculatedValue['name'])
+                ) {
+                    $variables[] = new OpenTextVariable($calculatedValue['name'], [], [$calculatedValue['name']]);
                 }
             }
         }
