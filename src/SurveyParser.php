@@ -198,7 +198,7 @@ class SurveyParser implements SurveyParserInterface
     public function parseJson(string $json): VariableSetInterface
     {
         $decoded = json_decode($json, true, JSON_THROW_ON_ERROR);
-        if (!is_array($decoded)) {
+        if (!is_array($decoded) || array_is_list($decoded)) {
             throw new \InvalidArgumentException("JSON string is not an object");
         }
         return $this->parseSurveyStructure($decoded);

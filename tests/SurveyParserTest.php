@@ -27,6 +27,10 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\Parsers\MatrixDynamicParser
  * @uses \Collecthor\SurveyjsParser\Parsers\TextQuestionParser
  * @uses \Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser
+ * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
+ * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
+ * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
+ * @uses \Collecthor\SurveyjsParser\Values\StringValue
  */
 class SurveyParserTest extends TestCase
 {
@@ -39,22 +43,21 @@ class SurveyParserTest extends TestCase
         foreach (is_array($files) ? $files : [] as $fileName) {
             $contents = file_get_contents($fileName);
             if (is_string($contents)) {
-                yield [json_decode($contents, true)];
+                yield [$contents];
             }
         }
     }
     /**
-     * @coversNothing
      * @dataProvider sampleProvider
-     * @param array<string, mixed> $surveyConfig
      */
-    public function testSamples(array $surveyConfig): void
+    public function testSamples(string $surveyJson): void
     {
         $parser = new SurveyParser();
-        $variableSet = $parser->parseSurveyStructure($surveyConfig);
+        $variableSet = $parser->parseJson($surveyJson);
         self::assertInstanceOf(VariableSet::class, $variableSet);
+        /** @var array{testConfig?:array{variableCount: int, samples?: list<array{data: array<string, mixed>, assertions: list<array{expected: mixed, variable: string}>}>}} $surveyConfig */
+        $surveyConfig = json_decode($surveyJson, true);
         if (isset($surveyConfig['testConfig'])) {
-            /** @var array{variableCount: int, samples?: list<array{data: array<string, mixed>, assertions: list<array{expected: mixed, variable: string}>}>} $testConfig */
             $testConfig = $surveyConfig['testConfig'];
             self::assertCount($testConfig['variableCount'], [...$variableSet->getVariables()]);
             if (isset($testConfig['samples'])) {
@@ -74,6 +77,13 @@ class SurveyParserTest extends TestCase
                 }
             }
         }
+    }
+
+    public function testInvalidJsonData(): void
+    {
+        $parser = new SurveyParser();
+        self::expectException(\InvalidArgumentException::class);
+        $parser->parseJson('[1 ,5]');
     }
 
     public function testParseEmptySurvey(): void
