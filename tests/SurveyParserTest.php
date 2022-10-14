@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests;
 
+use Collecthor\DataInterfaces\ValueInterface;
+use Collecthor\SurveyjsParser\ArrayDataRecord;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\SurveyParser;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
@@ -25,6 +27,10 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\Parsers\MatrixDynamicParser
  * @uses \Collecthor\SurveyjsParser\Parsers\TextQuestionParser
  * @uses \Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser
+ * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
+ * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
+ * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
+ * @uses \Collecthor\SurveyjsParser\Values\StringValue
  */
 class SurveyParserTest extends TestCase
 {
@@ -33,24 +39,51 @@ class SurveyParserTest extends TestCase
      */
     public function sampleProvider(): iterable
     {
-        $files = glob(__DIR__ . '/samples/*.json');
+        $files = glob(__DIR__ . '/support/samples/*.json');
         foreach (is_array($files) ? $files : [] as $fileName) {
             $contents = file_get_contents($fileName);
             if (is_string($contents)) {
-                yield [json_decode($contents, true)];
+                yield [$contents];
             }
         }
     }
     /**
-     * @coversNothing
      * @dataProvider sampleProvider
-     * @param array<string, mixed> $surveyConfig
      */
-    public function testSamples(array $surveyConfig): void
+    public function testSamples(string $surveyJson): void
     {
         $parser = new SurveyParser();
-        $variableSet = $parser->parseSurveyStructure($surveyConfig);
+        $variableSet = $parser->parseJson($surveyJson);
         self::assertInstanceOf(VariableSet::class, $variableSet);
+        /** @var array{testConfig?:array{variableCount: int, samples?: list<array{data: array<string, mixed>, assertions: list<array{expected: mixed, variable: string}>}>}} $surveyConfig */
+        $surveyConfig = json_decode($surveyJson, true);
+        if (isset($surveyConfig['testConfig'])) {
+            $testConfig = $surveyConfig['testConfig'];
+            self::assertCount($testConfig['variableCount'], [...$variableSet->getVariables()]);
+            if (isset($testConfig['samples'])) {
+                foreach ($testConfig['samples'] as $sample) {
+                    $data = new ArrayDataRecord($sample['data']);
+                    foreach ($sample['assertions'] as $assertion) {
+                        $value = $variableSet->getVariable($assertion['variable'])->getValue($data);
+                        if ($value instanceof ValueInterface) {
+                            self::assertSame(
+                                $assertion['expected'],
+                                $value->getRawValue()
+                            );
+                        } else {
+                            throw new \Exception('Value sets not supported yet by this test');
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public function testInvalidJsonData(): void
+    {
+        $parser = new SurveyParser();
+        self::expectException(\InvalidArgumentException::class);
+        $parser->parseJson('[1 ,5]');
     }
 
     public function testParseEmptySurvey(): void

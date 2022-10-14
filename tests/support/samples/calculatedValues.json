@@ -1,0 +1,23 @@
+{
+  "calculatedValues": [
+    {
+      "name": "var1",
+      "expression": "4 + 5",
+      "includeIntoResult": true
+    }
+  ],
+
+  "testConfig": {
+    "variableCount": 1,
+    "samples": [
+      {
+        "data": {
+          "var1": 9
+        },
+        "assertions": [
+          {"variable": "var1", "expected": "9"}
+        ]
+      }
+    ]
+  }
+}
