@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests;
 
+use Collecthor\DataInterfaces\ValueInterface;
+use Collecthor\SurveyjsParser\ArrayDataRecord;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\SurveyParser;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
@@ -33,7 +35,7 @@ class SurveyParserTest extends TestCase
      */
     public function sampleProvider(): iterable
     {
-        $files = glob(__DIR__ . '/samples/*.json');
+        $files = glob(__DIR__ . '/support/samples/*.json');
         foreach (is_array($files) ? $files : [] as $fileName) {
             $contents = file_get_contents($fileName);
             if (is_string($contents)) {
@@ -51,6 +53,27 @@ class SurveyParserTest extends TestCase
         $parser = new SurveyParser();
         $variableSet = $parser->parseSurveyStructure($surveyConfig);
         self::assertInstanceOf(VariableSet::class, $variableSet);
+        if (isset($surveyConfig['testConfig'])) {
+            /** @var array{variableCount: int, samples?: list<array{data: array<string, mixed>, assertions: list<array{expected: mixed, variable: string}>}>} $testConfig */
+            $testConfig = $surveyConfig['testConfig'];
+            self::assertCount($testConfig['variableCount'], [...$variableSet->getVariables()]);
+            if (isset($testConfig['samples'])) {
+                foreach ($testConfig['samples'] as $sample) {
+                    $data = new ArrayDataRecord($sample['data']);
+                    foreach ($sample['assertions'] as $assertion) {
+                        $value = $variableSet->getVariable($assertion['variable'])->getValue($data);
+                        if ($value instanceof ValueInterface) {
+                            self::assertSame(
+                                $assertion['expected'],
+                                $value->getRawValue()
+                            );
+                        } else {
+                            throw new \Exception('Value sets not supported yet by this test');
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public function testParseEmptySurvey(): void
