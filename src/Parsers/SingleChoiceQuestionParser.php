@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Parsers;
 
+use Collecthor\DataInterfaces\VariableSetInterface;
+use Collecthor\SurveyjsParser\DeferredVariable;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
@@ -36,7 +38,15 @@ class SingleChoiceQuestionParser implements ElementParserInterface
             $choices[] = new StringValueOption('other', $this->extractLocalizedTexts($questionConfig, 'otherText'));
         }
 
-        yield new SingleChoiceVariable($id, $titles, $choices, $dataPath, $questionConfig);
+        // choicesFromQuestion 
+        if (isset($questionConfig['choicesFromQuestion'])) {
+            yield new DeferredVariable($id, 
+                fn(VariableSetInterface $set) => yield new SingleChoiceVariable($id, $titles, $set->getVariable($id)->getChoices(), $dataPath, $questionConfig),
+            );
+        } else {
+
+            yield new SingleChoiceVariable($id, $titles, $choices, $dataPath, $questionConfig);
+        }
         yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }
