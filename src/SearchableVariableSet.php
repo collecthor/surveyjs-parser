@@ -3,13 +3,12 @@
 namespace Collecthor\SurveyjsParser;
 
 use Collecthor\DataInterfaces\VariableInterface;
-use Collecthor\DataInterfaces\VariableSetInterface;
 use InvalidArgumentException;
 
 final class SearchableVariableSet 
 {
     /**
-     * @var array<string, VariableInterface|DeferredVarialbe>
+     * @var array<string, VariableInterface|DeferredVariable>
      */
     private array $variables = [];
 

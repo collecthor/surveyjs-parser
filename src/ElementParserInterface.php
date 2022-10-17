@@ -12,7 +12,7 @@ interface ElementParserInterface
      * @param ElementParserInterface $root This allows an element parser to parse subtypes that it itself doesn't know.
      * @phpstan-param non-empty-array<string, mixed> $questionConfig
      * @param list<string> $dataPrefix
-     * @return iterable<VariableInterface>
+     * @return iterable<VariableInterface | DeferredVariable>
      */
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable;
 }
