@@ -8,6 +8,7 @@ use Collecthor\DataInterfaces\ValueInterface;
 use Collecthor\SurveyjsParser\ArrayDataRecord;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\SurveyParser;
+use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use Collecthor\SurveyjsParser\VariableSet;
@@ -203,7 +204,7 @@ class SurveyParserTest extends TestCase
                             "choicesFromQuestion" => "question3"
                         ],
                         [
-                            "type" => "radiogroup",
+                            "type" => "checkbox",
                             "name" => "question6",
                             "choicesFromQuestion" => "question5",
                         ],
@@ -236,8 +237,8 @@ class SurveyParserTest extends TestCase
         self::assertSame('item3.3', $options[2]->getRawValue());
 
         $question6 = $variables->getVariable('question6');
-        self::assertInstanceOf(SingleChoiceVariable::class, $question6);
-        /** @var SingleChoiceVariable $question6 */
+        self::assertInstanceOf(MultipleChoiceVariable::class, $question6);
+        /** @var MultipleChoiceVariable $question6 */
 
         $options = $question6->getValueOptions();
         self::assertCount(3, $options);
