@@ -19,7 +19,6 @@ use PHPUnit\Framework\TestCase;
  * @uses \Collecthor\SurveyjsParser\Variables\NumericVariable
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  * @uses \Collecthor\SurveyjsParser\Variables\DeferredVariable
- * @package Collecthor\SurveyjsParser\Tests
  */
 final class ResolvableVariableSetTest extends TestCase
 {
@@ -75,7 +74,7 @@ final class ResolvableVariableSetTest extends TestCase
             self::assertTrue($topLevelResolved);
             return $result;
         };
-        
+
         $callback2 = function (ResolvableVariableSet $variables) use (&$topLevelResolved): VariableInterface {
             $topLevelResolved = true;
             return $variables->getVariable('toplevel');

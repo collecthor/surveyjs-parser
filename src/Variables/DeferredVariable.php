@@ -13,12 +13,11 @@ use ReflectionNamedType;
 
 /**
  * @internal
- * @package Collecthor\SurveyjsParser
  */
 final class DeferredVariable
 {
     private Closure $closure;
-    
+
     public function __construct(private string $name, Closure $closure)
     {
         $reflection = new ReflectionFunction($closure);
