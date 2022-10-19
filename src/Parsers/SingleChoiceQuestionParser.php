@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Parsers;
 
 use Collecthor\DataInterfaces\ClosedVariableInterface;
-use Collecthor\DataInterfaces\VariableSetInterface;
+use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
+use Collecthor\SurveyjsParser\ResolvableVariableSet;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
@@ -55,14 +56,14 @@ class SingleChoiceQuestionParser implements ElementParserInterface
         if (isset($questionConfig['choicesFromQuestion']) && is_string($questionConfig['choicesFromQuestion'])) {
             yield new DeferredVariable(
                 $id,
-                function (VariableSetInterface $set) use ($id, $titles, $dataPath, $questionConfig) {
+                function (ResolvableVariableSet $set) use ($id, $titles, $dataPath, $questionConfig): VariableInterface {
                     /** @var ClosedVariableInterface $variable */
                     $variable = $set->getVariable($questionConfig['choicesFromQuestion']);
                     $options = $variable->getValueOptions();
                     if (count($options) === 0) {
                         throw new InvalidArgumentException("Options of variable {$questionConfig['choicesFromQuestion']} are empty, parsing {$id} failed");
                     }
-                    yield new SingleChoiceVariable($id, $titles, $options, $dataPath, $questionConfig);
+                    return new SingleChoiceVariable($id, $titles, $options, $dataPath, $questionConfig);
                 },
             );
         } else {
