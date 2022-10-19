@@ -20,6 +20,7 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
  * @uses \Collecthor\SurveyjsParser\ParserHelpers
  * @uses \Collecthor\SurveyjsParser\ParserLocalizer
+ * @uses \Collecthor\SurveyjsParser\ResolvableVariableSet
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  * @uses \Collecthor\SurveyjsParser\Parsers\BooleanParser
  * @uses \Collecthor\SurveyjsParser\Parsers\CommentParser

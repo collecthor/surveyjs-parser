@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser;
 
 use Collecthor\DataInterfaces\VariableInterface;
+use Collecthor\SurveyjsParser\Variables\DeferredVariable;
 
 interface ElementParserInterface
 {

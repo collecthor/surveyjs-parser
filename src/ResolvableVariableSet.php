@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Collecthor\SurveyjsParser;
 
 use Collecthor\DataInterfaces\VariableInterface;
+use Collecthor\SurveyjsParser\Variables\DeferredVariable;
 use InvalidArgumentException;
 
-final class SearchableVariableSet 
+final class ResolvableVariableSet
 {
     /**
      * @var array<string, VariableInterface|DeferredVariable>
@@ -19,7 +22,8 @@ final class SearchableVariableSet
         }
     }
 
-    public function getVariable(string $name): VariableInterface { 
+    public function getVariable(string $name): VariableInterface
+    {
         if (!isset($this->variables[$name])) {
             throw new InvalidArgumentException("Unknown variable name: $name");
         }
@@ -31,5 +35,4 @@ final class SearchableVariableSet
             return $variable;
         }
     }
-
 }

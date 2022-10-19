@@ -155,13 +155,14 @@ trait ParserHelpers
      */
     private function extractOptionalName(array $config): string
     {
-        if (isset($config['name']) && !is_string($config['name'])) {
+        if (isset($config['name']) && is_string($config['name'])) {
+            return $config['name'];
+        } elseif (isset($config['name']) && !is_string($config['name'])) {
             throw new InvalidArgumentException("Expected to find a string at key `name`, inside: " . print_r($config, true));
         } elseif (!isset($config['name']) && isset($config['title']) && is_scalar($config['title'])) {
             return (string) $config['title'];
         }
-
-        return $config['name'] ?? "";
+        return "";
     }
 
     /**

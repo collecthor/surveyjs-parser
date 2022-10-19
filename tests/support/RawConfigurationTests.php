@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\support;
 
+use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
@@ -34,7 +35,9 @@ trait RawConfigurationTests
             foreach ($parser->parse(new DummyParser(), $rawConfiguration, new SurveyConfiguration()) as $variable) {
                 // Test each key
                 foreach ($rawConfiguration as $key => $value) {
-                    self::assertSame($value, $variable->getRawConfigurationValue($key));
+                    if ($variable instanceof VariableInterface) {
+                        self::assertSame($value, $variable->getRawConfigurationValue($key));
+                    }
                 }
             }
         }

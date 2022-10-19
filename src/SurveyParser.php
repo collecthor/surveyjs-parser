@@ -20,6 +20,7 @@ use Collecthor\SurveyjsParser\Parsers\RankingParser;
 use Collecthor\SurveyjsParser\Parsers\RatingParser;
 use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
+use Collecthor\SurveyjsParser\Variables\DeferredVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 
 class SurveyParser implements SurveyParserInterface
@@ -137,7 +138,7 @@ class SurveyParser implements SurveyParserInterface
      * @phpstan-param array{type: string} $config
      * @param SurveyConfiguration $surveyConfiguration
      * @param list<string> $dataPrefix
-     * @return iterable<VariableInterface>
+     * @return iterable<VariableInterface|DeferredVariable>
      */
     private function parseElement(array $config, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
@@ -149,7 +150,7 @@ class SurveyParser implements SurveyParserInterface
     /**
      * @phpstan-param array{elements: non-empty-list<array{"type": string}>} $structure
      * @param SurveyConfiguration $surveyConfiguration
-     * @return iterable<VariableInterface>
+     * @return iterable<VariableInterface|DeferredVariable>
      */
     private function parsePage(array $structure, SurveyConfiguration $surveyConfiguration): iterable
     {
@@ -178,6 +179,7 @@ class SurveyParser implements SurveyParserInterface
                 }
             }
         }
+        $resolvable = new ResolvableVariableSet(...$variables);
 
         /**
          * Parse calculated values
@@ -192,7 +194,16 @@ class SurveyParser implements SurveyParserInterface
             }
         }
 
-        return new VariableSet(...$variables);
+        $resolvedVariables = [];
+        foreach ($variables as $variable) {
+            if ($variable instanceof DeferredVariable) {
+                $resolvedVariables[] = $variable->resolve($resolvable);
+            } else {
+                $resolvedVariables[] = $variable;
+            }
+        }
+
+        return new VariableSet(...$resolvedVariables);
     }
 
     public function parseJson(string $json): VariableSetInterface
