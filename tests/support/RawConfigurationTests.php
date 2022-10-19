@@ -33,11 +33,10 @@ trait RawConfigurationTests
             }
             // Test each resulting variable
             foreach ($parser->parse(new DummyParser(), $rawConfiguration, new SurveyConfiguration()) as $variable) {
+                self::assertInstanceOf(VariableInterface::class, $variable);
                 // Test each key
                 foreach ($rawConfiguration as $key => $value) {
-                    if ($variable instanceof VariableInterface) {
-                        self::assertSame($value, $variable->getRawConfigurationValue($key));
-                    }
+                    self::assertSame($value, $variable->getRawConfigurationValue($key));
                 }
             }
         }
