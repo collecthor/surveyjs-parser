@@ -21,17 +21,17 @@ final class DeferredVariableTest extends TestCase
 {
     public function testCreateDeferred(): void
     {
-        $createVariable = function (ResolvableVariableSet $variables): VariableInterface {
-            return new OpenTextVariable('var1', ['default' => 'var1'], ['var1'], );
-        };
+        $result = new OpenTextVariable('var1', ['default' => 'var1'], ['var1']);
+        $createVariable = static fn (ResolvableVariableSet $variables): VariableInterface => $result;
+
+
+        $variables = new ResolvableVariableSet();
 
         $deferred = new DeferredVariable('var1', $createVariable);
 
         self::assertSame('var1', $deferred->getName());
 
-        $variables = new ResolvableVariableSet();
-
-        self::assertInstanceOf(OpenTextVariable::class, $deferred->resolve($variables));
+        self::assertSame($result, $deferred->resolve($variables));
     }
 
     public function testCallbackReturnType(): void
