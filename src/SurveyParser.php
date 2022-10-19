@@ -20,6 +20,7 @@ use Collecthor\SurveyjsParser\Parsers\RankingParser;
 use Collecthor\SurveyjsParser\Parsers\RatingParser;
 use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
+use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 
 class SurveyParser implements SurveyParserInterface
 {
@@ -152,7 +153,7 @@ class SurveyParser implements SurveyParserInterface
      */
     private function parsePage(array $structure, SurveyConfiguration $surveyConfiguration): iterable
     {
-        foreach ($structure['elements'] as $element) {
+        foreach ($structure['elements'] ?? [] as $element) {
             yield from $this->parseElement($element, $surveyConfiguration);
         }
     }
@@ -178,13 +179,26 @@ class SurveyParser implements SurveyParserInterface
             }
         }
 
+        /**
+         * Parse calculated values
+         */
+        if (isset($structure['calculatedValues']) && is_array($structure['calculatedValues'])) {
+            foreach ($structure['calculatedValues'] ?? [] as $calculatedValue) {
+                if (isset($calculatedValue['includeIntoResult'], $calculatedValue['name'])
+                    && $calculatedValue['includeIntoResult'] === true && is_string($calculatedValue['name'])
+                ) {
+                    $variables[] = new OpenTextVariable($calculatedValue['name'], [], [$calculatedValue['name']]);
+                }
+            }
+        }
+
         return new VariableSet(...$variables);
     }
 
     public function parseJson(string $json): VariableSetInterface
     {
         $decoded = json_decode($json, true, JSON_THROW_ON_ERROR);
-        if (!is_array($decoded)) {
+        if (!is_array($decoded) || array_is_list($decoded)) {
             throw new \InvalidArgumentException("JSON string is not an object");
         }
         return $this->parseSurveyStructure($decoded);

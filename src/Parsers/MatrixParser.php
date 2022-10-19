@@ -17,26 +17,45 @@ final class MatrixParser implements ElementParserInterface
     {
         $titles = $this->extractTitles($questionConfig);
         $valueName = $this->extractValueName($questionConfig);
-        /** @var array{columns: list<string|array<string, string>>, rows: list<string|array<string, string>> } $questionConfig */
-        $answers = $this->extractChoices($questionConfig['columns']);
+        $answers = $this->extractChoices($questionConfig['columns'] ?? null);
+        if ($answers === []) {
+            throw new \InvalidArgumentException("Matrix questions must have columns");
+        }
 
-        /** @var array{value: string, text:string|array<string, string>} $rows */
-        $rows = $questionConfig['rows'];
-
-        foreach ($rows as $row) {
-            if (is_string($row)) {
-                $row = [
-                    'text' => $row,
-                    'value' => $row,
-                ];
-            }
-
+        /** @var list<string|array{value?: string, text?:string|array<string, string>}> $rows */
+        $rows = $questionConfig['rows'] ?? [];
+        if ($rows === []) {
+            // This is a matrix rendered as a single single choice variable
             yield new SingleChoiceVariable(
-                "{$valueName}.{$row['value']}",
-                $this->arrayFormat($titles, " - ", $row['text']),
+                "$valueName",
+                $titles,
                 $answers,
-                [...$dataPrefix, $valueName, $row['value']]
+                [...$dataPrefix, $valueName]
             );
+        } else {
+            foreach ($rows as $row) {
+                if (is_string($row)) {
+                    $row = [
+                        'value' => $row,
+                    ];
+                }
+
+                if ($row === []) {
+                    continue;
+                }
+                if (!isset($row['value']) || !is_scalar($row['value'])) {
+                    throw new \InvalidArgumentException("Matrix rows MUST contain a 'value' key with a scalar value");
+                }
+
+                $rowTexts = $this->extractLocalizedTexts($row, defaults: ['default' => (string) $row['value']]);
+
+                yield new SingleChoiceVariable(
+                    "{$valueName}.{$row['value']}",
+                    $this->arrayFormat($titles, " - ", $rowTexts),
+                    $answers,
+                    [...$dataPrefix, $valueName, $row['value']]
+                );
+            }
         }
     }
 }

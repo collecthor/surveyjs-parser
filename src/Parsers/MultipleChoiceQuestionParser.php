@@ -33,7 +33,9 @@ final class MultipleChoiceQuestionParser implements ElementParserInterface
             $choices[] = new StringValueOption('other', $this->extractLocalizedTexts($questionConfig, 'otherText'));
         }
 
-        yield new MultipleChoiceVariable($name, $titles, $choices, $dataPath, $questionConfig);
+        if ($choices !== []) {
+            yield new MultipleChoiceVariable($name, $titles, $choices, $dataPath, $questionConfig);
+        }
         yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }

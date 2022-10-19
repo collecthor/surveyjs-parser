@@ -21,8 +21,10 @@ final class OrderedVariableParser implements ElementParserInterface
 
         $titles = $this->extractTitles($questionConfig);
 
-        $choices = $this->extractChoices($this->extractArray($questionConfig, 'choices'));
+        $choices = $this->extractChoices($this->extractOptionalArray($questionConfig, 'choices'));
 
-        yield new OrderedVariable($name, $titles, $choices, $dataPath, $questionConfig);
+        if ($choices !== []) {
+            yield new OrderedVariable($name, $titles, $choices, $dataPath, $questionConfig);
+        }
     }
 }

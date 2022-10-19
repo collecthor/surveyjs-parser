@@ -32,7 +32,6 @@ final class SingleChoiceQuestionParserTest extends TestCase
      */
     public function badChoicesProvider(): iterable
     {
-        yield [['value' => 'abc']];
         yield [['text' => 'abc']];
         yield [['value' => 'abc', 'text' => 15]];
         yield [['value' => ['abc'], 'text' => 'ab4']];
@@ -150,7 +149,6 @@ final class SingleChoiceQuestionParserTest extends TestCase
     {
         $parser = new SingleChoiceQuestionParser();
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage("Choices must be a non empty list");
         toArray($parser->parse(new DummyParser(), [
             'name' => 'test',
         ], new SurveyConfiguration()));
