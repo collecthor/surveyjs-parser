@@ -9,7 +9,7 @@ trait GetRawConfiguration
     /**
      * @var array<string, mixed>
      */
-    private array $rawConfiguration;
+    private readonly array $rawConfiguration;
 
     public function getRawConfigurationValue(string $key): mixed
     {
