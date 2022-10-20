@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Tests\Variables;
 
 use Collecthor\DataInterfaces\Measure;
+use Collecthor\SurveyjsParser\ArrayDataRecord;
 use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
@@ -42,7 +43,24 @@ final class MultipleChoiceVariableTest extends TestCase
         ];
         $subject = new MultipleChoiceVariable('test', [], $valueOptions, ['path']);
 
-        $data = new ArrayRecord(['path' => ['test', 'bad data']], 1, new \DateTime(), new \DateTime());
+        $data = new ArrayDataRecord(['path' => ['test', 'bad data']]);
+
+        $foundValue = $subject->getValue($data);
+
+        self::assertInstanceOf(InvalidValue::class, $foundValue);
+    }
+
+    public function testGetInvalidValueType(): void
+    {
+        $valueOptions = [
+            new StringValueOption('test', ['en' => 'test', 'nl' => 'testnl']),
+            new StringValueOption('test2', ['en' => 'test-2', 'nl' => 'testnl2']),
+            new StringValueOption('test3', ['en' => 'test-3', 'nl' => 'testnl3']),
+            new StringValueOption('test4', ['en' => 'test-4', 'nl' => 'testnl4']),
+        ];
+        $subject = new MultipleChoiceVariable('test', [], $valueOptions, ['path']);
+
+        $data = new ArrayDataRecord(['path' => ['test', ['a' => 'b']]]);
 
         $foundValue = $subject->getValue($data);
 

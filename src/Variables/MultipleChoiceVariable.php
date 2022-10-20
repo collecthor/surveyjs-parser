@@ -71,8 +71,7 @@ class MultipleChoiceVariable implements ClosedVariableInterface
         $values = [];
 
         foreach ($rawValues as $value) {
-            /** @var string $value */
-            if (isset($this->valueMap[(string) $value])) {
+            if (is_scalar($value) && isset($this->valueMap[(string) $value])) {
                 $values[] = $this->valueMap[(string) $value];
             } else {
                 return new InvalidValue($rawValues);
