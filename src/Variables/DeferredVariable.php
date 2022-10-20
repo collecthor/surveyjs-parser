@@ -16,6 +16,9 @@ use ReflectionNamedType;
  */
 final class DeferredVariable
 {
+    /**
+     * @var \Closure((ResolvableVariableSet $variables): VariableInterface)
+     */
     private Closure $closure;
 
     public function __construct(private string $name, Closure $closure)
@@ -23,11 +26,14 @@ final class DeferredVariable
         $reflection = new ReflectionFunction($closure);
         $parameters = $reflection->getParameters();
         $returnType = $reflection->getReturnType();
-        if (!($parameters[0]->getType() instanceof ReflectionNamedType) || $parameters[0]->getType()->getName() !== 'Collecthor\SurveyjsParser\ResolvableVariableSet') {
+        if (count($parameters) !== 1) {
+            throw new InvalidArgumentException('Callback should have exactly one parameter');
+        }
+        if (!($parameters[0]->getType() instanceof ReflectionNamedType) || $parameters[0]->getType()->getName() !== ResolvableVariableSet::class) {
             throw new InvalidArgumentException('First callback parameter should be a ResolvableVariableSet');
         }
 
-        if (!($returnType instanceof ReflectionNamedType) || $returnType->getName() !== "Collecthor\DataInterfaces\VariableInterface") {
+        if (!($returnType instanceof ReflectionNamedType) || $returnType->getName() !== VariableInterface::class) {
             throw new InvalidArgumentException('Callback return type should be a VariableInterface.');
         }
 
@@ -41,8 +47,6 @@ final class DeferredVariable
 
     public function resolve(ResolvableVariableSet $variables): VariableInterface
     {
-        /** @var VariableInterface $result */
-        $result = ($this->closure)($variables);
-        return $result;
+        return ($this->closure)($variables);
     }
 }

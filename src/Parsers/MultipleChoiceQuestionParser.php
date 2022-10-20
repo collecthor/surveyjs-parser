@@ -13,7 +13,7 @@ use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\DeferredVariable;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
-use InvalidArgumentException;
+use ValueError;
 
 final class MultipleChoiceQuestionParser implements ElementParserInterface
 {
@@ -41,14 +41,14 @@ final class MultipleChoiceQuestionParser implements ElementParserInterface
         if (isset($questionConfig['choicesFromQuestion']) && is_string($questionConfig['choicesFromQuestion'])) {
             yield new DeferredVariable(
                 $name,
-                function (ResolvableVariableSet $set) use ($name, $titles, $dataPath, $questionConfig): VariableInterface {
-                    /** @var ClosedVariableInterface $variable */
+                static function (ResolvableVariableSet $set) use ($name, $titles, $dataPath, $questionConfig): VariableInterface {
                     $variable = $set->getVariable($questionConfig['choicesFromQuestion']);
-                    $options = $variable->getValueOptions();
-                    if (count($options) === 0) {
-                        throw new InvalidArgumentException("Options of variable {$questionConfig['choicesFromQuestion']} are empty, parsing {$name} failed");
+                    if ($variable instanceof ClosedVariableInterface) {
+                        $options = $variable->getValueOptions();
+                        return new MultipleChoiceVariable($name, $titles, $options, $dataPath, $questionConfig);
+                    } else {
+                        throw new ValueError("Question {$questionConfig['choicesFromQuestion']} does not implement ClosedQuestionInterface");
                     }
-                    return new MultipleChoiceVariable($name, $titles, $options, $dataPath, $questionConfig);
                 },
             );
         } else {
