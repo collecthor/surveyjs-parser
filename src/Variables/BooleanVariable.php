@@ -29,12 +29,12 @@ final class BooleanVariable implements ClosedVariableInterface
      * @param non-empty-list<string> $dataPath
      */
     public function __construct(
-        private string $name,
-        private array $titles,
+        private readonly string $name,
+        private readonly array $titles,
         private readonly array $trueLabels,
         private readonly array $falseLabels,
         private readonly array $dataPath,
-        private array $rawConfiguration = []
+        private readonly array $rawConfiguration = []
     ) {
     }
 

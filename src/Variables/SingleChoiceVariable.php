@@ -15,6 +15,7 @@ use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
 use Collecthor\SurveyjsParser\Values\StringValue;
+use InvalidArgumentException;
 
 class SingleChoiceVariable implements ClosedVariableInterface, JavascriptVariableInterface
 {
@@ -32,19 +33,17 @@ class SingleChoiceVariable implements ClosedVariableInterface, JavascriptVariabl
      * @param array<string, mixed> $rawConfiguration
      * @param non-empty-list<ValueOptionInterface> $valueOptions
      * @param non-empty-list<string> $dataPath
-
      */
     public function __construct(
-        string $name,
-        array $titles,
+        private readonly string $name,
+        private readonly array $titles,
         array $valueOptions,
         private readonly array $dataPath,
-        array $rawConfiguration = []
+        private readonly array $rawConfiguration = []
     ) {
-        $this->name = $name;
-        $this->titles = $titles;
-        $this->rawConfiguration = $rawConfiguration;
-
+        if (count($valueOptions) === 0) {
+            throw new InvalidArgumentException('ValueOptions must not be empty');
+        }
         foreach ($valueOptions as $valueOption) {
             $this->valueMap[(string) $valueOption->getRawValue()] = $valueOption;
         }

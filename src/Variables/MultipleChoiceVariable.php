@@ -18,6 +18,7 @@ use Collecthor\SurveyjsParser\Values\InvalidValue;
 use Collecthor\SurveyjsParser\Values\StringValue;
 use Collecthor\SurveyjsParser\Values\SystemMissingValue;
 use Collecthor\SurveyjsParser\Values\ValueSet;
+use InvalidArgumentException;
 
 class MultipleChoiceVariable implements ClosedVariableInterface
 {
@@ -34,25 +35,21 @@ class MultipleChoiceVariable implements ClosedVariableInterface
      * @param array<string, string> $titles
      * @param non-empty-list<ValueOptionInterface> $valueOptions
      * @param array<string, mixed> $rawConfiguration
+     * @param non-empty-list<string> $dataPath
      */
     public function __construct(
-        string $name,
-        array $titles,
+        private readonly string $name,
+        private readonly array $titles,
         array $valueOptions,
-        /**
-         * @phpstan-var non-empty-list<string>
-         */
-        private array $dataPath,
-        array $rawConfiguration = []
+        private readonly array $dataPath,
+        private readonly array $rawConfiguration = []
     ) {
-        $this->name = $name;
-
+        if (count($valueOptions) === 0) {
+            throw new InvalidArgumentException('ValueOptions must not be empty');
+        }
         foreach ($valueOptions as $valueOption) {
             $this->valueMap[(string) $valueOption->getRawValue()] = $valueOption;
         }
-
-        $this->titles = $titles;
-        $this->rawConfiguration = $rawConfiguration;
     }
 
     public function getValueOptions(): array
