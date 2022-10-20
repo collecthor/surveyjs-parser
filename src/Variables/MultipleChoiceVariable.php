@@ -24,9 +24,10 @@ class MultipleChoiceVariable implements ClosedVariableInterface
     use GetName, GetTitle, GetRawConfiguration;
 
     /**
-     * @var array<string, ValueOptionInterface>
+     * We can say this is non-empty, since valueoptions is non-empty, and this is a direct mapping from valueoptions
+     * @var non-empty-array<string, ValueOptionInterface>
      */
-    private array $valueMap = [];
+    private array $valueMap;
 
     /**
      * @param string $name
