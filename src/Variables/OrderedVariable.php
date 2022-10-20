@@ -42,9 +42,8 @@ final class OrderedVariable implements ClosedVariableInterface
         private readonly array $dataPath,
         private readonly array $rawConfiguration = []
     ) {
-        if (count($valueOptions) === 0) {
-            throw new InvalidArgumentException('ValueOptions must not be empty');
-        }
+        /* @phpstan-ignore-next-line */
+        assert(count($valueOptions) > 0, throw new InvalidArgumentException('ValueOptions must not be empty'));
         foreach ($valueOptions as $valueOption) {
             $this->valueMap[(string) $valueOption->getRawValue()] = $valueOption;
         }
