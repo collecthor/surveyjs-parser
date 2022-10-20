@@ -141,4 +141,25 @@ final class BooleanVariableTest extends TestCase
 
         self::assertInstanceOf(MissingBooleanValue::class, $value);
     }
+
+    public function testFallbackToDefaultLocale(): void
+    {
+        $subject = new BooleanVariable(
+            "test",
+            [],
+            [
+                "default" => "true",
+                "nl" => "waar",
+            ],
+            [
+                "default" => "false",
+                "nl" => "onwaar",
+            ],
+            ['path']
+        );
+
+        $record = new ArrayRecord(['path' => true], 1, new \DateTime(), new \DateTime());
+        self::assertSame("true", $subject->getDisplayValue($record)->getRawValue());
+        self::assertSame("true", $subject->getDisplayValue($record, 'fakeLocale')->getRawValue());
+    }
 }
