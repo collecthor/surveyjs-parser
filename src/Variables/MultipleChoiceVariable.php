@@ -18,40 +18,36 @@ use Collecthor\SurveyjsParser\Values\MissingStringValue;
 use Collecthor\SurveyjsParser\Values\StringValue;
 use Collecthor\SurveyjsParser\Values\SystemMissingValue;
 use Collecthor\SurveyjsParser\Values\ValueSet;
+use ValueError;
 
 class MultipleChoiceVariable implements ClosedVariableInterface
 {
     use GetName, GetTitle, GetRawConfiguration;
 
     /**
-     * @var array<string, ValueOptionInterface>
+     * We can say this is non-empty, since valueoptions is non-empty, and this is a direct mapping from valueoptions
+     * @var non-empty-array<string, ValueOptionInterface>
      */
-    private array $valueMap = [];
+    private array $valueMap;
 
     /**
      * @param string $name
      * @param array<string, string> $titles
-     * @param non-empty-list<ValueOptionInterface> $valueOptions
+     * @param list<ValueOptionInterface> $valueOptions
      * @param array<string, mixed> $rawConfiguration
+     * @param non-empty-list<string> $dataPath
      */
     public function __construct(
-        string $name,
-        array $titles,
+        private readonly string $name,
+        private readonly array $titles,
         array $valueOptions,
-        /**
-         * @phpstan-var non-empty-list<string>
-         */
-        private array $dataPath,
-        array $rawConfiguration = []
+        private readonly array $dataPath,
+        private readonly array $rawConfiguration = []
     ) {
-        $this->name = $name;
-
+        $this->checkValueOptions($valueOptions);
         foreach ($valueOptions as $valueOption) {
             $this->valueMap[(string) $valueOption->getRawValue()] = $valueOption;
         }
-
-        $this->titles = $titles;
-        $this->rawConfiguration = $rawConfiguration;
     }
 
     public function getValueOptions(): array
@@ -95,5 +91,16 @@ class MultipleChoiceVariable implements ClosedVariableInterface
     public function getMeasure(): Measure
     {
         return Measure::Nominal;
+    }
+
+    /**
+     * @phpstan-assert non-empty-list<ValueOptionInterface> $valueOptions
+     * @param list<ValueOptionInterface> $valueOptions
+     */
+    private function checkValueOptions(array $valueOptions): void
+    {
+        if (count($valueOptions) < 1) {
+            throw new ValueError("Valueoptions must not be empty");
+        }
     }
 }
