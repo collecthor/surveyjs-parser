@@ -16,7 +16,8 @@ use Collecthor\SurveyjsParser\Traits\GetTitle;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
 use Collecthor\SurveyjsParser\Values\StringValue;
 use Collecthor\SurveyjsParser\Values\ValueSet;
-use InvalidArgumentException;
+use ValueError;
+use function count;
 
 final class OrderedVariable implements ClosedVariableInterface
 {
@@ -31,7 +32,7 @@ final class OrderedVariable implements ClosedVariableInterface
     /**
      * @param string $name
      * @param array<string, string> $titles
-     * @param non-empty-list<ValueOptionInterface> $valueOptions
+     * @param list<ValueOptionInterface> $valueOptions
      * @param array<string, mixed> $rawConfiguration
      * @param non-empty-list<string> $dataPath
      */
@@ -42,8 +43,7 @@ final class OrderedVariable implements ClosedVariableInterface
         private readonly array $dataPath,
         private readonly array $rawConfiguration = []
     ) {
-        /* @phpstan-ignore-next-line */
-        assert(count($valueOptions) > 0, throw new InvalidArgumentException('ValueOptions must not be empty'));
+        $this->checkValueOptions($valueOptions);
         foreach ($valueOptions as $valueOption) {
             $this->valueMap[(string) $valueOption->getRawValue()] = $valueOption;
         }
@@ -87,5 +87,16 @@ final class OrderedVariable implements ClosedVariableInterface
     public function getMeasure(): Measure
     {
         return Measure::Nominal;
+    }
+
+    /**
+     * @phpstan-assert non-empty-list<ValueOptionInterface> $valueOptions
+     * @param list<ValueOptionInterface> $valueOptions
+     */
+    private function checkValueOptions(array $valueOptions): void
+    {
+        if (count($valueOptions) < 1) {
+            throw new ValueError("Valueoptions must not be empty");
+        }
     }
 }
