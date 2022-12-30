@@ -496,6 +496,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Parsers-TextQuestionParser.html#method_parse"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ResolvableVariableSet",
+            "name": "ResolvableVariableSet",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ResolvableVariableSet.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ResolvableVariableSet\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ResolvableVariableSet.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ResolvableVariableSet\u003A\u003AgetVariable\u0028\u0029",
+            "name": "getVariable",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ResolvableVariableSet.html#method_getVariable"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ResolvableVariableSet\u003A\u003A\u0024variables",
+            "name": "variables",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ResolvableVariableSet.html#property_variables"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyConfiguration",
             "name": "SurveyConfiguration",
             "summary": "Survey\u0020wide\u0020configuration\u0020settings\u0020that\u0020affect\u0020parsing\u0020of\u0020individual\u0020questions",
