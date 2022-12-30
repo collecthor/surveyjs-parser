@@ -189,7 +189,11 @@ class SurveyParser implements SurveyParserInterface
                 if (isset($calculatedValue['includeIntoResult'], $calculatedValue['name'])
                     && $calculatedValue['includeIntoResult'] === true && is_string($calculatedValue['name'])
                 ) {
-                    $variables[] = new OpenTextVariable($calculatedValue['name'], [], [$calculatedValue['name']]);
+                    $variables[] = new OpenTextVariable(
+                        $calculatedValue['name'],
+                        ['default' => $calculatedValue['name']],
+                        [$calculatedValue['name']]
+                    );
                 }
             }
         }

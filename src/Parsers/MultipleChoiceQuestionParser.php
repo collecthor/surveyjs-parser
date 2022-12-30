@@ -14,6 +14,7 @@ use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\DeferredVariable;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use ValueError;
+use function implode;
 
 final class MultipleChoiceQuestionParser implements ElementParserInterface
 {
@@ -23,7 +24,7 @@ final class MultipleChoiceQuestionParser implements ElementParserInterface
     {
         $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
 
-        $name = $this->extractName($questionConfig);
+        $name = implode(".", $dataPath);
 
         $titles = $this->extractTitles($questionConfig);
 

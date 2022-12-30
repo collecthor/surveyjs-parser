@@ -8,17 +8,17 @@ use Collecthor\DataInterfaces\ClosedVariableInterface;
 use Collecthor\DataInterfaces\Measure;
 use Collecthor\DataInterfaces\RecordInterface;
 use Collecthor\DataInterfaces\StringValueInterface;
-use Collecthor\DataInterfaces\ValueInterface;
 use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\DataInterfaces\ValueSetInterface;
 use Collecthor\SurveyjsParser\Traits\GetName;
 use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
+use Collecthor\SurveyjsParser\Values\MissingStringValue;
 use Collecthor\SurveyjsParser\Values\StringValue;
 use Collecthor\SurveyjsParser\Values\SystemMissingValue;
 use Collecthor\SurveyjsParser\Values\ValueSet;
-use InvalidArgumentException;
+use ValueError;
 
 class MultipleChoiceVariable implements ClosedVariableInterface
 {
@@ -33,7 +33,7 @@ class MultipleChoiceVariable implements ClosedVariableInterface
     /**
      * @param string $name
      * @param array<string, string> $titles
-     * @param non-empty-list<ValueOptionInterface> $valueOptions
+     * @param list<ValueOptionInterface> $valueOptions
      * @param array<string, mixed> $rawConfiguration
      * @param non-empty-list<string> $dataPath
      */
@@ -44,8 +44,7 @@ class MultipleChoiceVariable implements ClosedVariableInterface
         private readonly array $dataPath,
         private readonly array $rawConfiguration = []
     ) {
-        /* @phpstan-ignore-next-line */
-        assert(count($valueOptions) > 0, throw new InvalidArgumentException('ValueOptions must not be empty'));
+        $this->checkValueOptions($valueOptions);
         foreach ($valueOptions as $valueOption) {
             $this->valueMap[(string) $valueOption->getRawValue()] = $valueOption;
         }
@@ -56,7 +55,7 @@ class MultipleChoiceVariable implements ClosedVariableInterface
         return array_values($this->valueMap);
     }
 
-    public function getValue(RecordInterface $record): ValueInterface|ValueSetInterface
+    public function getValue(RecordInterface $record): SystemMissingValue|InvalidValue|ValueSetInterface
     {
         $rawValues = $record->getDataValue($this->dataPath);
         if ($rawValues === null) {
@@ -68,8 +67,7 @@ class MultipleChoiceVariable implements ClosedVariableInterface
         $values = [];
 
         foreach ($rawValues as $value) {
-            /** @var string $value */
-            if (isset($this->valueMap[(string) $value])) {
+            if (is_scalar($value) && isset($this->valueMap[(string) $value])) {
                 $values[] = $this->valueMap[(string) $value];
             } else {
                 return new InvalidValue($rawValues);
@@ -80,8 +78,10 @@ class MultipleChoiceVariable implements ClosedVariableInterface
 
     public function getDisplayValue(RecordInterface $record, ?string $locale = null): StringValueInterface
     {
-        /** @var ValueSetInterface $valueSet */
         $valueSet = $this->getValue($record);
+        if (!$valueSet instanceof ValueSetInterface) {
+            return new MissingStringValue((string) $valueSet->getRawValue(), $valueSet->isSystemMissing());
+        }
         $values = $valueSet->getValues();
 
         $displayValues = array_map(fn (ValueOptionInterface $val) => $val->getDisplayValue($locale), $values);
@@ -91,5 +91,16 @@ class MultipleChoiceVariable implements ClosedVariableInterface
     public function getMeasure(): Measure
     {
         return Measure::Nominal;
+    }
+
+    /**
+     * @phpstan-assert non-empty-list<ValueOptionInterface> $valueOptions
+     * @param list<ValueOptionInterface> $valueOptions
+     */
+    private function checkValueOptions(array $valueOptions): void
+    {
+        if (count($valueOptions) < 1) {
+            throw new ValueError("Valueoptions must not be empty");
+        }
     }
 }
