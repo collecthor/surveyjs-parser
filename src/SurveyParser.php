@@ -12,6 +12,7 @@ use Collecthor\SurveyjsParser\Parsers\DynamicPanelParser;
 use Collecthor\SurveyjsParser\Parsers\ImagePickerParser;
 use Collecthor\SurveyjsParser\Parsers\MatrixDynamicParser;
 use Collecthor\SurveyjsParser\Parsers\MatrixParser;
+use Collecthor\SurveyjsParser\Parsers\MultipleChoiceMatrixParser;
 use Collecthor\SurveyjsParser\Parsers\MultipleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\MultipleTextParser;
 use Collecthor\SurveyjsParser\Parsers\NoUISliderParser;
@@ -94,9 +95,12 @@ class SurveyParser implements SurveyParserInterface
         $matrixParser = new MatrixParser();
         $this->parsers['matrix'] = [$matrixParser];
 
+        $multipleChoiceMatrixParser = new MultipleChoiceMatrixParser();
+        $this->parsers['matrixdropdown'] = [$multipleChoiceMatrixParser];
+
         $dynamicPanelParser = new DynamicPanelParser($localizer->getAllTranslationsForString('row'));
         $this->parsers['paneldynamic'] = [$dynamicPanelParser];
-        
+
         $dummyParser = new DummyParser();
         $this->parsers['html'] = [$dummyParser];
         $this->parsers['image'] = [$dummyParser];
