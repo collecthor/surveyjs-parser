@@ -8,7 +8,9 @@ use Collecthor\DataInterfaces\ValueInterface;
 use Collecthor\SurveyjsParser\ArrayDataRecord;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\SurveyParser;
+use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
+use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use Collecthor\SurveyjsParser\VariableSet;
 use PHPUnit\Framework\TestCase;
 use function iter\toArray;
@@ -20,15 +22,20 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
  * @uses \Collecthor\SurveyjsParser\ParserHelpers
  * @uses \Collecthor\SurveyjsParser\ParserLocalizer
+ * @uses \Collecthor\SurveyjsParser\ResolvableVariableSet
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
+ * @uses \Collecthor\SurveyjsParser\Variables\DeferredVariable
  * @uses \Collecthor\SurveyjsParser\Parsers\BooleanParser
  * @uses \Collecthor\SurveyjsParser\Parsers\CommentParser
  * @uses \Collecthor\SurveyjsParser\Parsers\DynamicPanelParser
  * @uses \Collecthor\SurveyjsParser\Parsers\MatrixDynamicParser
  * @uses \Collecthor\SurveyjsParser\Parsers\TextQuestionParser
+ * @uses \Collecthor\SurveyjsParser\Parsers\PanelParser
  * @uses \Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser
+ * @uses \Collecthor\SurveyjsParser\Parsers\MultipleChoiceQuestionParser
  * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
  * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
+ * @uses \Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable
  * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
  */
@@ -196,5 +203,96 @@ class SurveyParserTest extends TestCase
 
         $variables = toArray($result->getVariables());
         self::assertEmpty($variables);
+    }
+
+    public function testChoicesFromQuestion(): void
+    {
+        $parser = new SurveyParser();
+        $questionConfig = [
+            "logoPosition" => "right",
+            "pages" => [
+                [
+                    "name" => "page1",
+                    "elements" => [
+                        [
+                            "type" => "checkbox",
+                            "name" => "question1",
+                            "choices" => [
+                                "item1",
+                                "item2",
+                                "item3"
+                            ]
+                        ],
+                        [
+                            "type" => "radiogroup",
+                            "name" => "question2",
+                            "choicesFromQuestion" => "question1"
+                        ],
+                        [
+                            "type" => "panel",
+                            "name" => "panel1",
+                            "elements" => [
+                                [
+                                    "type" => "radiogroup",
+                                    "name" => "question3",
+                                    "choices" => [
+                                        "item3.1",
+                                        "item3.2",
+                                        "item3.3"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        [
+                            "type" => "text",
+                            "name" => "question4"
+                        ],
+                        [
+                            "type" => "radiogroup",
+                            "name" => "question5",
+                            "choicesFromQuestion" => "question3"
+                        ],
+                        [
+                            "type" => "checkbox",
+                            "name" => "question6",
+                            "choicesFromQuestion" => "question5",
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $variables = $parser->parseSurveyStructure($questionConfig);
+        self::assertCount(6, toArray($variables->getVariables()));
+        
+        $question2 = $variables->getVariable('question2');
+        self::assertInstanceOf(SingleChoiceVariable::class, $question2);
+        /** @var SingleChoiceVariable $question2 */
+
+        $options = $question2->getValueOptions();
+        self::assertCount(3, $options);
+        self::assertSame('item1', $options[0]->getRawValue());
+        self::assertSame('item2', $options[1]->getRawValue());
+        self::assertSame('item3', $options[2]->getRawValue());
+
+        $question5 = $variables->getVariable('question5');
+        self::assertInstanceOf(SingleChoiceVariable::class, $question5);
+        /** @var SingleChoiceVariable $question5 */
+
+        $options = $question5->getValueOptions();
+        self::assertCount(3, $options);
+        self::assertSame('item3.1', $options[0]->getRawValue());
+        self::assertSame('item3.2', $options[1]->getRawValue());
+        self::assertSame('item3.3', $options[2]->getRawValue());
+
+        $question6 = $variables->getVariable('question6');
+        self::assertInstanceOf(MultipleChoiceVariable::class, $question6);
+        /** @var MultipleChoiceVariable $question6 */
+
+        $options = $question6->getValueOptions();
+        self::assertCount(3, $options);
+        self::assertSame('item3.1', $options[0]->getRawValue());
+        self::assertSame('item3.2', $options[1]->getRawValue());
+        self::assertSame('item3.3', $options[2]->getRawValue());
     }
 }

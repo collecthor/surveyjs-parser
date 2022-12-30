@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Parsers;
 
+use Collecthor\DataInterfaces\ClosedVariableInterface;
+use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
+use Collecthor\SurveyjsParser\ResolvableVariableSet;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
+use Collecthor\SurveyjsParser\Variables\DeferredVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
+use ValueError;
 
 class SingleChoiceQuestionParser implements ElementParserInterface
 {
@@ -47,11 +52,26 @@ class SingleChoiceQuestionParser implements ElementParserInterface
             $choices[] = new StringValueOption('other', $this->extractLocalizedTexts($questionConfig, 'otherText'));
         }
 
-        if ($choices === []) {
-            throw new \InvalidArgumentException("Choices must not be empty");
+        // choicesFromQuestion
+        if (isset($questionConfig['choicesFromQuestion']) && is_string($questionConfig['choicesFromQuestion'])) {
+            yield new DeferredVariable(
+                $id,
+                static function (ResolvableVariableSet $set) use ($id, $titles, $dataPath, $questionConfig): VariableInterface {
+                    $variable = $set->getVariable($questionConfig['choicesFromQuestion']);
+                    if ($variable instanceof ClosedVariableInterface) {
+                        $options = $variable->getValueOptions();
+                        return new SingleChoiceVariable($id, $titles, $options, $dataPath, $questionConfig);
+                    } else {
+                        throw new ValueError("Question {$questionConfig['choicesFromQuestion']} does not implement ClosedQuestionInterface");
+                    }
+                },
+            );
+        } else {
+            if ($choices === []) {
+                throw new \InvalidArgumentException("Choices must not be empty");
+            }
+            yield new SingleChoiceVariable($id, $titles, $choices, $dataPath, $questionConfig);
         }
-
-        yield new SingleChoiceVariable($id, $titles, $choices, $dataPath, $questionConfig);
         yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }

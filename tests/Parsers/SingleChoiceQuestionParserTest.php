@@ -7,9 +7,12 @@ namespace Collecthor\SurveyjsParser\Tests\Parsers;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
+use Collecthor\SurveyjsParser\ResolvableVariableSet;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Tests\support\NameTests;
 use Collecthor\SurveyjsParser\Tests\support\ValueNameTests;
+use Collecthor\SurveyjsParser\Values\StringValueOption;
+use Collecthor\SurveyjsParser\Variables\DeferredVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use PHPUnit\Framework\TestCase;
 use function iter\toArray;
@@ -21,6 +24,8 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\Values\IntegerValueOption
  * @uses \Collecthor\SurveyjsParser\Traits\GetDisplayValue
  * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
+ * @uses \Collecthor\SurveyjsParser\ResolvableVariableSet
+ * @uses \Collecthor\SurveyjsParser\Variables\DeferredVariable
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  */
 final class SingleChoiceQuestionParserTest extends TestCase
@@ -153,6 +158,38 @@ final class SingleChoiceQuestionParserTest extends TestCase
             'name' => 'test',
         ], new SurveyConfiguration()));
     }
+
+    public function testChoicesFromQuestionSimple(): void
+    {
+        $questionConfig =
+            [
+                'name' => 'question1',
+                'choicesFromQuestion' => 'question2',
+            ];
+        $parser = $this->getParser();
+        $question1 = toArray($parser->parse(new DummyParser(), $questionConfig, new SurveyConfiguration()))[0];
+
+        self::assertInstanceOf(DeferredVariable::class, $question1);
+        
+        /** @var DeferredVariable $question1 */
+
+        $valueOptions = [
+            new StringValueOption('a', ['default' => 'a']),
+            new StringValueOption('b', ['default' => 'b']),
+            new StringValueOption('c', ['default' => 'c']),
+        ];
+
+        $question2 = new SingleChoiceVariable('question2', ['default' => 'question2'], $valueOptions, ['question2']);
+
+        $resolvable = new ResolvableVariableSet($question1, $question2);
+
+        $resolved = $question1->resolve($resolvable);
+
+        self::assertInstanceOf(SingleChoiceVariable::class, $resolved);
+        /** @var SingleChoiceVariable $resolved */
+        self::assertSame($valueOptions, $resolved->getValueOptions());
+    }
+
     protected function getParser(): ElementParserInterface
     {
         return new SingleChoiceQuestionParser();
