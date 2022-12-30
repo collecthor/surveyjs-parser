@@ -65,9 +65,9 @@ final class BooleanVariable implements ClosedVariableInterface
             return new StringValue((string) $result->getRawValue());
         } else {
             if ($result->getRawValue()) {
-                return new StringValue($this->trueLabels[$locale]);
+                return new StringValue($this->trueLabels[$locale] ?? $this->trueLabels['default']);
             } else {
-                return new StringValue($this->falseLabels[$locale]);
+                return new StringValue($this->falseLabels[$locale] ?? $this->falseLabels['default']);
             }
         }
     }

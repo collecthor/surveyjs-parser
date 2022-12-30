@@ -148,4 +148,53 @@ class SurveyParserTest extends TestCase
             ]
         ]);
     }
+
+    public function testCalculatedValues(): void
+    {
+        $parser = new SurveyParser();
+        $result = $parser->parseSurveyStructure([
+            'pages' => [
+                [
+                    'name' => 'test1',
+                    'elements' => []
+                ]
+            ],
+            'calculatedValues' => [
+                [
+                    'name' => 'CalculatedValue',
+                    'expression' => '{question3}+{question5}',
+                    'includeIntoResult' => true,
+                ],
+            ],
+        ]);
+
+        $variables = toArray($result->getVariables());
+
+        self::assertCount(1, $variables);
+        self::assertInstanceOf(OpenTextVariable::class, $variables[0]);
+        self::assertSame('CalculatedValue', $variables[0]->getTitle());
+    }
+
+    public function testOnlyParseIncludedValues(): void
+    {
+        $parser = new SurveyParser();
+        $result = $parser->parseSurveyStructure([
+            'pages' => [
+                [
+                    'name' => 'test1',
+                    'elements' => []
+                ]
+            ],
+            'calculatedValues' => [
+                [
+                    'name' => 'CalculatedValue',
+                    'expression' => '{question3}+{question5}',
+                    'includeIntoResult' => false,
+                ],
+            ],
+        ]);
+
+        $variables = toArray($result->getVariables());
+        self::assertEmpty($variables);
+    }
 }

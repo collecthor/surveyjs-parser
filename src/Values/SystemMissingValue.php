@@ -13,7 +13,7 @@ final class SystemMissingValue implements MissingValueInterface
         return true;
     }
 
-    public function getRawValue(): string|int|float|bool|null|array
+    public function getRawValue(): null|string
     {
         return null;
     }
