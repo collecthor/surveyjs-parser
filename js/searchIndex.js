@@ -1046,15 +1046,35 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_getMeasure"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003AcheckValueOptions\u0028\u0029",
+            "name": "checkValueOptions",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_checkValueOptions"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003A\u0024valueMap",
             "name": "valueMap",
-            "summary": "",
+            "summary": "We\u0020can\u0020say\u0020this\u0020is\u0020non\u002Dempty,\u0020since\u0020valueoptions\u0020is\u0020non\u002Dempty,\u0020and\u0020this\u0020is\u0020a\u0020direct\u0020mapping\u0020from\u0020valueoptions",
             "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#property_valueMap"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#property_name"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003A\u0024titles",
+            "name": "titles",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#property_titles"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003A\u0024dataPath",
             "name": "dataPath",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#property_dataPath"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003A\u0024rawConfiguration",
+            "name": "rawConfiguration",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#property_rawConfiguration"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\NumericVariable",
             "name": "NumericVariable",
@@ -1156,15 +1176,35 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html#method_getMeasure"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable\u003A\u003AcheckValueOptions\u0028\u0029",
+            "name": "checkValueOptions",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html#method_checkValueOptions"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable\u003A\u003A\u0024valueMap",
             "name": "valueMap",
-            "summary": "",
+            "summary": "We\u0020can\u0020say\u0020this\u0020is\u0020non\u002Dempty,\u0020since\u0020valueoptions\u0020is\u0020non\u002Dempty,\u0020and\u0020this\u0020is\u0020a\u0020direct\u0020mapping\u0020from\u0020valueoptions",
             "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html#property_valueMap"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html#property_name"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable\u003A\u003A\u0024titles",
+            "name": "titles",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html#property_titles"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable\u003A\u003A\u0024dataPath",
             "name": "dataPath",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html#property_dataPath"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable\u003A\u003A\u0024rawConfiguration",
+            "name": "rawConfiguration",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html#property_rawConfiguration"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceVariable",
             "name": "SingleChoiceVariable",
@@ -1203,13 +1243,28 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceVariable\u003A\u003A\u0024valueMap",
             "name": "valueMap",
-            "summary": "",
+            "summary": "We\u0020can\u0020say\u0020this\u0020is\u0020non\u002Dempty,\u0020since\u0020valueoptions\u0020is\u0020non\u002Dempty,\u0020and\u0020this\u0020is\u0020a\u0020direct\u0020mapping\u0020from\u0020valueoptions",
             "url": "classes/Collecthor-SurveyjsParser-Variables-SingleChoiceVariable.html#property_valueMap"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceVariable\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-SingleChoiceVariable.html#property_name"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceVariable\u003A\u003A\u0024titles",
+            "name": "titles",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-SingleChoiceVariable.html#property_titles"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceVariable\u003A\u003A\u0024dataPath",
             "name": "dataPath",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Variables-SingleChoiceVariable.html#property_dataPath"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceVariable\u003A\u003A\u0024rawConfiguration",
+            "name": "rawConfiguration",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-SingleChoiceVariable.html#property_rawConfiguration"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\VariableSet",
             "name": "VariableSet",
