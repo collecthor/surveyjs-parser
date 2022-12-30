@@ -20,7 +20,18 @@ use PHPUnit\Framework\TestCase;
 use ValueError;
 use function iter\toArray;
 
-/** @covers  \Collecthor\SurveyjsParser\Parsers\MultipleChoiceMatrixParser */
+/**
+ * @covers  \Collecthor\SurveyjsParser\Parsers\MultipleChoiceMatrixParser
+ * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
+ * @uses \Collecthor\SurveyjsParser\ArrayRecord
+ * @uses \Collecthor\SurveyjsParser\Parsers\MultipleChoiceQuestionParser
+ * @uses \Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser
+ * @uses \Collecthor\SurveyjsParser\Traits\GetDisplayValue
+ * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
+ * @uses \Collecthor\SurveyjsParser\Values\ValueSet
+ * @uses \Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable
+ * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
+ */
 final class MultipleChoiceMatrixParserTest extends TestCase
 {
     private function getRootParser(): ElementParserInterface
