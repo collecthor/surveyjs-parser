@@ -12,6 +12,7 @@ class SurveyConfiguration
 {
     public function __construct(
         public readonly string $commentPostfix = '-Comment',
+        public readonly bool $storeOthersAsComment = true,
     ) {
     }
 }

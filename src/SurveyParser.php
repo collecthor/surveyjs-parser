@@ -23,6 +23,8 @@ use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
 use Collecthor\SurveyjsParser\Variables\DeferredVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
+use function is_bool;
+use function is_string;
 
 class SurveyParser implements SurveyParserInterface
 {
@@ -174,7 +176,10 @@ class SurveyParser implements SurveyParserInterface
          * Get some global settings from the survey structure. Note surveyJS incorrectly calls this a prefix
          * https://surveyjs.io/Documentation/Library?id=surveymodel#commentPrefix
          */
-        $surveyConfiguration = new SurveyConfiguration($this->extractString($structure, 'commentPrefix', '-Comment'));
+        $surveyConfiguration = new SurveyConfiguration(
+            $this->extractString($structure, 'commentPrefix', '-Comment'),
+            $this->extractBoolean($structure, 'storeOthersAsComment', true),
+        );
 
         if (isset($structure['pages']) && is_array($structure['pages'])) {
             foreach ($structure['pages'] as $page) {
@@ -230,6 +235,17 @@ class SurveyParser implements SurveyParserInterface
     {
         if (isset($config[$key]) && is_string($config[$key])) {
             return $key;
+        }
+        return $defaultValue;
+    }
+
+    /**
+     * @param array<string, mixed> $config
+     */
+    private function extractBoolean(array $config, string $key, bool $defaultValue): bool
+    {
+        if (isset($config[$key]) && is_bool($config[$key])) {
+            return $config[$key];
         }
         return $defaultValue;
     }
