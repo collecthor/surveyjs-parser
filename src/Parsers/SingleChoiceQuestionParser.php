@@ -13,7 +13,9 @@ use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\DeferredVariable;
+use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
+use Exception;
 use ValueError;
 
 class SingleChoiceQuestionParser implements ElementParserInterface
@@ -49,11 +51,18 @@ class SingleChoiceQuestionParser implements ElementParserInterface
         }
 
         if ($this->extractOptionalBoolean($questionConfig, 'hasOther') ?? false) {
+            if (!$surveyConfiguration->storeOthersAsComment) {
+                yield new OpenTextVariable($id, $titles, $dataPath, $questionConfig);
+                return;
+            }
             $choices[] = new StringValueOption('other', $this->extractLocalizedTexts($questionConfig, 'otherText'));
         }
 
         // choicesFromQuestion
         if (isset($questionConfig['choicesFromQuestion']) && is_string($questionConfig['choicesFromQuestion'])) {
+            if (!$surveyConfiguration->storeOthersAsComment) {
+                throw new Exception('The combination of choicesFromQuestion and storeOthersAsComment is not supported yet');
+            }
             yield new DeferredVariable(
                 $id,
                 static function (ResolvableVariableSet $set) use ($id, $titles, $dataPath, $questionConfig): VariableInterface {
