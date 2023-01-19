@@ -58,7 +58,7 @@ final class MultipleChoiceQuestionParserTest extends TestCase
         self::assertSame('abc', $options[3]->getDisplayValue());
     }
 
-    public function testStoreDontOthersAsComment(): void
+    public function testDontStoreOthersAsComment(): void
     {
         $questionConfig = [
             'name' => 'test',

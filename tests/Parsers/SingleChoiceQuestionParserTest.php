@@ -192,7 +192,7 @@ final class SingleChoiceQuestionParserTest extends TestCase
         self::assertSame($valueOptions, $resolved->getValueOptions());
     }
 
-    public function testStoreDontOthersAsComment(): void
+    public function testDontStoreOthersAsComment(): void
     {
         $questionConfig = [
             'name' => 'test',
