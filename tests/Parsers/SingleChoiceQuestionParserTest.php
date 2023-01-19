@@ -13,7 +13,9 @@ use Collecthor\SurveyjsParser\Tests\support\NameTests;
 use Collecthor\SurveyjsParser\Tests\support\ValueNameTests;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\DeferredVariable;
+use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use function iter\toArray;
 
@@ -170,7 +172,7 @@ final class SingleChoiceQuestionParserTest extends TestCase
         $question1 = toArray($parser->parse(new DummyParser(), $questionConfig, new SurveyConfiguration()))[0];
 
         self::assertInstanceOf(DeferredVariable::class, $question1);
-        
+
         /** @var DeferredVariable $question1 */
 
         $valueOptions = [
@@ -188,6 +190,41 @@ final class SingleChoiceQuestionParserTest extends TestCase
         self::assertInstanceOf(SingleChoiceVariable::class, $resolved);
         /** @var SingleChoiceVariable $resolved */
         self::assertSame($valueOptions, $resolved->getValueOptions());
+    }
+
+    public function testStoreDontOthersAsComment(): void
+    {
+        $questionConfig = [
+            'name' => 'test',
+            'choices' => [
+                'a',
+                'b',
+                'c',
+            ],
+            'hasOther' => true,
+        ];
+
+        $surveyConfig = new SurveyConfiguration(storeOthersAsComment: false);
+        $parser = $this->getParser();
+
+        $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig))[0];
+
+        self::assertInstanceOf(OpenTextVariable::class, $result);
+        self::assertEquals('test', $result->getName());
+    }
+
+    public function testDontAllowChoicesFromQuestionAndOthersAsComment(): void
+    {
+        $questionConfig = [
+            'name' => 'test',
+            'choicesFromQuestion' => 'question2',
+            'hasOther' => true,
+        ];
+
+        $surveyConfig = new SurveyConfiguration(storeOthersAsComment: false);
+        $parser = $this->getParser();
+        self::expectException(Exception::class);
+        $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig))[0];
     }
 
     protected function getParser(): ElementParserInterface

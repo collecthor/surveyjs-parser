@@ -33,6 +33,10 @@ final class MultipleChoiceQuestionParser implements ElementParserInterface
 
         $choices = $this->extractChoices($this->extractArray($questionConfig, 'choices'));
 
+        if (!$surveyConfiguration->storeOthersAsComment && isset($questionConfig['choicesFromQuestion']) && is_string($questionConfig['choicesFromQuestion'])) {
+            throw new Exception('The combination of choicesFromQuestion and storeOthersAsComment is not supported yet');
+        }
+
         // Check if we need to add options for `hasNone` or `hasOther`
         if ($this->extractOptionalBoolean($questionConfig, 'hasNone') ?? false) {
             $choices[] = new StringValueOption('none', $this->extractLocalizedTexts($questionConfig, 'noneText'));
@@ -47,9 +51,6 @@ final class MultipleChoiceQuestionParser implements ElementParserInterface
         }
         // choicesFromQuestion
         if (isset($questionConfig['choicesFromQuestion']) && is_string($questionConfig['choicesFromQuestion'])) {
-            if (!$surveyConfiguration->storeOthersAsComment) {
-                throw new Exception('The combination of choicesFromQuestion and storeOthersAsComment is not supported yet');
-            }
             yield new DeferredVariable(
                 $name,
                 static function (ResolvableVariableSet $set) use ($name, $titles, $dataPath, $questionConfig): VariableInterface {
