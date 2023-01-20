@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests;
 
+use Collecthor\DataInterfaces\ClosedVariableInterface;
 use Collecthor\DataInterfaces\ValueInterface;
+use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ArrayDataRecord;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\SurveyParser;
@@ -17,27 +19,28 @@ use function iter\toArray;
 
 /**
  * @covers \Collecthor\SurveyjsParser\SurveyParser
- * @uses \Collecthor\SurveyjsParser\Parsers\CallbackElementParser
- * @uses \Collecthor\SurveyjsParser\VariableSet
- * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
- * @uses \Collecthor\SurveyjsParser\ParserHelpers
- * @uses \Collecthor\SurveyjsParser\ParserLocalizer
- * @uses \Collecthor\SurveyjsParser\ResolvableVariableSet
- * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
- * @uses \Collecthor\SurveyjsParser\Variables\DeferredVariable
- * @uses \Collecthor\SurveyjsParser\Parsers\BooleanParser
- * @uses \Collecthor\SurveyjsParser\Parsers\CommentParser
- * @uses \Collecthor\SurveyjsParser\Parsers\DynamicPanelParser
- * @uses \Collecthor\SurveyjsParser\Parsers\MatrixDynamicParser
- * @uses \Collecthor\SurveyjsParser\Parsers\TextQuestionParser
- * @uses \Collecthor\SurveyjsParser\Parsers\PanelParser
- * @uses \Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser
- * @uses \Collecthor\SurveyjsParser\Parsers\MultipleChoiceQuestionParser
- * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
- * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
- * @uses \Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable
- * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
- * @uses \Collecthor\SurveyjsParser\Values\StringValue
+ * @uses   \Collecthor\SurveyjsParser\Parsers\CallbackElementParser
+ * @uses   \Collecthor\SurveyjsParser\VariableSet
+ * @uses   \Collecthor\SurveyjsParser\SurveyConfiguration
+ * @uses   \Collecthor\SurveyjsParser\ParserHelpers
+ * @uses   \Collecthor\SurveyjsParser\ParserLocalizer
+ * @uses   \Collecthor\SurveyjsParser\ResolvableVariableSet
+ * @uses   \Collecthor\SurveyjsParser\Variables\OpenTextVariable
+ * @uses   \Collecthor\SurveyjsParser\Variables\DeferredVariable
+ * @uses   \Collecthor\SurveyjsParser\Parsers\BooleanParser
+ * @uses   \Collecthor\SurveyjsParser\Parsers\CommentParser
+ * @uses   \Collecthor\SurveyjsParser\Parsers\DynamicPanelParser
+ * @uses   \Collecthor\SurveyjsParser\Parsers\MatrixParser
+ * @uses   \Collecthor\SurveyjsParser\Parsers\MatrixDynamicParser
+ * @uses   \Collecthor\SurveyjsParser\Parsers\TextQuestionParser
+ * @uses   \Collecthor\SurveyjsParser\Parsers\PanelParser
+ * @uses   \Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser
+ * @uses   \Collecthor\SurveyjsParser\Parsers\MultipleChoiceQuestionParser
+ * @uses   \Collecthor\SurveyjsParser\Values\StringValueOption
+ * @uses   \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
+ * @uses   \Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable
+ * @uses   \Collecthor\SurveyjsParser\ArrayDataRecord
+ * @uses   \Collecthor\SurveyjsParser\Values\StringValue
  */
 class SurveyParserTest extends TestCase
 {
@@ -294,5 +297,265 @@ class SurveyParserTest extends TestCase
         self::assertSame('item3.1', $options[0]->getRawValue());
         self::assertSame('item3.2', $options[1]->getRawValue());
         self::assertSame('item3.3', $options[2]->getRawValue());
+    }
+
+    public function testV2ResultEqualsV1Result(): void
+    {
+        $v2SurveyStructure = [
+            "title" => "test",
+            "logoPosition" => "right",
+            "pages" => [
+                [
+                    "name" => "page1",
+                    "elements" => [
+                        [
+                            "type" => "text",
+                            "name" => "question1",
+                            "title" => "Wat is je naam?",
+                            "description" => "Ik wil graag weten wat je naam is"
+                        ],
+                        [
+                            "type" => "radiogroup",
+                            "name" => "question9",
+                            "title" => "Als je een huishoudelijk apparaat zou zijn, wat zou je dan zijn?",
+                            "choices" => [
+                                [
+                                    "value" => "1",
+                                    "text" => "Droger"
+                                ],
+                                [
+                                    "value" => "2",
+                                    "text" => "Wasmachine"
+                                ],
+                                [
+                                    "value" => "3",
+                                    "text" => "Vaatwasser"
+                                ]
+                            ],
+                            "showOtherItem" => true,
+                            "showNoneItem" => true,
+                            "noneText" => "Ik ben helemaal geen huishoudelijk apparaat, ik ben een mens",
+                            "otherText" => "Anders, namelijk:"
+                        ],
+                        [
+                            "type" => "checkbox",
+                            "name" => "question2",
+                            "title" => "Hoe veel vragen heb je aangevinkt?",
+                            "choices" => [
+                                [
+                                    "value" => "item1",
+                                    "text" => "1"
+                                ],
+                                [
+                                    "value" => "item2",
+                                    "text" => "2"
+                                ],
+                                [
+                                    "value" => "item3",
+                                    "text" => "3"
+                                ]
+                            ],
+                            "showCommentArea" => true,
+                        ],
+                        [
+                            "type" => "comment",
+                            "name" => "question4",
+                            "title" => "Geef hier heel veel tekst in"
+                        ],
+                        [
+                            "type" => "matrix",
+                            "name" => "question3",
+                            "title" => "Hoe ga je naar je werk?",
+                            "columns" => [
+                                [
+                                    "value" => "1",
+                                    "text" => "Fiets"
+                                ],
+                                [
+                                    "value" => "2",
+                                    "text" => "Auto"
+                                ],
+                                [
+                                    "value" => "3",
+                                    "text" => "Bus"
+                                ],
+                                [
+                                    "value" => "4",
+                                    "text" => "Trein"
+                                ]
+                            ],
+                            "rows" => [
+                                [
+                                    "value" => "1",
+                                    "text" => "Maandag"
+                                ],
+                                [
+                                    "value" => "2",
+                                    "text" => "Dinsdag"
+                                ],
+                                [
+                                    "value" => "3",
+                                    "text" => "Woensdag"
+                                ],
+                                [
+                                    "value" => "4",
+                                    "text" => "Donderdag"
+                                ],
+                                [
+                                    "value" => "5",
+                                    "text" => "Vrijdag"
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            "calculatedValues" => [
+                [
+                    "name" => "Calculated",
+                    "includeIntoResult" => true
+                ]
+            ],
+            "storeOthersAsComment" => false
+        ];
+
+        $v1SurveyStructure = [
+            "title" => "test",
+            "logoPosition" => "right",
+            "pages" => [
+                [
+                    "name" => "page1",
+                    "elements" => [
+                        [
+                            "type" => "text",
+                            "name" => "question1",
+                            "title" => "Wat is je naam?",
+                            "description" => "Ik wil graag weten wat je naam is"
+                        ],
+                        [
+                            "type" => "radiogroup",
+                            "name" => "question9",
+                            "title" => "Als je een huishoudelijk apparaat zou zijn, wat zou je dan zijn?",
+                            "choices" => [
+                                [
+                                    "value" => "1",
+                                    "text" => "Droger"
+                                ],
+                                [
+                                    "value" => "2",
+                                    "text" => "Wasmachine"
+                                ],
+                                [
+                                    "value" => "3",
+                                    "text" => "Vaatwasser"
+                                ]
+                            ],
+                            "hasNone" => true,
+                            "hasOther" => true,
+                            "noneText" => "Ik ben helemaal geen huishoudelijk apparaat, ik ben een mens",
+                            "otherText" => "Anders, namelijk:"
+                        ],
+                        [
+                            "type" => "checkbox",
+                            "name" => "question2",
+                            "title" => "Hoe veel vragen heb je aangevinkt?",
+                            "choices" => [
+                                [
+                                    "value" => "item1",
+                                    "text" => "1"
+                                ],
+                                [
+                                    "value" => "item2",
+                                    "text" => "2"
+                                ],
+                                [
+                                    "value" => "item3",
+                                    "text" => "3"
+                                ]
+                            ],
+                            "hasComment" => true,
+                        ],
+                        [
+                            "type" => "comment",
+                            "name" => "question4",
+                            "title" => "Geef hier heel veel tekst in"
+                        ],
+                        [
+                            "type" => "matrix",
+                            "name" => "question3",
+                            "title" => "Hoe ga je naar je werk?",
+                            "columns" => [
+                                [
+                                    "value" => "1",
+                                    "text" => "Fiets"
+                                ],
+                                [
+                                    "value" => "2",
+                                    "text" => "Auto"
+                                ],
+                                [
+                                    "value" => "3",
+                                    "text" => "Bus"
+                                ],
+                                [
+                                    "value" => "4",
+                                    "text" => "Trein"
+                                ]
+                            ],
+                            "rows" => [
+                                [
+                                    "value" => "1",
+                                    "text" => "Maandag"
+                                ],
+                                [
+                                    "value" => "2",
+                                    "text" => "Dinsdag"
+                                ],
+                                [
+                                    "value" => "3",
+                                    "text" => "Woensdag"
+                                ],
+                                [
+                                    "value" => "4",
+                                    "text" => "Donderdag"
+                                ],
+                                [
+                                    "value" => "5",
+                                    "text" => "Vrijdag"
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            "calculatedValues" => [
+                [
+                    "name" => "Calculated",
+                    "includeIntoResult" => true
+                ]
+            ],
+            "storeOthersAsComment" => false
+        ];
+
+        $parser = new SurveyParser();
+
+        $v1Parsed = toArray($parser->parseSurveyStructure($v1SurveyStructure)->getVariables());
+        $v2Parsed = toArray($parser->parseSurveyStructure($v2SurveyStructure)->getVariables());
+
+        self::assertSameSize($v1Parsed, $v2Parsed);
+
+        for ($i = 0; $i < count($v1Parsed); $i++) {
+            /** @var VariableInterface $var1 */
+            $var1 = $v1Parsed[$i];
+            /** @var VariableInterface $var2 */
+            $var2 = $v2Parsed[$i];
+            self::assertInstanceOf($var1::class, $var2);
+            self::assertSame($var1->getName(), $var2->getName());
+            self::assertSame($var1->getTitle(), $var2->getTitle());
+            if ($var1 instanceof ClosedVariableInterface) {
+                self::assertInstanceOf(ClosedVariableInterface::class, $var2);
+                self::assertEquals($var1->getValueOptions(), $var2->getValueOptions());
+            }
+        }
     }
 }
