@@ -55,7 +55,7 @@ trait SimpleValueTest
      */
     public function testInvalidSamples(mixed $param): void
     {
-        $this->expectError();
+        $this->expectException(\Throwable::class);
         $this->getSubject($param);
     }
 
