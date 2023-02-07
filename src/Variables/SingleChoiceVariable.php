@@ -15,7 +15,6 @@ use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
 use Collecthor\SurveyjsParser\Values\StringValue;
-use InvalidArgumentException;
 
 class SingleChoiceVariable implements ClosedVariableInterface, JavascriptVariableInterface
 {
