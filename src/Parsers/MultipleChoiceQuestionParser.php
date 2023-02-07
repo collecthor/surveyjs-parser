@@ -30,14 +30,16 @@ final class MultipleChoiceQuestionParser implements ElementParserInterface
 
         $choices = $this->extractChoices($this->extractArray($questionConfig, 'choices'));
 
+
         // Check if we need to add options for `hasNone` or `hasOther`
-        if ($this->extractOptionalBoolean($questionConfig, 'hasNone') ?? false) {
+        if ($this->extractOptionalBoolean($questionConfig, 'hasNone') ?? $this->extractOptionalBoolean($questionConfig, 'showNoneItem') ?? false) {
             $choices[] = new StringValueOption('none', $this->extractLocalizedTexts($questionConfig, 'noneText'));
         }
 
-        if ($this->extractOptionalBoolean($questionConfig, 'hasOther') ?? false) {
+        if ($this->extractOptionalBoolean($questionConfig, 'hasOther') ?? $this->extractOptionalBoolean($questionConfig, 'showOtherItem') ?? false) {
             $choices[] = new StringValueOption('other', $this->extractLocalizedTexts($questionConfig, 'otherText'));
         }
+
         // choicesFromQuestion
         if (isset($questionConfig['choicesFromQuestion']) && is_string($questionConfig['choicesFromQuestion'])) {
             yield new DeferredVariable(

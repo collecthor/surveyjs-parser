@@ -20,10 +20,10 @@ trait ParserHelpers
      */
     private function parseCommentField(array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix): iterable
     {
-        if ($this->extractOptionalBoolean($questionConfig, 'hasOther') ?? false) {
+        if ($this->extractOptionalBoolean($questionConfig, 'hasOther') ?? $this->extractOptionalBoolean($questionConfig, 'showOtherItem') ?? false) {
             $defaultPostfix = "Other";
             $postfixField = "otherText";
-        } elseif ($this->extractOptionalBoolean($questionConfig, 'hasComment') ?? false) {
+        } elseif ($this->extractOptionalBoolean($questionConfig, 'hasComment') ?? $this->extractOptionalBoolean($questionConfig, 'showCommentArea') ?? false) {
             $defaultPostfix = "Other (describe)";
             $postfixField = "commentText";
         } else {
