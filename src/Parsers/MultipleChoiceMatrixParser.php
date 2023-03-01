@@ -23,6 +23,8 @@ final class MultipleChoiceMatrixParser implements ElementParserInterface
         /** @var list<array<string, mixed>> $columns */
         $columns = $this->extractArray($questionConfig, 'columns');
 
+        $defaultChoices = $this->extractOptionalArray($questionConfig, 'choices');
+
 
         foreach ($rows as $row) {
             $rowName = !is_string($row) ? $row['value'] : $row;
@@ -38,7 +40,8 @@ final class MultipleChoiceMatrixParser implements ElementParserInterface
                     $columnQuestion['hasNone'] = true;
                 }
                 $columnQuestion['title'] = $title;
-                $columnQuestion['type'] = $column['cellType'];
+                $columnQuestion['type'] = $column['cellType'] ?? 'dropdown';
+                $columnQuestion['choices'] = $columnQuestion['choices'] ?? $defaultChoices;
                 yield from $root->parse($root, $columnQuestion, $surveyConfiguration, $prefix);
             }
         }
