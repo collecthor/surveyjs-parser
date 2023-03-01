@@ -31,6 +31,7 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\Values\ValueSet
  * @uses \Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable
  * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
+ * @uses \Collecthor\SurveyjsParser\Values\IntegerValueOption
  */
 final class MultipleChoiceMatrixParserTest extends TestCase
 {
@@ -397,5 +398,49 @@ final class MultipleChoiceMatrixParserTest extends TestCase
         $answers = $value->getValues();
         self::assertEquals("Pakketten", $answers[0]->getDisplayValue());
         self::assertEquals("Pallets", $answers[1]->getDisplayValue());
+    }
+
+
+    public function testNoCellType(): void
+    {
+        $config = json_decode(<<<JSON
+            {
+             "type": "matrixdropdown",
+             "name": "question2",
+             "columns": [
+              {
+               "name": "Column 1"
+              },
+              {
+               "name": "Column 2"
+              },
+              {
+               "name": "Column 3"
+              }
+             ],
+             "choices": [
+              1,
+              2,
+              3,
+              4,
+              5
+             ],
+             "rows": [
+              "Row 1",
+              "Row 2"
+             ]
+            }
+        JSON, true);
+        $parser = new MultipleChoiceMatrixParser();
+        $surveyConfig = new SurveyConfiguration();
+        /**
+         * @var list<MultipleChoiceVariable> $result
+         */
+        $result = toArray($parser->parse($this->getRootParser(), $config, $surveyConfig, []));
+
+        self::assertCount(6, $result);
+        foreach ($result as $variable) {
+            self::assertCount(5, $variable->getValueOptions());
+        }
     }
 }
