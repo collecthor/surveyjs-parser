@@ -40,7 +40,7 @@ final class MultipleChoiceMatrixParser implements ElementParserInterface
                     $columnQuestion['hasNone'] = true;
                 }
                 $columnQuestion['title'] = $title;
-                $columnQuestion['type'] = $column['cellType'] ?? 'dropdown';
+                $columnQuestion['type'] = $column['cellType'] ?? $questionConfig['cellType'] ?? 'dropdown';
                 $columnQuestion['choices'] = $columnQuestion['choices'] ?? $defaultChoices;
                 yield from $root->parse($root, $columnQuestion, $surveyConfiguration, $prefix);
             }

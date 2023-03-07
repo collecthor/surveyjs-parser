@@ -11,9 +11,11 @@ use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\MultipleChoiceMatrixParser;
 use Collecthor\SurveyjsParser\Parsers\MultipleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
+use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
+use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use DateTime;
 use PHPUnit\Framework\TestCase;
@@ -26,11 +28,13 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\ArrayRecord
  * @uses \Collecthor\SurveyjsParser\Parsers\MultipleChoiceQuestionParser
  * @uses \Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser
+ * @uses \Collecthor\SurveyjsParser\Parsers\TextQuestionParser
  * @uses \Collecthor\SurveyjsParser\Traits\GetDisplayValue
  * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
  * @uses \Collecthor\SurveyjsParser\Values\ValueSet
  * @uses \Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable
  * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
+ * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  * @uses \Collecthor\SurveyjsParser\Values\IntegerValueOption
  */
 final class MultipleChoiceMatrixParserTest extends TestCase
@@ -43,10 +47,13 @@ final class MultipleChoiceMatrixParserTest extends TestCase
                 $dummyParser = new DummyParser();
                 $singleChoiceParser = new SingleChoiceQuestionParser();
                 $multipleChoiceParser = new MultipleChoiceQuestionParser();
+                $textParser = new TextQuestionParser();
                 if ($questionConfig['type'] === 'checkbox') {
                     yield from $multipleChoiceParser->parse($dummyParser, $questionConfig, $surveyConfiguration, $dataPrefix);
                 } elseif ($questionConfig['type'] === 'dropdown') {
                     yield from $singleChoiceParser->parse($dummyParser, $questionConfig, $surveyConfiguration, $dataPrefix);
+                } elseif ($questionConfig['type'] === 'comment') {
+                    yield from $textParser->parse($dummyParser, $questionConfig, $surveyConfiguration, $dataPrefix);
                 } else {
                     yield from $dummyParser->parse($dummyParser, $questionConfig, $surveyConfiguration, $dataPrefix);
                 }
@@ -441,6 +448,50 @@ final class MultipleChoiceMatrixParserTest extends TestCase
         self::assertCount(6, $result);
         foreach ($result as $variable) {
             self::assertCount(5, $variable->getValueOptions());
+        }
+    }
+
+    public function testOnlyQuestionCellType(): void
+    {
+        $config = json_decode(<<<JSON
+            {
+             "type": "matrixdropdown",
+             "name": "question2",
+             "cellType": "comment",
+             "columns": [
+              {
+               "name": "Column 1"
+              },
+              {
+               "name": "Column 2"
+              },
+              {
+               "name": "Column 3"
+              }
+             ],
+             "choices": [
+              1,
+              2,
+              3,
+              4,
+              5
+             ],
+             "rows": [
+              "Row 1",
+              "Row 2"
+             ]
+            }
+        JSON, true);
+        $parser = new MultipleChoiceMatrixParser();
+        $surveyConfig = new SurveyConfiguration();
+        /**
+         * @var list<MultipleChoiceVariable> $result
+         */
+        $result = toArray($parser->parse($this->getRootParser(), $config, $surveyConfig, []));
+
+        self::assertCount(6, $result);
+        foreach ($result as $variable) {
+            self::assertInstanceOf(OpenTextVariable::class, $variable);
         }
     }
 }
