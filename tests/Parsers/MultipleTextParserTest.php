@@ -53,6 +53,10 @@ final class MultipleTextParserTest extends TestCase
         $questionConfig = [
             "type" => "multipletext",
             "name" => "question4",
+            "title" => [
+                "nl" => "question4",
+                "default" => "question4",
+            ],
             "items" => [
                 [
                     "name" => "text1",
@@ -74,8 +78,8 @@ final class MultipleTextParserTest extends TestCase
         /** @var list<OpenTextVariable> $result */
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
 
-        self::assertSame('text1', $result[0]->getTitle());
-        self::assertSame('tekst1', $result[0]->getTitle('nl'));
+        self::assertSame('question4 - text1', $result[0]->getTitle());
+        self::assertSame('question4 - tekst1', $result[0]->getTitle('nl'));
     }
 
     public function testGetRightVariableType(): void
