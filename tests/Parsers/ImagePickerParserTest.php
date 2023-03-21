@@ -8,6 +8,7 @@ use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\ImagePickerParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
+use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use PHPUnit\Framework\TestCase;
 
@@ -257,5 +258,58 @@ final class ImagePickerParserTest extends TestCase
         self::assertSame('Giraf', $options[1]->getDisplayValue('nl'));
         self::assertSame('Panda', $options[2]->getDisplayValue('nl'));
         self::assertSame('Kameel', $options[3]->getDisplayValue('nl'));
+    }
+
+    public function testParseCommentField(): void
+    {
+        $surveyConfig = new SurveyConfiguration();
+        $questionConfig = [
+            "type" => "imagepicker",
+            "name" => "question3",
+            "showCommentArea" => true,
+            "commentText" => "Comment text",
+            "choices" => [
+                [
+                    "value" => "lion",
+                    "text" => [
+                        "default" => "Lion",
+                        "nl" => "Leeuw",
+                    ],
+                    "imageLink" => "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+                ],
+                [
+                    "value" => "giraffe",
+                    "text" => [
+                        "default" => "Giraffe",
+                        "nl" => "Giraf",
+                    ],
+                    "imageLink" => "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+                ],
+                [
+                    "value" => "panda",
+                    "text" => [
+                        "default" => "Panda",
+                        "nl" => "Panda",
+                    ],
+                    "imageLink" => "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+                ],
+                [
+                    "value" => "camel",
+                    "text" => [
+                        "default" => "Camel",
+                        "nl" => "Kameel",
+                    ],
+                    "imageLink" => "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+                ]
+            ]
+        ];
+
+        $parser = new ImagePickerParser();
+        $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
+
+        self::assertCount(2, $result);
+        self::assertInstanceOf(SingleChoiceVariable::class, $result[0]);
+        self::assertInstanceOf(OpenTextVariable::class, $result[1]);
+        self::assertSame('question3 - Comment text', $result[1]->getTitle());
     }
 }
