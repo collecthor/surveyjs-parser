@@ -34,5 +34,7 @@ final class ImagePickerParser implements ElementParserInterface
         } else {
             yield new SingleChoiceVariable($name, $titles, $choices, [...$dataPrefix, $valueName]);
         }
+
+        yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }
