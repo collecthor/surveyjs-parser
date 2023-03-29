@@ -11,6 +11,7 @@ use Collecthor\SurveyjsParser\ResolvableVariableSet;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Tests\support\NameTests;
 use Collecthor\SurveyjsParser\Tests\support\ValueNameTests;
+use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\DeferredVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
@@ -189,6 +190,54 @@ final class SingleChoiceQuestionParserTest extends TestCase
         /** @var SingleChoiceVariable $resolved */
         self::assertSame($valueOptions, $resolved->getValueOptions());
     }
+
+
+    public function testParseNumericOptionsAsNumbers(): void
+    {
+        $questionConfig =
+            [
+                'name' => 'question1',
+                'choices' => [
+                    '1',
+                    '2',
+                    '3',
+                    '4',
+                ],
+            ];
+        $parser = $this->getParser();
+        $question1 = toArray($parser->parse(new DummyParser(), $questionConfig, new SurveyConfiguration()))[0];
+
+        /** @var SingleChoiceVariable $question1 */
+        self::assertInstanceOf(SingleChoiceVariable::class, $question1);
+
+        foreach ($question1->getValueOptions() as $valueOption) {
+            self::assertInstanceOf(IntegerValueOption::class, $valueOption);
+        }
+    }
+
+    public function testParseOptionsThatContainNumbersButAreNotNumberNotAsNumbers(): void
+    {
+        $questionConfig =
+            [
+                'name' => 'question1',
+                'choices' => [
+                    '1a',
+                    '2c',
+                    '3f',
+                    '4h',
+                ],
+            ];
+        $parser = $this->getParser();
+        $question1 = toArray($parser->parse(new DummyParser(), $questionConfig, new SurveyConfiguration()))[0];
+
+        /** @var SingleChoiceVariable $question1 */
+        self::assertInstanceOf(SingleChoiceVariable::class, $question1);
+
+        foreach ($question1->getValueOptions() as $valueOption) {
+            self::assertInstanceOf(StringValueOption::class, $valueOption);
+        }
+    }
+
 
     protected function getParser(): ElementParserInterface
     {
