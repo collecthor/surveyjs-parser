@@ -218,7 +218,10 @@ trait ParserHelpers
                     throw new \InvalidArgumentException('Values must be scalar, got: ' . print_r($choice, true));
                 }
                 $displayValues = $this->extractLocalizedTexts($choice, 'text', ['default' => (string) $value]);
-            } elseif (is_string($choice) || is_int($choice)) {
+            } elseif (is_int($choice) || (is_string($choice) && ctype_digit($choice))) {
+                $value = (int)$choice;
+                $displayValues = [];
+            } elseif (is_string($choice)) {
                 $value = $choice;
                 $displayValues = [];
             } elseif ($choice === []) {
