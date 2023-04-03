@@ -255,7 +255,7 @@ trait ParserHelpers
             $result[$locale] = '';
             foreach ([$titles, ...$variables] as $variable) {
                 if (is_array($variable)) {
-                    $result[$locale] .= $variable[$locale] ?? $variable['default'];
+                    $result[$locale] .= $variable[$locale] ?? $variable['default'] ?? $variable[array_keys($variable)[0]];
                 } else {
                     $result[$locale] .= $variable;
                 }
