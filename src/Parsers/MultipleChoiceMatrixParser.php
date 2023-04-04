@@ -28,7 +28,7 @@ final class MultipleChoiceMatrixParser implements ElementParserInterface
 
         foreach ($rows as $row) {
             $rowName = !is_string($row) ? $row['value'] : $row;
-            $rowTitle = !is_string($row) ? $row['text'] : $row;
+            $rowTitle = !is_string($row) ? $row['text'] ?? $row['value'] : $row;
             foreach ($columns as $column) {
                 $columnTitle = $this->extractTitles($column);
                 $title = $this->arrayFormat($titles, " - ", $rowTitle, " - ", $columnTitle);
