@@ -23,4 +23,14 @@ final class StringValueOption implements ValueOptionInterface
     {
         return $this->rawValue;
     }
+
+    public function isNone(): bool
+    {
+        return false;
+    }
+
+    public function isOther(): bool
+    {
+        return true;
+    }
 }

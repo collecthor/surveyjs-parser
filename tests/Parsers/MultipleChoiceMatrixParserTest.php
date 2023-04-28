@@ -13,6 +13,7 @@ use Collecthor\SurveyjsParser\Parsers\MultipleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
+use Collecthor\SurveyjsParser\Values\NoneValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
@@ -36,6 +37,8 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  * @uses \Collecthor\SurveyjsParser\Values\IntegerValueOption
+ * @uses \Collecthor\SurveyjsParser\Values\NoneValueOption
+ * @uses \Collecthor\SurveyjsParser\Values\OtherValueOption
  */
 final class MultipleChoiceMatrixParserTest extends TestCase
 {
@@ -250,9 +253,10 @@ final class MultipleChoiceMatrixParserTest extends TestCase
         self::assertInstanceOf(SingleChoiceVariable::class, $result[1]);
 
         $valueOptions = $result[0]->getValueOptions();
-        foreach ($valueOptions as $valueOption) {
-            self::assertInstanceOf(StringValueOption::class, $valueOption);
-        }
+        self::assertInstanceOf(StringValueOption::class, $valueOptions[0]);
+        self::assertInstanceOf(StringValueOption::class, $valueOptions[1]);
+        self::assertInstanceOf(StringValueOption::class, $valueOptions[2]);
+        self::assertInstanceOf(NoneValueOption::class, $valueOptions[3]);
 
         self::assertEquals("Pakketten", $valueOptions[0]->getDisplayValue());
         self::assertEquals("1", $valueOptions[0]->getRawValue());

@@ -11,7 +11,8 @@ use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\ResolvableVariableSet;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
-use Collecthor\SurveyjsParser\Values\StringValueOption;
+use Collecthor\SurveyjsParser\Values\NoneValueOption;
+use Collecthor\SurveyjsParser\Values\OtherValueOption;
 use Collecthor\SurveyjsParser\Variables\DeferredVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use ValueError;
@@ -45,11 +46,11 @@ class SingleChoiceQuestionParser implements ElementParserInterface
 
         // Check if we need to add options for `hasNone` or `hasOther`
         if ($this->extractOptionalBoolean($questionConfig, 'hasNone') ?? $this->extractOptionalBoolean($questionConfig, 'showNoneItem') ?? false) {
-            $choices[] = new StringValueOption('none', $this->extractLocalizedTexts($questionConfig, 'noneText'));
+            $choices[] = new NoneValueOption('none', $this->extractLocalizedTexts($questionConfig, 'noneText'));
         }
 
         if ($this->extractOptionalBoolean($questionConfig, 'hasOther') ?? $this->extractOptionalBoolean($questionConfig, 'showOtherItem') ?? false) {
-            $choices[] = new StringValueOption('other', $this->extractLocalizedTexts($questionConfig, 'otherText'));
+            $choices[] = new OtherValueOption('other', $this->extractLocalizedTexts($questionConfig, 'otherText'));
         }
 
         // choicesFromQuestion
