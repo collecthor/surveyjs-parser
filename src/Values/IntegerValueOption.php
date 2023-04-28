@@ -31,6 +31,6 @@ final class IntegerValueOption implements ValueOptionInterface
 
     public function isNone(): bool
     {
-        return true;
+        return false;
     }
 }
