@@ -31,6 +31,6 @@ final class StringValueOption implements ValueOptionInterface
 
     public function isOther(): bool
     {
-        return true;
+        return false;
     }
 }
