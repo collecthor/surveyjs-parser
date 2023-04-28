@@ -9,6 +9,9 @@ use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\MultipleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Tests\support\RawConfigurationTests;
+use Collecthor\SurveyjsParser\Values\NoneValueOption;
+use Collecthor\SurveyjsParser\Values\OtherValueOption;
+use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use PHPUnit\Framework\TestCase;
 use function iter\toArray;
@@ -54,6 +57,49 @@ final class MultipleChoiceQuestionParserTest extends TestCase
         self::assertSame('c', $options[1]->getDisplayValue());
         self::assertSame('15', $options[2]->getDisplayValue());
         self::assertSame('abc', $options[3]->getDisplayValue());
+    }
+
+    public function testHasNoneOther(): void
+    {
+        $parent = new DummyParser();
+        $surveyConfiguration = new SurveyConfiguration();
+
+        $parser = new MultipleChoiceQuestionParser();
+
+        $questionConfig = [
+            "type" => "checkbox",
+            "name" => "question5",
+            "choices" => [
+                [
+                    "value" => "item1",
+                    "text" => "1"
+                ],
+                [
+                    "value" => "item2",
+                    "text" => "2"
+                ],
+                [
+                    "value" => "item3",
+                    "text" => "3"
+                ]
+            ],
+            "showOtherItem" => true,
+            "showNoneItem" => true,
+            "noneText" => "Geen",
+            "otherText" => "Anders"
+        ];
+
+        $variable = toArray($parser->parse($parent, $questionConfig, $surveyConfiguration))[0];
+        self::assertInstanceOf(MultipleChoiceVariable::class, $variable);
+        self::assertCount(5, $variable->getValueOptions());
+
+        $options = $variable->getValueOptions();
+
+        self::assertInstanceOf(StringValueOption::class, $options[0]);
+        self::assertInstanceOf(StringValueOption::class, $options[1]);
+        self::assertInstanceOf(StringValueOption::class, $options[2]);
+        self::assertInstanceOf(NoneValueOption::class, $options[3]);
+        self::assertInstanceOf(OtherValueOption::class, $options[4]);
     }
 
     protected function getParser(): ElementParserInterface
