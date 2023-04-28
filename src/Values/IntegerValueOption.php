@@ -23,4 +23,14 @@ final class IntegerValueOption implements ValueOptionInterface
     {
         return $this->rawValue;
     }
+
+    public function isOther(): bool
+    {
+        return false;
+    }
+
+    public function isNone(): bool
+    {
+        return true;
+    }
 }

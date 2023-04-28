@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Values;
 
-use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Traits\GetDisplayValue;
 
-final class BooleanValueOption implements ValueOptionInterface
+final class NoneValueOption implements \Collecthor\DataInterfaces\ValueOptionInterface
 {
     use GetDisplayValue;
+
     /**
+     * @param string $rawValue
      * @param array<string, string> $displayValues
      */
     public function __construct(
-        private readonly bool $rawValue,
+        private readonly string $rawValue,
         private readonly array $displayValues
     ) {
     }
-
-    public function getRawValue(): bool
+    public function getRawValue(): string|int|float|bool
     {
         return $this->rawValue;
     }
 
     public function isNone(): bool
     {
-        return false;
+        return true;
     }
 
     public function isOther(): bool
