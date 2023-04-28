@@ -41,6 +41,8 @@ use function iter\toArray;
  * @uses   \Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable
  * @uses   \Collecthor\SurveyjsParser\ArrayDataRecord
  * @uses   \Collecthor\SurveyjsParser\Values\StringValue
+ * @uses   \Collecthor\SurveyjsParser\Values\NoneValueOption
+ * @uses   \Collecthor\SurveyjsParser\Values\OtherValueOption
  */
 class SurveyParserTest extends TestCase
 {

@@ -24,6 +24,8 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\Traits\GetDisplayValue
  * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
+ * @uses \Collecthor\SurveyjsParser\Values\NoneValueOption
+ * @uses \Collecthor\SurveyjsParser\Values\OtherValueOption
  */
 
 final class MultipleChoiceQuestionParserTest extends TestCase

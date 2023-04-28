@@ -30,6 +30,8 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\ResolvableVariableSet
  * @uses \Collecthor\SurveyjsParser\Variables\DeferredVariable
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
+ * @uses \Collecthor\SurveyjsParser\Values\NoneValueOption
+ * @uses \Collecthor\SurveyjsParser\Values\OtherValueOption
  */
 final class SingleChoiceQuestionParserTest extends TestCase
 {

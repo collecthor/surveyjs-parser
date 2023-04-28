@@ -37,6 +37,8 @@ use function iter\toArray;
  * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
  * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
  * @uses \Collecthor\SurveyjsParser\Values\IntegerValueOption
+ * @uses \Collecthor\SurveyjsParser\Values\NoneValueOption
+ * @uses \Collecthor\SurveyjsParser\Values\OtherValueOption
  */
 final class MultipleChoiceMatrixParserTest extends TestCase
 {
