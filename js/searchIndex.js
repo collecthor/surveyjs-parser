@@ -721,6 +721,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValueOption.html#method_getRawValue"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValueOption\u003A\u003AisNone\u0028\u0029",
+            "name": "isNone",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValueOption.html#method_isNone"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValueOption\u003A\u003AisOther\u0028\u0029",
+            "name": "isOther",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValueOption.html#method_isOther"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValueOption\u003A\u003A\u0024rawValue",
             "name": "rawValue",
             "summary": "",
@@ -785,6 +795,16 @@ Search.appendIndex(
             "name": "getRawValue",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#method_getRawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\IntegerValueOption\u003A\u003AisOther\u0028\u0029",
+            "name": "isOther",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#method_isOther"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\IntegerValueOption\u003A\u003AisNone\u0028\u0029",
+            "name": "isNone",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#method_isNone"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\IntegerValueOption\u003A\u003A\u0024rawValue",
             "name": "rawValue",
@@ -896,6 +916,76 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-MissingStringValue.html#property_rawValue"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NoneValueOption",
+            "name": "NoneValueOption",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NoneValueOption.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NoneValueOption\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NoneValueOption.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NoneValueOption\u003A\u003AgetRawValue\u0028\u0029",
+            "name": "getRawValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NoneValueOption.html#method_getRawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NoneValueOption\u003A\u003AisNone\u0028\u0029",
+            "name": "isNone",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NoneValueOption.html#method_isNone"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NoneValueOption\u003A\u003AisOther\u0028\u0029",
+            "name": "isOther",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NoneValueOption.html#method_isOther"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NoneValueOption\u003A\u003A\u0024rawValue",
+            "name": "rawValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NoneValueOption.html#property_rawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NoneValueOption\u003A\u003A\u0024displayValues",
+            "name": "displayValues",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NoneValueOption.html#property_displayValues"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\OtherValueOption",
+            "name": "OtherValueOption",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-OtherValueOption.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\OtherValueOption\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-OtherValueOption.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\OtherValueOption\u003A\u003AgetRawValue\u0028\u0029",
+            "name": "getRawValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-OtherValueOption.html#method_getRawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\OtherValueOption\u003A\u003AisNone\u0028\u0029",
+            "name": "isNone",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-OtherValueOption.html#method_isNone"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\OtherValueOption\u003A\u003AisOther\u0028\u0029",
+            "name": "isOther",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-OtherValueOption.html#method_isOther"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\OtherValueOption\u003A\u003A\u0024rawValue",
+            "name": "rawValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-OtherValueOption.html#property_rawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\OtherValueOption\u003A\u003A\u0024displayValues",
+            "name": "displayValues",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-OtherValueOption.html#property_displayValues"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValue",
             "name": "StringValue",
             "summary": "",
@@ -930,6 +1020,16 @@ Search.appendIndex(
             "name": "getRawValue",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-StringValueOption.html#method_getRawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValueOption\u003A\u003AisNone\u0028\u0029",
+            "name": "isNone",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-StringValueOption.html#method_isNone"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValueOption\u003A\u003AisOther\u0028\u0029",
+            "name": "isOther",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-StringValueOption.html#method_isOther"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValueOption\u003A\u003A\u0024rawValue",
             "name": "rawValue",
