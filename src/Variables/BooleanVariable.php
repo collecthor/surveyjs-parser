@@ -11,7 +11,6 @@ use Collecthor\DataInterfaces\StringValueInterface;
 use Collecthor\SurveyjsParser\Traits\GetName;
 use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
-use Collecthor\SurveyjsParser\Values\BooleanValue;
 use Collecthor\SurveyjsParser\Values\BooleanValueOption;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
 use Collecthor\SurveyjsParser\Values\MissingBooleanValue;
@@ -46,7 +45,7 @@ final class BooleanVariable implements ClosedVariableInterface
         ];
     }
 
-    public function getValue(RecordInterface $record): BooleanValue | MissingBooleanValue | InvalidValue
+    public function getValue(RecordInterface $record): BooleanValueOption | MissingBooleanValue | InvalidValue
     {
         $dataValue = $record->getDataValue($this->dataPath);
         if (is_null($dataValue)) {
@@ -55,7 +54,7 @@ final class BooleanVariable implements ClosedVariableInterface
         if (!is_bool($dataValue)) {
             return new InvalidValue($dataValue);
         }
-        return new BooleanValue($dataValue);
+        return new BooleanValueOption($dataValue, $dataValue ? $this->trueLabels : $this->falseLabels);
     }
 
     public function getDisplayValue(RecordInterface $record, ?string $locale = 'default'): StringValueInterface
