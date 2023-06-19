@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser;
 
-use Collecthor\DataInterfaces\RecordInterface;
+use Collecthor\SurveyjsParser\Interfaces\RecordInterface;
 
 class ArrayDataRecord implements RecordInterface
 {

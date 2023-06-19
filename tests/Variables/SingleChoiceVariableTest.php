@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Variables;
 
-use Collecthor\DataInterfaces\InvalidValueInterface;
-use Collecthor\DataInterfaces\JavascriptVariableInterface;
-use Collecthor\DataInterfaces\Measure;
-use Collecthor\DataInterfaces\ValueOptionInterface;
-use Collecthor\DataInterfaces\VariableInterface;
+use Collecthor\SurveyjsParser\ArrayDataRecord;
 use Collecthor\SurveyjsParser\ArrayRecord;
+use Collecthor\SurveyjsParser\Interfaces\Measure;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueType;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
@@ -20,10 +20,10 @@ use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
  * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
  * @uses \Collecthor\SurveyjsParser\ArrayRecord
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
- * @uses \Collecthor\SurveyjsParser\Values\InvalidValue
  * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
+ * @uses \Collecthor\SurveyjsParser\Values\NotNormalValue
  */
-class SingleChoiceVariableTest extends VariableTest
+class SingleChoiceVariableTest extends VariableTestBase
 {
     public function testMeasureIsNominal(): void
     {
@@ -35,9 +35,7 @@ class SingleChoiceVariableTest extends VariableTest
     public function testGetValueOptions(): void
     {
         /**
-         * @todo Remove this
-         * @see https://github.com/phpstan/phpstan/issues/6070
-         * @phpstan-var non-empty-list<ValueOptionInterface> $options
+         * @var non-empty-list<ValueOptionInterface<string|int>> $options
          */
         $options = [];
         for ($i = 0; $i < 10; $i++) {
@@ -52,7 +50,6 @@ class SingleChoiceVariableTest extends VariableTest
             $options[] = $option;
         }
 
-
         $subject = new SingleChoiceVariable("test", [], $options, ['path']);
         $i = 0;
         foreach ($subject->getValueOptions() as $option) {
@@ -64,33 +61,29 @@ class SingleChoiceVariableTest extends VariableTest
     /**
      * @return iterable<non-empty-list<mixed>>
      */
-    public function invalidValueProvider(): iterable
+    public static function invalidValueProvider(): iterable
     {
-        yield [154];
-        yield ['151234abc'];
-        yield [15.3];
-        yield [["Test array value"]];
+        yield [154, "154"];
+        yield ['151234abc', "151234abc"];
+        yield [15.3, "15.30"];
+        yield [["Test array value"], print_r(["Test array value"], true)];
     }
 
     /**
      * @dataProvider invalidValueProvider
-     * @phpstan-param int|string|array<mixed>|float $value
+     * @param int|string|array<mixed>|float $value
      */
-    public function testGetInvalidValue(int|string|array|float $value): void
+    public function testGetInvalidValue(int|string|array|float $value, string $displayValue): void
     {
         $subject = new SingleChoiceVariable("test", [], [new IntegerValueOption(15, ['en' => 'test'])], ['path']);
 
-        $data = new ArrayRecord(['path' => $value], 5, new \DateTime(), new \DateTime());
+        $data = new ArrayDataRecord(['path' => $value]);
 
         $retrievedValue = $subject->getValue($data);
-        self::assertInstanceOf(InvalidValueInterface::class, $retrievedValue);
 
-        /**
-         * @see https://github.com/collecthor/surveyjs-parser/issues/2
-         */
-        if (!is_array($value)) {
-            self::assertSame((string) $value, $retrievedValue->getRawValue());
-        }
+        self::assertSame(ValueType::Invalid, $retrievedValue->getType());
+        self::assertSame($value, $retrievedValue->getRawValue());
+        self::assertSame($displayValue, $retrievedValue->getDisplayValue());
     }
 
     public function testGetValidValue(): void
@@ -105,8 +98,8 @@ class SingleChoiceVariableTest extends VariableTest
 
         self::assertSame($value, $retrievedValue->getRawValue());
 
-        self::assertSame('test', $subject->getDisplayValue($data)->getRawValue());
-        self::assertSame('test2', $subject->getDisplayValue($data, 'de')->getRawValue());
+        self::assertSame('test', $subject->getValue($data)->getDisplayValue());
+        self::assertSame('test2', $subject->getValue($data)->getDisplayValue('de'));
     }
 
     public function testGetInValidDisplayValue(): void
@@ -116,10 +109,8 @@ class SingleChoiceVariableTest extends VariableTest
 
         $data = new ArrayRecord(['path' => $value], 5, new \DateTime(), new \DateTime());
 
-        $displayValue = $subject->getDisplayValue($data);
-
-        self::assertSame((string) $value, $displayValue->getRawValue());
-        self::assertInstanceOf(InvalidValueInterface::class, $displayValue);
+        $value = $subject->getValue($data);
+        self::assertSame(ValueType::Invalid, $value->getType());
     }
 
     protected function getVariableWithRawConfiguration(array $rawConfiguration): VariableInterface
@@ -127,11 +118,19 @@ class SingleChoiceVariableTest extends VariableTest
         return new SingleChoiceVariable("test", [], [new IntegerValueOption(15, ['en' => 'test'])], ['path'], $rawConfiguration);
     }
 
-    protected function getVariableWithName(string $name): JavascriptVariableInterface
+    /**
+     * @param string $name
+     * @return SingleChoiceVariable<int>
+     */
+    protected function getVariableWithName(string $name): SingleChoiceVariable
     {
         return new SingleChoiceVariable($name, [], [new IntegerValueOption(15, ['en' => 'test'])], ['path']);
     }
 
+    /**
+     * @param array<string,string> $titles
+     * @return SingleChoiceVariable<int>
+     */
     protected function getVariableWithTitles(array $titles): VariableInterface
     {
         return new SingleChoiceVariable('test', $titles, [new IntegerValueOption(15, ['en' => 'test'])], ['path']);

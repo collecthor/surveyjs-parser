@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests;
 
-use Collecthor\DataInterfaces\ClosedVariableInterface;
-use Collecthor\DataInterfaces\ValueInterface;
-use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ArrayDataRecord;
 use Collecthor\SurveyjsParser\ElementParserInterface;
+use Collecthor\SurveyjsParser\Interfaces\ClosedVariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\RawValueInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\SurveyParser;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
@@ -49,7 +49,7 @@ class SurveyParserTest extends TestCase
     /**
      * @return iterable<non-empty-list<mixed>>
      */
-    public function sampleProvider(): iterable
+    public static function sampleProvider(): iterable
     {
         $files = glob(__DIR__ . '/support/samples/*.json');
         foreach (is_array($files) ? $files : [] as $fileName) {
@@ -77,14 +77,10 @@ class SurveyParserTest extends TestCase
                     $data = new ArrayDataRecord($sample['data']);
                     foreach ($sample['assertions'] as $assertion) {
                         $value = $variableSet->getVariable($assertion['variable'])->getValue($data);
-                        if ($value instanceof ValueInterface) {
-                            self::assertSame(
-                                $assertion['expected'],
-                                $value->getRawValue()
-                            );
-                        } else {
-                            throw new \Exception('Value sets not supported yet by this test');
-                        }
+                        self::assertSame(
+                            $assertion['expected'],
+                            $value->getRawValue()
+                        );
                     }
                 }
             }
@@ -272,7 +268,6 @@ class SurveyParserTest extends TestCase
         
         $question2 = $variables->getVariable('question2');
         self::assertInstanceOf(SingleChoiceVariable::class, $question2);
-        /** @var SingleChoiceVariable $question2 */
 
         $options = $question2->getValueOptions();
         self::assertCount(3, $options);
@@ -282,7 +277,6 @@ class SurveyParserTest extends TestCase
 
         $question5 = $variables->getVariable('question5');
         self::assertInstanceOf(SingleChoiceVariable::class, $question5);
-        /** @var SingleChoiceVariable $question5 */
 
         $options = $question5->getValueOptions();
         self::assertCount(3, $options);
@@ -292,7 +286,6 @@ class SurveyParserTest extends TestCase
 
         $question6 = $variables->getVariable('question6');
         self::assertInstanceOf(MultipleChoiceVariable::class, $question6);
-        /** @var MultipleChoiceVariable $question6 */
 
         $options = $question6->getValueOptions();
         self::assertCount(3, $options);

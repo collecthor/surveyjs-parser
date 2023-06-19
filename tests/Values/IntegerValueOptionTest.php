@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Values;
 
-use Collecthor\DataInterfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Tests\support\TestValueOptionLabels;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use PHPUnit\Framework\TestCase;
@@ -18,9 +18,8 @@ class IntegerValueOptionTest extends TestCase
 
     /**
      * @param array<string, string> $labels
-     * @return ValueOptionInterface
      */
-    private function createOption(array $labels): ValueOptionInterface
+    private function createOption(array $labels): IntegerValueOption
     {
         return new IntegerValueOption(14, $labels);
     }
@@ -28,7 +27,7 @@ class IntegerValueOptionTest extends TestCase
     /**
      * @return iterable<non-empty-list<array<string,string>>>
      */
-    public function labelProvider(): iterable
+    public static function labelProvider(): iterable
     {
         yield [[]];
         yield [[

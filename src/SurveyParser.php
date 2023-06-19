@@ -3,8 +3,8 @@
 declare(strict_types=1);
 namespace Collecthor\SurveyjsParser;
 
-use Collecthor\DataInterfaces\VariableInterface;
-use Collecthor\DataInterfaces\VariableSetInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableSetInterface;
 use Collecthor\SurveyjsParser\Parsers\BooleanParser;
 use Collecthor\SurveyjsParser\Parsers\CallbackElementParser;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
@@ -23,8 +23,9 @@ use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
 use Collecthor\SurveyjsParser\Variables\DeferredVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
-class SurveyParser implements SurveyParserInterface
+class SurveyParser implements SurveyParserInterface, ElementParserInterface
 {
     /**
      * @var array<string, list<ElementParserInterface>>
@@ -232,5 +233,14 @@ class SurveyParser implements SurveyParserInterface
             return $key;
         }
         return $defaultValue;
+    }
+
+    public function parse(
+        ElementParserInterface $root,
+        array $questionConfig,
+        SurveyConfiguration $surveyConfiguration,
+        array $dataPrefix = []
+    ): iterable {
+        return $this->recursiveParser->parse($root, $questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }

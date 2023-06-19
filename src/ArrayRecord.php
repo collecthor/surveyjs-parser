@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser;
 
-use Collecthor\DataInterfaces\RecordInterface;
-use Collecthor\DataInterfaces\StoredRecordInterface;
+use Collecthor\SurveyjsParser\Interfaces\StoredRecordInterface;
 use DateTimeInterface;
 
 /**

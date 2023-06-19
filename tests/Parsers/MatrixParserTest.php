@@ -169,7 +169,7 @@ final class MatrixParserTest extends TestCase
 
         $parser = new MatrixParser();
 
-        /** @var list<SingleChoiceVariable> $result */
+        /** @var list<SingleChoiceVariable<string>> $result */
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
 
         self::assertSame('question4 - First choice', $result[0]->getTitle());

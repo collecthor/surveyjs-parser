@@ -13,9 +13,9 @@ use PHPUnit\Framework\TestCase;
 class ArrayDataRecordTest extends TestCase
 {
     /**
-     * @phpstan-return iterable<array{0:array<string, mixed>, 1:non-empty-list<string>, 2:mixed}>
+     * @return iterable<array{0:array<string, mixed>, 1:non-empty-list<string>, 2:mixed}>
      */
-    public function dataProvider(): iterable
+    public static function dataProvider(): iterable
     {
         yield [['a' => 'b'], ['a'], 'b'];
         yield [['a' => ['b' => 'c']], ['a', 'b'], 'c'];

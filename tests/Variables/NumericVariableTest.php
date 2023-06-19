@@ -4,38 +4,35 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Variables;
 
-use Collecthor\DataInterfaces\InvalidValueInterface;
-use Collecthor\DataInterfaces\JavascriptVariableInterface;
-use Collecthor\DataInterfaces\Measure;
-use Collecthor\DataInterfaces\MissingValueInterface;
-use Collecthor\DataInterfaces\NumericValueInterface;
-use Collecthor\DataInterfaces\VariableInterface;
+use Collecthor\SurveyjsParser\ArrayDataRecord;
 use Collecthor\SurveyjsParser\ArrayRecord;
+use Collecthor\SurveyjsParser\Interfaces\Measure;
+use Collecthor\SurveyjsParser\Interfaces\NotNormalValueInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
+use Collecthor\SurveyjsParser\Values\FloatValue;
+use Collecthor\SurveyjsParser\Values\IntegerValue;
 use Collecthor\SurveyjsParser\Variables\NumericVariable;
 
 /**
  * @covers \Collecthor\SurveyjsParser\Variables\NumericVariable
- * @uses \Collecthor\SurveyjsParser\Values\InvalidValue
  * @uses \Collecthor\SurveyjsParser\ArrayRecord
  * @uses \Collecthor\SurveyjsParser\Values\IntegerValue
  * @uses \Collecthor\SurveyjsParser\Values\FloatValue
- * @uses \Collecthor\DataInterfaces\MissingValueInterface
- * @uses \Collecthor\SurveyjsParser\Values\MissingIntegerValue
+ * @uses \Collecthor\SurveyjsParser\Values\NotNormalValue
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
  * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  */
-class NumericVariableTest extends VariableTest
+class NumericVariableTest extends VariableTestBase
 {
     /**
-     * @return iterable<list<mixed>>
+     * @return iterable<array{0: string, 1: class-string, 2: array<string, float|string|int>, 3: int|float|string|null}>
      */
-    public function recordProvider(): iterable
+    public static function recordProvider(): iterable
     {
-        yield [PHP_INT_MIN, MissingValueInterface::class, ['abc' => "15"]];
-        yield [15, NumericValueInterface::class, ['path' => 15]];
-        yield [15.4, NumericValueInterface::class, ['path' => 15.4]];
-        yield ["15", InvalidValueInterface::class, ['path' => "15"]];
-        yield [PHP_INT_MIN, MissingValueInterface::class, ['abc' => "15"]];
+        yield [(string)PHP_INT_MIN, NotNormalValueInterface::class, ['abc' => "15"], null];
+        yield ["15", IntegerValue::class, ['path' => 15], 15];
+        yield ["15.40", FloatValue::class, ['path' => 15.4], 15.4];
+        yield ["15", NotNormalValueInterface::class, ['path' => "15"], "15"];
     }
 
     /**
@@ -43,14 +40,14 @@ class NumericVariableTest extends VariableTest
      * @param class-string $expectedClass
      * @param array<mixed> $sample
      */
-    public function testGetValue(mixed $expected, string $expectedClass, array $sample): void
+    public function testGetValue(string $expected, string $expectedClass, array $sample, mixed $expectedRaw): void
     {
         $variable = new NumericVariable('abc', ['en' => 'English', 'nl' => 'Dutch'], ['path']);
 
-        $value = $variable->getValue(new ArrayRecord($sample, 1, new \DateTime(), new \DateTime()));
+        $value = $variable->getValue(new ArrayDataRecord($sample));
 
         self::assertInstanceOf($expectedClass, $value);
-        self::assertSame($expected, $value->getRawValue());
+        self::assertSame($expectedRaw, $value->getRawValue());
     }
 
     public function testGetMeasure(): void
@@ -59,27 +56,13 @@ class NumericVariableTest extends VariableTest
         self::assertSame(Measure::Ordinal, $variable->getMeasure());
     }
 
-    /**
-     * @dataProvider recordProvider
-     * @param class-string $expectedClass
-     * @param array<mixed> $sample
-     */
-    public function testGetDisplayValue(string|int|float $expected, string $expectedClass, array $sample): void
-    {
-        $variable = new NumericVariable('abc', ['en' => 'English', 'nl' => 'Dutch'], ['path']);
-
-        $value = $variable->getDisplayValue(new ArrayRecord($sample, 1, new \DateTime(), new \DateTime()));
-
-        self::assertSame((string) $expected, $value->getRawValue());
-    }
-
     protected function getVariableWithRawConfiguration(array $rawConfiguration): VariableInterface
     {
         return new NumericVariable('abc', ['en' => 'English', 'nl' => 'Dutch'], ['path'], $rawConfiguration);
     }
 
 
-    protected function getVariableWithName(string $name): JavascriptVariableInterface
+    protected function getVariableWithName(string $name): VariableInterface
     {
         return new NumericVariable($name, ['en' => 'English', 'nl' => 'Dutch'], ['path']);
     }

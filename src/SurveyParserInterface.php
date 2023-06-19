@@ -3,7 +3,7 @@
 declare(strict_types=1);
 namespace Collecthor\SurveyjsParser;
 
-use Collecthor\DataInterfaces\VariableSetInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableSetInterface;
 
 interface SurveyParserInterface
 {

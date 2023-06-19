@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\support;
 
-use Collecthor\DataInterfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use PHPUnit\Framework\Assert;
 
 trait TestValueOptionLabels

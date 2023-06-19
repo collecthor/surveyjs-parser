@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Parsers;
 
-use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
+use function iter\toArray;
 
 final class MatrixDynamicParser implements ElementParserInterface
 {
@@ -17,13 +18,12 @@ final class MatrixDynamicParser implements ElementParserInterface
      * @param array<string, string> $rowLabels
      * @return void
      */
-    public function __construct(private array $rowLabels)
+    public function __construct(private readonly array $rowLabels)
     {
     }
 
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        /** @var non-empty-array<int, ValueOptionInterface> $answers */
         $answers = [];
         foreach ($this->extractOptionalArray($questionConfig, 'choices') ?? [] as $answer) {
             if (is_scalar($answer)) {

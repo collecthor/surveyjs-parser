@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
+use Collecthor\SurveyjsParser\ArrayDataRecord;
 use Collecthor\SurveyjsParser\ArrayRecord;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\RatingParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
@@ -45,7 +47,6 @@ final class RatingParserTest extends TestCase
 
         self::assertInstanceOf(SingleChoiceVariable::class, $result[0]);
 
-        /** @var SingleChoiceVariable $variable */
         $variable = $result[0];
 
         $choices = $variable->getValueOptions();
@@ -72,7 +73,6 @@ final class RatingParserTest extends TestCase
 
         self::assertInstanceOf(SingleChoiceVariable::class, $result[0]);
 
-        /** @var SingleChoiceVariable $variable */
         $variable = $result[0];
 
         $choices = $variable->getValueOptions();
@@ -100,7 +100,6 @@ final class RatingParserTest extends TestCase
 
         self::assertInstanceOf(SingleChoiceVariable::class, $result[0]);
 
-        /** @var SingleChoiceVariable $variable */
         $variable = $result[0];
 
         $choices = $variable->getValueOptions();
@@ -176,18 +175,19 @@ final class RatingParserTest extends TestCase
 
         $parser = new RatingParser();
 
-        /** @var SingleChoiceVariable $result */
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig))[0];
+        self::assertInstanceOf(SingleChoiceVariable::class, $result);
 
-        $record = new ArrayRecord(['question3' => 'item3'], 1, new \DateTime(), new \DateTime());
+        $record = new ArrayDataRecord(['question3' => 'item3']);
 
-        $value = $result->getValue($record)->getRawValue();
+        $value = $result->getValue($record);
 
-        self::assertSame('item3', $value);
+        self::assertInstanceOf(ValueOptionInterface::class, $value);
 
-        $displayValue = $result->getDisplayValue($record)->getRawValue();
 
-        self::assertSame('Good', $displayValue);
+        self::assertSame('item3', $value->getValue());
+
+        self::assertSame('Good', $value->getDisplayValue());
     }
 
     public function testCustomRangeRatingAnswersLocalized(): void
@@ -230,12 +230,11 @@ final class RatingParserTest extends TestCase
 
         $parser = new RatingParser();
 
-        /** @var SingleChoiceVariable $result */
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig))[0];
 
-        $record = new ArrayRecord(['question3' => 'item3'], 1, new \DateTime(), new \DateTime());
+        $record = new ArrayDataRecord(['question3' => 'item3']);
 
-        $displayValue = $result->getDisplayValue($record, 'nl')->getRawValue();
+        $displayValue = $result->getValue($record)->getDisplayValue('nl');
 
         self::assertSame('Goed', $displayValue);
     }

@@ -7,12 +7,15 @@ namespace Collecthor\SurveyjsParser\Tests\Parsers;
 use Collecthor\DataInterfaces\ValueInterface;
 use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\ElementParserInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueSetInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\MultipleChoiceMatrixParser;
 use Collecthor\SurveyjsParser\Parsers\MultipleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
+use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\NoneValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
@@ -394,19 +397,15 @@ final class MultipleChoiceMatrixParserTest extends TestCase
 
 
         $value = $result[0]->getValue($record);
-        if ($value instanceof ValueInterface) {
-            throw new ValueError("Value should be a ValueSetInterface");
-        }
-        $answers = $value->getValues();
+        self::assertInstanceOf(ValueSetInterface::class, $value);
+        $answers = $value->getValue();
         self::assertCount(1, $answers);
         self::assertEquals("none", $answers[0]->getRawValue());
         self::assertEquals("Maak ik geen gebruik van", $answers[0]->getDisplayValue());
 
         $value = $result[2]->getValue($record);
-        if ($value instanceof ValueInterface) {
-            throw new ValueError("Value should be a ValueSetInterface");
-        }
-        $answers = $value->getValues();
+        self::assertInstanceOf(ValueSetInterface::class, $value);
+        $answers = $value->getValue();
         self::assertEquals("Pakketten", $answers[0]->getDisplayValue());
         self::assertEquals("Pallets", $answers[1]->getDisplayValue());
     }
@@ -445,13 +444,16 @@ final class MultipleChoiceMatrixParserTest extends TestCase
         $parser = new MultipleChoiceMatrixParser();
         $surveyConfig = new SurveyConfiguration();
         /**
-         * @var list<MultipleChoiceVariable> $result
+         * @var list<MultipleChoiceVariable<int>> $result
          */
         $result = toArray($parser->parse($this->getRootParser(), $config, $surveyConfig, []));
 
         self::assertCount(6, $result);
         foreach ($result as $variable) {
             self::assertCount(5, $variable->getValueOptions());
+            foreach ($variable->getValueOptions() as $option) {
+                self::assertInstanceOf(IntegerValueOption::class, $option);
+            }
         }
     }
 
@@ -489,7 +491,7 @@ final class MultipleChoiceMatrixParserTest extends TestCase
         $parser = new MultipleChoiceMatrixParser();
         $surveyConfig = new SurveyConfiguration();
         /**
-         * @var list<MultipleChoiceVariable> $result
+         * @var list<VariableInterface> $result
          */
         $result = toArray($parser->parse($this->getRootParser(), $config, $surveyConfig, []));
 

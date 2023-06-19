@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Helpers;
 
-use Collecthor\DataInterfaces\VariableSetInterface;
 use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\Helpers\FlattenResponseHelper;
+use Collecthor\SurveyjsParser\Interfaces\VariableSetInterface;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use Collecthor\SurveyjsParser\Variables\NumericVariable;
@@ -54,7 +54,7 @@ final class FlattenResponseHelperTest extends TestCase
     /**
      * @return iterable<array<int, mixed>>
      */
-    public function provider(): iterable
+    public static function provider(): iterable
     {
         $openText = [
             new VariableSet(

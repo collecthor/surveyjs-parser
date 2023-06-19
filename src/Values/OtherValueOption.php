@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Values;
 
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueType;
 use Collecthor\SurveyjsParser\Traits\GetDisplayValue;
 
-final class OtherValueOption implements \Collecthor\DataInterfaces\ValueOptionInterface
+/**
+ * @implements ValueOptionInterface<string>
+ */
+final class OtherValueOption implements ValueOptionInterface
 {
     use GetDisplayValue;
 
@@ -32,5 +37,15 @@ final class OtherValueOption implements \Collecthor\DataInterfaces\ValueOptionIn
     public function isOther(): bool
     {
         return true;
+    }
+
+    public function getType(): ValueType
+    {
+        return ValueType::Normal;
+    }
+
+    public function getValue(): string
+    {
+        return $this->rawValue;
     }
 }

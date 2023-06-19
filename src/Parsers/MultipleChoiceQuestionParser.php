@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Parsers;
 
-use Collecthor\DataInterfaces\ClosedVariableInterface;
-use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
+use Collecthor\SurveyjsParser\Interfaces\ClosedVariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\ResolvableVariableSet;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
@@ -32,7 +32,6 @@ final class MultipleChoiceQuestionParser implements ElementParserInterface
         $choices = $this->extractChoices($this->extractArray($questionConfig, 'choices'));
 
 
-        // Check if we need to add options for `hasNone` or `hasOther`
         if ($this->extractOptionalBoolean($questionConfig, 'hasNone') ?? $this->extractOptionalBoolean($questionConfig, 'showNoneItem') ?? false) {
             $choices[] = new NoneValueOption('none', $this->extractLocalizedTexts($questionConfig, 'noneText'));
         }
@@ -42,16 +41,16 @@ final class MultipleChoiceQuestionParser implements ElementParserInterface
         }
 
         // choicesFromQuestion
-        if (isset($questionConfig['choicesFromQuestion']) && is_string($questionConfig['choicesFromQuestion'])) {
+        if (null !== $choicesFromQuestion = $this->extractOptionalString($questionConfig, 'choicesFromQuestion')) {
             yield new DeferredVariable(
                 $name,
-                static function (ResolvableVariableSet $set) use ($name, $titles, $dataPath, $questionConfig): VariableInterface {
-                    $variable = $set->getVariable($questionConfig['choicesFromQuestion']);
+                static function (ResolvableVariableSet $set) use ($name, $titles, $dataPath, $questionConfig, $choicesFromQuestion): VariableInterface {
+                    $variable = $set->getVariable($choicesFromQuestion);
                     if ($variable instanceof ClosedVariableInterface) {
                         $options = $variable->getValueOptions();
                         return new MultipleChoiceVariable($name, $titles, $options, $dataPath, $questionConfig);
                     } else {
-                        throw new ValueError("Question {$questionConfig['choicesFromQuestion']} does not implement ClosedQuestionInterface");
+                        throw new ValueError("Question {$choicesFromQuestion} does not implement ClosedQuestionInterface");
                     }
                 },
             );

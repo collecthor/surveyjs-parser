@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Values;
 
-use Collecthor\DataInterfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Tests\support\TestValueOptionLabels;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use PHPUnit\Framework\TestCase;
@@ -27,7 +27,7 @@ class StringValueOptionTest extends TestCase
     /**
      * @return iterable<non-empty-list<array<string,string>>>
      */
-    public function labelProvider(): iterable
+    public static function labelProvider(): iterable
     {
         yield [[]];
         yield [[
