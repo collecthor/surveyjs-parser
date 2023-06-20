@@ -4,22 +4,28 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Variables;
 
-use Collecthor\DataInterfaces\ClosedVariableInterface;
-use Collecthor\DataInterfaces\Measure;
-use Collecthor\DataInterfaces\RecordInterface;
-use Collecthor\DataInterfaces\StringValueInterface;
+use Collecthor\SurveyjsParser\Interfaces\ClosedVariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\Measure;
+use Collecthor\SurveyjsParser\Interfaces\NotNormalValueInterface;
+use Collecthor\SurveyjsParser\Interfaces\RecordInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueType;
 use Collecthor\SurveyjsParser\Traits\GetName;
 use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
-use Collecthor\SurveyjsParser\Values\BooleanValue;
 use Collecthor\SurveyjsParser\Values\BooleanValueOption;
-use Collecthor\SurveyjsParser\Values\InvalidValue;
-use Collecthor\SurveyjsParser\Values\MissingBooleanValue;
-use Collecthor\SurveyjsParser\Values\StringValue;
+use Collecthor\SurveyjsParser\Values\NotNormalValue;
 
+/**
+ * @implements ClosedVariableInterface<bool>
+ */
 final class BooleanVariable implements ClosedVariableInterface
 {
     use GetName, GetTitle, GetRawConfiguration;
+
+    private readonly BooleanValueOption $yes;
+    private readonly BooleanValueOption $no;
+
     /**
      * @param string $name
      * @param array<string, string> $titles
@@ -36,40 +42,31 @@ final class BooleanVariable implements ClosedVariableInterface
         private readonly array $dataPath,
         private readonly array $rawConfiguration = []
     ) {
+        $this->yes = new BooleanValueOption(true, $this->trueLabels);
+        $this->no = new BooleanValueOption(false, $this->falseLabels);
     }
 
+    /**
+     * @return non-empty-list<ValueOptionInterface<bool>>
+     */
     public function getValueOptions(): array
     {
         return [
-            new BooleanValueOption(true, $this->trueLabels),
-            new BooleanValueOption(false, $this->falseLabels),
+            $this->yes,
+            $this->no
         ];
     }
 
-    public function getValue(RecordInterface $record): BooleanValue | MissingBooleanValue | InvalidValue
+    public function getValue(RecordInterface $record): BooleanValueOption|NotNormalValueInterface
     {
         $dataValue = $record->getDataValue($this->dataPath);
         if (is_null($dataValue)) {
-            return new MissingBooleanValue();
+            return new NotNormalValue(ValueType::Missing);
         }
         if (!is_bool($dataValue)) {
-            return new InvalidValue($dataValue);
+            return new NotNormalValue(ValueType::Invalid);
         }
-        return new BooleanValue($dataValue);
-    }
-
-    public function getDisplayValue(RecordInterface $record, ?string $locale = 'default'): StringValueInterface
-    {
-        $result = $this->getValue($record);
-        if ($result instanceof InvalidValue || $result instanceof MissingBooleanValue) {
-            return new StringValue((string) $result->getRawValue());
-        } else {
-            if ($result->getRawValue()) {
-                return new StringValue($this->trueLabels[$locale] ?? $this->trueLabels['default']);
-            } else {
-                return new StringValue($this->falseLabels[$locale] ?? $this->falseLabels['default']);
-            }
-        }
+        return $dataValue ? $this->yes : $this->no;
     }
 
     public function getMeasure(): Measure

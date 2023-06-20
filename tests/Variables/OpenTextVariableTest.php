@@ -4,31 +4,29 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Variables;
 
-use Collecthor\DataInterfaces\JavascriptVariableInterface;
-use Collecthor\DataInterfaces\Measure;
-use Collecthor\DataInterfaces\MissingValueInterface;
-use Collecthor\DataInterfaces\StringValueInterface;
-use Collecthor\DataInterfaces\VariableInterface;
-use Collecthor\SurveyjsParser\ArrayRecord;
+use Collecthor\SurveyjsParser\ArrayDataRecord;
+use Collecthor\SurveyjsParser\Interfaces\Measure;
+use Collecthor\SurveyjsParser\Interfaces\NotNormalValueInterface;
+use Collecthor\SurveyjsParser\Interfaces\StringValueInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueType;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 
 /**
  * @covers \Collecthor\SurveyjsParser\Variables\OpenTextVariable
- * @uses \Collecthor\SurveyjsParser\Values\InvalidValue
  * @uses \Collecthor\SurveyjsParser\ArrayRecord
- * @uses \Collecthor\DataInterfaces\MissingValueInterface
- * @uses \Collecthor\SurveyjsParser\Values\MissingStringValue
  * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
+ * @uses \Collecthor\SurveyjsParser\Values\NotNormalValue
  */
-final class OpenTextVariableTest extends VariableTest
+final class OpenTextVariableTest extends VariableTestBase
 {
     /**
-     * @return iterable<list<mixed>>
+     * @return iterable<array{0: null|string, 1: class-string, 2: array<string|int>}>
      */
-    public function recordProvider(): iterable
+    public static function recordProvider(): iterable
     {
-        yield ["", MissingValueInterface::class, ['abc' => "15"]];
+        yield [null, NotNormalValueInterface::class, ['abc' => "15"]];
         yield ["15", StringValueInterface::class, ['path' => 15]];
         yield ["test", StringValueInterface::class, ['path' => "test"]];
     }
@@ -36,16 +34,20 @@ final class OpenTextVariableTest extends VariableTest
     /**
      * @dataProvider recordProvider
      * @param class-string $expectedClass
-     * @param array<mixed> $sample
+     * @param array<string, string|int> $sample
      */
     public function testGetValue(mixed $expected, string $expectedClass, array $sample): void
     {
         $variable = new OpenTextVariable('abc', ['en' => 'English', 'nl' => 'Dutch'], ['path']);
 
-        $value = $variable->getValue(new ArrayRecord($sample, 1, new \DateTime(), new \DateTime()));
+        $value = $variable->getValue(new ArrayDataRecord($sample));
 
         self::assertInstanceOf($expectedClass, $value);
+
         self::assertSame($expected, $value->getRawValue());
+        if ($value->getType() === ValueType::Normal) {
+            self::assertSame($expected, $value->getValue());
+        }
     }
 
     public function testGetMeasure(): void
@@ -54,26 +56,12 @@ final class OpenTextVariableTest extends VariableTest
         self::assertSame(Measure::Nominal, $variable->getMeasure());
     }
 
-    /**
-     * @dataProvider recordProvider
-     * @param class-string $expectedClass
-     * @param array<mixed> $sample
-     */
-    public function testGetDisplayValue(string $expected, string $expectedClass, array $sample): void
-    {
-        $variable = new OpenTextVariable('abc', ['en' => 'English', 'nl' => 'Dutch'], ['path']);
-
-        $value = $variable->getDisplayValue(new ArrayRecord($sample, 1, new \DateTime(), new \DateTime()));
-
-        self::assertSame($expected, $value->getRawValue());
-    }
-
     protected function getVariableWithRawConfiguration(array $rawConfiguration): VariableInterface
     {
         return new OpenTextVariable('abc', ['en' => 'English', 'nl' => 'Dutch'], ['path'], $rawConfiguration);
     }
 
-    protected function getVariableWithName(string $name): JavascriptVariableInterface
+    protected function getVariableWithName(string $name): OpenTextVariable
     {
         return new OpenTextVariable($name, ['en' => 'English', 'nl' => 'Dutch'], ['path']);
     }

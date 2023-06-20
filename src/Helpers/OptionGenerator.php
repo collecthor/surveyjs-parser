@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Helpers;
 
 use BackedEnum;
-use Collecthor\DataInterfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use UnitEnum;

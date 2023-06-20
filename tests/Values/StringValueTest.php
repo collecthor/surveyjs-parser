@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Tests\Values;
 
 use Collecthor\SurveyjsParser\Tests\support\CoversClass;
-use Collecthor\SurveyjsParser\Tests\support\SimpleValueTest;
+use Collecthor\SurveyjsParser\Tests\support\SimpleValueTests;
 use Collecthor\SurveyjsParser\Values\StringValue;
 use PHPUnit\Framework\TestCase;
 
@@ -15,21 +15,21 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(StringValue::class)]
 class StringValueTest extends TestCase
 {
-    use SimpleValueTest;
+    use SimpleValueTests;
 
     /**
-     * @return iterable<mixed>
+     * @return iterable<list<string>>
      */
-    public function getValidSamples(): iterable
+    public static function getValidSamples(): iterable
     {
         yield ["test"];
         yield ["test with spaces"];
     }
 
     /**
-     * @return iterable<mixed>
+     * @return iterable<list<string|int|float|list<string>>>
      */
-    public function getInvalidSamples(): iterable
+    public static function getInvalidSamples(): iterable
     {
         yield [13];
         yield [1545.4];

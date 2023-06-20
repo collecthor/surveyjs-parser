@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\support;
 
-use Collecthor\DataInterfaces\RecordInterface;
-use Collecthor\DataInterfaces\ValueInterface;
-use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
+use Collecthor\SurveyjsParser\Interfaces\RawValueInterface;
+use Collecthor\SurveyjsParser\Interfaces\RecordInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use PHPUnit\Framework\TestCase;
@@ -46,7 +46,7 @@ trait ValueNameTests
         $record = $this->getMockBuilder(RecordInterface::class)->getMock();
         $record->expects(self::once())->method('getDataValue')->with(['valueName'])->willReturn("a");
         $value = $variables[0]->getValue($record);
-        self::assertInstanceOf(ValueInterface::class, $value);
+        self::assertInstanceOf(RawValueInterface::class, $value);
         self::assertSame("a", $value->getRawValue());
     }
 }

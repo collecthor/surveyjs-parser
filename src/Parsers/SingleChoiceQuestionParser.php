@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Parsers;
 
-use Collecthor\DataInterfaces\ClosedVariableInterface;
-use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
+use Collecthor\SurveyjsParser\Interfaces\ClosedVariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\ResolvableVariableSet;
 use Collecthor\SurveyjsParser\SurveyConfiguration;

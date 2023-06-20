@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Variables;
 
-use Collecthor\DataInterfaces\Measure;
+use Collecthor\SurveyjsParser\ArrayDataRecord;
 use Collecthor\SurveyjsParser\ArrayRecord;
-use Collecthor\SurveyjsParser\Values\BooleanValue;
-use Collecthor\SurveyjsParser\Values\InvalidValue;
-use Collecthor\SurveyjsParser\Values\MissingBooleanValue;
+use Collecthor\SurveyjsParser\Interfaces\Measure;
+use Collecthor\SurveyjsParser\Interfaces\ValueType;
+use Collecthor\SurveyjsParser\Values\BooleanValueOption;
 use Collecthor\SurveyjsParser\Variables\BooleanVariable;
 use PHPUnit\Framework\TestCase;
 
@@ -16,10 +16,9 @@ use PHPUnit\Framework\TestCase;
  * @covers \Collecthor\SurveyjsParser\Variables\BooleanVariable
  * @uses \Collecthor\SurveyjsParser\ArrayRecord
  * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
- * @uses \Collecthor\SurveyjsParser\Values\InvalidValue
- * @uses \Collecthor\SurveyjsParser\Values\BooleanValue
+ * @uses \Collecthor\SurveyjsParser\Values\BooleanValueOption
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
- * @uses \Collecthor\SurveyjsParser\Values\MissingBooleanValue
+ * @uses \Collecthor\SurveyjsParser\Values\NotNormalValue
  */
 
 final class BooleanVariableTest extends TestCase
@@ -59,11 +58,11 @@ final class BooleanVariableTest extends TestCase
             ['path']
         );
 
-        $record = new ArrayRecord(['path' => 'some string'], 1, new \DateTime(), new \DateTime());
+        $record = new ArrayDataRecord(['path' => 'some string']);
 
         $value = $subject->getValue($record);
 
-        self::assertInstanceOf(InvalidValue::class, $value);
+        self::assertSame(ValueType::Invalid, $value->getType());
     }
 
     public function testValidValue(): void
@@ -86,37 +85,8 @@ final class BooleanVariableTest extends TestCase
 
         $value = $subject->getValue($record);
 
-        self::assertInstanceOf(BooleanValue::class, $value);
+        self::assertInstanceOf(BooleanValueOption::class, $value);
         self::assertTrue($value->getRawValue());
-    }
-
-    public function testDisplayValue(): void
-    {
-        $subject = new BooleanVariable(
-            "test",
-            [],
-            [
-                "default" => "true",
-                "nl" => "waar",
-            ],
-            [
-                "default" => "false",
-                "nl" => "onwaar",
-            ],
-            ['path']
-        );
-
-        $record = new ArrayRecord(['path' => true], 1, new \DateTime(), new \DateTime());
-
-        $value = $subject->getValue($record);
-
-        self::assertInstanceOf(BooleanValue::class, $value);
-        self::assertTrue($value->getRawValue());
-        $displayValue = $subject->getDisplayValue($record)->getRawValue();
-        self::assertEquals('true', $displayValue);
-
-        $displayValue = $subject->getDisplayValue($record, 'nl')->getRawValue();
-        self::assertEquals('waar', $displayValue);
     }
 
     public function testNullValue(): void
@@ -139,27 +109,6 @@ final class BooleanVariableTest extends TestCase
 
         $value = $subject->getValue($record);
 
-        self::assertInstanceOf(MissingBooleanValue::class, $value);
-    }
-
-    public function testFallbackToDefaultLocale(): void
-    {
-        $subject = new BooleanVariable(
-            "test",
-            [],
-            [
-                "default" => "true",
-                "nl" => "waar",
-            ],
-            [
-                "default" => "false",
-                "nl" => "onwaar",
-            ],
-            ['path']
-        );
-
-        $record = new ArrayRecord(['path' => true], 1, new \DateTime(), new \DateTime());
-        self::assertSame("true", $subject->getDisplayValue($record)->getRawValue());
-        self::assertSame("true", $subject->getDisplayValue($record, 'fakeLocale')->getRawValue());
+        self::assertSame(ValueType::Missing, $value->getType());
     }
 }

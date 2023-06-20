@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Helpers;
 
-use Collecthor\DataInterfaces\Measure;
 use Collecthor\SurveyjsParser\Helpers\OptionGenerator;
+use Collecthor\SurveyjsParser\Interfaces\Measure;
 use Collecthor\SurveyjsParser\Tests\support\IntegerBackedEnumSample;
 use Collecthor\SurveyjsParser\Tests\support\StringBackedEnumSample;
 use PHPUnit\Framework\TestCase;

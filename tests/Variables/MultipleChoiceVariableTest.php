@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Variables;
 
-use Collecthor\DataInterfaces\Measure;
 use Collecthor\SurveyjsParser\ArrayDataRecord;
 use Collecthor\SurveyjsParser\ArrayRecord;
+use Collecthor\SurveyjsParser\Interfaces\Measure;
+use Collecthor\SurveyjsParser\Interfaces\ValueType;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
-use Collecthor\SurveyjsParser\Values\InvalidValue;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Values\ValueSet;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
@@ -20,9 +20,9 @@ use PHPUnit\Framework\TestCase;
  * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
  * @uses \Collecthor\SurveyjsParser\ArrayRecord
  * @uses \Collecthor\SurveyjsParser\Values\StringValue
- * @uses \Collecthor\SurveyjsParser\Values\InvalidValue
  * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
  * @uses \Collecthor\SurveyjsParser\Values\ValueSet
+ * @uses \Collecthor\SurveyjsParser\Values\NotNormalValue
  */
 final class MultipleChoiceVariableTest extends TestCase
 {
@@ -47,7 +47,8 @@ final class MultipleChoiceVariableTest extends TestCase
 
         $foundValue = $subject->getValue($data);
 
-        self::assertInstanceOf(InvalidValue::class, $foundValue);
+        self::assertSame(ValueType::Invalid, $foundValue->getType());
+        self::assertSame($data->getDataValue(['path']), $foundValue->getRawValue());
     }
 
     public function testGetInvalidValueType(): void
@@ -64,7 +65,7 @@ final class MultipleChoiceVariableTest extends TestCase
 
         $foundValue = $subject->getValue($data);
 
-        self::assertInstanceOf(InvalidValue::class, $foundValue);
+        self::assertSame(ValueType::Invalid, $foundValue->getType());
     }
 
     public function testGetValidValues(): void
@@ -81,15 +82,9 @@ final class MultipleChoiceVariableTest extends TestCase
 
         $foundValue = $subject->getValue($data);
 
+        self::assertSame(ValueType::Normal, $foundValue->getType());
         self::assertInstanceOf(ValueSet::class, $foundValue);
-
-        /** @var StringValueOption[] $values */
-        $values = $foundValue->getValues();
-
-        self::assertSame($values[0]->getRawValue(), 'test');
-        self::assertSame($values[1]->getRawValue(), 'test2');
-
-        self::assertSame('test, test-2', $subject->getDisplayValue($data)->getRawValue());
-        self::assertSame('testnl, testnl2', $subject->getDisplayValue($data, 'nl')->getRawValue());
+        self::assertSame($valueOptions[0], $foundValue->getValue()[0]);
+        self::assertSame($valueOptions[1], $foundValue->getValue()[1]);
     }
 }

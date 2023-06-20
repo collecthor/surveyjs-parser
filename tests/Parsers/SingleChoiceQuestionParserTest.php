@@ -38,9 +38,9 @@ final class SingleChoiceQuestionParserTest extends TestCase
     use ValueNameTests;
     use NameTests;
     /**
-     * @return iterable<array<mixed>>
+     * @return iterable<list<array<string, mixed>>>
      */
-    public function badChoicesProvider(): iterable
+    public static function badChoicesProvider(): iterable
     {
         yield [['text' => 'abc']];
         yield [['value' => 'abc', 'text' => 15]];
@@ -175,9 +175,6 @@ final class SingleChoiceQuestionParserTest extends TestCase
         $question1 = toArray($parser->parse(new DummyParser(), $questionConfig, new SurveyConfiguration()))[0];
 
         self::assertInstanceOf(DeferredVariable::class, $question1);
-        
-        /** @var DeferredVariable $question1 */
-
         $valueOptions = [
             new StringValueOption('a', ['default' => 'a']),
             new StringValueOption('b', ['default' => 'b']),
@@ -191,7 +188,6 @@ final class SingleChoiceQuestionParserTest extends TestCase
         $resolved = $question1->resolve($resolvable);
 
         self::assertInstanceOf(SingleChoiceVariable::class, $resolved);
-        /** @var SingleChoiceVariable $resolved */
         self::assertSame($valueOptions, $resolved->getValueOptions());
     }
 
@@ -211,7 +207,6 @@ final class SingleChoiceQuestionParserTest extends TestCase
         $parser = $this->getParser();
         $question1 = toArray($parser->parse(new DummyParser(), $questionConfig, new SurveyConfiguration()))[0];
 
-        /** @var SingleChoiceVariable $question1 */
         self::assertInstanceOf(SingleChoiceVariable::class, $question1);
 
         foreach ($question1->getValueOptions() as $valueOption) {
@@ -234,7 +229,6 @@ final class SingleChoiceQuestionParserTest extends TestCase
         $parser = $this->getParser();
         $question1 = toArray($parser->parse(new DummyParser(), $questionConfig, new SurveyConfiguration()))[0];
 
-        /** @var SingleChoiceVariable $question1 */
         self::assertInstanceOf(SingleChoiceVariable::class, $question1);
 
         foreach ($question1->getValueOptions() as $valueOption) {

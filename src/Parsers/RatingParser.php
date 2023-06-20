@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Parsers;
 
-use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
@@ -20,10 +20,11 @@ final class RatingParser implements ElementParserInterface
         $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
         $id = implode('.', $dataPath);
 
-        /** @var non-empty-array<int, ValueOptionInterface> $answers */
-        $answers = [];
 
         if (isset($questionConfig['rateValues'])) {
+            /** @var non-empty-array<int, ValueOptionInterface<string>> $answers */
+            $answers = [];
+
             /** @var list<mixed> $values */
             $values = $questionConfig['rateValues'];
 
@@ -34,7 +35,10 @@ final class RatingParser implements ElementParserInterface
                 }
                 $answers[] = new StringValueOption((string) $value, $texts ?? [ 'default' => (string) $value]);
             }
+            yield new SingleChoiceVariable($id, $this->extractTitles($questionConfig), $answers, $dataPath);
         } else {
+            /** @var non-empty-array<int, ValueOptionInterface<int>> $answers */
+            $answers = [];
             /** @var int $rateMin */
             $rateMin = $questionConfig['rateMin'] ?? 1;
             $rateMax = $questionConfig['rateMax'] ?? 5;
@@ -46,8 +50,7 @@ final class RatingParser implements ElementParserInterface
                     'default' => (string) $i,
                 ]);
             }
+            yield new SingleChoiceVariable($id, $this->extractTitles($questionConfig), $answers, $dataPath);
         }
-
-        yield new SingleChoiceVariable($id, $this->extractTitles($questionConfig), $answers, $dataPath);
     }
 }

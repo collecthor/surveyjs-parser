@@ -4,35 +4,38 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Variables;
 
-use Collecthor\DataInterfaces\ClosedVariableInterface;
-use Collecthor\DataInterfaces\Measure;
-use Collecthor\DataInterfaces\RecordInterface;
-use Collecthor\DataInterfaces\StringValueInterface;
-use Collecthor\DataInterfaces\ValueOptionInterface;
-use Collecthor\DataInterfaces\ValueSetInterface;
+use Collecthor\SurveyjsParser\Interfaces\ClosedVariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\Measure;
+use Collecthor\SurveyjsParser\Interfaces\NotNormalValueInterface;
+use Collecthor\SurveyjsParser\Interfaces\RecordInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueSetInterface;
 use Collecthor\SurveyjsParser\Traits\GetName;
 use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
-use Collecthor\SurveyjsParser\Values\InvalidValue;
-use Collecthor\SurveyjsParser\Values\StringValue;
+use Collecthor\SurveyjsParser\Values\NotNormalValue;
 use Collecthor\SurveyjsParser\Values\ValueSet;
 use ValueError;
 use function count;
 
+/**
+ * @template T of string|int|float|bool
+ * @implements ClosedVariableInterface<T>
+ */
 final class OrderedVariable implements ClosedVariableInterface
 {
     use GetName, GetTitle, GetRawConfiguration;
 
     /**
      * We can say this is non-empty, since valueoptions is non-empty, and this is a direct mapping from valueoptions
-     * @var non-empty-array<string, ValueOptionInterface>
+     * @var non-empty-array<string, ValueOptionInterface<T>>
      */
     private array $valueMap;
 
     /**
      * @param string $name
      * @param array<string, string> $titles
-     * @param list<ValueOptionInterface> $valueOptions
+     * @param list<ValueOptionInterface<T>> $valueOptions
      * @param array<string, mixed> $rawConfiguration
      * @param non-empty-list<string> $dataPath
      */
@@ -45,7 +48,7 @@ final class OrderedVariable implements ClosedVariableInterface
     ) {
         $this->checkValueOptions($valueOptions);
         foreach ($valueOptions as $valueOption) {
-            $this->valueMap[(string) $valueOption->getRawValue()] = $valueOption;
+            $this->valueMap[(string) $valueOption->getValue()] = $valueOption;
         }
     }
 
@@ -54,34 +57,30 @@ final class OrderedVariable implements ClosedVariableInterface
         return array_values($this->valueMap);
     }
 
-    public function getValue(RecordInterface $record): InvalidValue | ValueSetInterface
+    /**
+     * @param RecordInterface $record
+     * @return NotNormalValueInterface|ValueSetInterface<T>
+     */
+    public function getValue(RecordInterface $record): NotNormalValueInterface | ValueSetInterface
     {
         $rawValues = $record->getDataValue($this->dataPath);
-        if (!is_array($rawValues)) {
-            return new InvalidValue($rawValues);
+        if ($rawValues === null) {
+            return NotNormalValue::missing();
+        } elseif (!is_array($rawValues)) {
+            return NotNormalValue::invalid($rawValues);
         }
 
         $values = [];
 
         foreach ($rawValues as $value) {
             /** @var string $value */
-            if (isset($this->valueMap[(string) $value])) {
+            if (is_scalar($value) && isset($this->valueMap[(string) $value])) {
                 $values[] = $this->valueMap[(string) $value];
             } else {
-                return new InvalidValue($rawValues);
+                return NotNormalValue::invalid($rawValues);
             }
         }
         return new ValueSet(...$values);
-    }
-
-    public function getDisplayValue(RecordInterface $record, ?string $locale = null): StringValueInterface
-    {
-        /** @var ValueSetInterface $valueSet */
-        $valueSet = $this->getValue($record);
-        $values = $valueSet->getValues();
-
-        $displayValues = array_map(fn (ValueOptionInterface $val) => $val->getDisplayValue($locale), $values);
-        return new StringValue(implode(", ", $displayValues));
     }
 
     public function getMeasure(): Measure
@@ -90,8 +89,9 @@ final class OrderedVariable implements ClosedVariableInterface
     }
 
     /**
-     * @phpstan-assert non-empty-list<ValueOptionInterface> $valueOptions
-     * @param list<ValueOptionInterface> $valueOptions
+     * @template X
+     * @phpstan-assert non-empty-list<X> $valueOptions
+     * @param list<X> $valueOptions
      */
     private function checkValueOptions(array $valueOptions): void
     {

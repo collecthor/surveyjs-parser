@@ -9,6 +9,9 @@ use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\BooleanVariable;
 
+/**
+ * @type T bool
+ */
 final class BooleanParser implements ElementParserInterface
 {
     use ParserHelpers;
@@ -16,7 +19,6 @@ final class BooleanParser implements ElementParserInterface
     /**
      * @param array<string, string> $trueLabels
      * @param array<string, string> $falseLabels
-     * @return self
      */
     public function __construct(private readonly array $trueLabels, private readonly array $falseLabels)
     {

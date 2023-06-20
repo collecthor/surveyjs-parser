@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser;
 
-use Collecthor\DataInterfaces\ValueOptionInterface;
-use Collecthor\DataInterfaces\VariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use InvalidArgumentException;
+use function PHPStan\dumpType;
 
 trait ParserHelpers
 {
@@ -184,6 +185,22 @@ trait ParserHelpers
 
     /**
      * @param array<string, mixed> $config
+     * @param string $key
+     */
+    private function extractOptionalString(array $config, string $key): string|null
+    {
+        if (!isset($config[$key])) {
+            return null;
+        }
+        if (is_string($config[$key])) {
+            return $config[$key];
+        }
+
+        throw new InvalidArgumentException("Key $key in array is expected to be string or null, got: " . print_r($config, true));
+    }
+
+    /**
+     * @param array<string, mixed> $config
      */
     private function extractOptionalInteger(array $config, string $key): int|null
     {
@@ -200,7 +217,7 @@ trait ParserHelpers
     /**
      * We use a mixed type here; since we're parsing user data.
      * We expect / hope for a list, but might get anything.
-     * @return list<ValueOptionInterface>
+     * @return list<ValueOptionInterface<string>>|list<ValueOptionInterface<int>>
      */
     private function extractChoices(mixed $choices): array
     {
@@ -209,7 +226,6 @@ trait ParserHelpers
         } elseif (!is_array($choices) || !array_is_list($choices)) {
             throw new \InvalidArgumentException("Choices must be a list");
         }
-        /** @var ValueOptionInterface[] $result */
         $result = [];
         foreach ($choices as $choice) {
             if (is_array($choice) && isset($choice['value'])) {
@@ -237,13 +253,15 @@ trait ParserHelpers
             }
         }
 
+        // Make sure that if 1 option is a string value option, all options are string value options.
+
         return $result;
     }
 
     /**
      * Concat a combination of localized strings and normal ones
      * @param array<string> $titles
-     * @param (array<string, string>|string)[] $variables
+     * @param (array<string, string>|string) $variables
      * @return array<string, string>
      */
     private function arrayFormat(array $titles, array|string ...$variables): array

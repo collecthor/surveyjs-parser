@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\support;
 
-use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use PHPUnit\Framework\TestCase;

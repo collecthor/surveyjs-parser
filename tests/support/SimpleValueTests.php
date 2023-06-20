@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\support;
 
-use Collecthor\DataInterfaces\ValueInterface;
+use Collecthor\SurveyjsParser\Interfaces\RawValueInterface;
 use PHPUnit\Framework\Assert;
 
-trait SimpleValueTest
+trait SimpleValueTests
 {
-    private function getSubject(mixed $param = null): ValueInterface
+    private function getSubject(mixed $param = null): RawValueInterface
     {
         $reflection = new \ReflectionClass($this);
 
         /** @var non-empty-list<mixed> $sample */
-        foreach ($this->getValidSamples() as $sample) {
+        foreach (static::getValidSamples() as $sample) {
             $defaultValue = $sample[0];
             break;
         }
@@ -25,7 +25,7 @@ trait SimpleValueTest
             /** @var CoversClass $coversClass */
             $coversClass = $attribute->newInstance();
             $result = new ($coversClass->className)($param ?? $defaultValue);
-            if ($result instanceof ValueInterface) {
+            if ($result instanceof RawValueInterface) {
                 return $result;
             }
         }
@@ -35,11 +35,11 @@ trait SimpleValueTest
     /**
      * @return iterable<mixed>
      */
-    abstract protected function getValidSamples(): iterable;
+    abstract protected static function getValidSamples(): iterable;
     /**
      * @return iterable<mixed>
      */
-    abstract protected function getInvalidSamples(): iterable;
+    abstract protected static function getInvalidSamples(): iterable;
 
     /**
      * @dataProvider getValidSamples
