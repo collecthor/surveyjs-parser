@@ -91,31 +91,24 @@
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/collecthor.html">Collecthor</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/collecthor-surveyjsparser.html">SurveyjsParser</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/collecthor-surveyjsparser-values.html">Values</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/collecthor-surveyjsparser-interfaces.html">Interfaces</a></li>
     </ul>
 
-    <article class="phpdocumentor-element -class">
+    <article class="phpdocumentor-element -interface">
         <h2 class="phpdocumentor-content__title">
-    MissingIntegerValue
-
-    
-            <div class="phpdocumentor-element__package">
-            in package
+    VariableSetInterface
+                <div class="phpdocumentor-element__package">
+            in
             <ul class="phpdocumentor-breadcrumbs">
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/SurveyJSParser.html">SurveyJSParser</a></li>
+                                    <li><a href="packages/SurveyJSParser.html">SurveyJSParser</a></li>
                             </ul>
         </div>
-    
-            <span class="phpdocumentor-element__implements">
-            implements
-                            <abbr title="\Collecthor\DataInterfaces\MissingValueInterface">MissingValueInterface</abbr>,                             <abbr title="\Collecthor\DataInterfaces\NumericValueInterface">NumericValueInterface</abbr>                    </span>
-    
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Values/MissingIntegerValue.php"><a href="files/src-values-missingintegervalue.html"><abbr title="src/Values/MissingIntegerValue.php">MissingIntegerValue.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Interfaces/VariableSetInterface.php"><a href="files/src-interfaces-variablesetinterface.html"><abbr title="src/Interfaces/VariableSetInterface.php">VariableSetInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">9</span>
 
     </aside>
 
@@ -127,20 +120,6 @@
 
 
 
-<h3 id="interfaces_class_traits">
-    Interfaces, Classes, Traits and Enums
-    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
-</h3>
-
-<dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Collecthor\DataInterfaces\MissingValueInterface">MissingValueInterface</abbr></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Collecthor\DataInterfaces\NumericValueInterface">NumericValueInterface</abbr></dt>
-        <dd></dd>
-    
-    
-    
-    </dl>
 
 
 <h3 id="toc">
@@ -149,38 +128,24 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#property_isSystemMissing">$isSystemMissing</a>
+                        <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Collecthor-SurveyjsParser-Interfaces-VariableSetInterface.html#method_getVariable">getVariable()</a>
     <span>
-                        &nbsp;: bool            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#property_rawValue">$rawValue</a>
-    <span>
-                        &nbsp;: int            </span>
-</dt>
-<dd></dd>
-
-                <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#method___construct">__construct()</a>
-    <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <a href="classes/Collecthor-SurveyjsParser-Interfaces-VariableInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\VariableInterface">VariableInterface</abbr></a>    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#method_getRawValue">getRawValue()</a>
+    <a href="classes/Collecthor-SurveyjsParser-Interfaces-VariableSetInterface.html#method_getVariableNames">getVariableNames()</a>
     <span>
-                                &nbsp;: int    </span>
+                                &nbsp;: iteratable&lt;string|int, string&gt;    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#method_isSystemMissing">isSystemMissing()</a>
+    <a href="classes/Collecthor-SurveyjsParser-Interfaces-VariableSetInterface.html#method_getVariables">getVariables()</a>
     <span>
-                                &nbsp;: bool    </span>
+                                &nbsp;: iteratable&lt;string|int, <a href="classes/Collecthor-SurveyjsParser-Interfaces-VariableInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\VariableInterface">VariableInterface</abbr></a>&gt;    </span>
 </dt>
 <dd></dd>
 
@@ -190,86 +155,10 @@
 
         
 
-        
-    <section class="phpdocumentor-properties">
-        <h3 class="phpdocumentor-elements__header" id="properties">
-            Properties
-            <a href="classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
-        </h3>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                -read-only        "
->
-    <h4 class="phpdocumentor-element__name" id="property_isSystemMissing">
-        $isSystemMissing
-        <a href="classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#property_isSystemMissing" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Values/MissingIntegerValue.php"><a href="files/src-values-missingintegervalue.html"><abbr title="src/Values/MissingIntegerValue.php">MissingIntegerValue.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">14</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">bool</span>
-    <span class="phpdocumentor-signature__name">$isSystemMissing</span>
-     = <span class="phpdocumentor-signature__default-value">true</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                -read-only        "
->
-    <h4 class="phpdocumentor-element__name" id="property_rawValue">
-        $rawValue
-        <a href="classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#property_rawValue" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Values/MissingIntegerValue.php"><a href="files/src-values-missingintegervalue.html"><abbr title="src/Values/MissingIntegerValue.php">MissingIntegerValue.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">13</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">int</span>
-    <span class="phpdocumentor-signature__name">$rawValue</span>
-    </code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
-            </section>
-
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Collecthor-SurveyjsParser-Interfaces-VariableSetInterface.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -277,97 +166,12 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method___construct">
-        __construct()
-        <a href="classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getVariable">
+        getVariable()
+        <a href="classes/Collecthor-SurveyjsParser-Interfaces-VariableSetInterface.html#method_getVariable" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Values/MissingIntegerValue.php"><a href="files/src-values-missingintegervalue.html"><abbr title="src/Values/MissingIntegerValue.php">MissingIntegerValue.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">12</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$rawValue</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$isSystemMissing</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$rawValue</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$isSystemMissing</span>
-                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">true</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getRawValue">
-        getRawValue()
-        <a href="classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#method_getRawValue" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Values/MissingIntegerValue.php"><a href="files/src-values-missingintegervalue.html"><abbr title="src/Values/MissingIntegerValue.php">MissingIntegerValue.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">24</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getRawValue</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_isSystemMissing">
-        isSystemMissing()
-        <a href="classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#method_isSystemMissing" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Values/MissingIntegerValue.php"><a href="files/src-values-missingintegervalue.html"><abbr title="src/Values/MissingIntegerValue.php">MissingIntegerValue.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Interfaces/VariableSetInterface.php"><a href="files/src-interfaces-variablesetinterface.html"><abbr title="src/Interfaces/VariableSetInterface.php">VariableSetInterface.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">19</span>
 
@@ -376,17 +180,111 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">isSystemMissing</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">getVariable</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Collecthor-SurveyjsParser-Interfaces-VariableInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\VariableInterface">VariableInterface</abbr></a></span></code>
 
-        <section class="phpdocumentor-description"></section>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$name</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
 
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\InvalidArgumentException">InvalidArgumentException</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"><p>when the given name is not valid</p>
+</section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Collecthor-SurveyjsParser-Interfaces-VariableInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\VariableInterface">VariableInterface</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getVariableNames">
+        getVariableNames()
+        <a href="classes/Collecthor-SurveyjsParser-Interfaces-VariableSetInterface.html#method_getVariableNames" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Interfaces/VariableSetInterface.php"><a href="files/src-interfaces-variablesetinterface.html"><abbr title="src/Interfaces/VariableSetInterface.php">VariableSetInterface.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">14</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getVariableNames</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, string&gt;</span></code>
+
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
+    <span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, string&gt;</span>
             &mdash;
-        
+            <section class="phpdocumentor-description"><p>Return a list of variable IDs</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getVariables">
+        getVariables()
+        <a href="classes/Collecthor-SurveyjsParser-Interfaces-VariableSetInterface.html#method_getVariables" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Interfaces/VariableSetInterface.php"><a href="files/src-interfaces-variablesetinterface.html"><abbr title="src/Interfaces/VariableSetInterface.php">VariableSetInterface.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">24</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getVariables</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, <a href="classes/Collecthor-SurveyjsParser-Interfaces-VariableInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\VariableInterface">VariableInterface</abbr></a>&gt;</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, <a href="classes/Collecthor-SurveyjsParser-Interfaces-VariableInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\VariableInterface">VariableInterface</abbr></a>&gt;</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>Returns an iterator that will yield the VariableInterface objects</p>
+</section>
+
     
 </article>
             </section>
@@ -467,7 +365,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Collecthor-SurveyjsParser-Interfaces-VariableSetInterface.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

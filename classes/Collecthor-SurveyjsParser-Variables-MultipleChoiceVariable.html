@@ -108,7 +108,7 @@
     
             <span class="phpdocumentor-element__implements">
             implements
-                            <abbr title="\Collecthor\DataInterfaces\ClosedVariableInterface">ClosedVariableInterface</abbr>                    </span>
+                            <a href="classes/Collecthor-SurveyjsParser-Interfaces-ClosedVariableInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\ClosedVariableInterface">ClosedVariableInterface</abbr></a>                    </span>
     
             <span class="phpdocumentor-element__extends">
             Uses
@@ -123,9 +123,32 @@
     </aside>
 
         
-    <section class="phpdocumentor-description"></section>
 
 
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">template</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>T of string|float|int|bool</p>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">implements</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>ClosedVariableInterface&lt;T&gt;</p>
+</section>
+
+                                    </dd>
+                        </dl>
 
 
 
@@ -136,8 +159,8 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Collecthor\DataInterfaces\ClosedVariableInterface">ClosedVariableInterface</abbr></dt>
-        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Collecthor-SurveyjsParser-Interfaces-ClosedVariableInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\ClosedVariableInterface">ClosedVariableInterface</abbr></a></dt>
+        <dd>A closed variable is a variable with a finite number of valid values</dd>
     
     
     
@@ -193,16 +216,9 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_getDisplayValue">getDisplayValue()</a>
-    <span>
-                                &nbsp;: <abbr title="\Collecthor\DataInterfaces\StringValueInterface">StringValueInterface</abbr>    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_getMeasure">getMeasure()</a>
     <span>
-                                &nbsp;: <abbr title="\Collecthor\DataInterfaces\Measure">Measure</abbr>    </span>
+                                &nbsp;: <a href="classes/Collecthor-SurveyjsParser-Interfaces-Measure.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\Measure">Measure</abbr></a>    </span>
 </dt>
 <dd></dd>
 
@@ -230,9 +246,9 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_getValue">getValue()</a>
     <span>
-                                &nbsp;: <a href="classes/Collecthor-SurveyjsParser-Values-SystemMissingValue.html"><abbr title="\Collecthor\SurveyjsParser\Values\SystemMissingValue">SystemMissingValue</abbr></a>|<a href="classes/Collecthor-SurveyjsParser-Values-InvalidValue.html"><abbr title="\Collecthor\SurveyjsParser\Values\InvalidValue">InvalidValue</abbr></a>|<abbr title="\Collecthor\DataInterfaces\ValueSetInterface">ValueSetInterface</abbr>    </span>
+                                &nbsp;: <a href="classes/Collecthor-SurveyjsParser-Interfaces-NotNormalValueInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\NotNormalValueInterface">NotNormalValueInterface</abbr></a>|<a href="classes/Collecthor-SurveyjsParser-Interfaces-ValueSetInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\ValueSetInterface">ValueSetInterface</abbr></a>&lt;string|int, <abbr title="\Collecthor\SurveyjsParser\Variables\T">T</abbr>&gt;    </span>
 </dt>
-<dd></dd>
+<dd>Extracts the variable value from a record</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_getValueOptions">getValueOptions()</a>
@@ -425,7 +441,7 @@
     </code>
 
     
-        <section class="phpdocumentor-description"><p>non-empty-array&lt;string, ValueOptionInterface&gt;</p>
+        <section class="phpdocumentor-description"><p>non-empty-array&lt;string, ValueOptionInterface&lt;T&gt;&gt;</p>
 </section>
 
     
@@ -458,7 +474,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$titles</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;int, <abbr title="\Collecthor\DataInterfaces\ValueOptionInterface">ValueOptionInterface</abbr>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$valueOptions</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dataPath</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$rawConfiguration</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$titles</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;int, <a href="classes/Collecthor-SurveyjsParser-Interfaces-ValueOptionInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface">ValueOptionInterface</abbr></a>&lt;string|int, <abbr title="\Collecthor\SurveyjsParser\Variables\T">T</abbr>&gt;&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$valueOptions</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dataPath</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$rawConfiguration</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -479,7 +495,7 @@
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$valueOptions</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;int, <abbr title="\Collecthor\DataInterfaces\ValueOptionInterface">ValueOptionInterface</abbr>&gt;</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;int, <a href="classes/Collecthor-SurveyjsParser-Interfaces-ValueOptionInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface">ValueOptionInterface</abbr></a>&lt;string|int, <abbr title="\Collecthor\SurveyjsParser\Variables\T">T</abbr>&gt;&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -515,58 +531,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getDisplayValue">
-        getDisplayValue()
-        <a href="classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_getDisplayValue" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/Variables/MultipleChoiceVariable.php"><a href="files/src-variables-multiplechoicevariable.html"><abbr title="src/Variables/MultipleChoiceVariable.php">MultipleChoiceVariable.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">79</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getDisplayValue</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\DataInterfaces\RecordInterface">RecordInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$record</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$locale</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Collecthor\DataInterfaces\StringValueInterface">StringValueInterface</abbr></span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$record</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\DataInterfaces\RecordInterface">RecordInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$locale</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Collecthor\DataInterfaces\StringValueInterface">StringValueInterface</abbr></span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getMeasure">
         getMeasure()
         <a href="classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_getMeasure" class="headerlink"><i class="fas fa-link"></i></a>
@@ -574,14 +538,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Variables/MultipleChoiceVariable.php"><a href="files/src-variables-multiplechoicevariable.html"><abbr title="src/Variables/MultipleChoiceVariable.php">MultipleChoiceVariable.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">91</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getMeasure</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Collecthor\DataInterfaces\Measure">Measure</abbr></span></code>
+                    <span class="phpdocumentor-signature__name">getMeasure</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Collecthor-SurveyjsParser-Interfaces-Measure.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\Measure">Measure</abbr></a></span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -589,7 +553,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Collecthor\DataInterfaces\Measure">Measure</abbr></span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Collecthor-SurveyjsParser-Interfaces-Measure.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\Measure">Measure</abbr></a></span>
             &mdash;
         
     
@@ -728,33 +692,32 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Variables/MultipleChoiceVariable.php"><a href="files/src-variables-multiplechoicevariable.html"><abbr title="src/Variables/MultipleChoiceVariable.php">MultipleChoiceVariable.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">58</span>
+    <span class="phpdocumentor-element-found-in__line">62</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Extracts the variable value from a record</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getValue</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\DataInterfaces\RecordInterface">RecordInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$record</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Collecthor-SurveyjsParser-Values-SystemMissingValue.html"><abbr title="\Collecthor\SurveyjsParser\Values\SystemMissingValue">SystemMissingValue</abbr></a>|<a href="classes/Collecthor-SurveyjsParser-Values-InvalidValue.html"><abbr title="\Collecthor\SurveyjsParser\Values\InvalidValue">InvalidValue</abbr></a>|<abbr title="\Collecthor\DataInterfaces\ValueSetInterface">ValueSetInterface</abbr></span></code>
+                    <span class="phpdocumentor-signature__name">getValue</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-Interfaces-RecordInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\RecordInterface">RecordInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$record</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Collecthor-SurveyjsParser-Interfaces-NotNormalValueInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\NotNormalValueInterface">NotNormalValueInterface</abbr></a>|<a href="classes/Collecthor-SurveyjsParser-Interfaces-ValueSetInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\ValueSetInterface">ValueSetInterface</abbr></a>&lt;string|int, <abbr title="\Collecthor\SurveyjsParser\Variables\T">T</abbr>&gt;</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$record</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Collecthor\DataInterfaces\RecordInterface">RecordInterface</abbr></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-Interfaces-RecordInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\RecordInterface">RecordInterface</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Collecthor-SurveyjsParser-Values-SystemMissingValue.html"><abbr title="\Collecthor\SurveyjsParser\Values\SystemMissingValue">SystemMissingValue</abbr></a>|<a href="classes/Collecthor-SurveyjsParser-Values-InvalidValue.html"><abbr title="\Collecthor\SurveyjsParser\Values\InvalidValue">InvalidValue</abbr></a>|<abbr title="\Collecthor\DataInterfaces\ValueSetInterface">ValueSetInterface</abbr></span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Collecthor-SurveyjsParser-Interfaces-NotNormalValueInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\NotNormalValueInterface">NotNormalValueInterface</abbr></a>|<a href="classes/Collecthor-SurveyjsParser-Interfaces-ValueSetInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\ValueSetInterface">ValueSetInterface</abbr></a>&lt;string|int, <abbr title="\Collecthor\SurveyjsParser\Variables\T">T</abbr>&gt;</span>
             &mdash;
         
     
@@ -781,8 +744,7 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getValueOptions</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
@@ -805,21 +767,21 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Variables/MultipleChoiceVariable.php"><a href="files/src-variables-multiplechoicevariable.html"><abbr title="src/Variables/MultipleChoiceVariable.php">MultipleChoiceVariable.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">100</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">checkValueOptions</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;int, <abbr title="\Collecthor\DataInterfaces\ValueOptionInterface">ValueOptionInterface</abbr>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$valueOptions</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">checkValueOptions</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;int, <a href="classes/Collecthor-SurveyjsParser-Interfaces-ValueOptionInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface">ValueOptionInterface</abbr></a>&lt;string|int, <abbr title="\Collecthor\SurveyjsParser\Variables\T">T</abbr>&gt;&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$valueOptions</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$valueOptions</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;int, <abbr title="\Collecthor\DataInterfaces\ValueOptionInterface">ValueOptionInterface</abbr>&gt;</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;int, <a href="classes/Collecthor-SurveyjsParser-Interfaces-ValueOptionInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface">ValueOptionInterface</abbr></a>&lt;string|int, <abbr title="\Collecthor\SurveyjsParser\Variables\T">T</abbr>&gt;&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 

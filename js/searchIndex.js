@@ -13,12 +13,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayDataRecord\u003A\u003AgetDataValue\u0028\u0029",
             "name": "getDataValue",
-            "summary": "",
+            "summary": "Retrieve\u0020a\u0020value\u0020given\u0020by\u0020path\u0020to\u0020the\u0020data.",
             "url": "classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#method_getDataValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayDataRecord\u003A\u003AallData\u0028\u0029",
             "name": "allData",
-            "summary": "",
+            "summary": "Return\u0020the\u0020data\u0020in\u0020the\u0020record",
             "url": "classes/Collecthor-SurveyjsParser-ArrayDataRecord.html#method_allData"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayDataRecord\u003A\u003A\u0024data",
@@ -38,17 +38,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayRecord\u003A\u003AgetRecordId\u0028\u0029",
             "name": "getRecordId",
-            "summary": "",
+            "summary": "Return\u0020the\u0020unique\u0020ID\u0020of\u0020this\u0020record",
             "url": "classes/Collecthor-SurveyjsParser-ArrayRecord.html#method_getRecordId"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayRecord\u003A\u003AgetStarted\u0028\u0029",
             "name": "getStarted",
-            "summary": "",
+            "summary": "Since\u0020there\u0020is\u0020no\u0020interface\u0020for\u0020immutable\u0020date\u0020times,\u0020implementations\u0020MUST\u0020return\u0020a\u0020fresh\u0020object\u0020every\u0020time.",
             "url": "classes/Collecthor-SurveyjsParser-ArrayRecord.html#method_getStarted"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayRecord\u003A\u003AgetLastUpdate\u0028\u0029",
             "name": "getLastUpdate",
-            "summary": "",
+            "summary": "Since\u0020there\u0020is\u0020no\u0020interface\u0020for\u0020immutable\u0020date\u0020times,\u0020implementations\u0020MUST\u0020return\u0020a\u0020fresh\u0020object\u0020every\u0020time.",
             "url": "classes/Collecthor-SurveyjsParser-ArrayRecord.html#method_getLastUpdate"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ArrayRecord\u003A\u003A\u0024id",
@@ -126,35 +126,255 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Helpers-OptionGenerator.html#method_generateOptionsFromBackedEnum"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\JavascriptVariableSet",
-            "name": "JavascriptVariableSet",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html"
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ClosedVariableInterface",
+            "name": "ClosedVariableInterface",
+            "summary": "A\u0020closed\u0020variable\u0020is\u0020a\u0020variable\u0020with\u0020a\u0020finite\u0020number\u0020of\u0020valid\u0020values",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-ClosedVariableInterface.html"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\JavascriptVariableSet\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ClosedVariableInterface\u003A\u003AgetValueOptions\u0028\u0029",
+            "name": "getValueOptions",
             "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#method___construct"
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-ClosedVariableInterface.html#method_getValueOptions"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\JavascriptVariableSet\u003A\u003AgetVariableNames\u0028\u0029",
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ClosedVariableInterface\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "Extracts\u0020the\u0020variable\u0020value\u0020from\u0020a\u0020record",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-ClosedVariableInterface.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\Measure",
+            "name": "Measure",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-Measure.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\Measure\u003A\u003ANominal",
+            "name": "Nominal",
+            "summary": "",
+            "url": ""
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\Measure\u003A\u003AOrdinal",
+            "name": "Ordinal",
+            "summary": "",
+            "url": ""
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\Measure\u003A\u003AScale",
+            "name": "Scale",
+            "summary": "",
+            "url": ""
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\NotNormalValueInterface",
+            "name": "NotNormalValueInterface",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-NotNormalValueInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\NotNormalValueInterface\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-NotNormalValueInterface.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\NotNormalValueInterface\u003A\u003AgetType\u0028\u0029",
+            "name": "getType",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-NotNormalValueInterface.html#method_getType"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\NotNormalValueInterface\u003A\u003AgetDisplayValue\u0028\u0029",
+            "name": "getDisplayValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-NotNormalValueInterface.html#method_getDisplayValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\RawValueInterface",
+            "name": "RawValueInterface",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-RawValueInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\RawValueInterface\u003A\u003AgetRawValue\u0028\u0029",
+            "name": "getRawValue",
+            "summary": "Returns\u0020a\u0020raw\u0020value\u0020as\u0020obtained\u0020from\u0020the\u0020record.",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-RawValueInterface.html#method_getRawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\RawValueInterface\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-RawValueInterface.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\RawValueInterface\u003A\u003AgetType\u0028\u0029",
+            "name": "getType",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-RawValueInterface.html#method_getType"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\RawValueInterface\u003A\u003AgetDisplayValue\u0028\u0029",
+            "name": "getDisplayValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-RawValueInterface.html#method_getDisplayValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\RecordInterface",
+            "name": "RecordInterface",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-RecordInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\RecordInterface\u003A\u003AgetDataValue\u0028\u0029",
+            "name": "getDataValue",
+            "summary": "Retrieve\u0020a\u0020value\u0020given\u0020by\u0020path\u0020to\u0020the\u0020data.",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-RecordInterface.html#method_getDataValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\RecordInterface\u003A\u003AallData\u0028\u0029",
+            "name": "allData",
+            "summary": "Return\u0020the\u0020data\u0020in\u0020the\u0020record",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-RecordInterface.html#method_allData"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\StoredRecordInterface",
+            "name": "StoredRecordInterface",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-StoredRecordInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\StoredRecordInterface\u003A\u003AgetRecordId\u0028\u0029",
+            "name": "getRecordId",
+            "summary": "Return\u0020the\u0020unique\u0020ID\u0020of\u0020this\u0020record",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-StoredRecordInterface.html#method_getRecordId"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\StoredRecordInterface\u003A\u003AgetStarted\u0028\u0029",
+            "name": "getStarted",
+            "summary": "Since\u0020there\u0020is\u0020no\u0020interface\u0020for\u0020immutable\u0020date\u0020times,\u0020implementations\u0020MUST\u0020return\u0020a\u0020fresh\u0020object\u0020every\u0020time.",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-StoredRecordInterface.html#method_getStarted"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\StoredRecordInterface\u003A\u003AgetLastUpdate\u0028\u0029",
+            "name": "getLastUpdate",
+            "summary": "Since\u0020there\u0020is\u0020no\u0020interface\u0020for\u0020immutable\u0020date\u0020times,\u0020implementations\u0020MUST\u0020return\u0020a\u0020fresh\u0020object\u0020every\u0020time.",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-StoredRecordInterface.html#method_getLastUpdate"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\StringValueInterface",
+            "name": "StringValueInterface",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-StringValueInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\StringValueInterface\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-StringValueInterface.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ValueMapInterface",
+            "name": "ValueMapInterface",
+            "summary": "Models\u0020a\u0020value\u0020that\u0020contains\u0020key\u0020value\u0020pairs.",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-ValueMapInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ValueOptionInterface",
+            "name": "ValueOptionInterface",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-ValueOptionInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ValueOptionInterface\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-ValueOptionInterface.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ValueOptionInterface\u003A\u003AgetRawValue\u0028\u0029",
+            "name": "getRawValue",
+            "summary": "Returns\u0020a\u0020raw\u0020value\u0020as\u0020obtained\u0020from\u0020the\u0020record.",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-ValueOptionInterface.html#method_getRawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ValueOptionInterface\u003A\u003AgetDisplayValues\u0028\u0029",
+            "name": "getDisplayValues",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-ValueOptionInterface.html#method_getDisplayValues"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ValueOptionInterface\u003A\u003AisNone\u0028\u0029",
+            "name": "isNone",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-ValueOptionInterface.html#method_isNone"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ValueOptionInterface\u003A\u003AisOther\u0028\u0029",
+            "name": "isOther",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-ValueOptionInterface.html#method_isOther"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ValueOptionInterface\u003A\u003ADEFAULT_LOCALE",
+            "name": "DEFAULT_LOCALE",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-ValueOptionInterface.html#constant_DEFAULT_LOCALE"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ValueSetInterface",
+            "name": "ValueSetInterface",
+            "summary": "Models\u0020a\u0020value\u0020that\u0020contains\u0020multiple\u0020ValueOptions.",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-ValueSetInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ValueSetInterface\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-ValueSetInterface.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ValueType",
+            "name": "ValueType",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-ValueType.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ValueType\u003A\u003ANormal",
+            "name": "Normal",
+            "summary": "A\u0020value\u0020that\u0020is\u0020within\u0020the\u0020expected\u0020range",
+            "url": ""
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ValueType\u003A\u003ASystemMissing",
+            "name": "SystemMissing",
+            "summary": "A\u0020value\u0020that\u0020is\u0020missing\u0020due\u0020to\u0020a\u0020system\u0020failure\n\u0022missing\u0020completely\u0020at\u0020random\u0022\nIt\u0020is\u0020unrelated\u0020to\u0020other\u0020data\u0020in\u0020the\u0020response",
+            "url": ""
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ValueType\u003A\u003AMissing",
+            "name": "Missing",
+            "summary": "A\u0020value\u0020that\u0020is\u0020missing\u0020with\u0020the\u0020reason\u0020related\u0020to\u0020other\u0020observed\u0020variables\n\u0022missing\u0020at\u0020random\u0022\nThis\u0020could\u0020be\u0020for\u0020example\u0020due\u0020to\u0020routing\u0020in\u0020the\u0020survey",
+            "url": ""
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ValueType\u003A\u003AInvalid",
+            "name": "Invalid",
+            "summary": "The\u0020value\u0020falls\u0020outside\u0020the\u0020expected\u0020domain,\u0020imagine\u0020getting\u0020a\u0020text\u0020when\u0020expecting\u0020a\u0020number",
+            "url": ""
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\VariableInterface",
+            "name": "VariableInterface",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-VariableInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\VariableInterface\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-VariableInterface.html#method_getName"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\VariableInterface\u003A\u003AgetTitle\u0028\u0029",
+            "name": "getTitle",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-VariableInterface.html#method_getTitle"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\VariableInterface\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "Extracts\u0020the\u0020variable\u0020value\u0020from\u0020a\u0020record",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-VariableInterface.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\VariableInterface\u003A\u003AgetMeasure\u0028\u0029",
+            "name": "getMeasure",
+            "summary": "Return\u0020the\u0020type\u0020of\u0020measure\u0020for\u0020this\u0020variable",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-VariableInterface.html#method_getMeasure"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\VariableInterface\u003A\u003AgetRawConfigurationValue\u0028\u0029",
+            "name": "getRawConfigurationValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-VariableInterface.html#method_getRawConfigurationValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\VariableSetInterface",
+            "name": "VariableSetInterface",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-VariableSetInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\VariableSetInterface\u003A\u003AgetVariableNames\u0028\u0029",
             "name": "getVariableNames",
             "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#method_getVariableNames"
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-VariableSetInterface.html#method_getVariableNames"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\JavascriptVariableSet\u003A\u003AgetVariable\u0028\u0029",
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\VariableSetInterface\u003A\u003AgetVariable\u0028\u0029",
             "name": "getVariable",
             "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#method_getVariable"
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-VariableSetInterface.html#method_getVariable"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\JavascriptVariableSet\u003A\u003AgetVariables\u0028\u0029",
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\VariableSetInterface\u003A\u003AgetVariables\u0028\u0029",
             "name": "getVariables",
             "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#method_getVariables"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\JavascriptVariableSet\u003A\u003A\u0024variables",
-            "name": "variables",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-JavascriptVariableSet.html#property_variables"
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-VariableSetInterface.html#method_getVariables"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\LocalizerInterface",
             "name": "LocalizerInterface",
@@ -215,6 +435,11 @@ Search.appendIndex(
             "name": "extractOptionalBoolean",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractOptionalBoolean"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AextractOptionalString\u0028\u0029",
+            "name": "extractOptionalString",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_extractOptionalString"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AextractOptionalInteger\u0028\u0029",
             "name": "extractOptionalInteger",
@@ -586,6 +811,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-SurveyParser.html#method_extractString"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser\u003A\u003Aparse\u0028\u0029",
+            "name": "parse",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-SurveyParser.html#method_parse"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser\u003A\u003A\u0024parsers",
             "name": "parsers",
             "summary": "",
@@ -686,26 +916,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Traits-GetTitle.html#property_titles"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValue",
-            "name": "BooleanValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValue.html"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValue\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValue.html#method___construct"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValue\u003A\u003AgetRawValue\u0028\u0029",
-            "name": "getRawValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValue.html#method_getRawValue"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValue\u003A\u003A\u0024rawValue",
-            "name": "rawValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValue.html#property_rawValue"
-        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValueOption",
             "name": "BooleanValueOption",
             "summary": "",
@@ -718,7 +928,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValueOption\u003A\u003AgetRawValue\u0028\u0029",
             "name": "getRawValue",
-            "summary": "",
+            "summary": "Returns\u0020a\u0020raw\u0020value\u0020as\u0020obtained\u0020from\u0020the\u0020record.",
             "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValueOption.html#method_getRawValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValueOption\u003A\u003AisNone\u0028\u0029",
@@ -730,6 +940,16 @@ Search.appendIndex(
             "name": "isOther",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValueOption.html#method_isOther"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValueOption\u003A\u003AgetType\u0028\u0029",
+            "name": "getType",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValueOption.html#method_getType"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValueOption\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValueOption.html#method_getValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\BooleanValueOption\u003A\u003A\u0024rawValue",
             "name": "rawValue",
@@ -753,8 +973,23 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\FloatValue\u003A\u003AgetRawValue\u0028\u0029",
             "name": "getRawValue",
-            "summary": "",
+            "summary": "Returns\u0020a\u0020raw\u0020value\u0020as\u0020obtained\u0020from\u0020the\u0020record.",
             "url": "classes/Collecthor-SurveyjsParser-Values-FloatValue.html#method_getRawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\FloatValue\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-FloatValue.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\FloatValue\u003A\u003AgetType\u0028\u0029",
+            "name": "getType",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-FloatValue.html#method_getType"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\FloatValue\u003A\u003AgetDisplayValue\u0028\u0029",
+            "name": "getDisplayValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-FloatValue.html#method_getDisplayValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\FloatValue\u003A\u003A\u0024rawValue",
             "name": "rawValue",
@@ -773,8 +1008,23 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\IntegerValue\u003A\u003AgetRawValue\u0028\u0029",
             "name": "getRawValue",
-            "summary": "",
+            "summary": "Returns\u0020a\u0020raw\u0020value\u0020as\u0020obtained\u0020from\u0020the\u0020record.",
             "url": "classes/Collecthor-SurveyjsParser-Values-IntegerValue.html#method_getRawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\IntegerValue\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-IntegerValue.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\IntegerValue\u003A\u003AgetType\u0028\u0029",
+            "name": "getType",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-IntegerValue.html#method_getType"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\IntegerValue\u003A\u003AgetDisplayValue\u0028\u0029",
+            "name": "getDisplayValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-IntegerValue.html#method_getDisplayValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\IntegerValue\u003A\u003A\u0024rawValue",
             "name": "rawValue",
@@ -793,7 +1043,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\IntegerValueOption\u003A\u003AgetRawValue\u0028\u0029",
             "name": "getRawValue",
-            "summary": "",
+            "summary": "Returns\u0020a\u0020raw\u0020value\u0020as\u0020obtained\u0020from\u0020the\u0020record.",
             "url": "classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#method_getRawValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\IntegerValueOption\u003A\u003AisOther\u0028\u0029",
@@ -806,6 +1056,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#method_isNone"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\IntegerValueOption\u003A\u003AgetType\u0028\u0029",
+            "name": "getType",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#method_getType"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\IntegerValueOption\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#method_getValue"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\IntegerValueOption\u003A\u003A\u0024rawValue",
             "name": "rawValue",
             "summary": "",
@@ -815,106 +1075,6 @@ Search.appendIndex(
             "name": "displayValues",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-IntegerValueOption.html#property_displayValues"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\InvalidValue",
-            "name": "InvalidValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-InvalidValue.html"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\InvalidValue\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-InvalidValue.html#method___construct"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\InvalidValue\u003A\u003AgetRawValue\u0028\u0029",
-            "name": "getRawValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-InvalidValue.html#method_getRawValue"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\InvalidValue\u003A\u003AisSystemMissing\u0028\u0029",
-            "name": "isSystemMissing",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-InvalidValue.html#method_isSystemMissing"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\InvalidValue\u003A\u003A\u0024rawValue",
-            "name": "rawValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-InvalidValue.html#property_rawValue"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingBooleanValue",
-            "name": "MissingBooleanValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-MissingBooleanValue.html"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingBooleanValue\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-MissingBooleanValue.html#method___construct"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingBooleanValue\u003A\u003A\u0024isSystemMissing",
-            "name": "isSystemMissing",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-MissingBooleanValue.html#property_isSystemMissing"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingBooleanValue\u003A\u003AgetRawValue\u0028\u0029",
-            "name": "getRawValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-MissingBooleanValue.html#method_getRawValue"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingBooleanValue\u003A\u003A\u0024rawValue",
-            "name": "rawValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-MissingBooleanValue.html#property_rawValue"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingIntegerValue",
-            "name": "MissingIntegerValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingIntegerValue\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#method___construct"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingIntegerValue\u003A\u003A\u0024isSystemMissing",
-            "name": "isSystemMissing",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#property_isSystemMissing"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingIntegerValue\u003A\u003AgetRawValue\u0028\u0029",
-            "name": "getRawValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#method_getRawValue"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingIntegerValue\u003A\u003A\u0024rawValue",
-            "name": "rawValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-MissingIntegerValue.html#property_rawValue"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingStringValue",
-            "name": "MissingStringValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-MissingStringValue.html"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingStringValue\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-MissingStringValue.html#method___construct"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingStringValue\u003A\u003A\u0024isSystemMissing",
-            "name": "isSystemMissing",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-MissingStringValue.html#property_isSystemMissing"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingStringValue\u003A\u003AgetRawValue\u0028\u0029",
-            "name": "getRawValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-MissingStringValue.html#method_getRawValue"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingStringValue\u003A\u003A\u0024rawValue",
-            "name": "rawValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-MissingStringValue.html#property_rawValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NoneValueOption",
             "name": "NoneValueOption",
@@ -928,7 +1088,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NoneValueOption\u003A\u003AgetRawValue\u0028\u0029",
             "name": "getRawValue",
-            "summary": "",
+            "summary": "Returns\u0020a\u0020raw\u0020value\u0020as\u0020obtained\u0020from\u0020the\u0020record.",
             "url": "classes/Collecthor-SurveyjsParser-Values-NoneValueOption.html#method_getRawValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NoneValueOption\u003A\u003AisNone\u0028\u0029",
@@ -941,6 +1101,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-NoneValueOption.html#method_isOther"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NoneValueOption\u003A\u003AgetType\u0028\u0029",
+            "name": "getType",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NoneValueOption.html#method_getType"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NoneValueOption\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NoneValueOption.html#method_getValue"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NoneValueOption\u003A\u003A\u0024rawValue",
             "name": "rawValue",
             "summary": "",
@@ -950,6 +1120,56 @@ Search.appendIndex(
             "name": "displayValues",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-NoneValueOption.html#property_displayValues"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NotNormalValue",
+            "name": "NotNormalValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NotNormalValue.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NotNormalValue\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NotNormalValue.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NotNormalValue\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NotNormalValue.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NotNormalValue\u003A\u003AgetType\u0028\u0029",
+            "name": "getType",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NotNormalValue.html#method_getType"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NotNormalValue\u003A\u003AgetDisplayValue\u0028\u0029",
+            "name": "getDisplayValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NotNormalValue.html#method_getDisplayValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NotNormalValue\u003A\u003AgetRawValue\u0028\u0029",
+            "name": "getRawValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NotNormalValue.html#method_getRawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NotNormalValue\u003A\u003Amissing\u0028\u0029",
+            "name": "missing",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NotNormalValue.html#method_missing"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NotNormalValue\u003A\u003Ainvalid\u0028\u0029",
+            "name": "invalid",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NotNormalValue.html#method_invalid"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NotNormalValue\u003A\u003A\u0024valueType",
+            "name": "valueType",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NotNormalValue.html#property_valueType"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\NotNormalValue\u003A\u003A\u0024rawValue",
+            "name": "rawValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-NotNormalValue.html#property_rawValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\OtherValueOption",
             "name": "OtherValueOption",
@@ -963,7 +1183,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\OtherValueOption\u003A\u003AgetRawValue\u0028\u0029",
             "name": "getRawValue",
-            "summary": "",
+            "summary": "Returns\u0020a\u0020raw\u0020value\u0020as\u0020obtained\u0020from\u0020the\u0020record.",
             "url": "classes/Collecthor-SurveyjsParser-Values-OtherValueOption.html#method_getRawValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\OtherValueOption\u003A\u003AisNone\u0028\u0029",
@@ -975,6 +1195,16 @@ Search.appendIndex(
             "name": "isOther",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-OtherValueOption.html#method_isOther"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\OtherValueOption\u003A\u003AgetType\u0028\u0029",
+            "name": "getType",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-OtherValueOption.html#method_getType"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\OtherValueOption\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-OtherValueOption.html#method_getValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\OtherValueOption\u003A\u003A\u0024rawValue",
             "name": "rawValue",
@@ -996,10 +1226,30 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-StringValue.html#method___construct"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValue\u003A\u003AfromRawValue\u0028\u0029",
+            "name": "fromRawValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-StringValue.html#method_fromRawValue"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValue\u003A\u003AgetRawValue\u0028\u0029",
             "name": "getRawValue",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-StringValue.html#method_getRawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValue\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-StringValue.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValue\u003A\u003AgetType\u0028\u0029",
+            "name": "getType",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-StringValue.html#method_getType"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValue\u003A\u003AgetDisplayValue\u0028\u0029",
+            "name": "getDisplayValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-StringValue.html#method_getDisplayValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValue\u003A\u003A\u0024rawValue",
             "name": "rawValue",
@@ -1018,7 +1268,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValueOption\u003A\u003AgetRawValue\u0028\u0029",
             "name": "getRawValue",
-            "summary": "",
+            "summary": "Returns\u0020a\u0020raw\u0020value\u0020as\u0020obtained\u0020from\u0020the\u0020record.",
             "url": "classes/Collecthor-SurveyjsParser-Values-StringValueOption.html#method_getRawValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValueOption\u003A\u003AisNone\u0028\u0029",
@@ -1031,6 +1281,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-StringValueOption.html#method_isOther"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValueOption\u003A\u003AgetType\u0028\u0029",
+            "name": "getType",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-StringValueOption.html#method_getType"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValueOption\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-StringValueOption.html#method_getValue"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValueOption\u003A\u003A\u0024rawValue",
             "name": "rawValue",
             "summary": "",
@@ -1040,21 +1300,6 @@ Search.appendIndex(
             "name": "displayValues",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-StringValueOption.html#property_displayValues"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\SystemMissingValue",
-            "name": "SystemMissingValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-SystemMissingValue.html"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\SystemMissingValue\u003A\u003AisSystemMissing\u0028\u0029",
-            "name": "isSystemMissing",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-SystemMissingValue.html#method_isSystemMissing"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\SystemMissingValue\u003A\u003AgetRawValue\u0028\u0029",
-            "name": "getRawValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-SystemMissingValue.html#method_getRawValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\ValueSet",
             "name": "ValueSet",
@@ -1066,10 +1311,25 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-ValueSet.html#method___construct"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\ValueSet\u003A\u003AgetValues\u0028\u0029",
-            "name": "getValues",
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\ValueSet\u003A\u003AgetRawValue\u0028\u0029",
+            "name": "getRawValue",
             "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-ValueSet.html#method_getValues"
+            "url": "classes/Collecthor-SurveyjsParser-Values-ValueSet.html#method_getRawValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\ValueSet\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-ValueSet.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\ValueSet\u003A\u003AgetType\u0028\u0029",
+            "name": "getType",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-ValueSet.html#method_getType"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\ValueSet\u003A\u003AgetDisplayValue\u0028\u0029",
+            "name": "getDisplayValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-ValueSet.html#method_getDisplayValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\ValueSet\u003A\u003A\u0024values",
             "name": "values",
@@ -1093,18 +1353,23 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003AgetValue\u0028\u0029",
             "name": "getValue",
-            "summary": "",
+            "summary": "Extracts\u0020the\u0020variable\u0020value\u0020from\u0020a\u0020record",
             "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#method_getValue"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003AgetDisplayValue\u0028\u0029",
-            "name": "getDisplayValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#method_getDisplayValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003AgetMeasure\u0028\u0029",
             "name": "getMeasure",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#method_getMeasure"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003A\u0024yes",
+            "name": "yes",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#property_yes"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003A\u0024no",
+            "name": "no",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#property_no"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003A\u0024name",
             "name": "name",
@@ -1153,13 +1418,8 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003AgetValue\u0028\u0029",
             "name": "getValue",
-            "summary": "",
+            "summary": "Extracts\u0020the\u0020variable\u0020value\u0020from\u0020a\u0020record",
             "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_getValue"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003AgetDisplayValue\u0028\u0029",
-            "name": "getDisplayValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_getDisplayValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003AgetMeasure\u0028\u0029",
             "name": "getMeasure",
@@ -1208,23 +1468,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\NumericVariable\u003A\u003AgetValue\u0028\u0029",
             "name": "getValue",
-            "summary": "",
+            "summary": "Extracts\u0020the\u0020variable\u0020value\u0020from\u0020a\u0020record",
             "url": "classes/Collecthor-SurveyjsParser-Variables-NumericVariable.html#method_getValue"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\NumericVariable\u003A\u003AgetDisplayValue\u0028\u0029",
-            "name": "getDisplayValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Variables-NumericVariable.html#method_getDisplayValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\NumericVariable\u003A\u003AgetMeasure\u0028\u0029",
             "name": "getMeasure",
             "summary": "Numerical\u0020variables\u0020are\u0020always\u0020ordered,\u0020they\u0020might\u0020even\u0020be\u0020scalar,\u0020but\u0020that\u0020depends\u0020on\u0020context.",
             "url": "classes/Collecthor-SurveyjsParser-Variables-NumericVariable.html#method_getMeasure"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\NumericVariable\u003A\u003AgetJavascriptRepresentation\u0028\u0029",
-            "name": "getJavascriptRepresentation",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Variables-NumericVariable.html#method_getJavascriptRepresentation"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\NumericVariable\u003A\u003A\u0024dataPath",
             "name": "dataPath",
@@ -1243,23 +1493,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OpenTextVariable\u003A\u003AgetValue\u0028\u0029",
             "name": "getValue",
-            "summary": "",
+            "summary": "Extracts\u0020the\u0020variable\u0020value\u0020from\u0020a\u0020record",
             "url": "classes/Collecthor-SurveyjsParser-Variables-OpenTextVariable.html#method_getValue"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OpenTextVariable\u003A\u003AgetDisplayValue\u0028\u0029",
-            "name": "getDisplayValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Variables-OpenTextVariable.html#method_getDisplayValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OpenTextVariable\u003A\u003AgetMeasure\u0028\u0029",
             "name": "getMeasure",
-            "summary": "",
+            "summary": "Return\u0020the\u0020type\u0020of\u0020measure\u0020for\u0020this\u0020variable",
             "url": "classes/Collecthor-SurveyjsParser-Variables-OpenTextVariable.html#method_getMeasure"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OpenTextVariable\u003A\u003AgetJavascriptRepresentation\u0028\u0029",
-            "name": "getJavascriptRepresentation",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Variables-OpenTextVariable.html#method_getJavascriptRepresentation"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OpenTextVariable\u003A\u003A\u0024dataPath",
             "name": "dataPath",
@@ -1283,13 +1523,8 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable\u003A\u003AgetValue\u0028\u0029",
             "name": "getValue",
-            "summary": "",
+            "summary": "Extracts\u0020the\u0020variable\u0020value\u0020from\u0020a\u0020record",
             "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html#method_getValue"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable\u003A\u003AgetDisplayValue\u0028\u0029",
-            "name": "getDisplayValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Variables-OrderedVariable.html#method_getDisplayValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\OrderedVariable\u003A\u003AgetMeasure\u0028\u0029",
             "name": "getMeasure",
@@ -1343,23 +1578,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceVariable\u003A\u003AgetValue\u0028\u0029",
             "name": "getValue",
-            "summary": "",
+            "summary": "Extracts\u0020the\u0020variable\u0020value\u0020from\u0020a\u0020record",
             "url": "classes/Collecthor-SurveyjsParser-Variables-SingleChoiceVariable.html#method_getValue"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceVariable\u003A\u003AgetDisplayValue\u0028\u0029",
-            "name": "getDisplayValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Variables-SingleChoiceVariable.html#method_getDisplayValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceVariable\u003A\u003AgetMeasure\u0028\u0029",
             "name": "getMeasure",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Variables-SingleChoiceVariable.html#method_getMeasure"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceVariable\u003A\u003AgetJavascriptRepresentation\u0028\u0029",
-            "name": "getJavascriptRepresentation",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Variables-SingleChoiceVariable.html#method_getJavascriptRepresentation"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceVariable\u003A\u003A\u0024valueMap",
             "name": "valueMap",
@@ -1435,6 +1660,11 @@ Search.appendIndex(
             "name": "Helpers",
             "summary": "",
             "url": "namespaces/collecthor-surveyjsparser-helpers.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces",
+            "name": "Interfaces",
+            "summary": "",
+            "url": "namespaces/collecthor-surveyjsparser-interfaces.html"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Parsers",
             "name": "Parsers",
