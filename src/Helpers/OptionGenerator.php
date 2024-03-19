@@ -9,8 +9,6 @@ use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use UnitEnum;
-use function iter\map;
-use function iter\toArray;
 
 class OptionGenerator
 {
@@ -19,7 +17,8 @@ class OptionGenerator
      */
     public static function generateOptionsFromUnitEnum(UnitEnum $example): array
     {
-        return toArray(map(static fn (UnitEnum $case): StringValueOption => new StringValueOption($case->name, [ValueOptionInterface::DEFAULT_LOCALE => $case->name]), $example::cases()));
+        $mapper = static fn (UnitEnum $case): StringValueOption => new StringValueOption($case->name, [ValueOptionInterface::DEFAULT_LOCALE => $case->name]);
+        return array_values(array_map($mapper, $example::cases()));
     }
 
     /**

@@ -20,8 +20,8 @@ trait TestValueOptionLabels
         Assert::assertInstanceOf(ValueOptionInterface::class, $option);
 
         if ($labels === []) {
-            Assert::assertEquals((string) $option->getRawValue(), $option->getDisplayValue());
-            Assert::assertEquals((string) $option->getRawValue(), $option->getDisplayValue($unknownLocale));
+            Assert::assertEquals((string) $option->getValue(), $option->getDisplayValue());
+            Assert::assertEquals((string) $option->getValue(), $option->getDisplayValue($unknownLocale));
             return;
         }
 

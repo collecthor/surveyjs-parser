@@ -13,21 +13,11 @@ use Collecthor\SurveyjsParser\Values\NoneValueOption;
 use Collecthor\SurveyjsParser\Values\OtherValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use function iter\toArray;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Parsers\MultipleChoiceQuestionParser
- * @uses \Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable
- * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
- * @uses \Collecthor\SurveyjsParser\Values\IntegerValueOption
- * @uses \Collecthor\SurveyjsParser\Traits\GetDisplayValue
- * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
- * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
- * @uses \Collecthor\SurveyjsParser\Values\NoneValueOption
- * @uses \Collecthor\SurveyjsParser\Values\OtherValueOption
- */
-
+#[CoversClass(MultipleChoiceQuestionParser::class)]
 final class MultipleChoiceQuestionParserTest extends TestCase
 {
     use RawConfigurationTests;
@@ -48,12 +38,12 @@ final class MultipleChoiceQuestionParserTest extends TestCase
             'name' => 'q1',
         ];
 
-        
+
         $variable = toArray($parser->parse($parent, $questionConfig, $surveyConfiguration))[0];
         self::assertInstanceOf(MultipleChoiceVariable::class, $variable);
-        self::assertCount(4, $variable->getValueOptions());
+        self::assertCount(4, $variable->getOptions());
 
-        $options = $variable->getValueOptions();
+        $options = $variable->getOptions();
 
         self::assertSame('b', $options[0]->getDisplayValue());
         self::assertSame('c', $options[1]->getDisplayValue());
@@ -93,9 +83,9 @@ final class MultipleChoiceQuestionParserTest extends TestCase
 
         $variable = toArray($parser->parse($parent, $questionConfig, $surveyConfiguration))[0];
         self::assertInstanceOf(MultipleChoiceVariable::class, $variable);
-        self::assertCount(5, $variable->getValueOptions());
+        self::assertCount(5, $variable->getOptions());
 
-        $options = $variable->getValueOptions();
+        $options = $variable->getOptions();
 
         self::assertInstanceOf(StringValueOption::class, $options[0]);
         self::assertInstanceOf(StringValueOption::class, $options[1]);

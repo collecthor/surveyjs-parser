@@ -5,50 +5,43 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Variables;
 
 use Collecthor\SurveyjsParser\Interfaces\Measure;
-use Collecthor\SurveyjsParser\Interfaces\NotNormalValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\RecordInterface;
+use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\StringValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Traits\GetName;
 use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
-use Collecthor\SurveyjsParser\Values\NotNormalValue;
+use Collecthor\SurveyjsParser\Values\InvalidValue;
+use Collecthor\SurveyjsParser\Values\MissingValue;
 use Collecthor\SurveyjsParser\Values\StringValue;
 
-class OpenTextVariable implements VariableInterface
+final readonly class OpenTextVariable implements VariableInterface
 {
     use GetName, GetTitle, GetRawConfiguration;
     /**
      * @param array<string, string> $titles
-     * @param array<string, mixed> $rawConfiguration
      * @phpstan-param non-empty-list<string> $dataPath
+     * @param array<string|int, mixed> $rawConfiguration
      */
     public function __construct(
-        string $name,
-        array $titles,
-        private readonly array $dataPath,
-        array $rawConfiguration = []
+        private string $name,
+        private array $dataPath,
+        private array $titles = [],
+        private array $rawConfiguration = []
     ) {
-        $this->name = $name;
-        $this->titles = $titles;
-        $this->rawConfiguration = $rawConfiguration;
     }
 
-    /**
-     * @param RecordInterface $record
-     * @return StringValueInterface|NotNormalValueInterface
-     */
-    public function getValue(RecordInterface $record): StringValueInterface|NotNormalValueInterface
+    public function getValue(RecordInterface $record): StringValueInterface|SpecialValueInterface
     {
         $result = $record->getDataValue($this->dataPath);
-
         if ($result === null) {
-            NotNormalValue::missing();
+            return MissingValue::create();
         } elseif (is_scalar($result)) {
-            return StringValue::fromRawValue($result);
+            return new StringValue($result);
         }
 
-        return NotNormalValue::invalid($result);
+        return new InvalidValue($result);
     }
     public function getMeasure(): Measure
     {

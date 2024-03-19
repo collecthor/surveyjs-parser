@@ -4,80 +4,70 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Variables;
 
-use Collecthor\SurveyjsParser\Interfaces\ClosedVariableInterface;
 use Collecthor\SurveyjsParser\Interfaces\Measure;
-use Collecthor\SurveyjsParser\Interfaces\NotNormalValueInterface;
+use Collecthor\SurveyjsParser\Interfaces\MultipleChoiceVariableInterface;
 use Collecthor\SurveyjsParser\Interfaces\RecordInterface;
+use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
-use Collecthor\SurveyjsParser\Interfaces\ValueSetInterface;
 use Collecthor\SurveyjsParser\Traits\GetName;
 use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
-use Collecthor\SurveyjsParser\Values\NotNormalValue;
-use Collecthor\SurveyjsParser\Values\ValueSet;
+use Collecthor\SurveyjsParser\Values\InvalidValue;
+use Collecthor\SurveyjsParser\Values\MissingValue;
+use Collecthor\SurveyjsParser\Values\MultipleChoiceValue;
 
-/**
- * @template T of string|float|int|bool
- * @implements ClosedVariableInterface<T>
- */
-class MultipleChoiceVariable implements ClosedVariableInterface
+final readonly class MultipleChoiceVariable implements MultipleChoiceVariableInterface
 {
     use GetName, GetTitle, GetRawConfiguration;
 
     /**
      * We can say this is non-empty, since valueoptions is non-empty, and this is a direct mapping from valueoptions
-     * @var non-empty-array<string, ValueOptionInterface<T>>
+     * @var array<int|string, ValueOptionInterface>
      */
     private array $valueMap;
 
     /**
-     * @param string $name
      * @param array<string, string> $titles
-     * @param list<ValueOptionInterface<T>> $valueOptions
-     * @param array<string, mixed> $rawConfiguration
+     * @param list<ValueOptionInterface> $options
      * @param non-empty-list<string> $dataPath
+     * @param array<mixed> $rawConfiguration
      */
     public function __construct(
-        private readonly string $name,
-        private readonly array $titles,
-        array $valueOptions,
-        private readonly array $dataPath,
-        private readonly array $rawConfiguration = []
+        private string $name,
+        private array $dataPath,
+        array $options,
+        private array $titles = [],
+        private array $rawConfiguration = [],
+        private bool $ordered = false,
     ) {
-        $this->checkValueOptions($valueOptions);
-        foreach ($valueOptions as $valueOption) {
-            $this->valueMap[(string) $valueOption->getValue()] = $valueOption;
+        $valueMap = [];
+        foreach ($options as $valueOption) {
+            $valueMap[$valueOption->getValue()] = $valueOption;
         }
+        $this->valueMap = $valueMap;
     }
 
-    public function getValueOptions(): array
-    {
-        return array_values($this->valueMap);
-    }
-
-    /**
-     * @param RecordInterface $record
-     * @return NotNormalValueInterface|ValueSetInterface<T>
-     */
-    public function getValue(RecordInterface $record): NotNormalValueInterface|ValueSetInterface
+    public function getValue(RecordInterface $record): SpecialValueInterface|MultipleChoiceValue
     {
         $rawValues = $record->getDataValue($this->dataPath);
-        if ($rawValues === null) {
-            return NotNormalValue::missing();
-        } elseif (!is_array($rawValues)) {
-            return NotNormalValue::invalid($rawValues);
-        }
 
-        $values = [];
-
-        foreach ($rawValues as $value) {
-            if (is_scalar($value) && isset($this->valueMap[(string) $value])) {
-                $values[] = $this->valueMap[(string) $value];
-            } else {
-                return NotNormalValue::invalid($rawValues);
+        if (is_array($rawValues)) {
+            $result = [];
+            foreach ($rawValues as $value) {
+                if (is_scalar($value) && isset($this->valueMap[$value])) {
+                    $result[] = $this->valueMap[$value];
+                } else {
+                    return new InvalidValue($rawValues);
+                }
             }
+            return new MultipleChoiceValue($result);
         }
-        return new ValueSet(...$values);
+
+        if ($rawValues === null) {
+            return MissingValue::create();
+        }
+
+        return new InvalidValue($rawValues);
     }
 
     public function getMeasure(): Measure
@@ -85,14 +75,13 @@ class MultipleChoiceVariable implements ClosedVariableInterface
         return Measure::Nominal;
     }
 
-    /**
-     * @phpstan-assert non-empty-list<ValueOptionInterface> $valueOptions
-     * @param list<ValueOptionInterface<T>> $valueOptions
-     */
-    private function checkValueOptions(array $valueOptions): void
+    public function getOptions(): array
     {
-        if (count($valueOptions) < 1) {
-            throw new \InvalidArgumentException("Valueoptions must not be empty");
-        }
+        return array_values($this->valueMap);
+    }
+
+    public function isOrdered(): bool
+    {
+        return $this->ordered;
     }
 }

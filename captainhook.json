@@ -25,7 +25,7 @@
                 "conditions": []
             },
             {
-                "action": "vendor/bin/psalm",
+                "action": "tools/psalm",
                 "options": [],
                 "conditions": []
             },

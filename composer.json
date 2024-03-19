@@ -22,18 +22,19 @@
     ],
     "require-dev": {
         "symplify/easy-coding-standard": ">= 11",
-        "phpunit/phpunit": "^10",
-        "phpstan/phpstan": "^1",
+        "phpunit/phpunit": "^11",
+        "phpstan/phpstan": "1.11.x-dev",
         "ramsey/conventional-commits": "^1",
         "captainhook/plugin-composer": "^5.3",
         "nikic/iter": "^2",
         "phpstan/phpstan-phpunit": "^1",
         "phpstan/extension-installer": "^1",
         "phpstan/phpstan-strict-rules": "^1",
-        "vimeo/psalm": "^5"
+        "phpspec/prophecy": "^1.19",
+        "phpspec/prophecy-phpunit": "^2.2"
     },
     "require": {
-        "php": ">= 8.1"
+        "php": ">= 8.2"
     },
     "config": {
         "allow-plugins": {

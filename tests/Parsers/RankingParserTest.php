@@ -4,20 +4,16 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
+use Collecthor\SurveyjsParser\Interfaces\MultipleChoiceVariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\RankingParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
-use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-
 use function iter\toArray;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Parsers\RankingParser
- * @uses \Collecthor\SurveyjsParser\Variables\BooleanVariable
- * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
- * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
- */
+#[CoversClass(RankingParser::class)]
 final class RankingParserTest extends TestCase
 {
     public function testNumVariables(): void
@@ -37,11 +33,8 @@ final class RankingParserTest extends TestCase
 
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
 
-        self::assertCount(3, $result);
-
-        foreach ($result as $variable) {
-            self::assertInstanceOf(SingleChoiceVariable::class, $variable);
-        }
+        self::assertCount(1, $result);
+        self::assertInstanceOf(MultipleChoiceVariableInterface::class, $result[0]);
     }
 
     public function testVariableTitles(): void
@@ -60,9 +53,8 @@ final class RankingParserTest extends TestCase
         $parser = new RankingParser();
 
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
-
-        self::assertSame("question5 (0)", $result[0]->getTitle());
-        self::assertSame("question5 (1)", $result[1]->getTitle());
-        self::assertSame("question5 (2)", $result[2]->getTitle());
+        self::assertCount(1, $result);
+        self::assertInstanceOf(VariableInterface::class, $result[0]);
+        self::assertSame("question5", $result[0]->getTitle());
     }
 }

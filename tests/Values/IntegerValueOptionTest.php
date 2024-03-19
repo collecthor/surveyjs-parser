@@ -7,19 +7,19 @@ namespace Collecthor\SurveyjsParser\Tests\Values;
 use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Tests\support\TestValueOptionLabels;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Values\IntegerValueOption
- */
-class IntegerValueOptionTest extends TestCase
+#[CoversClass(IntegerValueOption::class)]
+final class IntegerValueOptionTest extends TestCase
 {
     use TestValueOptionLabels;
 
     /**
      * @param array<string, string> $labels
      */
-    private function createOption(array $labels): IntegerValueOption
+    private function createOption(array $labels = []): IntegerValueOption
     {
         return new IntegerValueOption(14, $labels);
     }
@@ -40,10 +40,9 @@ class IntegerValueOptionTest extends TestCase
     }
 
     /**
-     * @dataProvider labelProvider
      * @param array<string,string> $labels
-     * @return void
      */
+    #[DataProvider('labelProvider')]
     public function testLabelSet(array $labels): void
     {
         self::assertValueOptionLabels($this->createOption(...), $labels);

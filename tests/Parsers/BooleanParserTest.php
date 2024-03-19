@@ -8,15 +8,12 @@ use Collecthor\SurveyjsParser\Parsers\BooleanParser;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\BooleanVariable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 use function iter\toArray;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Parsers\BooleanParser
- * @uses \Collecthor\SurveyjsParser\Variables\BooleanVariable
- * @uses \Collecthor\SurveyjsParser\Values\BooleanValueOption
- */
+#[CoversClass(BooleanParser::class)]
 final class BooleanParserTest extends TestCase
 {
     public function testParseBooleanQuestion(): void

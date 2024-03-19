@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Parsers;
 
 use Collecthor\SurveyjsParser\ElementParserInterface;
-use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
-use function iter\toArray;
 
-final class MatrixDynamicParser implements ElementParserInterface
+final readonly class MatrixDynamicParser implements ElementParserInterface
 {
     use ParserHelpers;
     /**
@@ -18,7 +16,7 @@ final class MatrixDynamicParser implements ElementParserInterface
      * @param array<string, string> $rowLabels
      * @return void
      */
-    public function __construct(private readonly array $rowLabels)
+    public function __construct(private array $rowLabels)
     {
     }
 
@@ -50,7 +48,7 @@ final class MatrixDynamicParser implements ElementParserInterface
                 $rowConfig['choices'] = $this->extractOptionalArray($column, 'choices') ?? $answers;
                 $rowConfig['title'] = $this->arrayFormat($questionTitles, ' ', $columnName, ' ', $this->rowLabels, " $r");
                 $rowConfig['valueName'] = $columnName;
-                yield from $root->parse($root, $rowConfig, $surveyConfiguration, [...$dataPrefix, $valueName, (string)$r]);
+                yield from $root->parse(root: $root, questionConfig: $rowConfig, surveyConfiguration: $surveyConfiguration, dataPrefix: [...$dataPrefix, $valueName, (string)$r]);
             }
         }
     }

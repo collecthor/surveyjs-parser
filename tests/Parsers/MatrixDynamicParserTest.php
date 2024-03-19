@@ -10,13 +10,13 @@ use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\SurveyParser;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\TestCase;
 
 use function iter\toArray;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Parsers\MatrixDynamicParser
- */
+#[CoversClass(MatrixDynamicParser::class)]
 final class MatrixDynamicParserTest extends TestCase
 {
     public function testUseRootParser(): void
@@ -66,9 +66,7 @@ final class MatrixDynamicParserTest extends TestCase
         toArray($parser->parse($rootParser, $questionConfig, $surveyConfig));
     }
 
-    /**
-     * @coversNothing
-     */
+    #[CoversNothing]
     public function testUseCustomDropdownOptions(): void
     {
         $surveyConfig = new SurveyConfiguration();
@@ -129,24 +127,22 @@ final class MatrixDynamicParserTest extends TestCase
         $parser = new MatrixDynamicParser([
             'default' => 'Row',
         ]);
-        /**
-         * @var array{0: SingleChoiceVariable<string>, 1: MultipleChoiceVariable<int>, 2: SingleChoiceVariable<int>} $parsed
-         */
-        $parsed = toArray($parser->parse($rootParser, $questionConfig, $surveyConfig));
+        $parsed = toArray($parser->parse(root: $rootParser, questionConfig: $questionConfig, surveyConfiguration: $surveyConfig));
 
         self::assertCount(3, $parsed);
 
-        self::assertInstanceOf(SingleChoiceVariable::class, $parsed[0]);
-        self::assertInstanceOf(MultipleChoiceVariable::class, $parsed[1]);
-        self::assertInstanceOf(SingleChoiceVariable::class, $parsed[2]);
+        [$q1, $q2, $q3] = $parsed;
+        self::assertInstanceOf(SingleChoiceVariable::class, $q1);
+        self::assertInstanceOf(MultipleChoiceVariable::class, $q2);
+        self::assertInstanceOf(SingleChoiceVariable::class, $q3);
 
-        self::assertCount(5, $parsed[0]->getValueOptions());
-        self::assertCount(5, $parsed[1]->getValueOptions());
-        self::assertCount(5, $parsed[2]->getValueOptions());
+        self::assertCount(5, $q1->getOptions());
+        self::assertCount(5, $q2->getOptions());
+        self::assertCount(5, $q3->getOptions());
 
-        self::assertSame('item1', $parsed[0]->getValueOptions()[0]->getValue());
-        self::assertSame(1, $parsed[1]->getValueOptions()[0]->getValue());
-        self::assertSame(1, $parsed[2]->getValueOptions()[0]->getValue());
+        self::assertSame('item1', $q1->getOptions()[0]->getValue());
+        self::assertSame(1, $q2->getOptions()[0]->getValue());
+        self::assertSame(1, $q3->getOptions()[0]->getValue());
     }
 
     public function testGenerateMaxRows(): void

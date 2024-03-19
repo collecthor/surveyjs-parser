@@ -3,6 +3,7 @@
 declare(strict_types=1);
 namespace Collecthor\SurveyjsParser;
 
+use Collecthor\SurveyjsParser\Exception\ParseError;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Interfaces\VariableSetInterface;
 use Collecthor\SurveyjsParser\Parsers\BooleanParser;
@@ -23,7 +24,6 @@ use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
 use Collecthor\SurveyjsParser\Variables\DeferredVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class SurveyParser implements SurveyParserInterface, ElementParserInterface
 {
@@ -42,12 +42,11 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
         $this->recursiveParser = new CallbackElementParser(
             function (
                 ElementParserInterface $parent,
-                SurveyConfiguration $surveyConfiguration,
                 array $questionConfig,
-                array $dataPrefix = []
+                SurveyConfiguration $surveyConfiguration,
+                array $dataPrefix
             ) {
-                /** @phpstan-ignore-next-line */
-                yield from $this->parseElement($questionConfig, $surveyConfiguration, $dataPrefix);
+                yield from $this->parseElement(config: $questionConfig, surveyConfiguration: $surveyConfiguration, dataPrefix: $dataPrefix);
             }
         );
 
@@ -140,32 +139,42 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
     }
 
     /**
-     * @phpstan-param array{type: string} $config
+     * @param array<mixed> $config
      * @param SurveyConfiguration $surveyConfiguration
      * @param list<string> $dataPrefix
      * @return iterable<VariableInterface|DeferredVariable>
      */
     private function parseElement(array $config, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
+        if (!is_string($config['type'])) {
+            throw new \ParseError("Element JSON must contain 'type' key and it must be a string");
+        }
+
         foreach ($this->getParsers($config['type']) as $parser) {
-            yield from $parser->parse($this->recursiveParser, $config, $surveyConfiguration, $dataPrefix);
+            yield from $parser->parse(root: $this->recursiveParser, questionConfig: $config, surveyConfiguration: $surveyConfiguration, dataPrefix: $dataPrefix);
         }
     }
 
     /**
-     * @phpstan-param array{elements: non-empty-list<array{"type": string}>} $structure
+     * @phpstan-param array<mixed> $structure
      * @param SurveyConfiguration $surveyConfiguration
      * @return iterable<VariableInterface|DeferredVariable>
      */
     private function parsePage(array $structure, SurveyConfiguration $surveyConfiguration): iterable
     {
-        foreach ($structure['elements'] ?? [] as $element) {
+        if (!is_iterable($structure['elements'])) {
+            throw new \ParseError("Survey JSON must contain elements key and it must be an array");
+        }
+        foreach ($structure['elements'] as $element) {
+            if (!is_array($element)) {
+                throw new ParseError("Element JSON must be a dictionary");
+            }
             yield from $this->parseElement($element, $surveyConfiguration);
         }
     }
 
     /**
-     * @param array<string, mixed> $structure
+     * @param array<string|int, mixed> $structure
      */
     public function parseSurveyStructure(array $structure): VariableSetInterface
     {
@@ -177,8 +186,11 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
          */
         $surveyConfiguration = new SurveyConfiguration($this->extractString($structure, 'commentPrefix', '-Comment'));
 
-        if (isset($structure['pages']) && is_array($structure['pages'])) {
+        if (is_array($structure['pages'] ?? null)) {
             foreach ($structure['pages'] as $page) {
+                if (!is_array($page)) {
+                    throw new ParseError("Page JSON must be a dictionary");
+                }
                 foreach ($this->parsePage($page, $surveyConfiguration) as $variable) {
                     $variables[] = $variable;
                 }
@@ -189,15 +201,15 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
         /**
          * Parse calculated values
          */
-        if (isset($structure['calculatedValues']) && is_array($structure['calculatedValues'])) {
-            foreach ($structure['calculatedValues'] ?? [] as $calculatedValue) {
-                if (isset($calculatedValue['includeIntoResult'], $calculatedValue['name'])
+        if (is_array($structure['calculatedValues'] ?? null)) {
+            foreach ($structure['calculatedValues'] as $calculatedValue) {
+                if (is_array($calculatedValue) && isset($calculatedValue['includeIntoResult'], $calculatedValue['name'])
                     && $calculatedValue['includeIntoResult'] === true && is_string($calculatedValue['name'])
                 ) {
                     $variables[] = new OpenTextVariable(
                         $calculatedValue['name'],
+                        [$calculatedValue['name']],
                         ['default' => $calculatedValue['name']],
-                        [$calculatedValue['name']]
                     );
                 }
             }
@@ -225,7 +237,7 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
     }
 
     /**
-     * @param array<string, mixed> $config
+     * @param array<string|int, mixed> $config
      */
     private function extractString(array $config, string $key, string $defaultValue): string
     {

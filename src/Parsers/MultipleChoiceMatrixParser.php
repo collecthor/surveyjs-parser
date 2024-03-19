@@ -19,9 +19,9 @@ final class MultipleChoiceMatrixParser implements ElementParserInterface
         $valueName = $this->extractValueName($questionConfig);
 
         /** @var list<string|array{value: string, text:string|array<string, string>}> $rows */
-        $rows = $this->extractArray($questionConfig, 'rows');
+        $rows = $this->extractOptionalArray($questionConfig, 'rows') ?? [];
         /** @var list<array<string, mixed>> $columns */
-        $columns = $this->extractArray($questionConfig, 'columns');
+        $columns = $this->extractOptionalArray($questionConfig, 'columns') ?? [];
 
         $defaultChoices = $this->extractOptionalArray($questionConfig, 'choices');
 
@@ -36,9 +36,6 @@ final class MultipleChoiceMatrixParser implements ElementParserInterface
                 $prefix = [...$dataPrefix, $valueName, $rowName];
 
                 $columnQuestion = $column;
-                if (isset($columnQuestion['showNoneItem']) && $columnQuestion['showNoneItem'] === true) {
-                    $columnQuestion['hasNone'] = true;
-                }
                 $columnQuestion['title'] = $title;
                 $columnQuestion['type'] = $column['cellType'] ?? $questionConfig['cellType'] ?? 'dropdown';
                 $columnQuestion['choices'] = $columnQuestion['choices'] ?? $defaultChoices;

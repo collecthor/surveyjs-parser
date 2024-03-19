@@ -11,7 +11,7 @@ trait GetRawConfiguration
      */
     private readonly array $rawConfiguration;
 
-    public function getRawConfigurationValue(string $key): mixed
+    public function getRawConfigurationValue(string|int $key): mixed
     {
         return $this->rawConfiguration[$key] ?? null;
     }

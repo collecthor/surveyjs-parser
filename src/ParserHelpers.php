@@ -5,19 +5,21 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser;
 
 use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
-use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
+use Collecthor\SurveyjsParser\Values\DontKnowValueOption;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
+use Collecthor\SurveyjsParser\Values\NoneValueOption;
+use Collecthor\SurveyjsParser\Values\OtherValueOption;
+use Collecthor\SurveyjsParser\Values\RefuseValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use InvalidArgumentException;
-use function PHPStan\dumpType;
 
 trait ParserHelpers
 {
     /**
-     * @phpstan-param non-empty-array<string, mixed> $questionConfig
-     * @param array<string> $dataPrefix
-     * @return iterable<VariableInterface>
+     * @phpstan-param non-empty-array<mixed> $questionConfig
+     * @param list<string> $dataPrefix
+     * @return iterable<OpenTextVariable>
      */
     private function parseCommentField(array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix): iterable
     {
@@ -46,11 +48,11 @@ trait ParserHelpers
         $name = implode('.', [...$dataPrefix, $this->extractName($questionConfig), 'comment']);
         $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig) . $surveyConfiguration->commentPostfix];
 
-        yield new OpenTextVariable($name, $titles, $dataPath, $questionConfig);
+        yield new OpenTextVariable(name: $name, dataPath: $dataPath, titles: $titles, rawConfiguration: $questionConfig);
     }
 
     /**
-     * @param array<string, mixed> $config
+     * @param array<string|int, mixed> $config
      * @return array<string, string>
      */
     private function extractTitles(array $config): array
@@ -61,7 +63,7 @@ trait ParserHelpers
     }
 
     /**
-     * @param array<string, mixed> $config
+     * @param array<string|int, mixed> $config
      */
     private function extractValueName(array $config): string
     {
@@ -74,7 +76,7 @@ trait ParserHelpers
 
     /**
      * @param non-empty-string $field
-     * @param array<string, mixed> $config
+     * @param array<mixed> $config
      * @param array<string, string> $defaults
      * @return array<string, string>
      */
@@ -93,7 +95,7 @@ trait ParserHelpers
         if (is_array($config[$field])) {
             $result = $defaults;
             foreach ($config[$field] as $locale => $data) {
-                if (!is_array($data)) {
+                if (is_string($locale) && (is_string($data) || is_int($data))) {
                     $result[$locale] = (string) $data;
                 }
             }
@@ -104,28 +106,10 @@ trait ParserHelpers
     }
 
     /**
-     * @param array<string, mixed> $config
-     * @param string $key
-     * @return array<mixed>
+     * @param array<mixed> $config
+     * @return array<mixed>|null
      */
-    private function extractArray(array $config, string $key): array
-    {
-        if (!isset($config[$key])) {
-            return [];
-        }
-        if (!is_array($config[$key])) {
-            throw new InvalidArgumentException("Expected to find an array at key $key, inside: " . print_r($config, true));
-        }
-
-        return $config[$key];
-    }
-
-    /**
-     * @param array<string, mixed> $config
-     * @param string $key
-     * @return array<string, mixed>|null
-     */
-    private function extractOptionalArray(array $config, string $key): array|null
+    private function extractOptionalArray(array $config, string $key): null|array
     {
         if (!isset($config[$key])) {
             return null;
@@ -167,9 +151,53 @@ trait ParserHelpers
     }
 
     /**
-     * @param array<string, mixed> $config
-     * @param string $key
-     * @return bool|null
+     * @param array<mixed> $config
+     */
+    private function showNoneItem(array $config): bool
+    {
+        return $this->extractBoolean($config, false, 'showNoneItem', 'hasNone');
+    }
+
+    /**
+     * @param array<mixed> $config
+     */
+    private function showOtherItem(array $config): bool
+    {
+        return $this->extractBoolean($config, false, 'showOtherItem', 'hasOther');
+    }
+
+    /**
+     * @param array<mixed> $config
+     */
+    private function showRefuseItem(array $config): bool
+    {
+        return $this->extractBoolean($config, false, 'showRefuseItem');
+    }
+
+    /**
+     * @param array<mixed> $config
+     */
+    private function showDontKnowItem(array $config): bool
+    {
+        return $this->extractBoolean($config, false, 'showDontKnowItem');
+    }
+
+    /**
+     * @param array<mixed> $config
+     */
+    private function extractBoolean(array $config, bool $default, string ...$keys): bool
+    {
+        foreach ($keys as $key) {
+            if (is_bool($config[$key] ?? null)) {
+                return $config[$key];
+            }
+        }
+
+        return $default;
+    }
+
+    /**
+     * @param array<mixed> $config
      */
     private function extractOptionalBoolean(array $config, string $key): bool|null
     {
@@ -184,8 +212,7 @@ trait ParserHelpers
     }
 
     /**
-     * @param array<string, mixed> $config
-     * @param string $key
+     * @param array<mixed> $config
      */
     private function extractOptionalString(array $config, string $key): string|null
     {
@@ -200,7 +227,7 @@ trait ParserHelpers
     }
 
     /**
-     * @param array<string, mixed> $config
+     * @param array<mixed> $config
      */
     private function extractOptionalInteger(array $config, string $key): int|null
     {
@@ -215,9 +242,31 @@ trait ParserHelpers
     }
 
     /**
+     * @param array<string|int, mixed> $questionConfig
+     * @return list<ValueOptionInterface>
+     */
+    private function generateChoices(array $questionConfig): array
+    {
+        $choices = $this->extractChoices($this->extractOptionalArray($questionConfig, 'choices'));
+        if ($this->showNoneItem($questionConfig)) {
+            $choices[] = new NoneValueOption($this->extractLocalizedTexts($questionConfig, 'noneText'));
+        }
+        if ($this->showOtherItem($questionConfig)) {
+            $choices[] = new OtherValueOption($this->extractLocalizedTexts($questionConfig, 'otherText'));
+        }
+        if ($this->showRefuseItem($questionConfig)) {
+            $choices[] = new RefuseValueOption($this->extractLocalizedTexts($questionConfig, 'refuseText'));
+        }
+        if ($this->showDontKnowItem($questionConfig)) {
+            $choices[] = new DontKnowValueOption($this->extractLocalizedTexts($questionConfig, 'dontKnowText'));
+        }
+        return $choices;
+    }
+
+    /**
      * We use a mixed type here; since we're parsing user data.
      * We expect / hope for a list, but might get anything.
-     * @return list<ValueOptionInterface<string>>|list<ValueOptionInterface<int>>
+     * @return list<ValueOptionInterface>
      */
     private function extractChoices(mixed $choices): array
     {
@@ -260,8 +309,8 @@ trait ParserHelpers
 
     /**
      * Concat a combination of localized strings and normal ones
-     * @param array<string> $titles
-     * @param (array<string, string>|string) $variables
+     * @param array<string, string> $titles
+     * @param array<string, string>|string $variables
      * @return array<string, string>
      */
     private function arrayFormat(array $titles, array|string ...$variables): array

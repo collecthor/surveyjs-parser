@@ -7,7 +7,7 @@ namespace Collecthor\SurveyjsParser\Parsers;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
-use Collecthor\SurveyjsParser\Variables\OrderedVariable;
+use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 
 final class OrderedVariableParser implements ElementParserInterface
 {
@@ -24,7 +24,14 @@ final class OrderedVariableParser implements ElementParserInterface
         $choices = $this->extractChoices($this->extractOptionalArray($questionConfig, 'choices'));
 
         if ($choices !== []) {
-            yield new OrderedVariable($name, $titles, $choices, $dataPath, $questionConfig);
+            yield new MultipleChoiceVariable(
+                name: $name,
+                dataPath: $dataPath,
+                options: $choices,
+                titles: $titles,
+                rawConfiguration: $questionConfig,
+                ordered: true
+            );
         }
     }
 }

@@ -6,46 +6,31 @@ namespace Collecthor\SurveyjsParser\Tests\Variables;
 
 use Collecthor\SurveyjsParser\ArrayDataRecord;
 use Collecthor\SurveyjsParser\ArrayRecord;
-use Collecthor\SurveyjsParser\Interfaces\Measure;
+use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\ValueType;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Values\BooleanValueOption;
+use Collecthor\SurveyjsParser\Values\InvalidValue;
+use Collecthor\SurveyjsParser\Values\MissingValue;
+use Collecthor\SurveyjsParser\Values\StringValue;
 use Collecthor\SurveyjsParser\Variables\BooleanVariable;
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Variables\BooleanVariable
- * @uses \Collecthor\SurveyjsParser\ArrayRecord
- * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
- * @uses \Collecthor\SurveyjsParser\Values\BooleanValueOption
- * @uses \Collecthor\SurveyjsParser\Values\StringValue
- * @uses \Collecthor\SurveyjsParser\Values\NotNormalValue
- */
-
-final class BooleanVariableTest extends TestCase
+#[UsesClass(InvalidValue::class)]
+#[UsesClass(MissingValue::class)]
+#[UsesClass(StringValue::class)]
+#[UsesClass(ArrayRecord::class)]
+#[UsesClass(ArrayDataRecord::class)]
+#[UsesClass(BooleanValueOption::class)]
+#[CoversClass(BooleanVariable::class)]
+final class BooleanVariableTest extends VariableTestBase
 {
-    public function testMeasureIsNominal(): void
-    {
-        $subject = new BooleanVariable(
-            "test",
-            [],
-            [
-                "default" => "true",
-                "nl" => "waar",
-            ],
-            [
-                "default" => "false",
-                "nl" => "onwaar",
-            ],
-            ['path']
-        );
-
-        self::assertSame(Measure::Nominal, $subject->getMeasure());
-    }
-
     public function testInvalidValue(): void
     {
         $subject = new BooleanVariable(
             "test",
+            ['path'],
             [],
             [
                 "default" => "true",
@@ -55,13 +40,13 @@ final class BooleanVariableTest extends TestCase
                 "default" => "false",
                 "nl" => "onwaar",
             ],
-            ['path']
         );
 
         $record = new ArrayDataRecord(['path' => 'some string']);
 
         $value = $subject->getValue($record);
 
+        self::assertInstanceOf(SpecialValueInterface::class, $value);
         self::assertSame(ValueType::Invalid, $value->getType());
     }
 
@@ -69,6 +54,7 @@ final class BooleanVariableTest extends TestCase
     {
         $subject = new BooleanVariable(
             "test",
+            ['path'],
             [],
             [
                 "default" => "true",
@@ -78,7 +64,6 @@ final class BooleanVariableTest extends TestCase
                 "default" => "false",
                 "nl" => "onwaar",
             ],
-            ['path']
         );
 
         $record = new ArrayRecord(['path' => true], 1, new \DateTime(), new \DateTime());
@@ -93,6 +78,7 @@ final class BooleanVariableTest extends TestCase
     {
         $subject = new BooleanVariable(
             "test",
+            ['path'],
             [],
             [
                 "default" => "true",
@@ -102,13 +88,27 @@ final class BooleanVariableTest extends TestCase
                 "default" => "false",
                 "nl" => "onwaar",
             ],
-            ['path']
         );
 
         $record = new ArrayRecord(['path' => null], 1, new \DateTime(), new \DateTime());
 
         $value = $subject->getValue($record);
-
+        self::assertInstanceOf(SpecialValueInterface::class, $value);
         self::assertSame(ValueType::Missing, $value->getType());
+    }
+
+    protected function getVariableWithRawConfiguration(array $rawConfiguration): VariableInterface
+    {
+        return new BooleanVariable(name: 'test', dataPath: ['path'], rawConfiguration: $rawConfiguration);
+    }
+
+    protected function getVariableWithName(string $name): VariableInterface
+    {
+        return new BooleanVariable(name: $name, dataPath: ['path']);
+    }
+
+    protected function getVariableWithTitles(array $titles): VariableInterface
+    {
+        return new BooleanVariable(name: 'test', dataPath: ['path'], titles: $titles);
     }
 }

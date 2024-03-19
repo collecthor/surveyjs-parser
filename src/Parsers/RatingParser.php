@@ -5,14 +5,16 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Parsers;
 
 use Collecthor\SurveyjsParser\ElementParserInterface;
-use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Exception\ParseError;
+use Collecthor\SurveyjsParser\Interfaces\Measure;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
+use Collecthor\SurveyjsParser\Variables\SingleChoiceIntegerVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 
-final class RatingParser implements ElementParserInterface
+final readonly class RatingParser implements ElementParserInterface
 {
     use ParserHelpers;
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
@@ -22,35 +24,55 @@ final class RatingParser implements ElementParserInterface
 
 
         if (isset($questionConfig['rateValues'])) {
-            /** @var non-empty-array<int, ValueOptionInterface<string>> $answers */
             $answers = [];
 
-            /** @var list<mixed> $values */
-            $values = $questionConfig['rateValues'];
-
-            foreach ($values as $value) {
+            foreach ($this->extractOptionalArray($questionConfig, 'rateValues') ?? [] as $value) {
                 if (is_array($value)) {
-                    $texts = $this->extractLocalizedTexts($value);
-                    $value = $value['value'];
+                    if (!is_scalar($value['value'])) {
+                        throw new ParseError('Rate value must be scalar');
+                    }
+                    $answers[] = new StringValueOption(
+                        rawValue: (string) $value['value'],
+                        displayValues: $this->extractLocalizedTexts($value)
+                    );
+                } elseif (is_string($value)) {
+                    $answers[] = new StringValueOption(
+                        rawValue: $value,
+                        displayValues: ['default' => $value]
+                    );
                 }
-                $answers[] = new StringValueOption((string) $value, $texts ?? [ 'default' => (string) $value]);
             }
-            yield new SingleChoiceVariable($id, $this->extractTitles($questionConfig), $answers, $dataPath);
+            if ($answers === []) {
+                throw new ParseError('Rating question has no values');
+            }
+            yield new SingleChoiceVariable(
+                name: $id,
+                options: $answers,
+                dataPath: $dataPath,
+                rawConfiguration: $questionConfig,
+                titles: $this->extractTitles($questionConfig),
+                measure: Measure::Ordinal
+            );
         } else {
-            /** @var non-empty-array<int, ValueOptionInterface<int>> $answers */
             $answers = [];
-            /** @var int $rateMin */
-            $rateMin = $questionConfig['rateMin'] ?? 1;
-            $rateMax = $questionConfig['rateMax'] ?? 5;
-            /** @var int $rateStep */
-            $rateStep = $questionConfig['rateStep'] ?? 1;
+            $rateMin = $this->extractOptionalInteger($questionConfig, 'rateMin') ?? 1;
+            $rateMax = $this->extractOptionalInteger($questionConfig, 'rateMax') ?? 5;
+            $rateStep = $this->extractOptionalInteger($questionConfig, 'rateStep') ?? 1;
 
             for ($i = $rateMin; $i <= $rateMax; $i += $rateStep) {
                 $answers[] = new IntegerValueOption($i, [
                     'default' => (string) $i,
                 ]);
             }
-            yield new SingleChoiceVariable($id, $this->extractTitles($questionConfig), $answers, $dataPath);
+            if ($answers !== []) {
+                yield new SingleChoiceIntegerVariable(
+                    name: $id,
+                    titles: $this->extractTitles($questionConfig),
+                    valueOptions: $answers,
+                    dataPath: $dataPath,
+                    measure: !isset($questionConfig['rateType']) ? Measure::Scale : Measure::Ordinal
+                );
+            }
         }
     }
 }

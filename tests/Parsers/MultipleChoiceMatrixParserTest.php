@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
-use Collecthor\DataInterfaces\ValueInterface;
 use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\ElementParserInterface;
-use Collecthor\SurveyjsParser\Interfaces\ValueSetInterface;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\MultipleChoiceMatrixParser;
@@ -16,33 +14,18 @@ use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
+use Collecthor\SurveyjsParser\Values\MultipleChoiceValue;
 use Collecthor\SurveyjsParser\Values\NoneValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use DateTime;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use ValueError;
 use function iter\toArray;
 
-/**
- * @covers  \Collecthor\SurveyjsParser\Parsers\MultipleChoiceMatrixParser
- * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
- * @uses \Collecthor\SurveyjsParser\ArrayRecord
- * @uses \Collecthor\SurveyjsParser\Parsers\MultipleChoiceQuestionParser
- * @uses \Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser
- * @uses \Collecthor\SurveyjsParser\Parsers\TextQuestionParser
- * @uses \Collecthor\SurveyjsParser\Traits\GetDisplayValue
- * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
- * @uses \Collecthor\SurveyjsParser\Values\ValueSet
- * @uses \Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable
- * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
- * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
- * @uses \Collecthor\SurveyjsParser\Values\IntegerValueOption
- * @uses \Collecthor\SurveyjsParser\Values\NoneValueOption
- * @uses \Collecthor\SurveyjsParser\Values\OtherValueOption
- */
+#[CoversClass(MultipleChoiceMatrixParser::class)]
 final class MultipleChoiceMatrixParserTest extends TestCase
 {
     private function getRootParser(): ElementParserInterface
@@ -155,6 +138,7 @@ final class MultipleChoiceMatrixParserTest extends TestCase
         $result = toArray($parser->parse($rootParser, $questionConfig, $surveyConfig));
 
         self::assertCount(16, $result);
+        self::assertContainsOnlyInstancesOf(VariableInterface::class, $result);
 
         self::assertEquals("question1 - DPD - col1", $result[0]->getTitle());
         self::assertEquals("question1 - DPD - col2", $result[1]->getTitle());
@@ -255,7 +239,7 @@ final class MultipleChoiceMatrixParserTest extends TestCase
         self::assertInstanceOf(MultipleChoiceVariable::class, $result[0]);
         self::assertInstanceOf(SingleChoiceVariable::class, $result[1]);
 
-        $valueOptions = $result[0]->getValueOptions();
+        $valueOptions = $result[0]->getOptions();
         self::assertInstanceOf(StringValueOption::class, $valueOptions[0]);
         self::assertInstanceOf(StringValueOption::class, $valueOptions[1]);
         self::assertInstanceOf(StringValueOption::class, $valueOptions[2]);
@@ -353,6 +337,7 @@ final class MultipleChoiceMatrixParserTest extends TestCase
         $parser = new MultipleChoiceMatrixParser();
         $result = toArray($parser->parse($rootParser, $questionConfig, $surveyConfig));
 
+        self::assertInstanceOf(VariableInterface::class, $result[0]);
         $record = new ArrayRecord([
             "language" => "en",
             "question1" => [
@@ -395,16 +380,18 @@ final class MultipleChoiceMatrixParserTest extends TestCase
             ]
         ], 1, new DateTime(), new DateTime());
 
+        self::assertContainsOnlyInstancesOf(VariableInterface::class, $result);
 
         $value = $result[0]->getValue($record);
-        self::assertInstanceOf(ValueSetInterface::class, $value);
+        self::assertInstanceOf(MultipleChoiceValue::class, $value);
         $answers = $value->getValue();
         self::assertCount(1, $answers);
-        self::assertEquals("none", $answers[0]->getRawValue());
+        self::assertEquals("none", $answers[0]->getValue());
         self::assertEquals("Maak ik geen gebruik van", $answers[0]->getDisplayValue());
 
+
         $value = $result[2]->getValue($record);
-        self::assertInstanceOf(ValueSetInterface::class, $value);
+        self::assertInstanceOf(MultipleChoiceValue::class, $value);
         $answers = $value->getValue();
         self::assertEquals("Pakketten", $answers[0]->getDisplayValue());
         self::assertEquals("Pallets", $answers[1]->getDisplayValue());
@@ -443,15 +430,13 @@ final class MultipleChoiceMatrixParserTest extends TestCase
         JSON, true);
         $parser = new MultipleChoiceMatrixParser();
         $surveyConfig = new SurveyConfiguration();
-        /**
-         * @var list<MultipleChoiceVariable<int>> $result
-         */
         $result = toArray($parser->parse($this->getRootParser(), $config, $surveyConfig, []));
 
+        self::assertContainsOnlyInstancesOf(SingleChoiceVariable::class, $result);
         self::assertCount(6, $result);
         foreach ($result as $variable) {
-            self::assertCount(5, $variable->getValueOptions());
-            foreach ($variable->getValueOptions() as $option) {
+            self::assertCount(5, $variable->getOptions());
+            foreach ($variable->getOptions() as $option) {
                 self::assertInstanceOf(IntegerValueOption::class, $option);
             }
         }

@@ -9,18 +9,11 @@ use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Parsers\DynamicPanelParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
-use Collecthor\SurveyjsParser\SurveyParser;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-
 use function iter\toArray;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Parsers\DynamicPanelParser
- * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
- * @uses \Collecthor\SurveyjsParser\Parsers\TextQuestionParser
- * @uses \Collecthor\SurveyjsParser\Traits\GetTitle
- * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
- */
+#[CoversClass(DynamicPanelParser::class)]
 final class DynamicPanelParserTest extends TestCase
 {
     public function testInvokeRootParser(): void
@@ -100,6 +93,7 @@ final class DynamicPanelParserTest extends TestCase
         $parser = new DynamicPanelParser(['default' => 'row']);
 
         $result = toArray($parser->parse($rootParser, $questionConfig, $surveyConfig));
+        self::assertContainsOnlyInstancesOf(VariableInterface::class, $result);
         self::assertSame("question1 row 0 question2", $result[0]->getTitle());
     }
 }

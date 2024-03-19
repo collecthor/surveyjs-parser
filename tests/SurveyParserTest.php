@@ -7,43 +7,18 @@ namespace Collecthor\SurveyjsParser\Tests;
 use Collecthor\SurveyjsParser\ArrayDataRecord;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\Interfaces\ClosedVariableInterface;
-use Collecthor\SurveyjsParser\Interfaces\RawValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\SurveyParser;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use Collecthor\SurveyjsParser\VariableSet;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use function iter\toArray;
 
-/**
- * @covers \Collecthor\SurveyjsParser\SurveyParser
- * @uses   \Collecthor\SurveyjsParser\Parsers\CallbackElementParser
- * @uses   \Collecthor\SurveyjsParser\VariableSet
- * @uses   \Collecthor\SurveyjsParser\SurveyConfiguration
- * @uses   \Collecthor\SurveyjsParser\ParserHelpers
- * @uses   \Collecthor\SurveyjsParser\ParserLocalizer
- * @uses   \Collecthor\SurveyjsParser\ResolvableVariableSet
- * @uses   \Collecthor\SurveyjsParser\Variables\OpenTextVariable
- * @uses   \Collecthor\SurveyjsParser\Variables\DeferredVariable
- * @uses   \Collecthor\SurveyjsParser\Parsers\BooleanParser
- * @uses   \Collecthor\SurveyjsParser\Parsers\CommentParser
- * @uses   \Collecthor\SurveyjsParser\Parsers\DynamicPanelParser
- * @uses   \Collecthor\SurveyjsParser\Parsers\MatrixParser
- * @uses   \Collecthor\SurveyjsParser\Parsers\MatrixDynamicParser
- * @uses   \Collecthor\SurveyjsParser\Parsers\TextQuestionParser
- * @uses   \Collecthor\SurveyjsParser\Parsers\PanelParser
- * @uses   \Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser
- * @uses   \Collecthor\SurveyjsParser\Parsers\MultipleChoiceQuestionParser
- * @uses   \Collecthor\SurveyjsParser\Values\StringValueOption
- * @uses   \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
- * @uses   \Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable
- * @uses   \Collecthor\SurveyjsParser\ArrayDataRecord
- * @uses   \Collecthor\SurveyjsParser\Values\StringValue
- * @uses   \Collecthor\SurveyjsParser\Values\NoneValueOption
- * @uses   \Collecthor\SurveyjsParser\Values\OtherValueOption
- */
+#[CoversClass(SurveyParser::class)]
 class SurveyParserTest extends TestCase
 {
     /**
@@ -59,9 +34,8 @@ class SurveyParserTest extends TestCase
             }
         }
     }
-    /**
-     * @dataProvider sampleProvider
-     */
+
+    #[DataProvider('sampleProvider')]
     public function testSamples(string $surveyJson): void
     {
         $parser = new SurveyParser();
@@ -79,7 +53,7 @@ class SurveyParserTest extends TestCase
                         $value = $variableSet->getVariable($assertion['variable'])->getValue($data);
                         self::assertSame(
                             $assertion['expected'],
-                            $value->getRawValue()
+                            $value->getValue()
                         );
                     }
                 }
@@ -265,33 +239,33 @@ class SurveyParserTest extends TestCase
 
         $variables = $parser->parseSurveyStructure($questionConfig);
         self::assertCount(6, toArray($variables->getVariables()));
-        
+
         $question2 = $variables->getVariable('question2');
         self::assertInstanceOf(SingleChoiceVariable::class, $question2);
 
-        $options = $question2->getValueOptions();
+        $options = $question2->getOptions();
         self::assertCount(3, $options);
-        self::assertSame('item1', $options[0]->getRawValue());
-        self::assertSame('item2', $options[1]->getRawValue());
-        self::assertSame('item3', $options[2]->getRawValue());
+        self::assertSame('item1', $options[0]->getValue());
+        self::assertSame('item2', $options[1]->getValue());
+        self::assertSame('item3', $options[2]->getValue());
 
         $question5 = $variables->getVariable('question5');
         self::assertInstanceOf(SingleChoiceVariable::class, $question5);
 
-        $options = $question5->getValueOptions();
+        $options = $question5->getOptions();
         self::assertCount(3, $options);
-        self::assertSame('item3.1', $options[0]->getRawValue());
-        self::assertSame('item3.2', $options[1]->getRawValue());
-        self::assertSame('item3.3', $options[2]->getRawValue());
+        self::assertSame('item3.1', $options[0]->getValue());
+        self::assertSame('item3.2', $options[1]->getValue());
+        self::assertSame('item3.3', $options[2]->getValue());
 
         $question6 = $variables->getVariable('question6');
         self::assertInstanceOf(MultipleChoiceVariable::class, $question6);
 
-        $options = $question6->getValueOptions();
+        $options = $question6->getOptions();
         self::assertCount(3, $options);
-        self::assertSame('item3.1', $options[0]->getRawValue());
-        self::assertSame('item3.2', $options[1]->getRawValue());
-        self::assertSame('item3.3', $options[2]->getRawValue());
+        self::assertSame('item3.1', $options[0]->getValue());
+        self::assertSame('item3.2', $options[1]->getValue());
+        self::assertSame('item3.3', $options[2]->getValue());
     }
 
     public function testV2ResultEqualsV1Result(): void
@@ -549,7 +523,7 @@ class SurveyParserTest extends TestCase
             self::assertSame($var1->getTitle(), $var2->getTitle());
             if ($var1 instanceof ClosedVariableInterface) {
                 self::assertInstanceOf(ClosedVariableInterface::class, $var2);
-                self::assertEquals($var1->getValueOptions(), $var2->getValueOptions());
+                self::assertEquals($var1->getOptions(), $var2->getOptions());
             }
         }
     }

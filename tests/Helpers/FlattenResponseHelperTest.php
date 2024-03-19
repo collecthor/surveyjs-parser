@@ -8,37 +8,25 @@ use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\Helpers\FlattenResponseHelper;
 use Collecthor\SurveyjsParser\Interfaces\VariableSetInterface;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
+use Collecthor\SurveyjsParser\Variables\IntegerVariable;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
-use Collecthor\SurveyjsParser\Variables\NumericVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use Collecthor\SurveyjsParser\VariableSet;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function iter\toArray;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Helpers\FlattenResponseHelper
- * @uses \Collecthor\SurveyjsParser\ArrayRecord
- * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
- * @uses \Collecthor\SurveyjsParser\Traits\GetTitle
- * @uses \Collecthor\SurveyjsParser\Traits\GetDisplayValue
- * @uses \Collecthor\SurveyjsParser\Values\StringValue
- * @uses \Collecthor\SurveyjsParser\Values\IntegerValue
- * @uses \Collecthor\SurveyjsParser\Values\ValueSet
- * @uses \Collecthor\SurveyjsParser\VariableSet
- * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
- * @uses \Collecthor\SurveyjsParser\Variables\NumericVariable
- * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
- * @uses \Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable
- */
+#[CoversClass(FlattenResponseHelper::class)]
 final class FlattenResponseHelperTest extends TestCase
 {
     /**
-     * @dataProvider provider
-     * @param array<string, mixed>[] $response
-     * @param array<string, array<string, string>> $result
+     * @param list<array<string, mixed>> $response
+     * @param list<array<string, mixed>> $result
      */
+    #[DataProvider('provider')]
     public function testFlattenResponse(VariableSetInterface $variables, array $response, string $locale, array $result): void
     {
         $helper = new FlattenResponseHelper($variables, $locale);
@@ -52,19 +40,19 @@ final class FlattenResponseHelperTest extends TestCase
     }
 
     /**
-     * @return iterable<array<int, mixed>>
+     * @return iterable<array{0: VariableSet, 1: list<array<string, mixed>>, 2: string, 3: list<array<string, mixed>>}>
      */
     public static function provider(): iterable
     {
         $openText = [
             new VariableSet(
                 new OpenTextVariable(
-                    'question1',
-                    [
+                    name: 'question1',
+                    dataPath: ['question1'],
+                    titles: [
                         'default' => 'question1',
                         'nl' => 'vraag1',
                     ],
-                    ['question1'],
                 ),
             ),
             [
@@ -83,13 +71,13 @@ final class FlattenResponseHelperTest extends TestCase
         yield $openText;
         $numeric = [
             new VariableSet(
-                new NumericVariable(
+                new IntegerVariable(
                     'question1',
-                    [
+                    titles: [
                         'default' => 'question1',
                         'nl' => 'vraag1',
                     ],
-                    ['question1'],
+                    dataPath: ['question1'],
                 ),
             ),
             [
@@ -111,11 +99,11 @@ final class FlattenResponseHelperTest extends TestCase
             new VariableSet(
                 new OpenTextVariable(
                     'question1',
-                    [
+                    dataPath: ['question1'],
+                    titles: [
                         'default' => 'question1',
                         'nl' => 'vraag1',
                     ],
-                    ['question1'],
                 ),
             ),
             [
@@ -153,13 +141,13 @@ final class FlattenResponseHelperTest extends TestCase
         $singleChoice = [
             new VariableSet(
                 new SingleChoiceVariable(
-                    'question1',
-                    [
+                    name: 'question1',
+                    options: $options,
+                    dataPath: ['question1'],
+                    titles: [
                         'default' => 'question1',
                         'nl' => 'vraag1',
-                    ],
-                    $options,
-                    ['question1'],
+                    ]
                 ),
             ),
             [
@@ -181,13 +169,13 @@ final class FlattenResponseHelperTest extends TestCase
         $multipleChoice = [
             new VariableSet(
                 new MultipleChoiceVariable(
-                    'question1',
-                    [
+                    name: 'question1',
+                    dataPath: ['question1'],
+                    options: $options,
+                    titles: [
                         'default' => 'question1',
                         'nl' => 'vraag1',
-                    ],
-                    $options,
-                    ['question1'],
+                    ]
                 ),
             ),
             [
@@ -210,19 +198,19 @@ final class FlattenResponseHelperTest extends TestCase
             new VariableSet(
                 new OpenTextVariable(
                     'question1',
-                    [
+                    dataPath: ['question1'],
+                    titles: [
                         'default' => 'question1',
                         'nl' => 'vraag1',
                     ],
-                    ['question1'],
                 ),
                 new OpenTextVariable(
                     'question2',
-                    [
+                    dataPath: ['question2'],
+                    titles: [
                         'default' => 'question2',
                         'nl' => 'vraag2',
                     ],
-                    ['question2'],
                 ),
             ),
             [
@@ -253,19 +241,19 @@ final class FlattenResponseHelperTest extends TestCase
             new VariableSet(
                 new OpenTextVariable(
                     'question1',
-                    [
+                    dataPath: ['question1'],
+                    titles: [
                         'default' => 'question1',
                         'nl' => 'vraag1',
                     ],
-                    ['question1'],
                 ),
                 new OpenTextVariable(
                     'question2',
-                    [
+                    dataPath: ['question2'],
+                    titles: [
                         'default' => 'question2',
                         'nl' => 'vraag2',
                     ],
-                    ['question2'],
                 ),
             ),
             [
@@ -307,22 +295,22 @@ final class FlattenResponseHelperTest extends TestCase
         $multipleVariableMultipleRecordsMultipleChoice = [
             new VariableSet(
                 new MultipleChoiceVariable(
-                    'question1',
-                    [
+                    name: 'question1',
+                    dataPath: ['question1'],
+                    options: $options,
+                    titles: [
                         'default' => 'question1',
                         'nl' => 'vraag1',
-                    ],
-                    $options,
-                    ['question1'],
+                    ]
                 ),
                 new MultipleChoiceVariable(
-                    'question2',
-                    [
+                    name: 'question2',
+                    dataPath: ['question2'],
+                    options: $options,
+                    titles: [
                         'default' => 'question2',
                         'nl' => 'vraag2',
-                    ],
-                    $options,
-                    ['question2'],
+                    ]
                 ),
             ),
             [

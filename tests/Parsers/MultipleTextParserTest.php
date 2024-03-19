@@ -8,21 +8,11 @@ use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\MultipleTextParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-
 use function iter\toArray;
 
-/**
- * Every question generates maxRowCount rows
- * @covers \Collecthor\SurveyjsParser\Parsers\MultipleTextParser
- * @uses \Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable
- * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
- * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
- * @uses \Collecthor\SurveyjsParser\Values\IntegerValueOption
- * @uses \Collecthor\SurveyjsParser\Traits\GetDisplayValue
- * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
- * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
- */
+#[CoversClass(MultipleTextParser::class)]
 final class MultipleTextParserTest extends TestCase
 {
     public function testGetRightAmountOfVariables(): void
