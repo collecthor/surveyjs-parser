@@ -7,7 +7,7 @@ namespace Collecthor\SurveyjsParser\Parsers;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
-use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
+use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 
 final class RankingParser implements ElementParserInterface
 {
@@ -18,14 +18,17 @@ final class RankingParser implements ElementParserInterface
         $titles = $this->extractTitles($questionConfig);
         $valueName = $this->extractValueName($questionConfig);
         $choices = $this->extractChoices($this->extractOptionalArray($questionConfig, 'choices'));
-
-        for ($i = 0; $i < count($choices); $i++) {
-            yield new SingleChoiceVariable(
-                "{$valueName}.{$i}",
-                $this->arrayFormat($titles, " ({$i})"),
-                $choices,
-                [...$dataPrefix, $valueName, (string)$i],
-            );
+        if ($choices === []) {
+            return;
         }
+
+        yield new MultipleChoiceVariable(
+            name: $valueName,
+            dataPath: [...$dataPrefix, $valueName],
+            titles: $titles,
+            options: $choices,
+            rawConfiguration: $questionConfig,
+            ordered: true
+        );
     }
 }

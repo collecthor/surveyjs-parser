@@ -10,17 +10,11 @@ use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Values\StringValue;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use function iter\toArray;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Parsers\CommentParser
- * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
- * @uses \Collecthor\SurveyjsParser\ArrayRecord
- * @uses \Collecthor\SurveyjsParser\Values\StringValue
- * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
- * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
- */
+#[CoversClass(CommentParser::class)]
 final class CommentParserTest extends TestCase
 {
     public function testEmpty(): void

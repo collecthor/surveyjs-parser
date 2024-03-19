@@ -4,33 +4,31 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Values;
 
-use Collecthor\SurveyjsParser\Interfaces\NumericValueInterface;
-use Collecthor\SurveyjsParser\Interfaces\RawValueInterface;
-use Collecthor\SurveyjsParser\Interfaces\ValueType;
+use Collecthor\SurveyjsParser\Interfaces\IntegerValueInterface;
 
-class IntegerValue implements RawValueInterface
+final class IntegerValue implements IntegerValueInterface
 {
-    public function __construct(private readonly int $rawValue)
+    /**
+     * @var array<self>
+     */
+    private static array $cached = [];
+    public static function create(int $value): self
     {
+        if (!isset(self::$cached[$value])) {
+            self::$cached[$value] = new self($value);
+        }
+        return self::$cached[$value];
     }
 
-    public function getRawValue(): int
+    private function __construct(private readonly int $value)
     {
-        return $this->rawValue;
     }
-
     public function getValue(): int
     {
-        return $this->rawValue;
+        return $this->value;
     }
-
-    public function getType(): ValueType
-    {
-        return ValueType::Normal;
-    }
-
     public function getDisplayValue(?string $locale = null): string
     {
-        return (string) $this->rawValue;
+        return (string)$this->value;
     }
 }

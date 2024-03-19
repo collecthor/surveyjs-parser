@@ -8,7 +8,7 @@ use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 
-final class DynamicPanelParser implements ElementParserInterface
+final readonly class DynamicPanelParser implements ElementParserInterface
 {
     use ParserHelpers;
 

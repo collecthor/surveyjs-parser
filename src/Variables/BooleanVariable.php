@@ -4,22 +4,18 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Variables;
 
-use Collecthor\SurveyjsParser\Interfaces\ClosedVariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\BooleanVariableInterface;
 use Collecthor\SurveyjsParser\Interfaces\Measure;
-use Collecthor\SurveyjsParser\Interfaces\NotNormalValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\RecordInterface;
-use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
-use Collecthor\SurveyjsParser\Interfaces\ValueType;
+use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
 use Collecthor\SurveyjsParser\Traits\GetName;
 use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
 use Collecthor\SurveyjsParser\Values\BooleanValueOption;
-use Collecthor\SurveyjsParser\Values\NotNormalValue;
+use Collecthor\SurveyjsParser\Values\InvalidValue;
+use Collecthor\SurveyjsParser\Values\MissingValue;
 
-/**
- * @implements ClosedVariableInterface<bool>
- */
-final class BooleanVariable implements ClosedVariableInterface
+final class BooleanVariable implements BooleanVariableInterface
 {
     use GetName, GetTitle, GetRawConfiguration;
 
@@ -31,25 +27,24 @@ final class BooleanVariable implements ClosedVariableInterface
      * @param array<string, string> $titles
      * @param array<string, string> $trueLabels
      * @param array<string, string> $falseLabels
-     * @param array<string, mixed> $rawConfiguration
+     * @param array<mixed> $rawConfiguration
      * @param non-empty-list<string> $dataPath
      */
     public function __construct(
         private readonly string $name,
-        private readonly array $titles,
-        private readonly array $trueLabels,
-        private readonly array $falseLabels,
         private readonly array $dataPath,
-        private readonly array $rawConfiguration = []
+        private readonly array $titles = [],
+        private readonly array $trueLabels = [],
+        private readonly array $falseLabels = [],
+        private readonly array $rawConfiguration = [],
+        bool|string $trueValue = true,
+        bool|string $falseValue = false,
     ) {
-        $this->yes = new BooleanValueOption(true, $this->trueLabels);
-        $this->no = new BooleanValueOption(false, $this->falseLabels);
+        $this->yes = new BooleanValueOption($trueValue, true, $this->trueLabels);
+        $this->no = new BooleanValueOption($falseValue, false, $this->falseLabels);
     }
 
-    /**
-     * @return non-empty-list<ValueOptionInterface<bool>>
-     */
-    public function getValueOptions(): array
+    public function getOptions(): array
     {
         return [
             $this->yes,
@@ -57,16 +52,19 @@ final class BooleanVariable implements ClosedVariableInterface
         ];
     }
 
-    public function getValue(RecordInterface $record): BooleanValueOption|NotNormalValueInterface
+    public function getValue(RecordInterface $record): BooleanValueOption|SpecialValueInterface
     {
         $dataValue = $record->getDataValue($this->dataPath);
         if (is_null($dataValue)) {
-            return new NotNormalValue(ValueType::Missing);
+            return MissingValue::create();
         }
-        if (!is_bool($dataValue)) {
-            return new NotNormalValue(ValueType::Invalid);
+        if ($dataValue === $this->yes->getRawValue()) {
+            return $this->yes;
+        } elseif ($dataValue === $this->no->getRawValue()) {
+            return $this->no;
         }
-        return $dataValue ? $this->yes : $this->no;
+
+        return new InvalidValue($dataValue);
     }
 
     public function getMeasure(): Measure

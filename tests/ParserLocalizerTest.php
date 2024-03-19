@@ -5,17 +5,16 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Tests;
 
 use Collecthor\SurveyjsParser\ParserLocalizer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Collecthor\SurveyjsParser\ParserLocalizer
- */
+#[CoversClass(ParserLocalizer::class)]
 final class ParserLocalizerTest extends TestCase
 {
     public function testDefaultValues(): void
     {
         $localizer = new ParserLocalizer();
-        
+
         self::assertSame('Row', $localizer->getAllTranslationsForString('Row')['default']);
         self::assertSame('Positive', $localizer->getAllTranslationsForString('Positive')['default']);
         self::assertSame('Text', $localizer->getAllTranslationsForString('Text')['default']);

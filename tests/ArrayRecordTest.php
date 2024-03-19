@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Tests;
 
 use Collecthor\SurveyjsParser\ArrayRecord;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Collecthor\SurveyjsParser\ArrayRecord
- * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
- */
+#[CoversClass(ArrayRecord::class)]
 class ArrayRecordTest extends TestCase
 {
     public function testGetRecordId(): void

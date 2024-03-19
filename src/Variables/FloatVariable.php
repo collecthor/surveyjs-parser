@@ -5,54 +5,49 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Variables;
 
 use Collecthor\SurveyjsParser\Interfaces\Measure;
-use Collecthor\SurveyjsParser\Interfaces\NotNormalValueInterface;
-use Collecthor\SurveyjsParser\Interfaces\NumericValueInterface;
-use Collecthor\SurveyjsParser\Interfaces\NumericVariableInterface;
-use Collecthor\SurveyjsParser\Interfaces\RawValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\RecordInterface;
+use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Traits\GetName;
 use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
 use Collecthor\SurveyjsParser\Values\FloatValue;
 use Collecthor\SurveyjsParser\Values\IntegerValue;
-use Collecthor\SurveyjsParser\Values\NotNormalValue;
+use Collecthor\SurveyjsParser\Values\InvalidValue;
+use Collecthor\SurveyjsParser\Values\MissingValue;
 
-class NumericVariable implements VariableInterface
+final readonly class FloatVariable implements VariableInterface
 {
     use GetTitle, GetName, GetRawConfiguration;
 
     /**
      * @param array<string, string> $titles
-     * @param array<string, mixed> $rawConfiguration
+     * @param array<string|int, mixed> $rawConfiguration
      * @phpstan-param non-empty-list<string> $dataPath
      */
     public function __construct(
-        string $name,
-        array $titles,
-        private readonly array $dataPath,
-        array $rawConfiguration = [],
+        private string $name,
+        private array $titles,
+        private array $dataPath,
+        private array $rawConfiguration = [],
     ) {
-        $this->titles = $titles;
-        $this->name = $name;
-        $this->rawConfiguration = $rawConfiguration;
     }
 
-    public function getValue(RecordInterface $record): FloatValue|IntegerValue|NotNormalValueInterface
+    public function getValue(RecordInterface $record): FloatValue|IntegerValue|SpecialValueInterface
     {
         $result = $record->getDataValue($this->dataPath);
         if ($result === null) {
-            return NotNormalValue::missing();
+            return MissingValue::create();
         }
 
         if (is_float($result)) {
             return new FloatValue($result);
         }
         if (is_int($result)) {
-            return new IntegerValue($result);
+            return IntegerValue::create($result);
         }
 
-        return NotNormalValue::invalid($result);
+        return new InvalidValue($result);
     }
 
     /**

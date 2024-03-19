@@ -9,7 +9,7 @@ use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 
-final class MultipleTextParser implements ElementParserInterface
+final readonly class MultipleTextParser implements ElementParserInterface
 {
     use ParserHelpers;
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
@@ -32,7 +32,12 @@ final class MultipleTextParser implements ElementParserInterface
             }
 
             $title = $this->arrayFormat($questionTitles, " - ", $this->extractTitles($item));
-            yield new OpenTextVariable($itemName, $title, $fullPath);
+            yield new OpenTextVariable(
+                name: $itemName,
+                dataPath: $fullPath,
+                titles: $title,
+                rawConfiguration: $title
+            );
             $itemNames[] = $itemName;
         }
     }

@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Parsers;
 
 use Collecthor\SurveyjsParser\ElementParserInterface;
+use Collecthor\SurveyjsParser\Exception\ParseError;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 
-final class MatrixParser implements ElementParserInterface
+final readonly class MatrixParser implements ElementParserInterface
 {
     use ParserHelpers;
 
@@ -25,13 +26,7 @@ final class MatrixParser implements ElementParserInterface
         /** @var list<string|array{value?: string, text?:string|array<string, string>}> $rows */
         $rows = $questionConfig['rows'] ?? [];
         if ($rows === []) {
-            // This is a matrix rendered as a single single choice variable
-            yield new SingleChoiceVariable(
-                "$valueName",
-                $titles,
-                $answers,
-                [...$dataPrefix, $valueName]
-            );
+            throw new ParseError("Matrix questions must have rows");
         } else {
             foreach ($rows as $row) {
                 if (is_string($row)) {
@@ -43,17 +38,18 @@ final class MatrixParser implements ElementParserInterface
                 if ($row === []) {
                     continue;
                 }
-                if (!isset($row['value']) || !is_scalar($row['value'])) {
+                if (!is_scalar($row['value'] ?? null)) {
                     throw new \InvalidArgumentException("Matrix rows MUST contain a 'value' key with a scalar value");
                 }
 
                 $rowTexts = $this->extractLocalizedTexts($row, defaults: ['default' => (string) $row['value']]);
 
                 yield new SingleChoiceVariable(
-                    "{$valueName}.{$row['value']}",
-                    $this->arrayFormat($titles, " - ", $rowTexts),
-                    $answers,
-                    [...$dataPrefix, $valueName, $row['value']]
+                    name: "{$valueName}.{$row['value']}",
+                    titles: $this->arrayFormat($titles, " - ", $rowTexts),
+                    options: $answers,
+                    dataPath: [...$dataPrefix, $valueName, $row['value']],
+                    rawConfiguration: $questionConfig
                 );
             }
         }

@@ -7,14 +7,11 @@ namespace Collecthor\SurveyjsParser\Tests\Parsers;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\Parsers\PanelParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
-use Collecthor\SurveyjsParser\SurveyParser;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use function iter\toArray;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Parsers\PanelParser
- * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
- */
+#[CoversClass(PanelParser::class)]
 final class PanelParserTest extends TestCase
 {
     public function testRecursionOnElements(): void

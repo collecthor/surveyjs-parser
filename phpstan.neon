@@ -3,7 +3,9 @@ parameters:
   paths:
     - src
     - tests
-  treatPhpDocTypesAsCertain: false
+  treatPhpDocTypesAsCertain: true
   ignoreErrors:
     - "#Casting to string something that's already string#"
   reportUnmatchedIgnoredErrors: false
+  checkImplicitMixed: true
+  checkBenevolentUnionTypes: true

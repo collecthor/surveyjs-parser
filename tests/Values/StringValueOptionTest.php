@@ -7,11 +7,11 @@ namespace Collecthor\SurveyjsParser\Tests\Values;
 use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Tests\support\TestValueOptionLabels;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Values\StringValueOption
- */
+#[CoversClass(StringValueOption::class)]
 class StringValueOptionTest extends TestCase
 {
     use TestValueOptionLabels;
@@ -40,19 +40,18 @@ class StringValueOptionTest extends TestCase
     }
 
     /**
-     * @dataProvider labelProvider
      * @param array<string,string> $labels
-     * @return void
      */
+    #[DataProvider('labelProvider')]
     public function testLabelSet(array $labels): void
     {
         self::assertValueOptionLabels($this->createOption(...), $labels);
     }
 
     /**
-     * @dataProvider labelProvider
      * @param array<string,string> $labels
      */
+    #[DataProvider('labelProvider')]
     public function testDisplayValues(array $labels): void
     {
         self::assertSame($labels, $this->createOption($labels)->getDisplayValues());

@@ -12,20 +12,12 @@ use Collecthor\SurveyjsParser\Tests\support\NameTests;
 use Collecthor\SurveyjsParser\Tests\support\RawConfigurationTests;
 use Collecthor\SurveyjsParser\Tests\support\ValueNameTests;
 use Collecthor\SurveyjsParser\Values\StringValue;
-use Collecthor\SurveyjsParser\Variables\NumericVariable;
+use Collecthor\SurveyjsParser\Variables\IntegerVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Parsers\TextQuestionParser
- * @uses \Collecthor\SurveyjsParser\ArrayRecord
- * @uses \Collecthor\SurveyjsParser\Values\StringValue
- * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
- * @uses \Collecthor\SurveyjsParser\Variables\NumericVariable
- * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
- * @uses \Collecthor\SurveyjsParser\Parsers\CommentParser
- * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
- */
+#[CoversClass(TextQuestionParser::class)]
 final class TextQuestionParserTest extends TestCase
 {
     use RawConfigurationTests;
@@ -105,7 +97,7 @@ final class TextQuestionParserTest extends TestCase
         ], $config, []));
 
         $variable = $variables[0];
-        self::assertInstanceOf(NumericVariable::class, $variable);
+        self::assertInstanceOf(IntegerVariable::class, $variable);
     }
 
 

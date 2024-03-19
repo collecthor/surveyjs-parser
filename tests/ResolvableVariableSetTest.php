@@ -7,26 +7,20 @@ namespace Collecthor\SurveyjsParser\Tests;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ResolvableVariableSet;
 use Collecthor\SurveyjsParser\Variables\DeferredVariable;
-use Collecthor\SurveyjsParser\Variables\NumericVariable;
+use Collecthor\SurveyjsParser\Variables\IntegerVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Collecthor\SurveyjsParser\ResolvableVariableSet
- * @uses \Collecthor\SurveyjsParser\Traits\GetName
- * @uses \Collecthor\SurveyjsParser\Traits\GetTitle
- * @uses \Collecthor\SurveyjsParser\Variables\NumericVariable
- * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
- * @uses \Collecthor\SurveyjsParser\Variables\DeferredVariable
- */
+#[CoversClass(ResolvableVariableSet::class)]
 final class ResolvableVariableSetTest extends TestCase
 {
     public function testGetVariables(): void
     {
         $variables = [
-            new OpenTextVariable('test1', ['default' => 'Title test 1'], ['test1']),
-            new NumericVariable('test2', ['default' => 'Title test 2'], ['test2']),
+            new OpenTextVariable('test1', titles: ['default' => 'Title test 1'], dataPath: ['test1']),
+            new IntegerVariable('test2', titles: ['default' => 'Title test 2'], dataPath: ['test2']),
         ];
         $resolvable = new ResolvableVariableSet(...$variables);
 
@@ -46,11 +40,11 @@ final class ResolvableVariableSetTest extends TestCase
 
         $callback = function (ResolvableVariableSet $set) use (&$variableResolved): VariableInterface {
             $variableResolved = true;
-            return new OpenTextVariable('testresolved', ['default' => 'Test Resolved'], ['testresolved']);
+            return new OpenTextVariable('testresolved', titles: ['default' => 'Test Resolved'], dataPath: ['testresolved']);
         };
 
         $variables = [
-            new NumericVariable('test', ['default' => 'Test'], ['test']),
+            new IntegerVariable('test', titles: ['default' => 'Test'], dataPath: ['test']),
             new DeferredVariable('test2', $callback),
         ];
 
@@ -82,7 +76,7 @@ final class ResolvableVariableSetTest extends TestCase
         $variables = [
             new DeferredVariable('variable1', $callback1),
             new DeferredVariable('variable2', $callback2),
-            new OpenTextVariable('toplevel', ['default' => 'toplevel'], ['toplevel']),
+            new OpenTextVariable('toplevel', dataPath: ['toplevel'], titles: ['default' => 'toplevel']),
         ];
 
         $resolvable = new ResolvableVariableSet(...$variables);

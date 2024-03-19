@@ -6,6 +6,7 @@ namespace Collecthor\SurveyjsParser\Tests\Variables;
 
 use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 abstract class VariableTestBase extends TestCase
@@ -34,9 +35,9 @@ abstract class VariableTestBase extends TestCase
     }
 
     /**
-     * @dataProvider rawConfigurationProvider
      * @param array<string,mixed> $rawConfiguration
      */
+    #[DataProvider('rawConfigurationProvider')]
     final public function testRawConfiguration(array $rawConfiguration): void
     {
         $variable = $this->getVariableWithRawConfiguration($rawConfiguration);

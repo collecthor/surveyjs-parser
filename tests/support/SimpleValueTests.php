@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\support;
 
-use Collecthor\SurveyjsParser\Interfaces\RawValueInterface;
+use Collecthor\SurveyjsParser\Interfaces\BaseValueInterface;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 trait SimpleValueTests
 {
-    private function getSubject(mixed $param = null): RawValueInterface
+    private function getSubject(mixed $param = null): BaseValueInterface
     {
         $reflection = new \ReflectionClass($this);
 
@@ -24,8 +26,15 @@ trait SimpleValueTests
         foreach ($reflection->getAttributes(CoversClass::class) as $attribute) {
             /** @var CoversClass $coversClass */
             $coversClass = $attribute->newInstance();
-            $result = new ($coversClass->className)($param ?? $defaultValue);
-            if ($result instanceof RawValueInterface) {
+
+            $valueClass = $coversClass->className();
+            if (method_exists($valueClass, 'create')) {
+                $result = ($valueClass)::create($param ?? $defaultValue);
+            } else {
+                $result = new $valueClass($param ?? $defaultValue);
+            }
+
+            if ($result instanceof BaseValueInterface) {
                 return $result;
             }
         }
@@ -41,38 +50,17 @@ trait SimpleValueTests
      */
     abstract protected static function getInvalidSamples(): iterable;
 
-    /**
-     * @dataProvider getValidSamples
-     */
+    #[DataProvider('getValidSamples')]
     public function testValidSamples(mixed $param): void
     {
         $value = $this->getSubject($param);
-        Assert::assertSame($param, $value->getRawValue());
+        Assert::assertSame($param, $value->getValue());
     }
 
-    /**
-     * @dataProvider getInvalidSamples
-     */
+    #[DataProvider('getInvalidSamples')]
     public function testInvalidSamples(mixed $param): void
     {
         $this->expectException(\Throwable::class);
         $this->getSubject($param);
-    }
-
-    public function testConstructorArgumentType(): void
-    {
-        $subject = $this->getSubject();
-
-        $reflector = new \ReflectionClass($subject);
-
-        $constructor = $reflector->getConstructor();
-        Assert::assertInstanceOf(\ReflectionMethod::class, $constructor);
-        $getterType = $reflector->getMethod('getRawValue')->getReturnType();
-
-        Assert::assertGreaterThanOrEqual(1, $constructor->getNumberOfParameters());
-
-        $valueType = $constructor->getParameters()[0]->getType();
-
-        Assert::assertSame((string)$getterType, (string)$valueType);
     }
 }

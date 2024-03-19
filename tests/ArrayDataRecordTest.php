@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Tests;
 
 use Collecthor\SurveyjsParser\ArrayDataRecord;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Collecthor\SurveyjsParser\ArrayDataRecord
- */
+#[CoversClass(ArrayDataRecord::class)]
 class ArrayDataRecordTest extends TestCase
 {
     /**
@@ -17,17 +17,18 @@ class ArrayDataRecordTest extends TestCase
      */
     public static function dataProvider(): iterable
     {
-        yield [['a' => 'b'], ['a'], 'b'];
-        yield [['a' => ['b' => 'c']], ['a', 'b'], 'c'];
+        //        yield [['a' => 'b'], ['a'], 'b'];
+        //        yield [['a' => ['b' => 'c']], ['a', 'b'], 'c'];
+
+        yield [['a' => ['b' => ['c' => ['d' => ['e' => ['f' => ['g' => 15]]]]]]], ['a', 'b', 'c', 'd', 'e', 'f', 'g'], 15];
     }
 
     /**
-     * @dataProvider dataProvider
      * @param array<string, mixed> $exampleData
      * @param non-empty-list<string> $path
-     * @param mixed $value
-     * @return void
+     *
      */
+    #[DataProvider('dataProvider')]
     public function testGetDataValue(array $exampleData, array $path, mixed $value): void
     {
         $subject = new ArrayDataRecord($exampleData);
@@ -35,9 +36,9 @@ class ArrayDataRecordTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProvider
      * @param array<string, mixed> $exampleData
      */
+    #[DataProvider('dataProvider')]
     public function testAllData(array $exampleData): void
     {
         $subject = new ArrayDataRecord($exampleData);

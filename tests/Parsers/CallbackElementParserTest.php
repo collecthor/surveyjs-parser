@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
+use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\Parsers\CallbackElementParser;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
+use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use function iter\toArray;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Parsers\CallbackElementParser
- * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
- */
+#[CoversClass(CallbackElementParser::class)]
 final class CallbackElementParserTest extends TestCase
 {
     public function testCallbackIsCalled(): void
@@ -22,16 +22,19 @@ final class CallbackElementParserTest extends TestCase
         $config = ['a' => 'b'];
         $surveyConfiguration = new SurveyConfiguration();
 
-        $mock = $this->getMockBuilder(\stdClass::class)->addMethods(['__invoke'])->getMock();
-        /** @phpstan-ignore-next-line */
-        $mock->expects($this->once())
-            ->method('__invoke')
-            ->with(self::equalTo($parent), self::equalTo($surveyConfiguration), self::equalTo($config))
-            ->willReturn([]);
-        self::assertIsCallable($mock);
-        $closure = \Closure::fromCallable($mock);
-        $parser = new CallbackElementParser($closure);
+        $count = 0;
 
+        $parser = new CallbackElementParser(function (ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfig) use ($parent, $config, $surveyConfiguration, &$count) {
+            Assert::assertSame($parent, $root);
+            Assert::assertSame($config, $questionConfig);
+            Assert::assertSame($surveyConfiguration, $surveyConfig);
+            $count++;
+            return [];
+        });
+
+        self::assertSame(0, $count);
         toArray($parser->parse($parent, $config, $surveyConfiguration));
+        /** @phpstan-ignore-next-line */
+        self::assertSame(1, $count);
     }
 }

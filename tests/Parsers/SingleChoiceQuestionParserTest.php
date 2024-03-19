@@ -17,22 +17,12 @@ use Collecthor\SurveyjsParser\Values\OtherValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\DeferredVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use function iter\toArray;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser
- * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
- * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
- * @uses \Collecthor\SurveyjsParser\Values\IntegerValueOption
- * @uses \Collecthor\SurveyjsParser\Traits\GetDisplayValue
- * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
- * @uses \Collecthor\SurveyjsParser\ResolvableVariableSet
- * @uses \Collecthor\SurveyjsParser\Variables\DeferredVariable
- * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
- * @uses \Collecthor\SurveyjsParser\Values\NoneValueOption
- * @uses \Collecthor\SurveyjsParser\Values\OtherValueOption
- */
+#[CoversClass(SingleChoiceQuestionParser::class)]
 final class SingleChoiceQuestionParserTest extends TestCase
 {
     use ValueNameTests;
@@ -48,9 +38,9 @@ final class SingleChoiceQuestionParserTest extends TestCase
     }
 
     /**
-     * @dataProvider badChoicesProvider
      * @param array<mixed> $choice
      */
+    #[DataProvider('badChoicesProvider')]
     public function testBadChoices(array $choice): void
     {
         $parent = new DummyParser();
@@ -106,12 +96,12 @@ final class SingleChoiceQuestionParserTest extends TestCase
         ], $surveyConfiguration))[0];
         self::assertInstanceOf(SingleChoiceVariable::class, $variable);
 
-        $options = $variable->getValueOptions();
+        $options = $variable->getOptions();
         self::assertCount(4, $options);
-        self::assertSame('a', $options[0]->getRawValue());
-        self::assertSame('c', $options[1]->getRawValue());
-        self::assertSame(15, $options[2]->getRawValue());
-        self::assertSame(16, $options[3]->getRawValue());
+        self::assertSame('a', $options[0]->getValue());
+        self::assertSame('c', $options[1]->getValue());
+        self::assertSame(15, $options[2]->getValue());
+        self::assertSame(16, $options[3]->getValue());
 
         self::assertSame('b', $options[0]->getDisplayValue());
         self::assertSame('c', $options[1]->getDisplayValue());
@@ -136,12 +126,10 @@ final class SingleChoiceQuestionParserTest extends TestCase
         ], $surveyConfiguration))[0];
 
         self::assertInstanceOf(SingleChoiceVariable::class, $variable);
-        $options = $variable->getValueOptions();
+        $options = $variable->getOptions();
         self::assertCount(3, $options);
-        $rawValues = [$options[0]->getRawValue(), $options[1]->getRawValue(), $options[2]->getRawValue()];
-        self::assertContains('a', $rawValues);
-        self::assertContains('other', $rawValues);
-        self::assertContains('none', $rawValues);
+        $rawValues = [$options[0]->getValue(), $options[1]->getValue(), $options[2]->getValue()];
+        self::assertSame(['a', 'none', 'other'], $rawValues);
     }
 
     public function testChoicesWrongType(): void
@@ -152,15 +140,6 @@ final class SingleChoiceQuestionParserTest extends TestCase
         toArray($parser->parse(new DummyParser(), [
             'name' => 'test',
             'choices' => 15
-        ], new SurveyConfiguration()));
-    }
-
-    public function testMissingChoices(): void
-    {
-        $parser = new SingleChoiceQuestionParser();
-        $this->expectException(\InvalidArgumentException::class);
-        toArray($parser->parse(new DummyParser(), [
-            'name' => 'test',
         ], new SurveyConfiguration()));
     }
 
@@ -181,14 +160,19 @@ final class SingleChoiceQuestionParserTest extends TestCase
             new StringValueOption('c', ['default' => 'c']),
         ];
 
-        $question2 = new SingleChoiceVariable('question2', ['default' => 'question2'], $valueOptions, ['question2']);
+        $question2 = new SingleChoiceVariable(
+            name: 'question2',
+            options: $valueOptions,
+            dataPath: ['question2'],
+            titles: ['default' => 'question2']
+        );
 
         $resolvable = new ResolvableVariableSet($question1, $question2);
 
         $resolved = $question1->resolve($resolvable);
 
         self::assertInstanceOf(SingleChoiceVariable::class, $resolved);
-        self::assertSame($valueOptions, $resolved->getValueOptions());
+        self::assertSame($valueOptions, $resolved->getOptions());
     }
 
 
@@ -209,9 +193,7 @@ final class SingleChoiceQuestionParserTest extends TestCase
 
         self::assertInstanceOf(SingleChoiceVariable::class, $question1);
 
-        foreach ($question1->getValueOptions() as $valueOption) {
-            self::assertInstanceOf(IntegerValueOption::class, $valueOption);
-        }
+        self::assertContainsOnlyInstancesOf(IntegerValueOption::class, $question1->getOptions());
     }
 
     public function testParseOptionsThatContainNumbersButAreNotNumberNotAsNumbers(): void
@@ -231,9 +213,7 @@ final class SingleChoiceQuestionParserTest extends TestCase
 
         self::assertInstanceOf(SingleChoiceVariable::class, $question1);
 
-        foreach ($question1->getValueOptions() as $valueOption) {
-            self::assertInstanceOf(StringValueOption::class, $valueOption);
-        }
+        self::assertContainsOnlyInstancesOf(StringValueOption::class, $question1->getOptions());
     }
 
     public function testHasNoneOther(): void
@@ -268,10 +248,8 @@ final class SingleChoiceQuestionParserTest extends TestCase
 
         $variable = toArray($parser->parse($parent, $questionConfig, $surveyConfiguration))[0];
         self::assertInstanceOf(SingleChoiceVariable::class, $variable);
-        self::assertCount(5, $variable->getValueOptions());
-
-        $options = $variable->getValueOptions();
-
+        $options = $variable->getOptions();
+        self::assertCount(5, $options);
         self::assertInstanceOf(StringValueOption::class, $options[0]);
         self::assertInstanceOf(StringValueOption::class, $options[1]);
         self::assertInstanceOf(StringValueOption::class, $options[2]);

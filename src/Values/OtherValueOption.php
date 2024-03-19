@@ -4,48 +4,32 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Values;
 
+use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Interfaces\ValueType;
 use Collecthor\SurveyjsParser\Traits\GetDisplayValue;
 
-/**
- * @implements ValueOptionInterface<string>
- */
-final class OtherValueOption implements ValueOptionInterface
+final readonly class OtherValueOption implements ValueOptionInterface, SpecialValueInterface
 {
     use GetDisplayValue;
 
+    private const RAW_VALUE = 'other';
+
     /**
-     * @param string $rawValue
      * @param array<string, string> $displayValues
      */
     public function __construct(
-        private readonly string $rawValue,
-        private readonly array $displayValues
+        private array $displayValues
     ) {
-    }
-    public function getRawValue(): string|int|float|bool
-    {
-        return $this->rawValue;
-    }
-
-    public function isNone(): bool
-    {
-        return false;
-    }
-
-    public function isOther(): bool
-    {
-        return true;
     }
 
     public function getType(): ValueType
     {
-        return ValueType::Normal;
+        return ValueType::Other;
     }
 
     public function getValue(): string
     {
-        return $this->rawValue;
+        return self::RAW_VALUE;
     }
 }

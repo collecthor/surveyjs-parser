@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Values;
 
-use Collecthor\SurveyjsParser\Tests\support\CoversClass;
 use Collecthor\SurveyjsParser\Tests\support\SimpleValueTests;
 use Collecthor\SurveyjsParser\Values\IntegerValue;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Values\IntegerValue
- */
 #[CoversClass(IntegerValue::class)]
 class IntegerValueTest extends TestCase
 {

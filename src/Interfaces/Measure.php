@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Interfaces;
 
-enum Measure: string
+enum Measure
 {
-    case Nominal = 'nominal';
-    case Ordinal = 'ordinal';
-    case Scale = 'scale';
+    case Nominal;
+    case Ordinal;
+    case Scale;
 }

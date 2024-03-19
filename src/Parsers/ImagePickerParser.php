@@ -10,9 +10,8 @@ use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
-use function PHPStan\dumpType;
 
-final class ImagePickerParser implements ElementParserInterface
+final readonly class ImagePickerParser implements ElementParserInterface
 {
     use ParserHelpers;
 
@@ -32,9 +31,21 @@ final class ImagePickerParser implements ElementParserInterface
         }
 
         if ($this->extractOptionalBoolean($questionConfig, 'multiSelect') ?? false) {
-            yield new MultipleChoiceVariable($name, $titles, $choices, [...$dataPrefix, $valueName]);
+            yield new MultipleChoiceVariable(
+                name: $name,
+                dataPath: [...$dataPrefix, $valueName],
+                options: $choices,
+                titles: $titles,
+                rawConfiguration: $questionConfig
+            );
         } else {
-            yield new SingleChoiceVariable($name, $titles, $choices, [...$dataPrefix, $valueName]);
+            yield new SingleChoiceVariable(
+                name: $name,
+                options: $choices,
+                dataPath: [...$dataPrefix, $valueName],
+                rawConfiguration: $questionConfig,
+                titles: $titles
+            );
         }
 
         yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);

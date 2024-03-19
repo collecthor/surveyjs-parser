@@ -8,11 +8,9 @@ use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\BooleanVariable;
+use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 
-/**
- * @type T bool
- */
-final class BooleanParser implements ElementParserInterface
+final readonly class BooleanParser implements ElementParserInterface
 {
     use ParserHelpers;
 
@@ -24,12 +22,25 @@ final class BooleanParser implements ElementParserInterface
     {
     }
 
+    /**
+     * @return iterable<BooleanVariable|OpenTextVariable>
+     */
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
         $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
         $id = implode('.', $dataPath);
 
         $titles = $this->extractTitles($questionConfig);
-        yield new BooleanVariable($id, $titles, $this->trueLabels, $this->falseLabels, $dataPath);
+        yield new BooleanVariable(
+            $id,
+            $dataPath,
+            $titles,
+            $this->trueLabels,
+            $this->falseLabels,
+            $questionConfig,
+            trueValue: $this->extractOptionalString($questionConfig, 'valueTrue') ?? true,
+            falseValue: $this->extractOptionalString($questionConfig, 'valueFalse') ?? false,
+        );
+        yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }

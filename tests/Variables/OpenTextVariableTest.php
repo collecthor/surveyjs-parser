@@ -6,19 +6,14 @@ namespace Collecthor\SurveyjsParser\Tests\Variables;
 
 use Collecthor\SurveyjsParser\ArrayDataRecord;
 use Collecthor\SurveyjsParser\Interfaces\Measure;
-use Collecthor\SurveyjsParser\Interfaces\NotNormalValueInterface;
+use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\StringValueInterface;
-use Collecthor\SurveyjsParser\Interfaces\ValueType;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Variables\OpenTextVariable
- * @uses \Collecthor\SurveyjsParser\ArrayRecord
- * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
- * @uses \Collecthor\SurveyjsParser\Values\StringValue
- * @uses \Collecthor\SurveyjsParser\Values\NotNormalValue
- */
+#[CoversClass(OpenTextVariable::class)]
 final class OpenTextVariableTest extends VariableTestBase
 {
     /**
@@ -26,48 +21,50 @@ final class OpenTextVariableTest extends VariableTestBase
      */
     public static function recordProvider(): iterable
     {
-        yield [null, NotNormalValueInterface::class, ['abc' => "15"]];
+        yield [null, SpecialValueInterface::class, ['abc' => "15"]];
         yield ["15", StringValueInterface::class, ['path' => 15]];
         yield ["test", StringValueInterface::class, ['path' => "test"]];
     }
 
     /**
-     * @dataProvider recordProvider
      * @param class-string $expectedClass
      * @param array<string, string|int> $sample
      */
+    #[DataProvider('recordProvider')]
     public function testGetValue(mixed $expected, string $expectedClass, array $sample): void
     {
-        $variable = new OpenTextVariable('abc', ['en' => 'English', 'nl' => 'Dutch'], ['path']);
+        $variable = new OpenTextVariable('abc', ['path'], ['en' => 'English', 'nl' => 'Dutch']);
 
         $value = $variable->getValue(new ArrayDataRecord($sample));
 
         self::assertInstanceOf($expectedClass, $value);
 
-        self::assertSame($expected, $value->getRawValue());
-        if ($value->getType() === ValueType::Normal) {
-            self::assertSame($expected, $value->getValue());
-        }
+        self::assertSame($expected, $value->getValue());
     }
 
     public function testGetMeasure(): void
     {
-        $variable = new OpenTextVariable('abc', [], ['path']);
+        $variable = new OpenTextVariable(name: 'abc', dataPath: ['path']);
         self::assertSame(Measure::Nominal, $variable->getMeasure());
     }
 
     protected function getVariableWithRawConfiguration(array $rawConfiguration): VariableInterface
     {
-        return new OpenTextVariable('abc', ['en' => 'English', 'nl' => 'Dutch'], ['path'], $rawConfiguration);
+        return new OpenTextVariable(
+            'abc',
+            dataPath: ['path'],
+            titles: ['en' => 'English', 'nl' => 'Dutch'],
+            rawConfiguration: $rawConfiguration
+        );
     }
 
     protected function getVariableWithName(string $name): OpenTextVariable
     {
-        return new OpenTextVariable($name, ['en' => 'English', 'nl' => 'Dutch'], ['path']);
+        return new OpenTextVariable($name, dataPath: ['path'], titles: ['en' => 'English', 'nl' => 'Dutch']);
     }
 
     protected function getVariableWithTitles(array $titles): VariableInterface
     {
-        return new OpenTextVariable('abc', $titles, ['path']);
+        return new OpenTextVariable('abc', dataPath: ['path'], titles: $titles);
     }
 }

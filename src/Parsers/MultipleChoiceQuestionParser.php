@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Parsers;
 
 use Collecthor\SurveyjsParser\ElementParserInterface;
+use Collecthor\SurveyjsParser\Exception\ParseError;
 use Collecthor\SurveyjsParser\Interfaces\ClosedVariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\ResolvableVariableSet;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
-use Collecthor\SurveyjsParser\Values\NoneValueOption;
-use Collecthor\SurveyjsParser\Values\OtherValueOption;
 use Collecthor\SurveyjsParser\Variables\DeferredVariable;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
-use ValueError;
 use function implode;
 
-final class MultipleChoiceQuestionParser implements ElementParserInterface
+final readonly class MultipleChoiceQuestionParser implements ElementParserInterface
 {
     use ParserHelpers;
 
@@ -29,16 +29,6 @@ final class MultipleChoiceQuestionParser implements ElementParserInterface
 
         $titles = $this->extractTitles($questionConfig);
 
-        $choices = $this->extractChoices($this->extractArray($questionConfig, 'choices'));
-
-
-        if ($this->extractOptionalBoolean($questionConfig, 'hasNone') ?? $this->extractOptionalBoolean($questionConfig, 'showNoneItem') ?? false) {
-            $choices[] = new NoneValueOption('none', $this->extractLocalizedTexts($questionConfig, 'noneText'));
-        }
-
-        if ($this->extractOptionalBoolean($questionConfig, 'hasOther') ?? $this->extractOptionalBoolean($questionConfig, 'showOtherItem') ?? false) {
-            $choices[] = new OtherValueOption('other', $this->extractLocalizedTexts($questionConfig, 'otherText'));
-        }
 
         // choicesFromQuestion
         if (null !== $choicesFromQuestion = $this->extractOptionalString($questionConfig, 'choicesFromQuestion')) {
@@ -47,18 +37,28 @@ final class MultipleChoiceQuestionParser implements ElementParserInterface
                 static function (ResolvableVariableSet $set) use ($name, $titles, $dataPath, $questionConfig, $choicesFromQuestion): VariableInterface {
                     $variable = $set->getVariable($choicesFromQuestion);
                     if ($variable instanceof ClosedVariableInterface) {
-                        $options = $variable->getValueOptions();
-                        return new MultipleChoiceVariable($name, $titles, $options, $dataPath, $questionConfig);
+                        return new MultipleChoiceVariable(
+                            name: $name,
+                            dataPath: $dataPath,
+                            options: array_filter($variable->getOptions(), function (ValueOptionInterface $option) {
+                                return !$option instanceof SpecialValueInterface;
+                            }),
+                            titles: $titles,
+                            rawConfiguration: $questionConfig
+                        );
                     } else {
-                        throw new ValueError("Question {$choicesFromQuestion} does not implement ClosedQuestionInterface");
+                        throw new ParseError("Question {$choicesFromQuestion} is not a closed question");
                     }
                 },
             );
         } else {
-            if ($choices === []) {
-                throw new \InvalidArgumentException("Choices must not be empty");
-            }
-            yield new MultipleChoiceVariable($name, $titles, $choices, $dataPath, $questionConfig);
+            yield new MultipleChoiceVariable(
+                name: $name,
+                dataPath: $dataPath,
+                options: $this->generateChoices($questionConfig),
+                titles: $titles,
+                rawConfiguration: $questionConfig
+            );
         }
         yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
     }

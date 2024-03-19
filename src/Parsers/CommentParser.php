@@ -8,7 +8,7 @@ use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 
-class CommentParser implements ElementParserInterface
+final readonly class CommentParser implements ElementParserInterface
 {
     use ParserHelpers;
 

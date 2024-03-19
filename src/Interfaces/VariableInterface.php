@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Interfaces;
 
+/**
+ * @internal
+ */
 interface VariableInterface
 {
     /**
@@ -18,16 +21,12 @@ interface VariableInterface
      */
     public function getTitle(null|string $locale = null): string;
 
-    /**
-     * Extracts the variable value from a record
-     * @return RawValueInterface|ValueSetInterface<string|float|int|bool>
-     */
-    public function getValue(RecordInterface $record): RawValueInterface|ValueSetInterface;
+    public function getValue(RecordInterface $record): BaseValueInterface;
 
     /**
      * Return the type of measure for this variable
      */
     public function getMeasure(): Measure;
 
-    public function getRawConfigurationValue(string $key): mixed;
+    public function getRawConfigurationValue(string|int $key): mixed;
 }
