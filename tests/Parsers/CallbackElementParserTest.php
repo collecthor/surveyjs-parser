@@ -11,13 +11,11 @@ use Collecthor\SurveyjsParser\SurveyConfiguration;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use function iter\toArray;
 
 #[CoversClass(CallbackElementParser::class)]
 final class CallbackElementParserTest extends TestCase
 {
-    use ProphecyTrait;
     public function testCallbackIsCalled(): void
     {
         $parent = new DummyParser();

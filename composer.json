@@ -29,9 +29,7 @@
         "nikic/iter": "^2",
         "phpstan/phpstan-phpunit": "^1",
         "phpstan/extension-installer": "^1",
-        "phpstan/phpstan-strict-rules": "^1",
-        "phpspec/prophecy": "^1.19",
-        "phpspec/prophecy-phpunit": "^2.2"
+        "phpstan/phpstan-strict-rules": "^1"
     },
     "require": {
         "php": ">= 8.2"
