@@ -8,7 +8,7 @@ use Collecthor\SurveyjsParser\Interfaces\Measure;
 use Collecthor\SurveyjsParser\Interfaces\RecordInterface;
 use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\StringValueInterface;
-use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\StringVariableInterface;
 use Collecthor\SurveyjsParser\Traits\GetName;
 use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
@@ -16,7 +16,7 @@ use Collecthor\SurveyjsParser\Values\InvalidValue;
 use Collecthor\SurveyjsParser\Values\MissingValue;
 use Collecthor\SurveyjsParser\Values\StringValue;
 
-final readonly class OpenTextVariable implements VariableInterface
+final readonly class OpenTextVariable implements StringVariableInterface
 {
     use GetName, GetTitle, GetRawConfiguration;
     /**
