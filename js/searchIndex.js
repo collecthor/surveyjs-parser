@@ -331,6 +331,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Interfaces-StringValueInterface.html#method_getValue"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\StringVariableInterface",
+            "name": "StringVariableInterface",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-StringVariableInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\StringVariableInterface\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-StringVariableInterface.html#method_getValue"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\TimestampVariableInterface",
             "name": "TimestampVariableInterface",
             "summary": "",
