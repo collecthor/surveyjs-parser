@@ -34,15 +34,22 @@ final readonly class MultipleChoiceQuestionParser implements ElementParserInterf
         if (null !== $choicesFromQuestion = $this->extractOptionalString($questionConfig, 'choicesFromQuestion')) {
             yield new DeferredVariable(
                 $name,
-                static function (ResolvableVariableSet $set) use ($name, $titles, $dataPath, $questionConfig, $choicesFromQuestion): VariableInterface {
+                function (ResolvableVariableSet $set) use ($name, $titles, $dataPath, $questionConfig, $choicesFromQuestion): VariableInterface {
                     $variable = $set->getVariable($choicesFromQuestion);
                     if ($variable instanceof ClosedVariableInterface) {
+                        // We get the special choices from current config
+                        $specialChoices = array_filter($this->generateChoices($questionConfig), function (ValueOptionInterface $option) {
+                            return $option instanceof SpecialValueInterface;
+                        });
+                        // We get the normal choices from the referenced variable
+                        $normalChoices = array_filter($variable->getOptions(), function (ValueOptionInterface $option) {
+                            return !$option instanceof SpecialValueInterface;
+                        });
+
                         return new MultipleChoiceVariable(
                             name: $name,
                             dataPath: $dataPath,
-                            options: array_filter($variable->getOptions(), function (ValueOptionInterface $option) {
-                                return !$option instanceof SpecialValueInterface;
-                            }),
+                            options: [...$normalChoices, ...$specialChoices],
                             titles: $titles,
                             rawConfiguration: $questionConfig
                         );

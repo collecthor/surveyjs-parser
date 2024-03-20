@@ -6,6 +6,7 @@ namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
 use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\ElementParserInterface;
+use Collecthor\SurveyjsParser\Interfaces\SpecialValueOptionInterface;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\MultipleChoiceMatrixParser;
@@ -383,11 +384,9 @@ final class MultipleChoiceMatrixParserTest extends TestCase
         self::assertContainsOnlyInstancesOf(VariableInterface::class, $result);
 
         $value = $result[0]->getValue($record);
-        self::assertInstanceOf(MultipleChoiceValue::class, $value);
-        $answers = $value->getValue();
-        self::assertCount(1, $answers);
-        self::assertEquals("none", $answers[0]->getValue());
-        self::assertEquals("Maak ik geen gebruik van", $answers[0]->getDisplayValue());
+        self::assertInstanceOf(SpecialValueOptionInterface::class, $value);
+        self::assertEquals("none", $value->getValue());
+        self::assertEquals("Maak ik geen gebruik van", $value->getDisplayValue());
 
 
         $value = $result[2]->getValue($record);

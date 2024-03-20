@@ -30,7 +30,7 @@ final readonly class TimestampVariable implements TimestampVariableInterface
         private array $dataPath,
         private array $titles = [],
         private array $rawConfiguration = [],
-        private string $format = 'Y-m-d h:i:s'
+        private string $format = 'Y-m-d H:i:s'
     ) {
     }
 
