@@ -15,12 +15,12 @@ use Collecthor\SurveyjsParser\Values\BooleanValueOption;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
 use Collecthor\SurveyjsParser\Values\MissingValue;
 
-final class BooleanVariable implements BooleanVariableInterface
+final readonly class BooleanVariable implements BooleanVariableInterface
 {
     use GetName, GetTitle, GetRawConfiguration;
 
-    private readonly BooleanValueOption $yes;
-    private readonly BooleanValueOption $no;
+    private BooleanValueOption $yes;
+    private BooleanValueOption $no;
 
     /**
      * @param string $name
@@ -31,12 +31,12 @@ final class BooleanVariable implements BooleanVariableInterface
      * @param non-empty-list<string> $dataPath
      */
     public function __construct(
-        private readonly string $name,
-        private readonly array $dataPath,
-        private readonly array $titles = [],
-        private readonly array $trueLabels = [],
-        private readonly array $falseLabels = [],
-        private readonly array $rawConfiguration = [],
+        private string $name,
+        private array $dataPath,
+        private array $titles = [],
+        private array $trueLabels = [],
+        private array $falseLabels = [],
+        private array $rawConfiguration = [],
         bool|string $trueValue = true,
         bool|string $falseValue = false,
     ) {

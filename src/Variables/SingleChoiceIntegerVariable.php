@@ -51,13 +51,12 @@ final readonly class SingleChoiceIntegerVariable implements ClosedVariableInterf
     public function getValue(RecordInterface $record): ValueOptionInterface|SpecialValueInterface
     {
         $rawValue = $record->getDataValue($this->dataPath);
-        if (is_array($rawValue)) {
-            return new InvalidValue($rawValue);
-        } elseif ($rawValue === null) {
-            return MissingValue::create();
-        }
 
-        return $this->valueMap[$rawValue];
+        return match (true) {
+            $rawValue === null => MissingValue::create(),
+            is_int($rawValue), is_string($rawValue) => $this->valueMap[$rawValue] ?? new InvalidValue($rawValue),
+            default => new InvalidValue($rawValue)
+        };
     }
 
     public function getMeasure(): Measure
