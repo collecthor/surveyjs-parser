@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Variables;
 
+use Collecthor\SurveyjsParser\Helpers\DataTypeHelper;
 use Collecthor\SurveyjsParser\Interfaces\Measure;
 use Collecthor\SurveyjsParser\Interfaces\MultipleChoiceVariableInterface;
 use Collecthor\SurveyjsParser\Interfaces\RecordInterface;
@@ -51,7 +52,17 @@ final readonly class MultipleChoiceVariable implements MultipleChoiceVariableInt
     {
         $rawValues = $record->getDataValue($this->dataPath);
 
+
         if (is_array($rawValues)) {
+            // Special case, if we have 1 value it might be a special value.
+            if (count($rawValues) === 1) {
+                $value = $this->valueMap[$rawValues[0]];
+                if (DataTypeHelper::valueIsNormal($value)) {
+                    return new MultipleChoiceValue([$value]);
+                } else {
+                    return $value;
+                }
+            }
             $result = [];
             foreach ($rawValues as $value) {
                 if (is_scalar($value) && isset($this->valueMap[$value])) {
@@ -67,7 +78,6 @@ final readonly class MultipleChoiceVariable implements MultipleChoiceVariableInt
 
         return new InvalidValue($rawValues);
     }
-
     public function getMeasure(): Measure
     {
         return Measure::Nominal;
