@@ -61,9 +61,7 @@ final readonly class MultipleChoiceVariable implements MultipleChoiceVariableInt
                 }
             }
             return new MultipleChoiceValue($result);
-        }
-
-        if ($rawValues === null) {
+        } elseif ($rawValues === null) {
             return MissingValue::create();
         }
 
