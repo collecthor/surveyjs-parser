@@ -50,12 +50,11 @@ final readonly class SingleChoiceVariable implements ClosedVariableInterface
     {
         // Match the value options.
         $rawValue = $record->getDataValue($this->dataPath);
-        if ($rawValue === null) {
-            return MissingValue::create();
-        } elseif (is_array($rawValue) || is_float($rawValue)) {
-            return new InvalidValue($rawValue);
-        }
-        return $this->valueMap[$rawValue] ?? new InvalidValue($rawValue);
+        return match (true) {
+            $rawValue === null => MissingValue::create(),
+            is_string($rawValue), is_int($rawValue) => $this->valueMap[$rawValue] ?? new InvalidValue($rawValue),
+            default => new InvalidValue($rawValue)
+        };
     }
 
     public function getMeasure(): Measure
