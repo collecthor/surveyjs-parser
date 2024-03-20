@@ -186,11 +186,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Interfaces-BooleanValueInterface.html#method_getValue"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\BooleanValueInterface\u003A\u003AgetDisplayValue\u0028\u0029",
-            "name": "getDisplayValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Interfaces-BooleanValueInterface.html#method_getDisplayValue"
-        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ClosedVariableInterface",
             "name": "ClosedVariableInterface",
             "summary": "",
@@ -200,6 +195,16 @@ Search.appendIndex(
             "name": "getOptions",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Interfaces-ClosedVariableInterface.html#method_getOptions"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\DateTimeValueInterface",
+            "name": "DateTimeValueInterface",
+            "summary": "This\u0020models\u0020the\u0020smallest\u0020piece\u0020of\u0020data.",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-DateTimeValueInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\DateTimeValueInterface\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-DateTimeValueInterface.html#method_getValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\IntegerValueInterface",
             "name": "IntegerValueInterface",
@@ -225,6 +230,11 @@ Search.appendIndex(
             "name": "getValue",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Interfaces-IntegerVariableInterface.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\IntegerVariableInterface\u003A\u003AgetMeasure\u0028\u0029",
+            "name": "getMeasure",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-IntegerVariableInterface.html#method_getMeasure"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\Measure",
             "name": "Measure",
@@ -320,6 +330,21 @@ Search.appendIndex(
             "name": "getValue",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Interfaces-StringValueInterface.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\TimestampVariableInterface",
+            "name": "TimestampVariableInterface",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-TimestampVariableInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\TimestampVariableInterface\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-TimestampVariableInterface.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\TimestampVariableInterface\u003A\u003AgetMeasure\u0028\u0029",
+            "name": "getMeasure",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-TimestampVariableInterface.html#method_getMeasure"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ValueMapInterface",
             "name": "ValueMapInterface",
@@ -1005,6 +1030,36 @@ Search.appendIndex(
             "name": "displayValues",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-BooleanValueOption.html#property_displayValues"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\DateTimeValue",
+            "name": "DateTimeValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-DateTimeValue.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\DateTimeValue\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-DateTimeValue.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\DateTimeValue\u003A\u003AgetDisplayValue\u0028\u0029",
+            "name": "getDisplayValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-DateTimeValue.html#method_getDisplayValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\DateTimeValue\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-DateTimeValue.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\DateTimeValue\u003A\u003A\u0024value",
+            "name": "value",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-DateTimeValue.html#property_value"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\DateTimeValue\u003A\u003A\u0024format",
+            "name": "format",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-DateTimeValue.html#property_format"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\DontKnowValueOption",
             "name": "DontKnowValueOption",
@@ -1720,6 +1775,51 @@ Search.appendIndex(
             "name": "measure",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Variables-SingleChoiceVariable.html#property_measure"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\TimestampVariable",
+            "name": "TimestampVariable",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-TimestampVariable.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\TimestampVariable\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-TimestampVariable.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\TimestampVariable\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-TimestampVariable.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\TimestampVariable\u003A\u003AgetMeasure\u0028\u0029",
+            "name": "getMeasure",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-TimestampVariable.html#method_getMeasure"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\TimestampVariable\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-TimestampVariable.html#property_name"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\TimestampVariable\u003A\u003A\u0024dataPath",
+            "name": "dataPath",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-TimestampVariable.html#property_dataPath"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\TimestampVariable\u003A\u003A\u0024titles",
+            "name": "titles",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-TimestampVariable.html#property_titles"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\TimestampVariable\u003A\u003A\u0024rawConfiguration",
+            "name": "rawConfiguration",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-TimestampVariable.html#property_rawConfiguration"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\TimestampVariable\u003A\u003A\u0024format",
+            "name": "format",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-TimestampVariable.html#property_format"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\VariableSet",
             "name": "VariableSet",
