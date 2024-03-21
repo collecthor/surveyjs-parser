@@ -407,5 +407,54 @@ final class FlattenResponseHelperTest extends TestCase
                 ]
             ]
         ];
+
+        yield [
+            new VariableSet(
+                new MultipleChoiceVariable(
+                    name: 'question1',
+                    dataPath: ['question1'],
+                    options: [
+                        new StringValueOption('option1', [
+                            'default' => 'option 1',
+                            'nl' => 'optie 1',
+                        ]),
+                        new StringValueOption('option2', [
+                            'default' => 'option 2',
+                            'nl' => 'optie 2',
+                        ]),
+                        new RefuseValueOption([
+                            'default' => 'Refused',
+                            'nl' => 'Geweigerd'
+                        ])
+                    ],
+                    titles: [
+                        'default' => 'question1',
+                        'nl' => 'vraag1',
+                    ],
+                    ordered: true
+                )
+            ),
+            [
+                [
+                    'question1' => ['option2', 'option1']
+                ],
+                [
+                    'question1' => 'refused'
+                ]
+            ],
+            'default',
+            [
+                [
+                    'question1 (1)' => 'option 2',
+                    'question1 (2)' => 'option 1',
+                    'question1 (3)' => null
+                ],
+                [
+                    'question1 (1)' => 'refused',
+                    'question1 (2)' => 'refused',
+                    'question1 (3)' => 'refused'
+                ]
+            ]
+        ];
     }
 }

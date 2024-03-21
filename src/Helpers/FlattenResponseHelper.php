@@ -23,16 +23,34 @@ final readonly class FlattenResponseHelper implements FlattenResponseInterface
                 // Check if it is a multiple choice variable.
                 if (DataTypeHelper::isMultipleChoice($variable)) {
                     $baseTitle = $variable->getTitle($this->locale);
-                    $selectedOptions = $variable->getValue($record);
-                    foreach ($variable->getOptions() as $option) {
-                        if (!DataTypeHelper::valueIsNormal($option)) {
-                            continue;
-                        }
-                        $title = "{$baseTitle} - {$option->getDisplayValue($this->locale)}";
-                        if (DataTypeHelper::valueIsNormal($selectedOptions)) {
-                            $flattened[$title] = in_array($option, $selectedOptions->getValue(), true) ? 1 : 0;
+                    $value = $variable->getValue($record);
+                    if ($variable->isOrdered()) {
+                        // This is a ranking question, we export a column based on rank.
+                        if (DataTypeHelper::valueIsNormal($value)) {
+                            $selectedOptions = $value->getValue();
+                            for ($i = 1; $i <= count($variable->getOptions()); $i++) {
+                                $title = "{$baseTitle} ({$i})";
+                                $flattened[$title] = isset($selectedOptions[$i - 1]) ? $selectedOptions[$i - 1]->getDisplayValue($this->locale) : null;
+                            }
                         } else {
-                            $flattened[$title] = $selectedOptions->getDisplayValue($this->locale);
+                            $displayValue = $value->getDisplayValue($this->locale);
+                            for ($i = 1; $i <= count($variable->getOptions()); $i++) {
+                                $title = "{$baseTitle} ({$i})";
+                                $flattened[$title] = $displayValue;
+                            }
+                        }
+                    } else {
+                        // This is a multiple choice question, we export a column for each option
+                        foreach ($variable->getOptions() as $option) {
+                            if (!DataTypeHelper::valueIsNormal($option)) {
+                                continue;
+                            }
+                            $title = "{$baseTitle} - {$option->getDisplayValue($this->locale)}";
+                            if (DataTypeHelper::valueIsNormal($value)) {
+                                $flattened[$title] = in_array($option, $value->getValue(), true) ? 1 : 0;
+                            } else {
+                                $flattened[$title] = $value->getDisplayValue($this->locale);
+                            }
                         }
                     }
                 } else {
