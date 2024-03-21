@@ -7,6 +7,7 @@ namespace Collecthor\SurveyjsParser\Tests\Helpers;
 use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\Helpers\FlattenResponseHelper;
 use Collecthor\SurveyjsParser\Interfaces\VariableSetInterface;
+use Collecthor\SurveyjsParser\Values\RefuseValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\IntegerVariable;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
@@ -183,14 +184,22 @@ final class FlattenResponseHelperTest extends TestCase
             ],
             'default',
             [
-                ['question1' => 'option 2, option 3', ],
+                [
+                    'question1 - option 1' => 0,
+                    'question1 - option 2' => 1,
+                    'question1 - option 3' => 1,
+                ]
             ],
         ];
 
         yield $multipleChoice;
         $multipleChoice[2] = 'nl';
         $multipleChoice[3] = [
-            ['vraag1' => 'optie 2, optie 3'],
+            [
+                'vraag1 - optie 1' => 0,
+                'vraag1 - optie 2' => 1,
+                'vraag1 - optie 3' => 1
+            ],
         ];
         yield $multipleChoice;
 
@@ -326,12 +335,20 @@ final class FlattenResponseHelperTest extends TestCase
             'default',
             [
                 [
-                    'question1' => 'option 1',
-                    'question2' => 'option 1, option 2, option 3',
+                    'question1 - option 1' => 1,
+                    'question1 - option 2' => 0,
+                    'question1 - option 3' => 0,
+                    'question2 - option 1' => 1,
+                    'question2 - option 2' => 1,
+                    'question2 - option 3' => 1,
                 ],
                 [
-                    'question1' => '',
-                    'question2' => 'option 1, option 3',
+                    'question1 - option 1' => 0,
+                    'question1 - option 2' => 0,
+                    'question1 - option 3' => 0,
+                    'question2 - option 1' => 1,
+                    'question2 - option 2' => 0,
+                    'question2 - option 3' => 1,
                 ],
             ],
         ];
@@ -339,14 +356,56 @@ final class FlattenResponseHelperTest extends TestCase
         $multipleVariableMultipleRecordsMultipleChoice[2] = 'nl';
         $multipleVariableMultipleRecordsMultipleChoice[3] = [
             [
-                'vraag1' => 'optie 1',
-                'vraag2' => 'optie 1, optie 2, optie 3',
+                'vraag1 - optie 1' => 1,
+                'vraag1 - optie 2' => 0,
+                'vraag1 - optie 3' => 0,
+                'vraag2 - optie 1' => 1,
+                'vraag2 - optie 2' => 1,
+                'vraag2 - optie 3' => 1,
             ],
             [
-                'vraag1' => '',
-                'vraag2' => 'optie 1, optie 3',
+                'vraag1 - optie 1' => 0,
+                'vraag1 - optie 2' => 0,
+                'vraag1 - optie 3' => 0,
+                'vraag2 - optie 1' => 1,
+                'vraag2 - optie 2' => 0,
+                'vraag2 - optie 3' => 1,
             ],
         ];
         yield $multipleVariableMultipleRecordsMultipleChoice;
+
+        yield [
+            new VariableSet(
+                new MultipleChoiceVariable(
+                    name: 'question1',
+                    dataPath: ['question1'],
+                    options: [
+                        new StringValueOption('option1', [
+                            'default' => 'option 1',
+                            'nl' => 'optie 1',
+                        ]),
+                        new RefuseValueOption([
+                            'default' => 'Refused',
+                            'nl' => 'Geweigerd'
+                        ])
+                    ],
+                    titles: [
+                        'default' => 'question1',
+                        'nl' => 'vraag1',
+                    ]
+                )
+            ),
+            [
+                [
+                    'question1' => 'refused'
+                ]
+            ],
+            'default',
+            [
+                [
+                    'question1 - option 1' => 'refused'
+                ]
+            ]
+        ];
     }
 }

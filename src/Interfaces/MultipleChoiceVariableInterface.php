@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Interfaces;
 
+use Collecthor\SurveyjsParser\Values\MultipleChoiceValue;
+
 interface MultipleChoiceVariableInterface extends ClosedVariableInterface
 {
     /**
@@ -12,4 +14,6 @@ interface MultipleChoiceVariableInterface extends ClosedVariableInterface
      * @return bool whether the value ordering is relevant.
      */
     public function isOrdered(): bool;
+
+    public function getValue(RecordInterface $record): SpecialValueInterface|MultipleChoiceValue;
 }

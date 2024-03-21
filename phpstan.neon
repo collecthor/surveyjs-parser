@@ -6,6 +6,8 @@ parameters:
   treatPhpDocTypesAsCertain: true
   ignoreErrors:
     - "#Casting to string something that's already string#"
+    - message: "#^Cannot access offset \\(int\\|string\\) on mixed.$#"
+      path: "src/ArrayDataRecord.php"
   reportUnmatchedIgnoredErrors: false
   checkImplicitMixed: true
   checkBenevolentUnionTypes: true

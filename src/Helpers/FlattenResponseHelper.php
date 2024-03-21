@@ -20,9 +20,26 @@ final readonly class FlattenResponseHelper implements FlattenResponseInterface
         foreach ($records as $record) {
             $flattened = [];
             foreach ($this->variables->getVariables() as $variable) {
-                $value = $variable->getValue($record);
-                if (DataTypeHelper::valueIsNormal($value)) {
-                    $flattened[$variable->getTitle($this->locale)] = $value->getDisplayValue($this->locale);
+                // Check if it is a multiple choice variable.
+                if (DataTypeHelper::isMultipleChoice($variable)) {
+                    $baseTitle = $variable->getTitle($this->locale);
+                    $selectedOptions = $variable->getValue($record);
+                    foreach ($variable->getOptions() as $option) {
+                        if (!DataTypeHelper::valueIsNormal($option)) {
+                            continue;
+                        }
+                        $title = "{$baseTitle} - {$option->getDisplayValue($this->locale)}";
+                        if (DataTypeHelper::valueIsNormal($selectedOptions)) {
+                            $flattened[$title] = in_array($option, $selectedOptions->getValue(), true) ? 1 : 0;
+                        } else {
+                            $flattened[$title] = $selectedOptions->getDisplayValue($this->locale);
+                        }
+                    }
+                } else {
+                    $value = $variable->getValue($record);
+                    if (DataTypeHelper::valueIsNormal($value)) {
+                        $flattened[$variable->getTitle($this->locale)] = $value->getDisplayValue($this->locale);
+                    }
                 }
             }
             yield $flattened;
