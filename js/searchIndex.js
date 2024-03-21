@@ -121,6 +121,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Helpers-DataTypeHelper.html#method_valueIsNormal"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\DataTypeHelper\u003A\u003AisMultipleChoice\u0028\u0029",
+            "name": "isMultipleChoice",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Helpers-DataTypeHelper.html#method_isMultipleChoice"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\FlattenResponseHelper",
             "name": "FlattenResponseHelper",
             "summary": "",
@@ -265,6 +270,11 @@ Search.appendIndex(
             "name": "isOrdered",
             "summary": "This\u0020is\u0020used\u0020to\u0020identify\u0020ranking\u0020questions\u003B\u0020they\u0020contain\u0020the\u0020same\u0020data\u0020as\u0020other\u0020multiple\u0020choice\u0020questions\nbut\u0020the\u0020order\u0020of\u0020the\u0020values\u0020is\u0020relevant",
             "url": "classes/Collecthor-SurveyjsParser-Interfaces-MultipleChoiceVariableInterface.html#method_isOrdered"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\MultipleChoiceVariableInterface\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-MultipleChoiceVariableInterface.html#method_getValue"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\RecordInterface",
             "name": "RecordInterface",
