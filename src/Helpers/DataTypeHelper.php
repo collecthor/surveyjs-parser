@@ -6,6 +6,7 @@ namespace Collecthor\SurveyjsParser\Helpers;
 
 use Collecthor\SurveyjsParser\Interfaces\BaseValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\BooleanVariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\MultipleChoiceVariableInterface;
 use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 
@@ -26,5 +27,13 @@ final class DataTypeHelper
     public static function valueIsNormal(BaseValueInterface $value): bool
     {
         return !$value instanceof SpecialValueInterface;
+    }
+
+    /**
+     * @phpstan-assert-if-true MultipleChoiceVariableInterface $variable
+     */
+    public static function isMultipleChoice(VariableInterface $variable): bool
+    {
+        return $variable instanceof MultipleChoiceVariableInterface;
     }
 }
