@@ -1,10 +1,10 @@
 name: Continuous integration
 on:
   pull_request:
-    types: [ opened, reopened ]
-  push:
-    branches-ignore:
-      - master
+    types:
+      - opened
+      - reopened
+      - synchronize
 jobs:
   static_analysis_psalm:
     name: Static Analysis (psalm)
