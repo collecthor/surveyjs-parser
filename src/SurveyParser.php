@@ -162,10 +162,8 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
      */
     private function parsePage(array $structure, SurveyConfiguration $surveyConfiguration): iterable
     {
-        if (!is_iterable($structure['elements'])) {
-            throw new \ParseError("Survey JSON must contain elements key and it must be an array");
-        }
-        foreach ($structure['elements'] as $element) {
+        $elements = isset($structure['elements']) && is_iterable($structure['elements']) ? $structure['elements'] : [];
+        foreach ($elements as $element) {
             if (!is_array($element)) {
                 throw new ParseError("Element JSON must be a dictionary");
             }
