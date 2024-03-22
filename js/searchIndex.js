@@ -556,6 +556,11 @@ Search.appendIndex(
             "summary": "Concat\u0020a\u0020combination\u0020of\u0020localized\u0020strings\u0020and\u0020normal\u0020ones",
             "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_arrayFormat"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AallInstanceOf\u0028\u0029",
+            "name": "allInstanceOf",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_allInstanceOf"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ParserLocalizer",
             "name": "ParserLocalizer",
             "summary": "",
