@@ -13,6 +13,7 @@ use Collecthor\SurveyjsParser\Values\RefuseValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use InvalidArgumentException;
+use function iter\all;
 
 trait ParserHelpers
 {
@@ -329,5 +330,18 @@ trait ParserHelpers
             }
         }
         return $result;
+    }
+
+
+    /**
+     * @template T
+     * @param list<object> $items
+     * @param class-string<T> $class
+     * @return bool
+     * @phpstan-assert-if-true list<T> $items
+     */
+    private function allInstanceOf(array $items, string $class): bool
+    {
+        return all(static fn (object $option) => $option instanceof $class, $items);
     }
 }
