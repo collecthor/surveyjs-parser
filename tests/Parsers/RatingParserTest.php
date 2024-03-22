@@ -227,4 +227,46 @@ final class RatingParserTest extends TestCase
 
         self::assertSame('Goed', $displayValue);
     }
+
+    public function testRatingWithCustomValueAndRateCount(): void
+    {
+        $json = <<<JSON
+{
+       "type": "rating",
+       "name": "q1",
+       "title": {
+        "default": "What rating?"
+       },
+       "isRequired": true,
+       "autoGenerate": false,
+       "rateCount": 11,
+       "rateValues": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        {
+         "value": 11,
+         "text": {
+          "nl": "Weet ik niet",
+          "default": "I don’t know"
+         }
+        }
+       ],
+       "rateMax": 11
+      }
+JSON;
+        $parser = new RatingParser();
+
+        $result = toArray($parser->parse(new DummyParser(), json_decode($json, true, JSON_THROW_ON_ERROR), new SurveyConfiguration()))[0];
+
+        self::assertInstanceOf(SingleChoiceIntegerVariable::class, $result);
+        self::assertCount(11, $result->getOptions());
+    }
 }

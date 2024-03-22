@@ -29,20 +29,20 @@ final readonly class SingleChoiceIntegerVariable implements ClosedVariableInterf
 
     /**
      * @param array<string, string> $titles
-     * @param non-empty-list<IntegerValueOptionInterface> $valueOptions
+     * @param non-empty-list<IntegerValueOptionInterface> $options
      * @param non-empty-list<string> $dataPath
-     * @param array<string, mixed> $rawConfiguration
+     * @param array<mixed> $rawConfiguration
      */
     public function __construct(
         private string $name,
         private array $titles,
-        array $valueOptions,
+        array $options,
         private array $dataPath,
         private array $rawConfiguration = [],
         private Measure $measure = Measure::Nominal
     ) {
         $valueMap = [];
-        foreach ($valueOptions as $valueOption) {
+        foreach ($options as $valueOption) {
             $valueMap[$valueOption->getValue()] = $valueOption;
         }
         $this->valueMap = $valueMap;
