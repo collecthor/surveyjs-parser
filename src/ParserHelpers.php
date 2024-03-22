@@ -316,10 +316,16 @@ trait ParserHelpers
      */
     private function arrayFormat(array $titles, array|string ...$variables): array
     {
-        $locales = array_keys($titles);
-
+        $locales = [];
+        foreach ([$titles, ...$variables] as $stringDictionary) {
+            if (is_array($stringDictionary)) {
+                foreach (array_keys($stringDictionary) as $locale) {
+                    $locales[$locale] = true;
+                }
+            }
+        }
         $result = [];
-        foreach ($locales as $locale) {
+        foreach (array_keys($locales) as $locale) {
             $result[$locale] = '';
             foreach ([$titles, ...$variables] as $variable) {
                 if (is_array($variable)) {

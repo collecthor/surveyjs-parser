@@ -27,11 +27,15 @@ final class MultipleChoiceMatrixParser implements ElementParserInterface
 
 
         foreach ($rows as $row) {
-            $rowName = !is_string($row) ? $row['value'] : $row;
-            $rowTitle = !is_string($row) ? $row['text'] : $row;
+            if (is_string($row)) {
+                $rowName = $rowTitles = $row;
+            } else {
+                $rowName = $row['value'];
+                $rowTitles = $this->extractLocalizedTexts($row, defaults: ['default' => $row['value']]);
+            }
             foreach ($columns as $column) {
                 $columnTitle = $this->extractTitles($column);
-                $title = $this->arrayFormat($titles, " - ", $rowTitle, " - ", $columnTitle);
+                $title = $this->arrayFormat($titles, " - ", $rowTitles, " - ", $columnTitle);
 
                 $prefix = [...$dataPrefix, $valueName, $rowName];
 

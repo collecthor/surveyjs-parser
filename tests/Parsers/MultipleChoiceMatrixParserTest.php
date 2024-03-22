@@ -6,6 +6,7 @@ namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
 use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\ElementParserInterface;
+use Collecthor\SurveyjsParser\Interfaces\ClosedVariableInterface;
 use Collecthor\SurveyjsParser\Interfaces\SpecialValueOptionInterface;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
@@ -483,5 +484,53 @@ final class MultipleChoiceMatrixParserTest extends TestCase
         foreach ($result as $variable) {
             self::assertInstanceOf(OpenTextVariable::class, $variable);
         }
+    }
+
+    public function testLocalizedRowTitle(): void
+    {
+        $config = json_decode(<<<JSON
+            {
+             "type": "matrixdropdown",
+             "name": "question1",
+             "columns": [
+              {
+               "name": "Column 1"
+              },
+              {
+               "name": "Column 2"
+              },
+              {
+               "name": "Column 3"
+              }
+             ],
+             "choices": [
+              1,
+              2,
+              3,
+              4,
+              5
+             ],
+             "rows": [
+              "Row 1",
+              {
+               "value": "Row 2",
+               "text": {
+                "default": "test2",
+                "nl": "NLTEST2"
+               }
+              }
+             ]
+            }
+        JSON, true);
+        $parser = new MultipleChoiceMatrixParser();
+        $surveyConfig = new SurveyConfiguration();
+        /**
+         * @var list<VariableInterface> $result
+         */
+        $result = toArray($parser->parse($this->getRootParser(), $config, $surveyConfig, []));
+
+        self::assertCount(6, $result);
+        self::assertContainsOnlyInstancesOf(ClosedVariableInterface::class, $result);
+        self::assertSame("question1 - NLTEST2 - Column 2", $result[4]->getTitle('nl'));
     }
 }
