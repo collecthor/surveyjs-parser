@@ -268,5 +268,8 @@ JSON;
 
         self::assertInstanceOf(SingleChoiceIntegerVariable::class, $result);
         self::assertCount(11, $result->getOptions());
+        foreach ($result->getOptions() as $i => $option) {
+            self::assertSame($i + 1, $option->getValue());
+        }
     }
 }

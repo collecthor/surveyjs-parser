@@ -35,7 +35,7 @@ final readonly class RatingParser implements ElementParserInterface
                     }
                     if (is_int($value['value']) || ctype_digit($value['value'])) {
                         $answers[] = new IntegerValueOption(
-                            rawValue: intval('value'),
+                            rawValue: intval($value['value']),
                             displayValues: $this->extractLocalizedTexts($value)
                         );
                     } else {
