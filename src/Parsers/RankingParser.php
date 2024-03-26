@@ -25,10 +25,11 @@ final class RankingParser implements ElementParserInterface
         yield new MultipleChoiceVariable(
             name: $valueName,
             dataPath: [...$dataPrefix, $valueName],
-            titles: $titles,
             options: $choices,
+            titles: $titles,
             rawConfiguration: $questionConfig,
             ordered: true
         );
+        yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }
