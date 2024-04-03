@@ -1261,6 +1261,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-MultipleChoiceValue.html#method_getValue"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MultipleChoiceValue\u003A\u003AgetIndex\u0028\u0029",
+            "name": "getIndex",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-MultipleChoiceValue.html#method_getIndex"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MultipleChoiceValue\u003A\u003AgetDisplayValue\u0028\u0029",
             "name": "getDisplayValue",
             "summary": "",
