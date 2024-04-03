@@ -10,11 +10,14 @@ use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 final readonly class MultipleChoiceValue implements BaseValueInterface
 {
     /**
-     * @param list<ValueOptionInterface> $values
+     * @var list<ValueOptionInterface> $values
      */
+    private array $values;
+
     public function __construct(
-        private array $values
+        ValueOptionInterface ...$values
     ) {
+        $this->values = array_values($values);
     }
 
 
@@ -24,6 +27,11 @@ final readonly class MultipleChoiceValue implements BaseValueInterface
     public function getValue(): array
     {
         return $this->values;
+    }
+
+    public function getIndex(int $index): ValueOptionInterface|null
+    {
+        return $this->values[$index] ?? null;
     }
 
     public function getDisplayValue(?string $locale = null): string

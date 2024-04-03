@@ -58,7 +58,7 @@ final readonly class MultipleChoiceVariable implements MultipleChoiceVariableInt
             if (count($rawValues) === 1) {
                 $value = $this->valueMap[$rawValues[0]];
                 if (DataTypeHelper::valueIsNormal($value)) {
-                    return new MultipleChoiceValue([$value]);
+                    return new MultipleChoiceValue($value);
                 } else {
                     return $value;
                 }
@@ -71,7 +71,7 @@ final readonly class MultipleChoiceVariable implements MultipleChoiceVariableInt
                     return new InvalidValue($rawValues);
                 }
             }
-            return new MultipleChoiceValue($result);
+            return new MultipleChoiceValue(...$result);
         } elseif ($rawValues === null) {
             return MissingValue::create();
         }
