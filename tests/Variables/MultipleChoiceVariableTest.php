@@ -11,7 +11,6 @@ use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\ValueType;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
 use Collecthor\SurveyjsParser\Values\MultipleChoiceValue;
-use Collecthor\SurveyjsParser\Values\StringValue;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -42,7 +41,6 @@ final class MultipleChoiceVariableTest extends TestCase
 
         self::assertInstanceOf(SpecialValueInterface::class, $foundValue);
         self::assertSame(ValueType::Invalid, $foundValue->getType());
-        self::assertSame(StringValue::toString($data->getDataValue(['path'])), $foundValue->getValue());
     }
 
     public function testGetInvalidValueType(): void

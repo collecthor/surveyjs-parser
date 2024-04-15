@@ -29,6 +29,16 @@ final readonly class MultipleChoiceValue implements BaseValueInterface
         return $this->values;
     }
 
+    public function contains(ValueOptionInterface $option): bool
+    {
+        foreach ($this->values as $value) {
+            if ($value === $option) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function getIndex(int $index): ValueOptionInterface|null
     {
         return $this->values[$index] ?? null;

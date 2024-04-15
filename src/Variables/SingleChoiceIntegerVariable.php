@@ -68,4 +68,9 @@ final readonly class SingleChoiceIntegerVariable implements ClosedVariableInterf
     {
         return array_values($this->valueMap);
     }
+
+    public function getNumberOfOptions(): int
+    {
+        return count($this->valueMap);
+    }
 }

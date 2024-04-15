@@ -17,9 +17,8 @@ class ArrayDataRecord implements RecordInterface
 
     /**
      * @param list<array-key> $path
-     * @return string|int|float|bool|null|array<mixed>
      */
-    public function getDataValue(array $path): string|int|float|bool|null|array
+    public function getDataValue(array $path): mixed
     {
         if (count($path) < 6) {
             $result = match (count($path)) {
@@ -37,10 +36,7 @@ class ArrayDataRecord implements RecordInterface
                 $result = $result[$key] ?? null;
             }
         }
-        if (is_scalar($result) || is_null($result) || is_array($result)) {
-            return $result;
-        }
-        throw new \RuntimeException('Data contains invalid value type');
+        return $result;
     }
 
     public function allData(): array

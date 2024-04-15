@@ -67,6 +67,6 @@ final readonly class MultipleChoiceQuestionParser implements ElementParserInterf
                 rawConfiguration: $questionConfig
             );
         }
-        yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
+        yield from (new CommentParser())->parse($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }

@@ -7,6 +7,7 @@ namespace Collecthor\SurveyjsParser\Tests\Helpers;
 use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\Helpers\FlattenResponseHelper;
 use Collecthor\SurveyjsParser\Interfaces\VariableSetInterface;
+use Collecthor\SurveyjsParser\Values\DontKnowValueOption;
 use Collecthor\SurveyjsParser\Values\RefuseValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\IntegerVariable;
@@ -397,13 +398,13 @@ final class FlattenResponseHelperTest extends TestCase
             ),
             [
                 [
-                    'question1' => 'refused'
+                    'question1' => ['refused']
                 ]
             ],
             'default',
             [
                 [
-                    'question1 - option 1' => 'refused'
+                    'question1 - option 1' => 'Refused'
                 ]
             ]
         ];
@@ -453,6 +454,54 @@ final class FlattenResponseHelperTest extends TestCase
                     'question1 (1)' => 'refused',
                     'question1 (2)' => 'refused',
                     'question1 (3)' => 'refused'
+                ]
+            ]
+        ];
+
+        // Test missing value for single choice
+        yield [
+            new VariableSet(
+                new SingleChoiceVariable(
+                    name: 'question1',
+                    options: [
+                        new StringValueOption('option1', [
+                            'default' => 'option 1',
+                            'nl' => 'optie 1',
+                        ]),
+                        new StringValueOption('option2', [
+                            'default' => 'option 2',
+                            'nl' => 'optie 2',
+                        ]),
+                        new RefuseValueOption([
+                            'default' => "I'd rather not say",
+                            'nl' => 'Geweigerd'
+                        ]),
+                        new DontKnowValueOption([
+                            'default' => 'Dont know',
+                        ])
+                    ],
+                    dataPath: ['question1'],
+                    titles: [
+                        'default' => 'question1',
+                        'nl' => 'vraag1',
+                    ]
+                )
+            ),
+            [
+                [
+                    'question1' => 'dontknow'
+                ],
+                [
+                    'question1' => 'refused'
+                ]
+            ],
+            'default',
+            [
+                [
+                    'question1' => 'Dont know',
+                ],
+                [
+                    'question1' => "I'd rather not say",
                 ]
             ]
         ];

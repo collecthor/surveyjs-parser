@@ -17,9 +17,9 @@ class ArrayDataRecordTest extends TestCase
      */
     public static function dataProvider(): iterable
     {
-        //        yield [['a' => 'b'], ['a'], 'b'];
-        //        yield [['a' => ['b' => 'c']], ['a', 'b'], 'c'];
-
+        yield [['a' => 'b'], ['a'], 'b'];
+        yield [['a' => 'b'], ['c'], null];
+        yield [['a' => ['b' => 'c']], ['a', 'b'], 'c'];
         yield [['a' => ['b' => ['c' => ['d' => ['e' => ['f' => ['g' => 15]]]]]]], ['a', 'b', 'c', 'd', 'e', 'f', 'g'], 15];
     }
 

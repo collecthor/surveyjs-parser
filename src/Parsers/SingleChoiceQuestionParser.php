@@ -74,6 +74,6 @@ class SingleChoiceQuestionParser implements ElementParserInterface
                 titles: $titles
             );
         }
-        yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
+        yield from (new CommentParser())->parse($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }

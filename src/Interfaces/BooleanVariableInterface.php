@@ -10,4 +10,9 @@ namespace Collecthor\SurveyjsParser\Interfaces;
 interface BooleanVariableInterface extends VariableInterface, ClosedVariableInterface
 {
     public function getValue(RecordInterface $record): BooleanValueInterface|SpecialValueInterface;
+
+    /**
+     * @return int{2}
+     */
+    public function getNumberOfOptions(): int;
 }

@@ -9,9 +9,8 @@ interface RecordInterface
     /**
      * Retrieve a value given by path to the data.
      * @param non-empty-list<string> $path
-     * @return string|int|float|bool|null|array<mixed>|\DateTimeImmutable
      */
-    public function getDataValue(array $path): string|int|float|bool|null|array|\DateTimeImmutable;
+    public function getDataValue(array $path): mixed;
 
     /**
      * Return the data in the record

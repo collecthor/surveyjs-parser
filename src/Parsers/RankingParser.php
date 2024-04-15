@@ -30,6 +30,6 @@ final class RankingParser implements ElementParserInterface
             rawConfiguration: $questionConfig,
             ordered: true
         );
-        yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
+        yield from (new CommentParser())->parse($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }

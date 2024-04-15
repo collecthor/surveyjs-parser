@@ -10,4 +10,6 @@ interface ClosedVariableInterface extends VariableInterface
      * @return list<ValueOptionInterface>
      */
     public function getOptions(): array;
+
+    public function getNumberOfOptions(): int;
 }

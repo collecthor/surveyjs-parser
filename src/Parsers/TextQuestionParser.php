@@ -45,6 +45,6 @@ class TextQuestionParser implements ElementParserInterface
             );
         }
 
-        yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
+        yield from (new CommentParser())->parse($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }
