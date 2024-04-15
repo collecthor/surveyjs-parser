@@ -126,6 +126,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Helpers-DataTypeHelper.html#method_isMultipleChoice"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\DataTypeHelper\u003A\u003AisClosed\u0028\u0029",
+            "name": "isClosed",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Helpers-DataTypeHelper.html#method_isClosed"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\FlattenResponseHelper",
             "name": "FlattenResponseHelper",
             "summary": "",
@@ -200,6 +205,11 @@ Search.appendIndex(
             "name": "getOptions",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Interfaces-ClosedVariableInterface.html#method_getOptions"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\ClosedVariableInterface\u003A\u003AgetNumberOfOptions\u0028\u0029",
+            "name": "getNumberOfOptions",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-ClosedVariableInterface.html#method_getNumberOfOptions"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\DateTimeValueInterface",
             "name": "DateTimeValueInterface",
@@ -465,11 +475,6 @@ Search.appendIndex(
             "name": "ParserHelpers",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AparseCommentField\u0028\u0029",
-            "name": "parseCommentField",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-ParserHelpers.html#method_parseCommentField"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\ParserHelpers\u003A\u003AextractTitles\u0028\u0029",
             "name": "extractTitles",
@@ -856,10 +861,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-SurveyConfiguration.html#method___construct"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyConfiguration\u003A\u003A\u0024commentPostfix",
-            "name": "commentPostfix",
+            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyConfiguration\u003A\u003A\u0024commentSuffix",
+            "name": "commentSuffix",
             "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-SurveyConfiguration.html#property_commentPostfix"
+            "url": "classes/Collecthor-SurveyjsParser-SurveyConfiguration.html#property_commentSuffix"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser",
             "name": "SurveyParser",
@@ -910,11 +915,6 @@ Search.appendIndex(
             "name": "parseJson",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-SurveyParser.html#method_parseJson"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser\u003A\u003AextractString\u0028\u0029",
-            "name": "extractString",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-SurveyParser.html#method_extractString"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\SurveyParser\u003A\u003Aparse\u0028\u0029",
             "name": "parse",
@@ -1201,10 +1201,30 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-InvalidValue.html"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\InvalidValue\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-InvalidValue.html#method___construct"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\InvalidValue\u003A\u003AgetType\u0028\u0029",
             "name": "getType",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-InvalidValue.html#method_getType"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\InvalidValue\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-InvalidValue.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\InvalidValue\u003A\u003AgetDisplayValue\u0028\u0029",
+            "name": "getDisplayValue",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-InvalidValue.html#method_getDisplayValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\InvalidValue\u003A\u003A\u0024value",
+            "name": "value",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-InvalidValue.html#property_value"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingValue",
             "name": "MissingValue",
@@ -1260,6 +1280,11 @@ Search.appendIndex(
             "name": "getValue",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-MultipleChoiceValue.html#method_getValue"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MultipleChoiceValue\u003A\u003Acontains\u0028\u0029",
+            "name": "contains",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-MultipleChoiceValue.html#method_contains"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MultipleChoiceValue\u003A\u003AgetIndex\u0028\u0029",
             "name": "getIndex",
@@ -1406,20 +1431,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-StringValueOption.html#method___construct"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValueOption\u003A\u003AgetRawValue\u0028\u0029",
-            "name": "getRawValue",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-StringValueOption.html#method_getRawValue"
-        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValueOption\u003A\u003AgetValue\u0028\u0029",
             "name": "getValue",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-StringValueOption.html#method_getValue"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValueOption\u003A\u003AgetSerialized\u0028\u0029",
-            "name": "getSerialized",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Values-StringValueOption.html#method_getSerialized"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\StringValueOption\u003A\u003A\u0024rawValue",
             "name": "rawValue",
@@ -1455,6 +1470,11 @@ Search.appendIndex(
             "name": "getMeasure",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#method_getMeasure"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003AgetNumberOfOptions\u0028\u0029",
+            "name": "getNumberOfOptions",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-BooleanVariable.html#method_getNumberOfOptions"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\BooleanVariable\u003A\u003A\u0024yes",
             "name": "yes",
@@ -1556,16 +1576,6 @@ Search.appendIndex(
             "summary": "Numerical\u0020variables\u0020are\u0020always\u0020ordered,\u0020they\u0020might\u0020even\u0020be\u0020scalar,\u0020but\u0020that\u0020depends\u0020on\u0020context.",
             "url": "classes/Collecthor-SurveyjsParser-Variables-IntegerVariable.html#method_getMeasure"
         },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\IntegerVariable\u003A\u003AgetMin\u0028\u0029",
-            "name": "getMin",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Variables-IntegerVariable.html#method_getMin"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\IntegerVariable\u003A\u003AgetMax\u0028\u0029",
-            "name": "getMax",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Variables-IntegerVariable.html#method_getMax"
-        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\IntegerVariable\u003A\u003A\u0024name",
             "name": "name",
             "summary": "",
@@ -1580,16 +1590,6 @@ Search.appendIndex(
             "name": "dataPath",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Variables-IntegerVariable.html#property_dataPath"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\IntegerVariable\u003A\u003A\u0024min",
-            "name": "min",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Variables-IntegerVariable.html#property_min"
-        },                {
-            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\IntegerVariable\u003A\u003A\u0024max",
-            "name": "max",
-            "summary": "",
-            "url": "classes/Collecthor-SurveyjsParser-Variables-IntegerVariable.html#property_max"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\IntegerVariable\u003A\u003A\u0024rawConfiguration",
             "name": "rawConfiguration",
@@ -1625,6 +1625,11 @@ Search.appendIndex(
             "name": "isOrdered",
             "summary": "This\u0020is\u0020used\u0020to\u0020identify\u0020ranking\u0020questions\u003B\u0020they\u0020contain\u0020the\u0020same\u0020data\u0020as\u0020other\u0020multiple\u0020choice\u0020questions\nbut\u0020the\u0020order\u0020of\u0020the\u0020values\u0020is\u0020relevant",
             "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_isOrdered"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003AgetNumberOfOptions\u0028\u0029",
+            "name": "getNumberOfOptions",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_getNumberOfOptions"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\MultipleChoiceVariable\u003A\u003A\u0024valueMap",
             "name": "valueMap",
@@ -1721,6 +1726,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Variables-SingleChoiceIntegerVariable.html#method_getOptions"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceIntegerVariable\u003A\u003AgetNumberOfOptions\u0028\u0029",
+            "name": "getNumberOfOptions",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-SingleChoiceIntegerVariable.html#method_getNumberOfOptions"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceIntegerVariable\u003A\u003A\u0024valueMap",
             "name": "valueMap",
             "summary": "We\u0020can\u0020say\u0020this\u0020is\u0020non\u002Dempty,\u0020since\u0020valueoptions\u0020is\u0020non\u002Dempty,\u0020and\u0020this\u0020is\u0020a\u0020direct\u0020mapping\u0020from\u0020valueoptions",
@@ -1775,6 +1785,11 @@ Search.appendIndex(
             "name": "getOptions",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Variables-SingleChoiceVariable.html#method_getOptions"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceVariable\u003A\u003AgetNumberOfOptions\u0028\u0029",
+            "name": "getNumberOfOptions",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Variables-SingleChoiceVariable.html#method_getNumberOfOptions"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Variables\\SingleChoiceVariable\u003A\u003A\u0024valueMap",
             "name": "valueMap",
