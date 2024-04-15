@@ -26,28 +26,24 @@ final readonly class FlattenResponseHelper implements FlattenResponseInterface
                     $value = $variable->getValue($record);
                     if ($variable->isOrdered()) {
                         // This is a ranking question, we export a column based on rank.
-                        if (DataTypeHelper::valueIsNormal($value)) {
-                            $selectedOptions = $value->getValue();
-                            for ($i = 1; $i <= count($variable->getOptions()); $i++) {
-                                $title = "{$baseTitle} ({$i})";
-                                $flattened[$title] = isset($selectedOptions[$i - 1]) ? $selectedOptions[$i - 1]->getDisplayValue($this->locale) : null;
-                            }
-                        } else {
-                            $displayValue = $value->getDisplayValue($this->locale);
-                            for ($i = 1; $i <= count($variable->getOptions()); $i++) {
-                                $title = "{$baseTitle} ({$i})";
+                        for ($i = 1; $i <= $variable->getNumberOfOptions(); $i++) {
+                            $title = "{$baseTitle} ({$i})";
+                            if (DataTypeHelper::valueIsNormal($value)) {
+                                $flattened[$title] = $value->getIndex($i - 1)?->getDisplayValue($this->locale);
+                            } else {
+                                $displayValue = $value->getDisplayValue($this->locale);
                                 $flattened[$title] = $displayValue;
                             }
                         }
                     } else {
-                        // This is a multiple choice question, we export a column for each option
+                        // This is a multiple choice question, we export a column for each normal option
                         foreach ($variable->getOptions() as $option) {
                             if (!DataTypeHelper::valueIsNormal($option)) {
                                 continue;
                             }
                             $title = "{$baseTitle} - {$option->getDisplayValue($this->locale)}";
                             if (DataTypeHelper::valueIsNormal($value)) {
-                                $flattened[$title] = in_array($option, $value->getValue(), true) ? 1 : 0;
+                                $flattened[$title] = $value->contains($option) ? 1 : 0;
                             } else {
                                 $flattened[$title] = $value->getDisplayValue($this->locale);
                             }
@@ -55,9 +51,7 @@ final readonly class FlattenResponseHelper implements FlattenResponseInterface
                     }
                 } else {
                     $value = $variable->getValue($record);
-                    if (DataTypeHelper::valueIsNormal($value)) {
-                        $flattened[$variable->getTitle($this->locale)] = $value->getDisplayValue($this->locale);
-                    }
+                    $flattened[$variable->getTitle($this->locale)] = $value->getDisplayValue($this->locale);
                 }
             }
             yield $flattened;

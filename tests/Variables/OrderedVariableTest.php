@@ -82,10 +82,10 @@ final class OrderedVariableTest extends TestCase
         /** @var StringValueOption[] $values */
         $values = $foundValue->getValue();
 
-        self::assertSame($values[0]->getRawValue(), 'test');
-        self::assertSame($values[1]->getRawValue(), 'test2');
-        self::assertSame($values[2]->getRawValue(), 'test3');
-        self::assertSame($values[3]->getRawValue(), 'test4');
+        self::assertSame($values[0]->getValue(), 'test');
+        self::assertSame($values[1]->getValue(), 'test2');
+        self::assertSame($values[2]->getValue(), 'test3');
+        self::assertSame($values[3]->getValue(), 'test4');
 
         $data = new ArrayDataRecord(['path' => ['test3', 'test4', 'test', 'test2']]);
 
@@ -96,9 +96,9 @@ final class OrderedVariableTest extends TestCase
         /** @var StringValueOption[] $values */
         $values = $foundValue->getValue();
 
-        self::assertSame($values[0]->getRawValue(), 'test3');
-        self::assertSame($values[1]->getRawValue(), 'test4');
-        self::assertSame($values[2]->getRawValue(), 'test');
-        self::assertSame($values[3]->getRawValue(), 'test2');
+        self::assertSame($values[0]->getValue(), 'test3');
+        self::assertSame($values[1]->getValue(), 'test4');
+        self::assertSame($values[2]->getValue(), 'test');
+        self::assertSame($values[3]->getValue(), 'test2');
     }
 }

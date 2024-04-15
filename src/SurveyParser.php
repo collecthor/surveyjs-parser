@@ -182,7 +182,7 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
          * Get some global settings from the survey structure. Note surveyJS incorrectly calls this a prefix
          * https://surveyjs.io/Documentation/Library?id=surveymodel#commentPrefix
          */
-        $surveyConfiguration = new SurveyConfiguration($this->extractString($structure, 'commentPrefix', '-Comment'));
+        $surveyConfiguration = new SurveyConfiguration();
 
         if (is_array($structure['pages'] ?? null)) {
             foreach ($structure['pages'] as $page) {
@@ -232,17 +232,6 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
             throw new \InvalidArgumentException("JSON string is not an object");
         }
         return $this->parseSurveyStructure($decoded);
-    }
-
-    /**
-     * @param array<string|int, mixed> $config
-     */
-    private function extractString(array $config, string $key, string $defaultValue): string
-    {
-        if (isset($config[$key]) && is_string($config[$key])) {
-            return $key;
-        }
-        return $defaultValue;
     }
 
     public function parse(

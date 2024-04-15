@@ -20,13 +20,13 @@ class OptionGeneratorTest extends TestCase
 
         self::assertCount(3, $options);
         self::assertSame(Measure::Nominal->name, $options[0]->getDisplayValue());
-        self::assertSame(Measure::Nominal->name, $options[0]->getRawValue());
+        self::assertSame(Measure::Nominal->name, $options[0]->getValue());
 
         self::assertSame(Measure::Ordinal->name, $options[1]->getDisplayValue());
-        self::assertSame(Measure::Ordinal->name, $options[1]->getRawValue());
+        self::assertSame(Measure::Ordinal->name, $options[1]->getValue());
 
         self::assertSame(Measure::Scale->name, $options[2]->getDisplayValue());
-        self::assertSame(Measure::Scale->name, $options[2]->getRawValue());
+        self::assertSame(Measure::Scale->name, $options[2]->getValue());
     }
 
     public function testGenerateFromStringBackedEnum(): void

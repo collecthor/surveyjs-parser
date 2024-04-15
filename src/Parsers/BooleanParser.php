@@ -41,6 +41,6 @@ final readonly class BooleanParser implements ElementParserInterface
             trueValue: $this->extractOptionalString($questionConfig, 'valueTrue') ?? true,
             falseValue: $this->extractOptionalString($questionConfig, 'valueFalse') ?? false,
         );
-        yield from $this->parseCommentField($questionConfig, $surveyConfiguration, $dataPrefix);
+        yield from (new CommentParser())->parse($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }

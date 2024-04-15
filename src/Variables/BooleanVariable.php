@@ -71,4 +71,9 @@ final readonly class BooleanVariable implements BooleanVariableInterface
     {
         return Measure::Nominal;
     }
+
+    public function getNumberOfOptions(): int
+    {
+        return 2;
+    }
 }

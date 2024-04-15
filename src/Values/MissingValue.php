@@ -31,6 +31,9 @@ final class MissingValue implements SpecialValueInterface
         return ValueType::Missing;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getValue(): null
     {
         return null;

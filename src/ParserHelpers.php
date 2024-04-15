@@ -11,47 +11,11 @@ use Collecthor\SurveyjsParser\Values\NoneValueOption;
 use Collecthor\SurveyjsParser\Values\OtherValueOption;
 use Collecthor\SurveyjsParser\Values\RefuseValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
-use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use InvalidArgumentException;
 use function iter\all;
 
 trait ParserHelpers
 {
-    /**
-     * @phpstan-param non-empty-array<mixed> $questionConfig
-     * @param list<string> $dataPrefix
-     * @return iterable<OpenTextVariable>
-     */
-    private function parseCommentField(array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix): iterable
-    {
-        if ($this->extractOptionalBoolean($questionConfig, 'hasOther') ?? $this->extractOptionalBoolean($questionConfig, 'showOtherItem') ?? false) {
-            $defaultPostfix = "Other";
-            $postfixField = "otherText";
-        } elseif ($this->extractOptionalBoolean($questionConfig, 'hasComment') ?? $this->extractOptionalBoolean($questionConfig, 'showCommentArea') ?? false) {
-            $defaultPostfix = "Other (describe)";
-            $postfixField = "commentText";
-        } else {
-            return;
-        }
-
-        $defaultPostfixes = [
-            'default' => $defaultPostfix,
-        ];
-
-        $postfixes = $this->extractLocalizedTexts($questionConfig, $postfixField, $defaultPostfixes);
-
-        $titles = [];
-        foreach ($this->extractTitles($questionConfig) as $locale => $title) {
-            $titles[$locale] = $title . " - " . ($postfixes[$locale] ?? $postfixes['default']);
-        }
-
-
-        $name = implode('.', [...$dataPrefix, $this->extractName($questionConfig), 'comment']);
-        $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig) . $surveyConfiguration->commentPostfix];
-
-        yield new OpenTextVariable(name: $name, dataPath: $dataPath, titles: $titles, rawConfiguration: $questionConfig);
-    }
-
     /**
      * @param array<string|int, mixed> $config
      * @return array<string, string>

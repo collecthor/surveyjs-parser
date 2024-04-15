@@ -19,16 +19,7 @@ final class StringValueOption implements ValueOptionInterface
     ) {
     }
 
-    public function getRawValue(): string
-    {
-        return $this->rawValue;
-    }
-
     public function getValue(): string
-    {
-        return $this->rawValue;
-    }
-    public function getSerialized(): string
     {
         return $this->rawValue;
     }

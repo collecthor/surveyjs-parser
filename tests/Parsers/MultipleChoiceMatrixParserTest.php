@@ -248,7 +248,7 @@ final class MultipleChoiceMatrixParserTest extends TestCase
         self::assertInstanceOf(NoneValueOption::class, $valueOptions[3]);
 
         self::assertEquals("Pakketten", $valueOptions[0]->getDisplayValue());
-        self::assertEquals("1", $valueOptions[0]->getRawValue());
+        self::assertEquals("1", $valueOptions[0]->getValue());
     }
 
     public function testValuePath(): void

@@ -92,4 +92,9 @@ final readonly class MultipleChoiceVariable implements MultipleChoiceVariableInt
     {
         return $this->ordered;
     }
+
+    public function getNumberOfOptions(): int
+    {
+        return count($this->valueMap);
+    }
 }

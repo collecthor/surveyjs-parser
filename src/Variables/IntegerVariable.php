@@ -28,8 +28,6 @@ final readonly class IntegerVariable implements IntegerVariableInterface
         private string $name,
         private array $titles,
         private array $dataPath,
-        private int|null $min = null,
-        private int|null $max = null,
         private array $rawConfiguration = [],
     ) {
     }
@@ -56,15 +54,5 @@ final readonly class IntegerVariable implements IntegerVariableInterface
     public function getMeasure(): Measure
     {
         return Measure::Ordinal;
-    }
-
-    public function getMin(): int|null
-    {
-        return $this->min;
-    }
-
-    public function getMax(): int|null
-    {
-        return $this->max;
     }
 }

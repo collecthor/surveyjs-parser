@@ -6,6 +6,7 @@ namespace Collecthor\SurveyjsParser\Helpers;
 
 use Collecthor\SurveyjsParser\Interfaces\BaseValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\BooleanVariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\ClosedVariableInterface;
 use Collecthor\SurveyjsParser\Interfaces\MultipleChoiceVariableInterface;
 use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
@@ -35,5 +36,13 @@ final class DataTypeHelper
     public static function isMultipleChoice(VariableInterface $variable): bool
     {
         return $variable instanceof MultipleChoiceVariableInterface;
+    }
+
+    /**
+     * @phpstan-assert-if-true ClosedVariableInterface $variable
+     */
+    public static function isClosed(VariableInterface $variable): bool
+    {
+        return $variable instanceof ClosedVariableInterface;
     }
 }

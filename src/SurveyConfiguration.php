@@ -8,10 +8,10 @@ namespace Collecthor\SurveyjsParser;
  * Survey wide configuration settings that affect parsing of individual questions
  * @codeCoverageIgnore
  */
-class SurveyConfiguration
+final readonly class SurveyConfiguration
 {
     public function __construct(
-        public readonly string $commentPostfix = '-Comment',
+        public string $commentSuffix = '-Comment',
     ) {
     }
 }
