@@ -10,6 +10,7 @@ use Collecthor\SurveyjsParser\Parsers\BooleanParser;
 use Collecthor\SurveyjsParser\Parsers\CallbackElementParser;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\DynamicPanelParser;
+use Collecthor\SurveyjsParser\Parsers\ExpressionParser;
 use Collecthor\SurveyjsParser\Parsers\ImagePickerParser;
 use Collecthor\SurveyjsParser\Parsers\MatrixDynamicParser;
 use Collecthor\SurveyjsParser\Parsers\MatrixParser;
@@ -23,12 +24,11 @@ use Collecthor\SurveyjsParser\Parsers\RatingParser;
 use Collecthor\SurveyjsParser\Parsers\SingleChoiceQuestionParser;
 use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
 use Collecthor\SurveyjsParser\Variables\DeferredVariable;
-use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 
 class SurveyParser implements SurveyParserInterface, ElementParserInterface
 {
     /**
-     * @var array<string, list<ElementParserInterface>>
+     * @var array<string, ElementParserInterface>
      */
     private array $parsers = [];
 
@@ -52,59 +52,59 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
 
         // Configure default built-in parsers.
         $textParser = new TextQuestionParser();
-        $this->parsers['text'] = [$textParser];
-        $this->parsers['comment'] = [$textParser];
-        $this->parsers['expression'] = [$textParser];
+        $this->parsers['text'] = $textParser;
+        $this->parsers['comment'] = $textParser;
+        $this->parsers['expression'] = new ExpressionParser();
 
         $singleChoiceParser = new SingleChoiceQuestionParser();
-        $this->parsers['radiogroup'] = [$singleChoiceParser];
-        $this->parsers['dropdown'] = [$singleChoiceParser];
+        $this->parsers['radiogroup'] = $singleChoiceParser;
+        $this->parsers['dropdown'] = $singleChoiceParser;
 
         $booleanParser = new BooleanParser(
             $localizer->getAllTranslationsForString('true'),
             $localizer->getAllTranslationsForString('false')
         );
-        $this->parsers['boolean'] = [$booleanParser];
+        $this->parsers['boolean'] = $booleanParser;
 
         $imagePickerParser = new ImagePickerParser();
-        $this->parsers['imagepicker'] = [$imagePickerParser];
+        $this->parsers['imagepicker'] = $imagePickerParser;
 
         $matrixDynamicParser = new MatrixDynamicParser($localizer->getAllTranslationsForString('row'));
-        $this->parsers['matrixdynamic'] = [$matrixDynamicParser];
+        $this->parsers['matrixdynamic'] = $matrixDynamicParser;
 
         $multipleChoiceQuestionParser = new MultipleChoiceQuestionParser();
-        $this->parsers['checkbox'] = [$multipleChoiceQuestionParser];
-        $this->parsers['imagemap'] = [$multipleChoiceQuestionParser];
-        $this->parsers['tagbox'] = [$multipleChoiceQuestionParser];
+        $this->parsers['checkbox'] = $multipleChoiceQuestionParser;
+        $this->parsers['imagemap'] = $multipleChoiceQuestionParser;
+        $this->parsers['tagbox'] = $multipleChoiceQuestionParser;
 
         $multipleTextParser = new MultipleTextParser();
-        $this->parsers['multipletext'] = [$multipleTextParser];
+        $this->parsers['multipletext'] = $multipleTextParser;
 
         $panelParser = new PanelParser();
-        $this->parsers['panel'] = [$panelParser];
+        $this->parsers['panel'] = $panelParser;
 
         $rankingParser = new RankingParser();
-        $this->parsers['ranking'] = [$rankingParser];
-        $this->parsers['sortablelist'] = [$rankingParser];
+        $this->parsers['ranking'] = $rankingParser;
+        $this->parsers['sortablelist'] = $rankingParser;
 
         $ratingParser = new RatingParser();
-        $this->parsers['rating'] = [$ratingParser];
+        $this->parsers['rating'] = $ratingParser;
 
         $noUISliderParser = new NoUISliderParser();
-        $this->parsers['nouislider'] = [$noUISliderParser];
+        $this->parsers['nouislider'] = $noUISliderParser;
 
         $matrixParser = new MatrixParser();
-        $this->parsers['matrix'] = [$matrixParser];
+        $this->parsers['matrix'] = $matrixParser;
 
         $multipleChoiceMatrixParser = new MultipleChoiceMatrixParser();
-        $this->parsers['matrixdropdown'] = [$multipleChoiceMatrixParser];
+        $this->parsers['matrixdropdown'] = $multipleChoiceMatrixParser;
 
         $dynamicPanelParser = new DynamicPanelParser($localizer->getAllTranslationsForString('row'));
-        $this->parsers['paneldynamic'] = [$dynamicPanelParser];
+        $this->parsers['paneldynamic'] = $dynamicPanelParser;
 
         $dummyParser = new DummyParser();
-        $this->parsers['html'] = [$dummyParser];
-        $this->parsers['image'] = [$dummyParser];
+        $this->parsers['html'] = $dummyParser;
+        $this->parsers['image'] = $dummyParser;
         $this->defaultParser = $dummyParser;
     }
 
@@ -116,12 +116,7 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
      */
     public function setParser(string $type, ElementParserInterface $parser): void
     {
-        $this->parsers[$type] = [$parser];
-    }
-
-    public function addParser(string $type, ElementParserInterface $parser): void
-    {
-        $this->parsers[$type][] = $parser;
+        $this->parsers[$type] = $parser;
     }
 
     public function setDefaultParser(ElementParserInterface $parser): void
@@ -129,13 +124,9 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
         $this->defaultParser = $parser;
     }
 
-    /**
-     * @param string $type
-     * @return list<ElementParserInterface>
-     */
-    private function getParsers(string $type): array
+    private function getParser(string $type): ElementParserInterface
     {
-        return $this->parsers[$type] ?? [$this->defaultParser];
+        return $this->parsers[$type] ?? $this->defaultParser;
     }
 
     /**
@@ -150,9 +141,7 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
             throw new \ParseError("Element JSON must contain 'type' key and it must be a string");
         }
 
-        foreach ($this->getParsers($config['type']) as $parser) {
-            yield from $parser->parse(root: $this->recursiveParser, questionConfig: $config, surveyConfiguration: $surveyConfiguration, dataPrefix: $dataPrefix);
-        }
+        yield from $this->getParser($config['type'])->parse(root: $this->recursiveParser, questionConfig: $config, surveyConfiguration: $surveyConfiguration, dataPrefix: $dataPrefix);
     }
 
     /**
@@ -204,11 +193,13 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
                 if (is_array($calculatedValue) && isset($calculatedValue['includeIntoResult'], $calculatedValue['name'])
                     && $calculatedValue['includeIntoResult'] === true && is_string($calculatedValue['name'])
                 ) {
-                    $variables[] = new OpenTextVariable(
-                        $calculatedValue['name'],
-                        [$calculatedValue['name']],
-                        ['default' => $calculatedValue['name']],
-                    );
+                    foreach ($this->getParser('expression')->parse(
+                        root: $this->recursiveParser,
+                        questionConfig: $calculatedValue,
+                        surveyConfiguration: $surveyConfiguration
+                    ) as $variable) {
+                        $variables[] = $variable;
+                    }
                 }
             }
         }
