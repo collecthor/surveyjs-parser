@@ -10,6 +10,7 @@ use Collecthor\SurveyjsParser\Expressions\Buffer;
 use Collecthor\SurveyjsParser\Expressions\FunctionNode;
 use Collecthor\SurveyjsParser\Expressions\Node;
 use Collecthor\SurveyjsParser\Expressions\Operator;
+use Collecthor\SurveyjsParser\Expressions\UnaryOperatorNode;
 use Collecthor\SurveyjsParser\Expressions\ValueNode;
 use Collecthor\SurveyjsParser\Expressions\VariableNode;
 
@@ -132,6 +133,12 @@ class ExpressionParser
         $operators = [];
         $operands[] = $this->parseInternal($buffer);
         while (null !== $operator = $buffer->readOptionalOperator()) {
+            // Special case for unary operators.
+            if ($operator->isUnary()) {
+                $operands[] = new UnaryOperatorNode($operator, array_pop($operands));
+                $buffer->consumeWhitespace();
+                continue;
+            }
             $operators[] = $operator;
             $operands[] = $this->parseInternal($buffer);
         }
