@@ -45,6 +45,8 @@ final class ExpressionParserTest extends TestCase
             ['({Getal0}+{Getal1}+{Getal2}+{Getal3}+{Getal4}) % 7', 'Modulus(Addition(Addition(Variable(Getal0), Variable(Getal1)), Addition(Addition(Variable(Getal2), Variable(Getal3)), Variable(Getal4))), Value(7))'],
             ['5 >= 4', 'Gte(Value(5), Value(4))'],
             ['{Q008_ČSOB} notempty', 'NotEmpty(Variable(Q008_ČSOB))'],
+            [' {Q008_HDI Fiba} notempty + {Q008_Garanti} notempty + {Q008_Halk} notempty + {Q008_Katilim} notempty + {Q008_Metlife} notempty + {Q008_Vakif} notempty + {Q008_Ziraat} notempty + {Q008_Bereket} notempty + {Q008_Turkiye} notempty', 'Addition(Addition(NotEmpty(Variable(Q008_HDI Fiba)), NotEmpty(Variable(Q008_Garanti))), Addition(Addition(NotEmpty(Variable(Q008_Halk)), NotEmpty(Variable(Q008_Katilim))), Addition(Addition(NotEmpty(Variable(Q008_Metlife)), NotEmpty(Variable(Q008_Vakif))), Addition(Addition(NotEmpty(Variable(Q008_Ziraat)), NotEmpty(Variable(Q008_Bereket))), NotEmpty(Variable(Q008_Turkiye))))))']
+
         ];
     }
 

@@ -69,7 +69,7 @@ class ExpressionParser
     {
         $buffer->readChar('{');
         $buffer->consumeWhitespace();
-        $variableName = $buffer->readRegex("/^([\pL][\-_.\pL\d]*)/u");
+        $variableName = $buffer->readRegex("/^([\pL][\ \-_.\pL\d]*)/u");
         $index = $this->parseIndex($buffer);
         $buffer->readChar('}');
         return new VariableNode($variableName, ...$index);
