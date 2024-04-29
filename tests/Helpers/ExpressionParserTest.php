@@ -41,7 +41,7 @@ final class ExpressionParserTest extends TestCase
             ['iif({S006} == 1, {S005a}, {S005a}/({S006}-{S007}))', 'iif(Eq2(Variable(S006), Value(1)), Variable(S005a), Division(Variable(S005a), Subtraction(Variable(S006), Variable(S007))))'],
             ["iif({Q11Q12_verborgen} contains 'Other namely', [{Q011-Comment}], {Q11Q12_verborgen})", 'iif(Contains(Variable(Q11Q12_verborgen), Value("Other namely")), Variable(Q011-Comment), Variable(Q11Q12_verborgen))'],
             ['randomSubset(T013Keuze,1)', 'randomSubset(UnescapedStringValue("T013Keuze"), Value(1))'],
-
+            ['iif({channel} <> \'Belgie\', "sanitaire", "badkamer")', 'iif(NotEq(Variable(channel), Value("Belgie")), Value("sanitaire"), Value("badkamer"))'],
         ];
     }
 
