@@ -39,7 +39,10 @@ class Buffer
 
     public function readOptionalOperator(): Operator | null
     {
-        foreach (Operator::cases() as $operator) {
+        $operators = Operator::cases();
+        usort($operators, fn (Operator $a, Operator $b) => strlen($b->value) <=> strlen($a->value));
+
+        foreach ($operators as $operator) {
             if (str_starts_with($this->contents, $operator->value)) {
                 $this->contents = mb_substr($this->contents, mb_strlen($operator->value));
                 return $operator;

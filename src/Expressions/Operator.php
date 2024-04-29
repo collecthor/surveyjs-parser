@@ -16,6 +16,7 @@ enum Operator: string
     case Gt = '>';
 
     case Eq = '=';
+    case Eq2 = '==';
     case Or = 'or';
     case And = 'and';
 
@@ -39,8 +40,7 @@ enum Operator: string
             Operator::Lt, Operator::Gt => 12,
             Operator::Addition, Operator::Subtraction => 90,
             Operator::Multiplication, Operator::Division => 100,
-            // Unary operators are handled separately
-            Operator::NotEmpty, Operator::Empty => 110,
+            default => 500,
         };
     }
 
