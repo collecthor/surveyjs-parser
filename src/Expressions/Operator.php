@@ -22,6 +22,7 @@ enum Operator: string
     case AnyOf = 'anyof';
 
     case Contains = 'contains';
+    case NotContains = 'notcontains';
 
     case NotEmpty = 'notempty';
     case Empty = 'empty';
@@ -34,7 +35,7 @@ enum Operator: string
             Operator::Eq => 8,
             Operator::Or => 7,
             Operator::And => 6,
-            Operator::AnyOf, Operator::Contains => 8,
+            Operator::AnyOf, Operator::Contains, Operator::NotContains => 8,
             Operator::Lt, Operator::Gt => 12,
             Operator::Addition, Operator::Subtraction => 90,
             Operator::Multiplication, Operator::Division => 100,
