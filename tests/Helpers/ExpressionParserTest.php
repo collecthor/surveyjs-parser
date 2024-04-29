@@ -39,6 +39,7 @@ final class ExpressionParserTest extends TestCase
             ["iif(({Folder1a} + {Folder2a} + {Folder3a} ) < 1, 1, 0)", "iif(Lt(Addition(Addition(Variable(Folder1a), Variable(Folder2a)), Variable(Folder3a)), Value(1)), Value(1), Value(0))"],
             ["iif({V006} notcontains '1', {Kiezer[1]}, iif({V006} contains '1', {Kiezer[0]}))", 'iif(NotContains(Variable(V006), Value("1")), Variable(Kiezer, 1), iif(Contains(Variable(V006), Value("1")), Variable(Kiezer, 0)))'],
             ['iif({S006} == 1, {S005a}, {S005a}/({S006}-{S007}))', 'iif(Eq2(Variable(S006), Value(1)), Variable(S005a), Division(Variable(S005a), Subtraction(Variable(S006), Variable(S007))))'],
+            ["iif({Q11Q12_verborgen} contains 'Other namely', [{Q011-Comment}], {Q11Q12_verborgen})", 'iif(Contains(Variable(Q11Q12_verborgen), Value("Other namely")), Variable(Q011-Comment), Variable(Q11Q12_verborgen))']
         ];
     }
 
