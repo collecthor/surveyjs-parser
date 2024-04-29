@@ -15,6 +15,8 @@ enum Operator: string
     case Or = 'or';
     case And = 'and';
 
+    case AnyOf = 'anyof';
+
 
 
     private function getPrecedence(): int
@@ -23,6 +25,7 @@ enum Operator: string
             Operator::Eq => 8,
             Operator::Or => 7,
             Operator::And => 6,
+            Operator::AnyOf => 8,
             Operator::Addition, Operator::Subtraction => 9,
             Operator::Multiplication, Operator::Division => 10,
         };

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Helpers;
 
+use Collecthor\SurveyjsParser\Expressions\ArrayNode;
 use Collecthor\SurveyjsParser\Expressions\BinaryOperatorNode;
 use Collecthor\SurveyjsParser\Expressions\Buffer;
 use Collecthor\SurveyjsParser\Expressions\FunctionNode;
@@ -57,7 +58,7 @@ class ExpressionParser
     private function parseBracketedExpression(Buffer $buffer): Node
     {
         $buffer->readChar("(");
-        $result = $this->parseInternal($buffer);
+        $result = $this->parseExpression($buffer);
         $buffer->readChar(")");
         return $result;
     }
@@ -86,6 +87,23 @@ class ExpressionParser
         }
         return $indexes;
     }
+    private function parseArray(Buffer $buffer): Node
+    {
+        $data = [];
+        $buffer->readChar('[');
+        $buffer->consumeWhitespace();
+        if (!$buffer->peekNext(']')) {
+            $data[] = $this->parseExpression($buffer);
+            while ($buffer->peekNext(',')) {
+                $buffer->readChar(',');
+                $data[] = $this->parseExpression($buffer);
+            }
+        }
+
+        $buffer->readChar(']');
+
+        return new ArrayNode(...$data);
+    }
 
     private function parseInternal(Buffer $buffer): Node
     {
@@ -96,6 +114,7 @@ class ExpressionParser
             "(" => $this->parseBracketedExpression($buffer),
             "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" => $this->parseNumber($buffer),
             "'", "\"" => $this->parseString($buffer),
+            "[" => $this->parseArray($buffer),
             default => $this->parseFunction($buffer)
         };
         $buffer->consumeWhitespace();
