@@ -34,7 +34,9 @@ final class ExpressionParserTest extends TestCase
             ["{S001}=4 or {S002}=3", 'Or(Eq(Variable(S001), Value(4)), Eq(Variable(S002), Value(3)))'],
             ["iif(({ppc} anyof [7065,7075]), 1, 0)", "iif(AnyOf(Variable(ppc), Value(7065), Value(7075)), Value(1), Value(0))"],
             ["{Q008_AG} notempty + {Q002} contains 17 + {Q008_AB} notempty", 'Contains(Addition(NotEmpty(Variable(Q008_AG)), Variable(Q002)), Addition(Value(17), NotEmpty(Variable(Q008_AB))))'],
-            ["if({random} empty,randInt(1,3),{random})", "if(Empty(Variable(random)), randInt(Value(1), Value(3)), Variable(random))"]
+            ["if({random} empty,randInt(1,3),{random})", "if(Empty(Variable(random)), randInt(Value(1), Value(3)), Variable(random))"],
+            ["randomSubset({T013Keuze},1)", "randomSubset(Variable(T013Keuze), Value(1))"],
+            ["iif(({Folder1a} + {Folder2a} + {Folder3a} ) < 1, 1, 0)", "iif(Lt(Addition(Addition(Variable(Folder1a), Variable(Folder2a)), Variable(Folder3a)), Value(1)), Value(1), Value(0))"],
         ];
     }
 

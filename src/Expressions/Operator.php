@@ -11,6 +11,10 @@ enum Operator: string
     case Multiplication = '*';
     case Division = '/';
 
+    case Lt = '<';
+
+    case Gt = '>';
+
     case Eq = '=';
     case Or = 'or';
     case And = 'and';
@@ -31,6 +35,7 @@ enum Operator: string
             Operator::Or => 7,
             Operator::And => 6,
             Operator::AnyOf, Operator::Contains => 8,
+            Operator::Lt, Operator::Gt => 12,
             Operator::Addition, Operator::Subtraction => 90,
             Operator::Multiplication, Operator::Division => 100,
             // Unary operators are handled separately
