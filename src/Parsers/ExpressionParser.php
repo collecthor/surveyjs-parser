@@ -23,7 +23,11 @@ final readonly class ExpressionParser implements ElementParserInterface
         // Try to parse the expression.
         if (isset($questionConfig['expression']) && is_string($questionConfig['expression'])) {
             $sub = new \Collecthor\SurveyjsParser\Helpers\ExpressionParser();
-            $sub->parse($questionConfig['expression']);
+            try {
+                $questionConfig['parsedExpression'] = $sub->parse($questionConfig['expression']);
+            } catch (\Exception $e) {
+                $questionConfig['parseError'] = $e->getMessage();
+            }
         }
 
         yield new OpenTextVariable(
