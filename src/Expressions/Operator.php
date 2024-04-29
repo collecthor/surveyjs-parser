@@ -20,6 +20,7 @@ enum Operator: string
     case Contains = 'contains';
 
     case NotEmpty = 'notempty';
+    case Empty = 'empty';
 
 
 
@@ -33,7 +34,7 @@ enum Operator: string
             Operator::Addition, Operator::Subtraction => 90,
             Operator::Multiplication, Operator::Division => 100,
             // Unary operators are handled separately
-            Operator::NotEmpty => 110,
+            Operator::NotEmpty, Operator::Empty => 110,
         };
     }
 
