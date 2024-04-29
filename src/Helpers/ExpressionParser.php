@@ -188,8 +188,15 @@ class ExpressionParser
     private function parseFunction(Buffer $buffer): Node
     {
         $functionName = $buffer->readRegex("/^([a-zA-Z][a-zA-Z_0-9]*)/");
+
         $arguments = [];
         $buffer->consumeWhitespace();
+        // Special exception for notempty prefix
+        if ($functionName === 'notempty') {
+            $operand = $this->parseExpression($buffer);
+            return new UnaryOperatorNode(Operator::NotEmpty, $operand);
+        }
+
         if (!$buffer->peekNext('(')) {
             // Unescaped string?!
             return new UnescapedStringNode($functionName);
