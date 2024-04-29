@@ -42,7 +42,8 @@ final class ExpressionParserTest extends TestCase
             ["iif({Q11Q12_verborgen} contains 'Other namely', [{Q011-Comment}], {Q11Q12_verborgen})", 'iif(Contains(Variable(Q11Q12_verborgen), Value("Other namely")), Variable(Q011-Comment), Variable(Q11Q12_verborgen))'],
             ['randomSubset(T013Keuze,1)', 'randomSubset(UnescapedStringValue("T013Keuze"), Value(1))'],
             ['iif({channel} <> \'Belgie\', "sanitaire", "badkamer")', 'iif(NotEq(Variable(channel), Value("Belgie")), Value("sanitaire"), Value("badkamer"))'],
-            ['({Getal0}+{Getal1}+{Getal2}+{Getal3}+{Getal4}) % 7', 'Modulus(Addition(Addition(Variable(Getal0), Variable(Getal1)), Addition(Addition(Variable(Getal2), Variable(Getal3)), Variable(Getal4))), Value(7))']
+            ['({Getal0}+{Getal1}+{Getal2}+{Getal3}+{Getal4}) % 7', 'Modulus(Addition(Addition(Variable(Getal0), Variable(Getal1)), Addition(Addition(Variable(Getal2), Variable(Getal3)), Variable(Getal4))), Value(7))'],
+            ['5 >= 4', 'Gte(Value(5), Value(4))']
         ];
     }
 

@@ -19,6 +19,9 @@ enum Operator: string
     case Eq = '=';
     case Eq2 = '==';
 
+    case Lte = '<=';
+    case Gte = '>=';
+
     case NotEq = '<>';
     case Or = 'or';
     case And = 'and';
