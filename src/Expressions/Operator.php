@@ -19,6 +19,8 @@ enum Operator: string
     case Eq = '=';
     case Eq2 = '==';
 
+    case Eq3 = 'equal';
+
     case Lte = '<=';
     case Gte = '>=';
 
@@ -39,7 +41,7 @@ enum Operator: string
     private function getPrecedence(): int
     {
         return match ($this) {
-            Operator::Eq, Operator::NotEq => 8,
+            Operator::Eq, Operator::Eq2, Operator::Eq3, Operator::NotEq => 8,
             Operator::Or => 7,
             Operator::And => 6,
             Operator::AnyOf, Operator::Contains, Operator::NotContains => 8,
