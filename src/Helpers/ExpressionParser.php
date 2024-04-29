@@ -11,6 +11,7 @@ use Collecthor\SurveyjsParser\Expressions\FunctionNode;
 use Collecthor\SurveyjsParser\Expressions\Node;
 use Collecthor\SurveyjsParser\Expressions\Operator;
 use Collecthor\SurveyjsParser\Expressions\UnaryOperatorNode;
+use Collecthor\SurveyjsParser\Expressions\UnescapedStringNode;
 use Collecthor\SurveyjsParser\Expressions\ValueNode;
 use Collecthor\SurveyjsParser\Expressions\VariableNode;
 
@@ -187,9 +188,12 @@ class ExpressionParser
     private function parseFunction(Buffer $buffer): Node
     {
         $functionName = $buffer->readRegex("/^([a-zA-Z][a-zA-Z_0-9]*)/");
-
         $arguments = [];
         $buffer->consumeWhitespace();
+        if (!$buffer->peekNext('(')) {
+            // Unescaped string?!
+            return new UnescapedStringNode($functionName);
+        }
         $buffer->readChar('(');
         while ($buffer->peekChar() != ")") {
             $buffer->consumeWhitespace();
