@@ -43,7 +43,8 @@ final class ExpressionParserTest extends TestCase
             ['randomSubset(T013Keuze,1)', 'randomSubset(UnescapedStringValue("T013Keuze"), Value(1))'],
             ['iif({channel} <> \'Belgie\', "sanitaire", "badkamer")', 'iif(NotEq(Variable(channel), Value("Belgie")), Value("sanitaire"), Value("badkamer"))'],
             ['({Getal0}+{Getal1}+{Getal2}+{Getal3}+{Getal4}) % 7', 'Modulus(Addition(Addition(Variable(Getal0), Variable(Getal1)), Addition(Addition(Variable(Getal2), Variable(Getal3)), Variable(Getal4))), Value(7))'],
-            ['5 >= 4', 'Gte(Value(5), Value(4))']
+            ['5 >= 4', 'Gte(Value(5), Value(4))'],
+            ['{Q008_ČSOB} notempty', 'NotEmpty(Variable(Q008_ČSOB))'],
         ];
     }
 
