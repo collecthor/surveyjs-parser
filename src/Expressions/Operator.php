@@ -10,6 +10,7 @@ enum Operator: string
     case Subtraction = '-';
     case Multiplication = '*';
     case Division = '/';
+    case Modulus = '%';
 
     case Lt = '<';
 
@@ -41,7 +42,7 @@ enum Operator: string
             Operator::AnyOf, Operator::Contains, Operator::NotContains => 8,
             Operator::Lt, Operator::Gt => 12,
             Operator::Addition, Operator::Subtraction => 90,
-            Operator::Multiplication, Operator::Division => 100,
+            Operator::Multiplication, Operator::Division, Operator::Modulus => 100,
             default => 500,
         };
     }
