@@ -11,18 +11,33 @@ enum Operator: string
     case Multiplication = '*';
     case Division = '/';
 
+    case Eq = '=';
+    case Or = 'or';
+    case And = 'and';
+
 
 
     private function getPrecedence(): int
     {
         return match ($this) {
-            Operator::Addition, Operator::Subtraction => 0,
-            Operator::Multiplication, Operator::Division => 1,
+            Operator::Eq => 8,
+            Operator::Or => 7,
+            Operator::And => 6,
+            Operator::Addition, Operator::Subtraction => 9,
+            Operator::Multiplication, Operator::Division => 10,
         };
     }
 
     public function hasPrecendenceOver(Operator $operator): bool
     {
         return $this->getPrecedence() >= $operator->getPrecedence();
+    }
+
+    /**
+     * @return list<string>;
+     */
+    public static function values(): array
+    {
+        return array_map(fn (Operator $op) => $op->value, self::cases());
     }
 }

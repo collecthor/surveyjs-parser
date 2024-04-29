@@ -25,6 +25,7 @@ class Buffer
         return $result;
     }
 
+
     public function peekChar(string ...$validCharacters): string
     {
         $result = mb_substr($this->contents, 0, 1);
@@ -35,9 +36,20 @@ class Buffer
         return $result;
     }
 
+
+    public function readOptionalOperator(): Operator | null
+    {
+        foreach (Operator::cases() as $operator) {
+            if (str_starts_with($this->contents, $operator->value)) {
+                $this->contents = mb_substr($this->contents, mb_strlen($operator->value));
+                return $operator;
+            }
+        }
+        return null;
+    }
     public function peekNext(string $character): bool
     {
-        return $character === mb_substr($this->contents, 0, 1);
+        return str_starts_with($this->contents, $character);
     }
 
     public function readRegex(string $regex): string
@@ -48,5 +60,10 @@ class Buffer
         } else {
             throw new \Exception("Expected match of ($regex) in buffer: {$this->contents}");
         }
+    }
+
+    public function __toString(): string
+    {
+        return "Buffer {$this->contents}";
     }
 }

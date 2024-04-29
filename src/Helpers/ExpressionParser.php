@@ -112,8 +112,8 @@ class ExpressionParser
         $operands = [];
         $operators = [];
         $operands[] = $this->parseInternal($buffer);
-        while (in_array($buffer->peekChar(), ["-", "+", "*", "/"], true)) {
-            $operators[] = Operator::from($buffer->readChar("-", "+", "*", "/"));
+        while (null !== $operator = $buffer->readOptionalOperator()) {
+            $operators[] = $operator;
             $operands[] = $this->parseInternal($buffer);
         }
 
@@ -153,7 +153,7 @@ class ExpressionParser
         $buffer = new Buffer($expression);
         $result = $this->parseExpression($buffer);
         if ($buffer->peekChar() !== "") {
-            throw new \Exception("Buffer not empty after parsing expression");
+            throw new \Exception("Buffer not empty after parsing expression: " . $buffer);
         }
         return $result;
     }

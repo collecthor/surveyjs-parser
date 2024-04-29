@@ -31,7 +31,7 @@ final class ExpressionParserTest extends TestCase
             ["randomSubset('V001',1)", 'randomSubset(Value("V001"), Value(1))'],
             ["{r1[0]}", 'Variable(r1, 0)'],
             ["randomSubset('V001', 2 + 4)", 'randomSubset(Value("V001"), Addition(Value(2), Value(4)))'],
-
+            ["{S001}=4 or {S002}=3", 'Or(Eq(Variable(S001), Value(4)), Eq(Variable(S002), Value(3)))']
         ];
     }
 
