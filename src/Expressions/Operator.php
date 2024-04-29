@@ -54,7 +54,7 @@ enum Operator: string
     public function isUnary(): bool
     {
         return match ($this) {
-            Operator::NotEmpty => true,
+            Operator::NotEmpty, Operator::Empty => true,
             default => false
         };
     }
