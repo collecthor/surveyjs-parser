@@ -54,7 +54,7 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -three phpdocumentor-sidebar">
-                    <section class="phpdocumentor-sidebar__category">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/collecthor.html" class="">Collecthor</a>
@@ -67,7 +67,7 @@
             </ul>
 
                         </section>
-                <section class="phpdocumentor-sidebar__category">
+                <section class="phpdocumentor-sidebar__category -packages">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/SurveyJSParser.html" class="">SurveyJSParser</a>
@@ -75,14 +75,14 @@
 
                         </section>
             
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -reports">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
     </section>
 
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -indices">
         <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
     </section>
@@ -113,7 +113,7 @@
                             <a href="classes/Collecthor-SurveyjsParser-Interfaces-MultipleChoiceVariableInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\MultipleChoiceVariableInterface">MultipleChoiceVariableInterface</abbr></a>                    </span>
     
             <span class="phpdocumentor-element__extends">
-            Uses
+            uses
                             <a href="classes/Collecthor-SurveyjsParser-Traits-GetName.html"><abbr title="\Collecthor\SurveyjsParser\Traits\GetName">GetName</abbr></a>,                             <a href="classes/Collecthor-SurveyjsParser-Traits-GetTitle.html"><abbr title="\Collecthor\SurveyjsParser\Traits\GetTitle">GetTitle</abbr></a>,                             <a href="classes/Collecthor-SurveyjsParser-Traits-GetRawConfiguration.html"><abbr title="\Collecthor\SurveyjsParser\Traits\GetRawConfiguration">GetRawConfiguration</abbr></a>                    </span>
     </h2>
 
@@ -134,6 +134,8 @@
     </aside>
 
         
+
+
 
 
 
@@ -238,7 +240,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Collecthor-SurveyjsParser-Variables-MultipleChoiceVariable.html#method_getOptions">getOptions()</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: array&lt;int, <a href="classes/Collecthor-SurveyjsParser-Interfaces-ValueOptionInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface">ValueOptionInterface</abbr></a>&gt;    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
@@ -268,7 +270,6 @@
 but the order of the values is relevant</dd>
 
     </dl>
-
 
 
 
@@ -313,6 +314,8 @@ but the order of the values is relevant</dd>
     
     
 
+    
+
 </article>
                     <article
         class="
@@ -344,6 +347,8 @@ but the order of the values is relevant</dd>
 
     
     
+    
+
     
 
 </article>
@@ -379,6 +384,8 @@ but the order of the values is relevant</dd>
     
     
 
+    
+
 </article>
                     <article
         class="
@@ -410,6 +417,8 @@ but the order of the values is relevant</dd>
 
     
     
+    
+
     
 
 </article>
@@ -445,6 +454,8 @@ but the order of the values is relevant</dd>
     
     
 
+    
+
 </article>
                     <article
         class="
@@ -477,6 +488,8 @@ but the order of the values is relevant</dd>
 
     
     
+    
+
     
 
 </article>
@@ -563,6 +576,8 @@ but the order of the values is relevant</dd>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -591,6 +606,8 @@ but the order of the values is relevant</dd>
         </div>
     
     
+    
+
     
 
             <section>
@@ -628,6 +645,8 @@ but the order of the values is relevant</dd>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
@@ -663,6 +682,8 @@ but the order of the values is relevant</dd>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int</span>
@@ -690,7 +711,7 @@ but the order of the values is relevant</dd>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getOptions</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getOptions</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;int, <a href="classes/Collecthor-SurveyjsParser-Interfaces-ValueOptionInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface">ValueOptionInterface</abbr></a>&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -698,9 +719,11 @@ but the order of the values is relevant</dd>
     
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+        <span class="phpdocumentor-signature__response_type">array&lt;int, <a href="classes/Collecthor-SurveyjsParser-Interfaces-ValueOptionInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface">ValueOptionInterface</abbr></a>&gt;</span>
             </section>
 
 </article>
@@ -744,6 +767,8 @@ but the order of the values is relevant</dd>
     
 
     
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -781,6 +806,8 @@ but the order of the values is relevant</dd>
                 
             </dd>
             </dl>
+
+    
 
     
 
@@ -829,6 +856,8 @@ but the order of the values is relevant</dd>
 
     
 
+    
+
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/Collecthor-SurveyjsParser-Interfaces-SpecialValueInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface">SpecialValueInterface</abbr></a>|<a href="classes/Collecthor-SurveyjsParser-Values-MultipleChoiceValue.html"><abbr title="\Collecthor\SurveyjsParser\Values\MultipleChoiceValue">MultipleChoiceValue</abbr></a></span>
@@ -864,6 +893,8 @@ but the order of the values is relevant</p>
         </div>
     
     
+    
+
     
 
             <section>
