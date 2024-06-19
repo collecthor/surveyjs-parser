@@ -4,31 +4,21 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
-use Collecthor\SurveyjsParser\ArrayRecord;
+use Collecthor\SurveyjsParser\ArrayDataRecord;
+use Collecthor\SurveyjsParser\Interfaces\StringVariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\RatingParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
+use Collecthor\SurveyjsParser\Variables\SingleChoiceIntegerVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-
 use function iter\toArray;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Parsers\RatingParser
- * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
- * @uses \Collecthor\SurveyjsParser\Values\IntegerValueOption
- * @uses \Collecthor\SurveyjsParser\Traits\GetDisplayValue
- * @uses \Collecthor\SurveyjsParser\SurveyConfiguration
- * @uses \Collecthor\SurveyjsParser\Variables\OpenTextVariable
- * @uses \Collecthor\SurveyjsParser\Variables\NumericVariable
- * @uses \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
- * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
- * @uses \Collecthor\SurveyjsParser\ArrayRecord
- * @uses \Collecthor\SurveyjsParser\Values\StringValue
- *
- */
-
+#[CoversClass(RatingParser::class)]
 final class RatingParserTest extends TestCase
 {
     public function testDefaultRating(): void
@@ -43,17 +33,18 @@ final class RatingParserTest extends TestCase
 
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
 
-        self::assertInstanceOf(SingleChoiceVariable::class, $result[0]);
+        self::assertInstanceOf(SingleChoiceIntegerVariable::class, $result[0]);
 
-        /** @var SingleChoiceVariable $variable */
         $variable = $result[0];
 
-        $choices = $variable->getValueOptions();
+        $choices = $variable->getOptions();
+        self::assertCount(5, $choices);
+        self::assertContainsOnlyInstancesOf(IntegerValueOption::class, $choices);
 
-        for ($i = 1; $i < 6; $i++) {
-            self::assertSame($i, $choices[$i - 1]->getRawValue());
-            self::assertInstanceOf(IntegerValueOption::class, $choices[$i - 1]);
-        }
+        $values = array_map(function (IntegerValueOption $option) {
+            return $option->getValue();
+        }, $choices);
+        self::assertSame([1, 2, 3, 4, 5], $values);
     }
 
     public function testCustomRange(): void
@@ -70,16 +61,16 @@ final class RatingParserTest extends TestCase
 
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
 
-        self::assertInstanceOf(SingleChoiceVariable::class, $result[0]);
+        self::assertInstanceOf(SingleChoiceIntegerVariable::class, $result[0]);
 
-        /** @var SingleChoiceVariable $variable */
         $variable = $result[0];
 
-        $choices = $variable->getValueOptions();
+        $choices = $variable->getOptions();
+        self::assertCount(9, $choices);
+        self::assertContainsOnlyInstancesOf(IntegerValueOption::class, $choices);
 
         for ($i = 2; $i <= 10; $i++) {
-            self::assertSame($i, $choices[$i - 2]->getRawValue());
-            self::assertInstanceOf(IntegerValueOption::class, $choices[$i - 2]);
+            self::assertSame($i, $choices[$i - 2]->getValue());
         }
     }
 
@@ -98,21 +89,17 @@ final class RatingParserTest extends TestCase
 
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
 
-        self::assertInstanceOf(SingleChoiceVariable::class, $result[0]);
-
-        /** @var SingleChoiceVariable $variable */
         $variable = $result[0];
+        self::assertInstanceOf(SingleChoiceIntegerVariable::class, $variable);
 
-        $choices = $variable->getValueOptions();
+
+        $choices = $variable->getOptions();
 
         self::assertCount(3, $choices);
-        self::assertSame(2, $choices[0]->getRawValue());
-        self::assertSame(5, $choices[1]->getRawValue());
-        self::assertSame(8, $choices[2]->getRawValue());
-
-        foreach ($choices as $choice) {
-            self::assertInstanceOf(IntegerValueOption::class, $choice);
-        }
+        self::assertContainsOnlyInstancesOf(IntegerValueOption::class, $choices);
+        self::assertSame(2, $choices[0]->getValue());
+        self::assertSame(5, $choices[1]->getValue());
+        self::assertSame(8, $choices[2]->getValue());
     }
 
     public function testCustomRangeRating(): void
@@ -176,18 +163,19 @@ final class RatingParserTest extends TestCase
 
         $parser = new RatingParser();
 
-        /** @var SingleChoiceVariable $result */
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig))[0];
+        self::assertInstanceOf(SingleChoiceVariable::class, $result);
 
-        $record = new ArrayRecord(['question3' => 'item3'], 1, new \DateTime(), new \DateTime());
+        $record = new ArrayDataRecord(['question3' => 'item3']);
 
-        $value = $result->getValue($record)->getRawValue();
+        $value = $result->getValue($record);
 
-        self::assertSame('item3', $value);
+        self::assertInstanceOf(ValueOptionInterface::class, $value);
 
-        $displayValue = $result->getDisplayValue($record)->getRawValue();
 
-        self::assertSame('Good', $displayValue);
+        self::assertSame('item3', $value->getValue());
+
+        self::assertSame('Good', $value->getDisplayValue());
     }
 
     public function testCustomRangeRatingAnswersLocalized(): void
@@ -230,13 +218,79 @@ final class RatingParserTest extends TestCase
 
         $parser = new RatingParser();
 
-        /** @var SingleChoiceVariable $result */
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig))[0];
 
-        $record = new ArrayRecord(['question3' => 'item3'], 1, new \DateTime(), new \DateTime());
+        self::assertInstanceOf(VariableInterface::class, $result);
+        $record = new ArrayDataRecord(['question3' => 'item3']);
 
-        $displayValue = $result->getDisplayValue($record, 'nl')->getRawValue();
+        $displayValue = $result->getValue($record)->getDisplayValue('nl');
+
 
         self::assertSame('Goed', $displayValue);
+    }
+
+    public function testRatingWithCustomValueAndRateCount(): void
+    {
+        $json = <<<JSON
+{
+       "type": "rating",
+       "name": "q1",
+       "title": {
+        "default": "What rating?"
+       },
+       "isRequired": true,
+       "autoGenerate": false,
+       "rateCount": 11,
+       "rateValues": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        {
+         "value": 11,
+         "text": {
+          "nl": "Weet ik niet",
+          "default": "I don’t know"
+         }
+        }
+       ],
+       "rateMax": 11
+      }
+JSON;
+        $parser = new RatingParser();
+
+        $result = toArray($parser->parse(new DummyParser(), json_decode($json, true, JSON_THROW_ON_ERROR), new SurveyConfiguration()))[0];
+
+        self::assertInstanceOf(SingleChoiceIntegerVariable::class, $result);
+        self::assertCount(11, $result->getOptions());
+        foreach ($result->getOptions() as $i => $option) {
+            self::assertSame($i + 1, $option->getValue());
+        }
+    }
+
+    public function testRatingExportsComment(): void
+    {
+        $json = <<<JSON
+{
+       "type": "rating",
+       "name": "q1",
+       "showCommentArea": true,
+       "title": {
+        "default": "What rating?"
+       }
+      }
+JSON;
+        $parser = new RatingParser();
+
+        $result = toArray($parser->parse(new DummyParser(), json_decode($json, true, JSON_THROW_ON_ERROR), new SurveyConfiguration()));
+
+        self::assertCount(2, $result);
+        self::assertInstanceOf(StringVariableInterface::class, $result[1]);
     }
 }

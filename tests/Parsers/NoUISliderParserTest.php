@@ -7,15 +7,12 @@ namespace Collecthor\SurveyjsParser\Tests\Parsers;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\NoUISliderParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
-use Collecthor\SurveyjsParser\Variables\NumericVariable;
+use Collecthor\SurveyjsParser\Variables\FloatVariable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-
 use function iter\toArray;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Parsers\NoUISliderParser
- * @uses \Collecthor\SurveyjsParser\Variables\NumericVariable
- */
+#[CoversClass(NoUISliderParser::class)]
 final class NoUISliderParserTest extends TestCase
 {
     public function testParseDefault(): void
@@ -31,7 +28,7 @@ final class NoUISliderParserTest extends TestCase
 
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig))[0];
 
-        self::assertInstanceOf(NumericVariable::class, $result);
+        self::assertInstanceOf(FloatVariable::class, $result);
         self::assertSame("question1", $result->getTitle());
     }
 }

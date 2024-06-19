@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Traits;
 
-use Collecthor\DataInterfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 
 trait GetTitle
 {
     /**
      * @var array<string, string>
      */
-    private array $titles;
+    private readonly array $titles;
 
     public function getTitle(?string $locale = null): string
     {

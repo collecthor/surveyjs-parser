@@ -9,9 +9,9 @@ trait GetRawConfiguration
     /**
      * @var array<string, mixed>
      */
-    private array $rawConfiguration;
+    private readonly array $rawConfiguration;
 
-    public function getRawConfigurationValue(string $key): mixed
+    public function getRawConfigurationValue(string|int $key): mixed
     {
         return $this->rawConfiguration[$key] ?? null;
     }

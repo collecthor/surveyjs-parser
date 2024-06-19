@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Parsers;
 
-use Collecthor\DataInterfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 
-final class MatrixDynamicParser implements ElementParserInterface
+final readonly class MatrixDynamicParser implements ElementParserInterface
 {
     use ParserHelpers;
     /**
@@ -23,7 +22,6 @@ final class MatrixDynamicParser implements ElementParserInterface
 
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        /** @var non-empty-array<int, ValueOptionInterface> $answers */
         $answers = [];
         foreach ($this->extractOptionalArray($questionConfig, 'choices') ?? [] as $answer) {
             if (is_scalar($answer)) {
@@ -50,7 +48,7 @@ final class MatrixDynamicParser implements ElementParserInterface
                 $rowConfig['choices'] = $this->extractOptionalArray($column, 'choices') ?? $answers;
                 $rowConfig['title'] = $this->arrayFormat($questionTitles, ' ', $columnName, ' ', $this->rowLabels, " $r");
                 $rowConfig['valueName'] = $columnName;
-                yield from $root->parse($root, $rowConfig, $surveyConfiguration, [...$dataPrefix, $valueName, (string)$r]);
+                yield from $root->parse(root: $root, questionConfig: $rowConfig, surveyConfiguration: $surveyConfiguration, dataPrefix: [...$dataPrefix, $valueName, (string)$r]);
             }
         }
     }

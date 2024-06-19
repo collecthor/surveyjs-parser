@@ -4,19 +4,15 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
+use Collecthor\SurveyjsParser\Interfaces\MultipleChoiceVariableInterface;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\OrderedVariableParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
-use Collecthor\SurveyjsParser\Variables\OrderedVariable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-
 use function iter\toArray;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Parsers\OrderedVariableParser
- * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
- * @uses \Collecthor\SurveyjsParser\Variables\OrderedVariable
- */
+#[CoversClass(OrderedVariableParser::class)]
 final class OrderedVariableParserTest extends TestCase
 {
     public function testParseRanking(): void
@@ -36,8 +32,9 @@ final class OrderedVariableParserTest extends TestCase
 
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
 
-        self::assertInstanceOf(OrderedVariable::class, $result[0]);
-        $options = $result[0]->getValueOptions();
+        self::assertInstanceOf(MultipleChoiceVariableInterface::class, $result[0]);
+        self::assertTrue($result[0]->isOrdered());
+        $options = $result[0]->getOptions();
 
         self::assertSame('item1', $options[0]->getDisplayValue());
         self::assertSame('item2', $options[1]->getDisplayValue());

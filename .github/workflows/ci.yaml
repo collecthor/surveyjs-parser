@@ -1,19 +1,31 @@
-name: Continous integration
+name: Continuous integration
 on:
   pull_request:
-  push:
-    branches-ignore:
-      - master
+    types:
+      - opened
+      - reopened
+      - synchronize
 jobs:
+  static_analysis_psalm:
+    name: Static Analysis (psalm)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Psalm
+        uses: docker://ghcr.io/psalm/psalm-github-actions
+        with:
+          composer_require_dev: true
+          composer_ignore_platform_reqs: true
+          security_analysis: true
   code_checks:
     name: Check code
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.2'
       - name: Install dependencies
         run: composer install
       - name: Test code style

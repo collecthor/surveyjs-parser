@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser;
 
-use Collecthor\DataInterfaces\VariableInterface;
-use Collecthor\DataInterfaces\VariableSetInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableSetInterface;
 use InvalidArgumentException;
 
 class VariableSet implements VariableSetInterface

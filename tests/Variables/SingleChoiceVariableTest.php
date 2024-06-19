@@ -4,40 +4,34 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Variables;
 
-use Collecthor\DataInterfaces\InvalidValueInterface;
-use Collecthor\DataInterfaces\JavascriptVariableInterface;
-use Collecthor\DataInterfaces\Measure;
-use Collecthor\DataInterfaces\ValueOptionInterface;
-use Collecthor\DataInterfaces\VariableInterface;
+use Collecthor\SurveyjsParser\ArrayDataRecord;
 use Collecthor\SurveyjsParser\ArrayRecord;
+use Collecthor\SurveyjsParser\Interfaces\Measure;
+use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueType;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
+use Collecthor\SurveyjsParser\Values\StringValue;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 
-/**
- * @covers \Collecthor\SurveyjsParser\Variables\SingleChoiceVariable
- * @uses \Collecthor\SurveyjsParser\Values\IntegerValueOption
- * @uses \Collecthor\SurveyjsParser\Values\StringValueOption
- * @uses \Collecthor\SurveyjsParser\ArrayRecord
- * @uses \Collecthor\SurveyjsParser\Values\StringValue
- * @uses \Collecthor\SurveyjsParser\Values\InvalidValue
- * @uses \Collecthor\SurveyjsParser\ArrayDataRecord
- */
-class SingleChoiceVariableTest extends VariableTest
+#[CoversClass(SingleChoiceVariable::class)]
+class SingleChoiceVariableTest extends VariableTestBase
 {
     public function testMeasureIsNominal(): void
     {
         $option = new IntegerValueOption(15, []);
-        $subject = new SingleChoiceVariable("test", [], [$option], ['path']);
+        $subject = new SingleChoiceVariable("test", options: [$option], dataPath: ['path']);
         self::assertSame(Measure::Nominal, $subject->getMeasure());
     }
 
     public function testGetValueOptions(): void
     {
         /**
-         * @todo Remove this
-         * @see https://github.com/phpstan/phpstan/issues/6070
-         * @phpstan-var non-empty-list<ValueOptionInterface> $options
+         * @var list<ValueOptionInterface> $options
          */
         $options = [];
         for ($i = 0; $i < 10; $i++) {
@@ -52,10 +46,9 @@ class SingleChoiceVariableTest extends VariableTest
             $options[] = $option;
         }
 
-
-        $subject = new SingleChoiceVariable("test", [], $options, ['path']);
+        $subject = new SingleChoiceVariable("test", options: $options, dataPath: ['path']);
         $i = 0;
-        foreach ($subject->getValueOptions() as $option) {
+        foreach ($subject->getOptions() as $option) {
             self::assertSame($options[$i], $option);
             $i++;
         }
@@ -64,76 +57,80 @@ class SingleChoiceVariableTest extends VariableTest
     /**
      * @return iterable<non-empty-list<mixed>>
      */
-    public function invalidValueProvider(): iterable
+    public static function invalidValueProvider(): iterable
     {
-        yield [154];
-        yield ['151234abc'];
-        yield [15.3];
-        yield [["Test array value"]];
+        yield [154, "154"];
+        yield ['151234abc', "151234abc"];
+        yield [15.3, "15.30"];
+        yield [["Test array value"], print_r(["Test array value"], true)];
     }
 
     /**
-     * @dataProvider invalidValueProvider
-     * @phpstan-param int|string|array<mixed>|float $value
+     * @param int|string|array<mixed>|float $value
      */
-    public function testGetInvalidValue(int|string|array|float $value): void
+    #[DataProvider('invalidValueProvider')]
+    public function testGetInvalidValue(int|string|array|float $value, string $displayValue): void
     {
-        $subject = new SingleChoiceVariable("test", [], [new IntegerValueOption(15, ['en' => 'test'])], ['path']);
+        $subject = new SingleChoiceVariable("test", options: [new IntegerValueOption(15, ['en' => 'test'])], dataPath: ['path']);
 
-        $data = new ArrayRecord(['path' => $value], 5, new \DateTime(), new \DateTime());
+        $data = new ArrayDataRecord(['path' => $value]);
 
         $retrievedValue = $subject->getValue($data);
-        self::assertInstanceOf(InvalidValueInterface::class, $retrievedValue);
 
-        /**
-         * @see https://github.com/collecthor/surveyjs-parser/issues/2
-         */
-        if (!is_array($value)) {
-            self::assertSame((string) $value, $retrievedValue->getRawValue());
-        }
+        self::assertInstanceOf(SpecialValueInterface::class, $retrievedValue);
+        self::assertSame(ValueType::Invalid, $retrievedValue->getType());
+        self::assertSame(StringValue::toString($value), $retrievedValue->getValue());
+        self::assertSame($displayValue, $retrievedValue->getDisplayValue());
     }
 
     public function testGetValidValue(): void
     {
         $value = 15;
-        $subject = new SingleChoiceVariable("test", [], [new IntegerValueOption($value, ['en' => 'test', 'de' => 'test2'])], ['path']);
+        $subject = new SingleChoiceVariable("test", options: [new IntegerValueOption($value, ['en' => 'test', 'de' => 'test2'])], dataPath: ['path']);
 
         $data = new ArrayRecord(['path' => $value], 5, new \DateTime(), new \DateTime());
 
         $retrievedValue = $subject->getValue($data);
         self::assertInstanceOf(IntegerValueOption::class, $retrievedValue);
 
-        self::assertSame($value, $retrievedValue->getRawValue());
+        self::assertSame($value, $retrievedValue->getValue());
 
-        self::assertSame('test', $subject->getDisplayValue($data)->getRawValue());
-        self::assertSame('test2', $subject->getDisplayValue($data, 'de')->getRawValue());
+        self::assertSame('test', $subject->getValue($data)->getDisplayValue());
+        self::assertSame('test2', $subject->getValue($data)->getDisplayValue('de'));
     }
 
     public function testGetInValidDisplayValue(): void
     {
         $value = 1213123132;
-        $subject = new SingleChoiceVariable("test", [], [new IntegerValueOption(15, ['en' => 'test', 'de' => 'test2'])], ['path']);
+        $subject = new SingleChoiceVariable("test", options: [new IntegerValueOption(15, ['en' => 'test', 'de' => 'test2'])], dataPath: ['path']);
 
         $data = new ArrayRecord(['path' => $value], 5, new \DateTime(), new \DateTime());
 
-        $displayValue = $subject->getDisplayValue($data);
-
-        self::assertSame((string) $value, $displayValue->getRawValue());
-        self::assertInstanceOf(InvalidValueInterface::class, $displayValue);
+        $value = $subject->getValue($data);
+        self::assertInstanceOf(SpecialValueInterface::class, $value);
+        self::assertSame(ValueType::Invalid, $value->getType());
     }
 
     protected function getVariableWithRawConfiguration(array $rawConfiguration): VariableInterface
     {
-        return new SingleChoiceVariable("test", [], [new IntegerValueOption(15, ['en' => 'test'])], ['path'], $rawConfiguration);
+        return new SingleChoiceVariable("test", options: [new IntegerValueOption(15, ['en' => 'test'])], dataPath: ['path'], rawConfiguration: $rawConfiguration);
     }
 
-    protected function getVariableWithName(string $name): JavascriptVariableInterface
+    protected function getVariableWithName(string $name): SingleChoiceVariable
     {
-        return new SingleChoiceVariable($name, [], [new IntegerValueOption(15, ['en' => 'test'])], ['path']);
+        return new SingleChoiceVariable($name, options: [new IntegerValueOption(15, ['en' => 'test'])], dataPath: ['path']);
     }
 
-    protected function getVariableWithTitles(array $titles): VariableInterface
+    /**
+     * @param array<string,string> $titles
+     */
+    protected function getVariableWithTitles(array $titles): SingleChoiceVariable
     {
-        return new SingleChoiceVariable('test', $titles, [new IntegerValueOption(15, ['en' => 'test'])], ['path']);
+        return new SingleChoiceVariable(
+            'test',
+            options: [new IntegerValueOption(15, ['en' => 'test'])],
+            dataPath: ['path'],
+            titles: $titles
+        );
     }
 }

@@ -6,7 +6,7 @@ namespace Collecthor\SurveyjsParser\Traits;
 
 trait GetName
 {
-    private string $name;
+    private readonly string $name;
 
     public function getName(): string
     {

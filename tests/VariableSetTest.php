@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests;
 
-use Collecthor\DataInterfaces\VariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\VariableSet;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Collecthor\SurveyjsParser\VariableSet
- */
-class VariableSetTest extends TestCase
+#[CoversClass(VariableSet::class)]
+final class VariableSetTest extends TestCase
 {
     private function createVariableWithName(string $name): VariableInterface
     {

@@ -4,15 +4,26 @@ on:
     branches:
       - master
 jobs:
+  static_analysis_psalm:
+    name: Static Analysis (psalm)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Psalm
+        uses: docker://ghcr.io/psalm/psalm-github-actions
+        with:
+          composer_require_dev: true
+          composer_ignore_platform_reqs: true
+          security_analysis: true
   code_checks:
     name: Check code
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.2'
       - name: Install dependencies
         run: composer install
       - name: Test code style
@@ -28,13 +39,13 @@ jobs:
           name: codecov-umbrella
   release:
     name: Automated release
-    needs: [ code_checks ]
+    needs: [ code_checks, static_analysis_psalm ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: 20
       - run: >
           npx
           -p "@semantic-release/commit-analyzer"
@@ -47,7 +58,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.2'
           tools: phpDocumentor
       - name: Generate docs
         run: phpdoc run

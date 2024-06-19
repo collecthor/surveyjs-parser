@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Parsers;
 
-use Collecthor\DataInterfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ElementParserInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 
-final class ImagePickerParser implements ElementParserInterface
+final readonly class ImagePickerParser implements ElementParserInterface
 {
     use ParserHelpers;
 
@@ -29,10 +29,25 @@ final class ImagePickerParser implements ElementParserInterface
         if ($choices === []) {
             return;
         }
-        if (isset($questionConfig['multiSelect']) && is_bool($questionConfig['multiSelect']) && $questionConfig['multiSelect']) {
-            yield new MultipleChoiceVariable($name, $titles, $choices, [...$dataPrefix, $valueName]);
+
+        if ($this->extractOptionalBoolean($questionConfig, 'multiSelect') ?? false) {
+            yield new MultipleChoiceVariable(
+                name: $name,
+                dataPath: [...$dataPrefix, $valueName],
+                options: $choices,
+                titles: $titles,
+                rawConfiguration: $questionConfig
+            );
         } else {
-            yield new SingleChoiceVariable($name, $titles, $choices, [...$dataPrefix, $valueName]);
+            yield new SingleChoiceVariable(
+                name: $name,
+                options: $choices,
+                dataPath: [...$dataPrefix, $valueName],
+                rawConfiguration: $questionConfig,
+                titles: $titles
+            );
         }
+
+        yield from (new CommentParser())->parse($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }

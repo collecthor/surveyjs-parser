@@ -11,7 +11,7 @@ use Collecthor\SurveyjsParser\SurveyConfiguration;
  * A parser that always resolves to an empty list of variables
  * @codeCoverageIgnore
  */
-class DummyParser implements ElementParserInterface
+final readonly class DummyParser implements ElementParserInterface
 {
     public function parse(
         ElementParserInterface $root,

@@ -4,63 +4,31 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser;
 
-use Collecthor\DataInterfaces\ValueOptionInterface;
-use Collecthor\DataInterfaces\VariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Values\DontKnowValueOption;
 use Collecthor\SurveyjsParser\Values\IntegerValueOption;
+use Collecthor\SurveyjsParser\Values\NoneValueOption;
+use Collecthor\SurveyjsParser\Values\OtherValueOption;
+use Collecthor\SurveyjsParser\Values\RefuseValueOption;
 use Collecthor\SurveyjsParser\Values\StringValueOption;
-use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 use InvalidArgumentException;
+use function iter\all;
 
 trait ParserHelpers
 {
     /**
-     * @phpstan-param non-empty-array<string, mixed> $questionConfig
-     * @param array<string> $dataPrefix
-     * @return iterable<VariableInterface>
-     */
-    private function parseCommentField(array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix): iterable
-    {
-        if ($this->extractOptionalBoolean($questionConfig, 'hasOther') ?? false) {
-            $defaultPostfix = "Other";
-            $postfixField = "otherText";
-        } elseif ($this->extractOptionalBoolean($questionConfig, 'hasComment') ?? false) {
-            $defaultPostfix = "Other (describe)";
-            $postfixField = "commentText";
-        } else {
-            return;
-        }
-
-        $defaultPostfixes = [
-            'default' => $defaultPostfix,
-        ];
-
-        $postfixes = $this->extractLocalizedTexts($questionConfig, $postfixField, $defaultPostfixes);
-
-        $titles = [];
-        foreach ($this->extractTitles($questionConfig) as $locale => $title) {
-            $titles[$locale] = $title . " - " . ($postfixes[$locale] ?? $postfixes['default']);
-        }
-
-
-        $name = implode('.', [...$dataPrefix, $this->extractName($questionConfig), 'comment']);
-        $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig) . $surveyConfiguration->commentPostfix];
-
-        yield new OpenTextVariable($name, $titles, $dataPath, $questionConfig);
-    }
-
-    /**
-     * @param array<string, mixed> $config
+     * @param array<string|int, mixed> $config
      * @return array<string, string>
      */
     private function extractTitles(array $config): array
     {
         return $this->extractLocalizedTexts($config, 'title', [
-            'default' => $this->extractName($config)
+            'default' => $this->extractOptionalName($config)
         ]);
     }
 
     /**
-     * @param array<string, mixed> $config
+     * @param array<string|int, mixed> $config
      */
     private function extractValueName(array $config): string
     {
@@ -73,7 +41,7 @@ trait ParserHelpers
 
     /**
      * @param non-empty-string $field
-     * @param array<string, mixed> $config
+     * @param array<mixed> $config
      * @param array<string, string> $defaults
      * @return array<string, string>
      */
@@ -92,7 +60,7 @@ trait ParserHelpers
         if (is_array($config[$field])) {
             $result = $defaults;
             foreach ($config[$field] as $locale => $data) {
-                if (!is_array($data)) {
+                if (is_string($locale) && (is_string($data) || is_int($data))) {
                     $result[$locale] = (string) $data;
                 }
             }
@@ -103,28 +71,10 @@ trait ParserHelpers
     }
 
     /**
-     * @param array<string, mixed> $config
-     * @param string $key
-     * @return array<mixed>
+     * @param array<mixed> $config
+     * @return array<mixed>|null
      */
-    private function extractArray(array $config, string $key): array
-    {
-        if (!isset($config[$key])) {
-            return [];
-        }
-        if (!is_array($config[$key])) {
-            throw new InvalidArgumentException("Expected to find an array at key $key, inside: " . print_r($config, true));
-        }
-
-        return $config[$key];
-    }
-
-    /**
-     * @param array<string, mixed> $config
-     * @param string $key
-     * @return array<mixed>
-     */
-    private function extractOptionalArray(array $config, string $key): array|null
+    private function extractOptionalArray(array $config, string $key): null|array
     {
         if (!isset($config[$key])) {
             return null;
@@ -149,9 +99,70 @@ trait ParserHelpers
     }
 
     /**
-     * @param array<string, mixed> $config
-     * @param string $key
-     * @return bool|null
+     * @param array<mixed> $config
+     * @return string
+     * @throws InvalidArgumentException
+     */
+    private function extractOptionalName(array $config): string
+    {
+        if (isset($config['name']) && is_string($config['name'])) {
+            return $config['name'];
+        } elseif (isset($config['name']) && !is_string($config['name'])) {
+            throw new InvalidArgumentException("Expected to find a string at key `name`, inside: " . print_r($config, true));
+        } elseif (!isset($config['name']) && isset($config['title']) && is_scalar($config['title'])) {
+            return (string) $config['title'];
+        }
+        return "";
+    }
+
+    /**
+     * @param array<mixed> $config
+     */
+    private function showNoneItem(array $config): bool
+    {
+        return $this->extractBoolean($config, false, 'showNoneItem', 'hasNone');
+    }
+
+    /**
+     * @param array<mixed> $config
+     */
+    private function showOtherItem(array $config): bool
+    {
+        return $this->extractBoolean($config, false, 'showOtherItem', 'hasOther');
+    }
+
+    /**
+     * @param array<mixed> $config
+     */
+    private function showRefuseItem(array $config): bool
+    {
+        return $this->extractBoolean($config, false, 'showRefuseItem');
+    }
+
+    /**
+     * @param array<mixed> $config
+     */
+    private function showDontKnowItem(array $config): bool
+    {
+        return $this->extractBoolean($config, false, 'showDontKnowItem');
+    }
+
+    /**
+     * @param array<mixed> $config
+     */
+    private function extractBoolean(array $config, bool $default, string ...$keys): bool
+    {
+        foreach ($keys as $key) {
+            if (is_bool($config[$key] ?? null)) {
+                return $config[$key];
+            }
+        }
+
+        return $default;
+    }
+
+    /**
+     * @param array<mixed> $config
      */
     private function extractOptionalBoolean(array $config, string $key): bool|null
     {
@@ -166,7 +177,22 @@ trait ParserHelpers
     }
 
     /**
-     * @param array<string, mixed> $config
+     * @param array<mixed> $config
+     */
+    private function extractOptionalString(array $config, string $key): string|null
+    {
+        if (!isset($config[$key])) {
+            return null;
+        }
+        if (is_string($config[$key])) {
+            return $config[$key];
+        }
+
+        throw new InvalidArgumentException("Key $key in array is expected to be string or null, got: " . print_r($config, true));
+    }
+
+    /**
+     * @param array<mixed> $config
      */
     private function extractOptionalInteger(array $config, string $key): int|null
     {
@@ -181,6 +207,28 @@ trait ParserHelpers
     }
 
     /**
+     * @param array<string|int, mixed> $questionConfig
+     * @return list<ValueOptionInterface>
+     */
+    private function generateChoices(array $questionConfig): array
+    {
+        $choices = $this->extractChoices($this->extractOptionalArray($questionConfig, 'choices'));
+        if ($this->showNoneItem($questionConfig)) {
+            $choices[] = new NoneValueOption($this->extractLocalizedTexts($questionConfig, 'noneText'));
+        }
+        if ($this->showOtherItem($questionConfig)) {
+            $choices[] = new OtherValueOption($this->extractLocalizedTexts($questionConfig, 'otherText'));
+        }
+        if ($this->showRefuseItem($questionConfig)) {
+            $choices[] = new RefuseValueOption($this->extractLocalizedTexts($questionConfig, 'refuseText'));
+        }
+        if ($this->showDontKnowItem($questionConfig)) {
+            $choices[] = new DontKnowValueOption($this->extractLocalizedTexts($questionConfig, 'dontKnowText'));
+        }
+        return $choices;
+    }
+
+    /**
      * We use a mixed type here; since we're parsing user data.
      * We expect / hope for a list, but might get anything.
      * @return list<ValueOptionInterface>
@@ -192,13 +240,18 @@ trait ParserHelpers
         } elseif (!is_array($choices) || !array_is_list($choices)) {
             throw new \InvalidArgumentException("Choices must be a list");
         }
-        /** @var ValueOptionInterface[] $result */
         $result = [];
         foreach ($choices as $choice) {
             if (is_array($choice) && isset($choice['value'])) {
                 $value = $choice['value'];
-                $displayValues = $this->extractLocalizedTexts($choice, 'text', ['default' => $choice['value']]);
-            } elseif (is_string($choice) || is_int($choice)) {
+                if (!is_scalar($value)) {
+                    throw new \InvalidArgumentException('Values must be scalar, got: ' . print_r($choice, true));
+                }
+                $displayValues = $this->extractLocalizedTexts($choice, 'text', ['default' => (string) $value]);
+            } elseif (is_int($choice) || (is_string($choice) && ctype_digit($choice))) {
+                $value = (int)$choice;
+                $displayValues = [];
+            } elseif (is_string($choice)) {
                 $value = $choice;
                 $displayValues = [];
             } elseif ($choice === []) {
@@ -209,37 +262,56 @@ trait ParserHelpers
 
             if (is_int($value)) {
                 $result[] = new IntegerValueOption($value, $displayValues);
-            } elseif (is_scalar($value)) {
-                $result[] = new StringValueOption((string) $value, $displayValues);
             } else {
-                throw new \InvalidArgumentException('Values must be scalar, got: ' . print_r($choice, true));
+                $result[] = new StringValueOption((string) $value, $displayValues);
             }
         }
+
+        // Make sure that if 1 option is a string value option, all options are string value options.
 
         return $result;
     }
 
     /**
      * Concat a combination of localized strings and normal ones
-     * @param array<string> $titles
-     * @param (array<string, string>|string)[] $variables
+     * @param array<string, string> $titles
+     * @param array<string, string>|string $variables
      * @return array<string, string>
      */
     private function arrayFormat(array $titles, array|string ...$variables): array
     {
-        $locales = array_keys($titles);
-
+        $locales = [];
+        foreach ([$titles, ...$variables] as $stringDictionary) {
+            if (is_array($stringDictionary)) {
+                foreach (array_keys($stringDictionary) as $locale) {
+                    $locales[$locale] = true;
+                }
+            }
+        }
         $result = [];
-        foreach ($locales as $locale) {
+        foreach (array_keys($locales) as $locale) {
             $result[$locale] = '';
             foreach ([$titles, ...$variables] as $variable) {
                 if (is_array($variable)) {
-                    $result[$locale] .= $variable[$locale] ?? $variable['default'];
+                    $result[$locale] .= $variable[$locale] ?? $variable['default'] ?? $variable[array_keys($variable)[0]];
                 } else {
                     $result[$locale] .= $variable;
                 }
             }
         }
         return $result;
+    }
+
+
+    /**
+     * @template T
+     * @param list<object> $items
+     * @param class-string<T> $class
+     * @return bool
+     * @phpstan-assert-if-true list<T> $items
+     */
+    private function allInstanceOf(array $items, string $class): bool
+    {
+        return all(static fn (object $option) => $option instanceof $class, $items);
     }
 }

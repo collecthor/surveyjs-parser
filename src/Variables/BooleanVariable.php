@@ -4,76 +4,76 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Variables;
 
-use Collecthor\DataInterfaces\ClosedVariableInterface;
-use Collecthor\DataInterfaces\Measure;
-use Collecthor\DataInterfaces\RecordInterface;
-use Collecthor\DataInterfaces\StringValueInterface;
+use Collecthor\SurveyjsParser\Interfaces\BooleanVariableInterface;
+use Collecthor\SurveyjsParser\Interfaces\Measure;
+use Collecthor\SurveyjsParser\Interfaces\RecordInterface;
+use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
 use Collecthor\SurveyjsParser\Traits\GetName;
 use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
-use Collecthor\SurveyjsParser\Values\BooleanValue;
 use Collecthor\SurveyjsParser\Values\BooleanValueOption;
 use Collecthor\SurveyjsParser\Values\InvalidValue;
-use Collecthor\SurveyjsParser\Values\MissingBooleanValue;
-use Collecthor\SurveyjsParser\Values\StringValue;
+use Collecthor\SurveyjsParser\Values\MissingValue;
 
-final class BooleanVariable implements ClosedVariableInterface
+final readonly class BooleanVariable implements BooleanVariableInterface
 {
     use GetName, GetTitle, GetRawConfiguration;
+
+    private BooleanValueOption $yes;
+    private BooleanValueOption $no;
+
     /**
      * @param string $name
      * @param array<string, string> $titles
      * @param array<string, string> $trueLabels
      * @param array<string, string> $falseLabels
-     * @param array<string, mixed> $rawConfiguration
+     * @param array<mixed> $rawConfiguration
      * @param non-empty-list<string> $dataPath
      */
     public function __construct(
         private string $name,
-        private array $titles,
-        private readonly array $trueLabels,
-        private readonly array $falseLabels,
-        private readonly array $dataPath,
-        private array $rawConfiguration = []
+        private array $dataPath,
+        private array $titles = [],
+        private array $trueLabels = [],
+        private array $falseLabels = [],
+        private array $rawConfiguration = [],
+        bool|string $trueValue = true,
+        bool|string $falseValue = false,
     ) {
+        $this->yes = new BooleanValueOption($trueValue, true, $this->trueLabels);
+        $this->no = new BooleanValueOption($falseValue, false, $this->falseLabels);
     }
 
-    public function getValueOptions(): array
+    public function getOptions(): array
     {
         return [
-            new BooleanValueOption(true, $this->trueLabels),
-            new BooleanValueOption(false, $this->falseLabels),
+            $this->yes,
+            $this->no
         ];
     }
 
-    public function getValue(RecordInterface $record): BooleanValue | MissingBooleanValue | InvalidValue
+    public function getValue(RecordInterface $record): BooleanValueOption|SpecialValueInterface
     {
         $dataValue = $record->getDataValue($this->dataPath);
         if (is_null($dataValue)) {
-            return new MissingBooleanValue();
+            return MissingValue::create();
         }
-        if (!is_bool($dataValue)) {
-            return new InvalidValue($dataValue);
+        if ($dataValue === $this->yes->getRawValue()) {
+            return $this->yes;
+        } elseif ($dataValue === $this->no->getRawValue()) {
+            return $this->no;
         }
-        return new BooleanValue($dataValue);
-    }
 
-    public function getDisplayValue(RecordInterface $record, ?string $locale = 'default'): StringValueInterface
-    {
-        $result = $this->getValue($record);
-        if ($result instanceof InvalidValue || $result instanceof MissingBooleanValue) {
-            return new StringValue((string) $result->getRawValue());
-        } else {
-            if ($result->getRawValue()) {
-                return new StringValue($this->trueLabels[$locale]);
-            } else {
-                return new StringValue($this->falseLabels[$locale]);
-            }
-        }
+        return new InvalidValue($dataValue);
     }
 
     public function getMeasure(): Measure
     {
         return Measure::Nominal;
+    }
+
+    public function getNumberOfOptions(): int
+    {
+        return 2;
     }
 }

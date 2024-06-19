@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Values;
 
-use Collecthor\DataInterfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Traits\GetDisplayValue;
 
 final class StringValueOption implements ValueOptionInterface
@@ -19,7 +19,7 @@ final class StringValueOption implements ValueOptionInterface
     ) {
     }
 
-    public function getRawValue(): string
+    public function getValue(): string
     {
         return $this->rawValue;
     }
