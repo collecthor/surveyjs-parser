@@ -59,9 +59,9 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
-          tools: phpDocumentor
+          tools: phpDocumentor:3.5
       - name: Generate docs
-        run: phpdoc run
+        run: phpDocumentor run
       - name: Deploy docs to pages
         uses: peaceiris/actions-gh-pages@v3
         with:
