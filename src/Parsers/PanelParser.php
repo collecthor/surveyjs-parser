@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Parsers;
 
 use Collecthor\SurveyjsParser\ElementParserInterface;
-use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 
-class PanelParser implements ElementParserInterface
+use function Collecthor\SurveyjsParser\Helpers\extractOptionalArray;
+
+final readonly class PanelParser implements ElementParserInterface
 {
-    use ParserHelpers;
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        foreach ($this->extractOptionalArray($questionConfig, 'elements') ?? [] as $elementConfig) {
-            /** @phpstan-ignore-next-line  */
+        foreach (extractOptionalArray($questionConfig, 'elements') ?? [] as $elementConfig) {
+            /** @phpstan-ignore argument.type  */
             yield from $root->parse($root, $elementConfig, $surveyConfiguration, $dataPrefix);
         }
     }

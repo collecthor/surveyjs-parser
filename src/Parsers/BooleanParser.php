@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Parsers;
 
 use Collecthor\SurveyjsParser\ElementParserInterface;
-use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\BooleanVariable;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 
+use function Collecthor\SurveyjsParser\Helpers\extractOptionalString;
+use function Collecthor\SurveyjsParser\Helpers\extractTitles;
+use function Collecthor\SurveyjsParser\Helpers\extractValueName;
+
 final readonly class BooleanParser implements ElementParserInterface
 {
-    use ParserHelpers;
-
     /**
      * @param array<string, string> $trueLabels
      * @param array<string, string> $falseLabels
@@ -27,10 +28,10 @@ final readonly class BooleanParser implements ElementParserInterface
      */
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
+        $dataPath = [...$dataPrefix, extractValueName($questionConfig)];
         $id = implode('.', $dataPath);
 
-        $titles = $this->extractTitles($questionConfig);
+        $titles = extractTitles($questionConfig);
         yield new BooleanVariable(
             $id,
             $dataPath,
@@ -38,8 +39,8 @@ final readonly class BooleanParser implements ElementParserInterface
             $this->trueLabels,
             $this->falseLabels,
             $questionConfig,
-            trueValue: $this->extractOptionalString($questionConfig, 'valueTrue') ?? true,
-            falseValue: $this->extractOptionalString($questionConfig, 'valueFalse') ?? false,
+            trueValue: extractOptionalString($questionConfig, 'valueTrue') ?? true,
+            falseValue: extractOptionalString($questionConfig, 'valueFalse') ?? false,
         );
         yield from (new CommentParser())->parse($questionConfig, $surveyConfiguration, $dataPrefix);
     }

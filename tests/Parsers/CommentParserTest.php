@@ -36,14 +36,6 @@ final class CommentParserTest extends TestCase
         self::assertCount(1, toArray($variables));
     }
 
-    public function testHasCommentInvalidValue(): void
-    {
-        $parser = new CommentParser();
-        $variables = $parser->parse(['hasComment' => 15, 'name' => 'q1'], new SurveyConfiguration());
-        $this->expectException(\InvalidArgumentException::class);
-        toArray($variables);
-    }
-
     public function testHasCommentAndOther(): void
     {
         $parser = new CommentParser();

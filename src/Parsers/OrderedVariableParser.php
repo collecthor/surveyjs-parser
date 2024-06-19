@@ -5,23 +5,26 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Parsers;
 
 use Collecthor\SurveyjsParser\ElementParserInterface;
-use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 
-final class OrderedVariableParser implements ElementParserInterface
-{
-    use ParserHelpers;
+use function Collecthor\SurveyjsParser\Helpers\extractChoices;
+use function Collecthor\SurveyjsParser\Helpers\extractName;
+use function Collecthor\SurveyjsParser\Helpers\extractOptionalArray;
+use function Collecthor\SurveyjsParser\Helpers\extractTitles;
+use function Collecthor\SurveyjsParser\Helpers\extractValueName;
 
+final readonly class OrderedVariableParser implements ElementParserInterface
+{
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
+        $dataPath = [...$dataPrefix, extractValueName($questionConfig)];
 
-        $name = $this->extractName($questionConfig);
+        $name = extractName($questionConfig);
 
-        $titles = $this->extractTitles($questionConfig);
+        $titles = extractTitles($questionConfig);
 
-        $choices = $this->extractChoices($this->extractOptionalArray($questionConfig, 'choices'));
+        $choices = extractChoices(extractOptionalArray($questionConfig, 'choices'));
 
         if ($choices !== []) {
             yield new MultipleChoiceVariable(

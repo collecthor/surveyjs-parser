@@ -34,7 +34,7 @@ final class CallbackElementParserTest extends TestCase
 
         self::assertSame(0, $count);
         toArray($parser->parse($parent, $config, $surveyConfiguration));
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore staticMethod.impossibleType */
         self::assertSame(1, $count);
     }
 }

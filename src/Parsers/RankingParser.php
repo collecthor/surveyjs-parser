@@ -5,19 +5,21 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Parsers;
 
 use Collecthor\SurveyjsParser\ElementParserInterface;
-use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 
+use function Collecthor\SurveyjsParser\Helpers\extractChoices;
+use function Collecthor\SurveyjsParser\Helpers\extractOptionalArray;
+use function Collecthor\SurveyjsParser\Helpers\extractTitles;
+use function Collecthor\SurveyjsParser\Helpers\extractValueName;
+
 final class RankingParser implements ElementParserInterface
 {
-    use ParserHelpers;
-
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        $titles = $this->extractTitles($questionConfig);
-        $valueName = $this->extractValueName($questionConfig);
-        $choices = $this->extractChoices($this->extractOptionalArray($questionConfig, 'choices'));
+        $titles = extractTitles($questionConfig);
+        $valueName = extractValueName($questionConfig);
+        $choices = extractChoices(extractOptionalArray($questionConfig, 'choices'));
         if ($choices === []) {
             return;
         }

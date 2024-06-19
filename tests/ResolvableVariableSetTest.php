@@ -64,7 +64,7 @@ final class ResolvableVariableSetTest extends TestCase
         $callback1 = function (ResolvableVariableSet $variables) use (&$topLevelResolved): VariableInterface {
             $result = $variables->getVariable('variable2');
             // The next line turns true when callback2 resolves, but phpstan does not understand this.
-            /* @phpstan-ignore-next-line */
+            /* @phpstan-ignore staticMethod.impossibleType */
             self::assertTrue($topLevelResolved);
             return $result;
         };

@@ -5,6 +5,9 @@
     "license": "mit",
     "minimum-stability": "stable",
     "autoload": {
+        "files": [
+            "src/Helpers/utils.php"
+        ],
         "psr-4": {
             "Collecthor\\SurveyjsParser\\": "src/"
         }
