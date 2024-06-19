@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Parsers;
 
 use Collecthor\SurveyjsParser\ElementParserInterface;
-use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
+
+use function Collecthor\SurveyjsParser\Helpers\arrayFormat;
+use function Collecthor\SurveyjsParser\Helpers\extractOptionalArray;
+use function Collecthor\SurveyjsParser\Helpers\extractTitles;
+use function Collecthor\SurveyjsParser\Helpers\extractValueName;
 
 final readonly class MatrixDynamicParser implements ElementParserInterface
 {
-    use ParserHelpers;
     /**
      *
      * @param array<string, string> $rowLabels
@@ -23,7 +26,7 @@ final readonly class MatrixDynamicParser implements ElementParserInterface
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
         $answers = [];
-        foreach ($this->extractOptionalArray($questionConfig, 'choices') ?? [] as $answer) {
+        foreach (extractOptionalArray($questionConfig, 'choices') ?? [] as $answer) {
             if (is_scalar($answer)) {
                 $answer = [
                     'value' => $answer,
@@ -33,11 +36,11 @@ final readonly class MatrixDynamicParser implements ElementParserInterface
             $answers[] = $answer;
         }
 
-        $questionTitles = $this->extractTitles($questionConfig);
+        $questionTitles = extractTitles($questionConfig);
 
         $rowLimit = $questionConfig['maxRowCount'] ?? 10;
 
-        $valueName = $this->extractValueName($questionConfig);
+        $valueName = extractValueName($questionConfig);
         /** @var array<string, mixed> $column */
         foreach ((array)$questionConfig['columns'] as $column) {
             /** @var string $columnName */
@@ -45,8 +48,8 @@ final readonly class MatrixDynamicParser implements ElementParserInterface
             for ($r = 0; $r < $rowLimit; $r++) {
                 $rowConfig = $column;
                 $rowConfig['type'] = $column['cellType'] ?? $questionConfig['cellType'] ?? 'dropdown';
-                $rowConfig['choices'] = $this->extractOptionalArray($column, 'choices') ?? $answers;
-                $rowConfig['title'] = $this->arrayFormat($questionTitles, ' ', $columnName, ' ', $this->rowLabels, " $r");
+                $rowConfig['choices'] = extractOptionalArray($column, 'choices') ?? $answers;
+                $rowConfig['title'] = arrayFormat($questionTitles, ' ', $columnName, ' ', $this->rowLabels, " $r");
                 $rowConfig['valueName'] = $columnName;
                 yield from $root->parse(root: $root, questionConfig: $rowConfig, surveyConfiguration: $surveyConfiguration, dataPrefix: [...$dataPrefix, $valueName, (string)$r]);
             }

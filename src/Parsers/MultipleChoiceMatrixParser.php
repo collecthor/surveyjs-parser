@@ -5,25 +5,28 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Parsers;
 
 use Collecthor\SurveyjsParser\ElementParserInterface;
-use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
+
+use function Collecthor\SurveyjsParser\Helpers\arrayFormat;
+use function Collecthor\SurveyjsParser\Helpers\extractLocalizedTexts;
+use function Collecthor\SurveyjsParser\Helpers\extractOptionalArray;
+use function Collecthor\SurveyjsParser\Helpers\extractTitles;
+use function Collecthor\SurveyjsParser\Helpers\extractValueName;
 use function is_string;
 
-final class MultipleChoiceMatrixParser implements ElementParserInterface
+final readonly class MultipleChoiceMatrixParser implements ElementParserInterface
 {
-    use ParserHelpers;
-
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        $titles = $this->extractTitles($questionConfig);
-        $valueName = $this->extractValueName($questionConfig);
+        $titles = extractTitles($questionConfig);
+        $valueName = extractValueName($questionConfig);
 
         /** @var list<string|array{value: string, text:string|array<string, string>}> $rows */
-        $rows = $this->extractOptionalArray($questionConfig, 'rows') ?? [];
+        $rows = extractOptionalArray($questionConfig, 'rows') ?? [];
         /** @var list<array<string, mixed>> $columns */
-        $columns = $this->extractOptionalArray($questionConfig, 'columns') ?? [];
+        $columns = extractOptionalArray($questionConfig, 'columns') ?? [];
 
-        $defaultChoices = $this->extractOptionalArray($questionConfig, 'choices');
+        $defaultChoices = extractOptionalArray($questionConfig, 'choices');
 
 
         foreach ($rows as $row) {
@@ -31,11 +34,11 @@ final class MultipleChoiceMatrixParser implements ElementParserInterface
                 $rowName = $rowTitles = $row;
             } else {
                 $rowName = $row['value'];
-                $rowTitles = $this->extractLocalizedTexts($row, defaults: ['default' => $row['value']]);
+                $rowTitles = extractLocalizedTexts($row, defaults: ['default' => $row['value']]);
             }
             foreach ($columns as $column) {
-                $columnTitle = $this->extractTitles($column);
-                $title = $this->arrayFormat($titles, " - ", $rowTitles, " - ", $columnTitle);
+                $columnTitle = extractTitles($column);
+                $title = arrayFormat($titles, " - ", $rowTitles, " - ", $columnTitle);
 
                 $prefix = [...$dataPrefix, $valueName, $rowName];
 

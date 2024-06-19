@@ -6,31 +6,35 @@ namespace Collecthor\SurveyjsParser\Parsers;
 
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
-use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 
+use function Collecthor\SurveyjsParser\Helpers\extractChoices;
+use function Collecthor\SurveyjsParser\Helpers\extractName;
+use function Collecthor\SurveyjsParser\Helpers\extractOptionalArray;
+use function Collecthor\SurveyjsParser\Helpers\extractOptionalBoolean;
+use function Collecthor\SurveyjsParser\Helpers\extractTitles;
+use function Collecthor\SurveyjsParser\Helpers\extractValueName;
+
 final readonly class ImagePickerParser implements ElementParserInterface
 {
-    use ParserHelpers;
-
     /**
      * @return iterable<VariableInterface>
      */
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        $name = $this->extractName($questionConfig);
-        $titles = $this->extractTitles($questionConfig);
+        $name = extractName($questionConfig);
+        $titles = extractTitles($questionConfig);
 
-        $choices = $this->extractChoices($this->extractOptionalArray($questionConfig, 'choices'));
-        $valueName = $this->extractValueName($questionConfig);
+        $choices = extractChoices(extractOptionalArray($questionConfig, 'choices'));
+        $valueName = extractValueName($questionConfig);
 
         if ($choices === []) {
             return;
         }
 
-        if ($this->extractOptionalBoolean($questionConfig, 'multiSelect') ?? false) {
+        if (extractOptionalBoolean($questionConfig, 'multiSelect') ?? false) {
             yield new MultipleChoiceVariable(
                 name: $name,
                 dataPath: [...$dataPrefix, $valueName],

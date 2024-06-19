@@ -5,20 +5,21 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Parsers;
 
 use Collecthor\SurveyjsParser\ElementParserInterface;
-use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\OpenTextVariable;
 
+use function Collecthor\SurveyjsParser\Helpers\extractName;
+use function Collecthor\SurveyjsParser\Helpers\extractTitles;
+use function Collecthor\SurveyjsParser\Helpers\extractValueName;
+
 final readonly class ExpressionParser implements ElementParserInterface
 {
-    use ParserHelpers;
-
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
+        $dataPath = [...$dataPrefix, extractValueName($questionConfig)];
 
-        $name = implode('.', [...$dataPrefix, $this->extractName($questionConfig)]);
-        $titles = $this->extractTitles($questionConfig);
+        $name = implode('.', [...$dataPrefix, extractName($questionConfig)]);
+        $titles = extractTitles($questionConfig);
 
         // Try to parse the expression.
         if (isset($questionConfig['expression']) && is_string($questionConfig['expression'])) {

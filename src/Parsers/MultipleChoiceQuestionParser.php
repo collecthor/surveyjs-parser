@@ -10,35 +10,37 @@ use Collecthor\SurveyjsParser\Interfaces\ClosedVariableInterface;
 use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
-use Collecthor\SurveyjsParser\ParserHelpers;
 use Collecthor\SurveyjsParser\ResolvableVariableSet;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\DeferredVariable;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
+
+use function Collecthor\SurveyjsParser\Helpers\extractOptionalString;
+use function Collecthor\SurveyjsParser\Helpers\extractTitles;
+use function Collecthor\SurveyjsParser\Helpers\extractValueName;
+use function Collecthor\SurveyjsParser\Helpers\generateChoices;
 use function implode;
 
 final readonly class MultipleChoiceQuestionParser implements ElementParserInterface
 {
-    use ParserHelpers;
-
     public function parse(ElementParserInterface $root, array $questionConfig, SurveyConfiguration $surveyConfiguration, array $dataPrefix = []): iterable
     {
-        $dataPath = [...$dataPrefix, $this->extractValueName($questionConfig)];
+        $dataPath = [...$dataPrefix, extractValueName($questionConfig)];
 
         $name = implode(".", $dataPath);
 
-        $titles = $this->extractTitles($questionConfig);
+        $titles = extractTitles($questionConfig);
 
 
         // choicesFromQuestion
-        if (null !== $choicesFromQuestion = $this->extractOptionalString($questionConfig, 'choicesFromQuestion')) {
+        if (null !== $choicesFromQuestion = extractOptionalString($questionConfig, 'choicesFromQuestion')) {
             yield new DeferredVariable(
                 $name,
                 function (ResolvableVariableSet $set) use ($name, $titles, $dataPath, $questionConfig, $choicesFromQuestion): VariableInterface {
                     $variable = $set->getVariable($choicesFromQuestion);
                     if ($variable instanceof ClosedVariableInterface) {
                         // We get the special choices from current config
-                        $specialChoices = array_filter($this->generateChoices($questionConfig), function (ValueOptionInterface $option) {
+                        $specialChoices = array_filter(generateChoices($questionConfig), function (ValueOptionInterface $option) {
                             return $option instanceof SpecialValueInterface;
                         });
                         // We get the normal choices from the referenced variable
@@ -62,7 +64,7 @@ final readonly class MultipleChoiceQuestionParser implements ElementParserInterf
             yield new MultipleChoiceVariable(
                 name: $name,
                 dataPath: $dataPath,
-                options: $this->generateChoices($questionConfig),
+                options: generateChoices($questionConfig),
                 titles: $titles,
                 rawConfiguration: $questionConfig
             );
