@@ -99,6 +99,7 @@ final readonly class RatingParser implements ElementParserInterface
                     measure: !isset($questionConfig['rateType']) ? Measure::Scale : Measure::Ordinal
                 );
             }
+            yield from (new CommentParser())->parse($questionConfig, $surveyConfiguration, $dataPrefix);
         }
     }
 }

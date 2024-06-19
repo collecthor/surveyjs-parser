@@ -88,20 +88,17 @@ class SurveyParserTest extends TestCase
                         [
                             'type' => 'text',
                             'title' => 'question text',
-                            'name' => 'question1',
-                            'hasComment' => true
+                            'name' => 'question1'
                         ]
                     ]
                 ]
             ]
         ]);
 
-        self::assertCount(2, toArray($set->getVariables()));
+        self::assertCount(1, toArray($set->getVariables()));
         $variable = $set->getVariable('question1');
 
         self::assertSame('question text', $variable->getTitle());
-
-        self::assertInstanceOf(OpenTextVariable::class, $set->getVariable('question1.comment'));
     }
 
     public function testCalculatedValues(): void

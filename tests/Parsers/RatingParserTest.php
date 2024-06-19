@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
 use Collecthor\SurveyjsParser\ArrayDataRecord;
+use Collecthor\SurveyjsParser\Interfaces\StringVariableInterface;
 use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
@@ -271,5 +272,25 @@ JSON;
         foreach ($result->getOptions() as $i => $option) {
             self::assertSame($i + 1, $option->getValue());
         }
+    }
+
+    public function testRatingExportsComment(): void
+    {
+        $json = <<<JSON
+{
+       "type": "rating",
+       "name": "q1",
+       "showCommentArea": true,
+       "title": {
+        "default": "What rating?"
+       }
+      }
+JSON;
+        $parser = new RatingParser();
+
+        $result = toArray($parser->parse(new DummyParser(), json_decode($json, true, JSON_THROW_ON_ERROR), new SurveyConfiguration()));
+
+        self::assertCount(2, $result);
+        self::assertInstanceOf(StringVariableInterface::class, $result[1]);
     }
 }
