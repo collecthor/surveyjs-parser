@@ -44,7 +44,5 @@ class TextQuestionParser implements ElementParserInterface
                 rawConfiguration: $questionConfig
             );
         }
-
-        yield from (new CommentParser())->parse($questionConfig, $surveyConfiguration, $dataPrefix);
     }
 }
