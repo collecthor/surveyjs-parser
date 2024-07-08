@@ -47,7 +47,8 @@ final class ExpressionParserTest extends TestCase
             ['{Q008_ČSOB} notempty', 'NotEmpty(Variable(Q008_ČSOB))'],
             [' {Q008_HDI Fiba} notempty + {Q008_Garanti} notempty + {Q008_Halk} notempty + {Q008_Katilim} notempty + {Q008_Metlife} notempty + {Q008_Vakif} notempty + {Q008_Ziraat} notempty + {Q008_Bereket} notempty + {Q008_Turkiye} notempty', 'Addition(Addition(NotEmpty(Variable(Q008_HDI Fiba)), NotEmpty(Variable(Q008_Garanti))), Addition(Addition(NotEmpty(Variable(Q008_Halk)), NotEmpty(Variable(Q008_Katilim))), Addition(Addition(NotEmpty(Variable(Q008_Metlife)), NotEmpty(Variable(Q008_Vakif))), Addition(Addition(NotEmpty(Variable(Q008_Ziraat)), NotEmpty(Variable(Q008_Bereket))), NotEmpty(Variable(Q008_Turkiye))))))'],
             ['((notempty {Q008_Allianz}) + notempty {Q008_Ceska})', 'Addition(NotEmpty(Variable(Q008_Allianz)), NotEmpty(Variable(Q008_Ceska)))'],
-            ['{ppc} equal 9088', 'Eq3(Variable(ppc), Value(9088))']
+            ['{ppc} equal 9088', 'Eq3(Variable(ppc), Value(9088))'],
+            ['iif({RandomVar} empty, randInt(1,2),{RandomVar})', 'iif(Empty(Variable(RandomVar)), randInt(Value(1), Value(2)), Variable(RandomVar))'],
         ];
     }
 

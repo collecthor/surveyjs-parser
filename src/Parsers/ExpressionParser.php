@@ -22,7 +22,7 @@ final readonly class ExpressionParser implements ElementParserInterface
         $titles = extractTitles($questionConfig);
 
         // Try to parse the expression.
-        if (isset($questionConfig['expression']) && is_string($questionConfig['expression'])) {
+        if (isset($questionConfig['expression']) && is_string($questionConfig['expression']) && strlen($questionConfig['expression']) < 2000) {
             $sub = new \Collecthor\SurveyjsParser\Helpers\ExpressionParser();
             try {
                 $questionConfig['parsedExpression'] = $sub->parse($questionConfig['expression']);

@@ -22,6 +22,7 @@ enum ValueType
      */
     case Invalid;
 
+
     /**
      * The value indicates that the user picked an option like "none of the above"
      */
