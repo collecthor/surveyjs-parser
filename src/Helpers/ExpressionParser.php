@@ -132,11 +132,6 @@ class ExpressionParser
     private function parseExpression(Buffer $buffer): Node
     {
         $this->depth++;
-        if ($this->depth > 5) {
-            var_dump($this->depth);
-            die();
-        }
-
         $operands = [];
         $operators = [];
         $operands[] = $this->parseInternal($buffer);
