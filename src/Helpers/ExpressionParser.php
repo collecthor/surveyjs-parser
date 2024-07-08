@@ -17,6 +17,7 @@ use Collecthor\SurveyjsParser\Expressions\VariableNode;
 
 class ExpressionParser
 {
+    private int $depth = 0;
     /**
     Expression := Number | quoted-string
                   | FunctionName "(" ExpressionList ")" | Variable | BracketedExpression
@@ -130,6 +131,7 @@ class ExpressionParser
      */
     private function parseExpression(Buffer $buffer): Node
     {
+        $this->depth++;
         $operands = [];
         $operators = [];
         $operands[] = $this->parseInternal($buffer);
@@ -144,6 +146,7 @@ class ExpressionParser
             $operands[] = $this->parseInternal($buffer);
         }
 
+        $this->depth--;
         return $this->resolveOperators($operands, $operators);
     }
 
@@ -178,9 +181,18 @@ class ExpressionParser
     public function parse(string $expression): Node
     {
         $buffer = new Buffer($expression);
-        $result = $this->parseExpression($buffer);
+        try {
+            $result = $this->parseExpression($buffer);
+        } catch (\Throwable $t) {
+            $this->depth = 0;
+            throw $t;
+        }
+
         if ($buffer->peekChar() !== "") {
             throw new \Exception("Buffer not empty after parsing expression: " . $buffer);
+        }
+        if ($this->depth !== 0) {
+            throw new \Exception("Depth not 0 after parsing expression: $buffer");
         }
         return $result;
     }
