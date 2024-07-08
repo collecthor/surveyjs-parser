@@ -6,12 +6,32 @@ namespace Collecthor\SurveyjsParser\Helpers;
 
 use Collecthor\SurveyjsParser\FlattenResponseInterface;
 use Collecthor\SurveyjsParser\Interfaces\RecordInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Interfaces\VariableSetInterface;
+use Collecthor\SurveyjsParser\Interfaces\VariableTitleFormatterInterface;
 
 final readonly class FlattenResponseHelper implements FlattenResponseInterface
 {
-    public function __construct(private VariableSetInterface $variables, private ?string $locale = null)
-    {
+    /**
+     * @var \SplObjectStorage<VariableInterface, string>
+     */
+    private \SplObjectStorage $titleMap;
+
+    public function __construct(
+        private VariableSetInterface $variables,
+        private ?string $locale = null,
+        VariableTitleFormatterInterface|null $formatter = null
+    ) {
+        $formatter ??= new class() implements VariableTitleFormatterInterface {
+            public function formatHeaderText(VariableInterface $variable, string|null $locale): string
+            {
+                return $variable->getTitle($locale);
+            }
+        };
+        $this->titleMap = new \SplObjectStorage();
+        foreach ($this->variables->getVariables() as $variable) {
+            $this->titleMap->offsetSet($variable, $formatter->formatHeaderText($variable, $locale));
+        }
     }
 
     /** @param iterable<RecordInterface> $records */
@@ -20,9 +40,9 @@ final readonly class FlattenResponseHelper implements FlattenResponseInterface
         foreach ($records as $record) {
             $flattened = [];
             foreach ($this->variables->getVariables() as $variable) {
+                $baseTitle = $this->titleMap->offsetGet($variable);
                 // Check if it is a multiple choice variable.
                 if (DataTypeHelper::isMultipleChoice($variable)) {
-                    $baseTitle = $variable->getTitle($this->locale);
                     $value = $variable->getValue($record);
                     if ($variable->isOrdered()) {
                         // This is a ranking question, we export a column based on rank.
@@ -51,7 +71,7 @@ final readonly class FlattenResponseHelper implements FlattenResponseInterface
                     }
                 } else {
                     $value = $variable->getValue($record);
-                    $flattened[$variable->getTitle($this->locale)] = $value->getDisplayValue($this->locale);
+                    $flattened[$baseTitle] = $value->getDisplayValue($this->locale);
                 }
             }
             yield $flattened;
