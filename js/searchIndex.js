@@ -541,6 +541,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Helpers-ExpressionParser.html#method_parseFunction"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\ExpressionParser\u003A\u003A\u0024depth",
+            "name": "depth",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Helpers-ExpressionParser.html#property_depth"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\FlattenResponseHelper",
             "name": "FlattenResponseHelper",
             "summary": "",
@@ -555,6 +560,11 @@ Search.appendIndex(
             "name": "flattenAll",
             "summary": "Convert\u0020all\u0020records\u0020to\u0020a\u0020flat\u0020array",
             "url": "classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#method_flattenAll"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\FlattenResponseHelper\u003A\u003A\u0024titleMap",
+            "name": "titleMap",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#property_titleMap"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\FlattenResponseHelper\u003A\u003A\u0024variables",
             "name": "variables",
@@ -965,6 +975,16 @@ Search.appendIndex(
             "name": "getVariables",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Interfaces-VariableSetInterface.html#method_getVariables"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\VariableTitleFormatterInterface",
+            "name": "VariableTitleFormatterInterface",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-VariableTitleFormatterInterface.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Interfaces\\VariableTitleFormatterInterface\u003A\u003AformatHeaderText\u0028\u0029",
+            "name": "formatHeaderText",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Interfaces-VariableTitleFormatterInterface.html#method_formatHeaderText"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\LocalizerInterface",
             "name": "LocalizerInterface",
