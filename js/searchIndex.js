@@ -456,6 +456,11 @@ Search.appendIndex(
             "summary": "Convert\u0020all\u0020records\u0020to\u0020a\u0020flat\u0020array",
             "url": "classes/Collecthor-SurveyjsParser-FlattenResponseInterface.html#method_flattenAll"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\FlattenResponseInterface\u003A\u003Aflatten\u0028\u0029",
+            "name": "flatten",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-FlattenResponseInterface.html#method_flatten"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\DataTypeHelper",
             "name": "DataTypeHelper",
             "summary": "",
@@ -555,6 +560,11 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\FlattenResponseHelper\u003A\u003Aflatten\u0028\u0029",
+            "name": "flatten",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#method_flatten"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Helpers\\FlattenResponseHelper\u003A\u003AflattenAll\u0028\u0029",
             "name": "flattenAll",

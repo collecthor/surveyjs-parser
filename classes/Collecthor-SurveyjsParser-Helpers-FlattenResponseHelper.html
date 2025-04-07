@@ -126,7 +126,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Helpers/FlattenResponseHelper.php"><a href="files/src-helpers-flattenresponsehelper.html"><abbr title="src/Helpers/FlattenResponseHelper.php">FlattenResponseHelper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
@@ -181,7 +181,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#property_variables">$variables</a>
     <span>
-                        &nbsp;: <a href="classes/Collecthor-SurveyjsParser-Interfaces-VariableSetInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\VariableSetInterface">VariableSetInterface</abbr></a>            </span>
+                        &nbsp;: array&lt;int, <abbr title="\Collecthor\SurveyjsParser\Interfaces\VariableInterface">VariableInterface</abbr>&gt;            </span>
 </dt>
 
     </dl>
@@ -196,6 +196,12 @@
     <a class="" href="classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#method_flatten">flatten()</a>
+    <span>
+                                &nbsp;: array&lt;string, string|int|null&gt;    </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
@@ -235,7 +241,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Helpers/FlattenResponseHelper.php"><a href="files/src-helpers-flattenresponsehelper.html"><abbr title="src/Helpers/FlattenResponseHelper.php">FlattenResponseHelper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
@@ -271,7 +277,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Helpers/FlattenResponseHelper.php"><a href="files/src-helpers-flattenresponsehelper.html"><abbr title="src/Helpers/FlattenResponseHelper.php">FlattenResponseHelper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
@@ -307,7 +313,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Helpers/FlattenResponseHelper.php"><a href="files/src-helpers-flattenresponsehelper.html"><abbr title="src/Helpers/FlattenResponseHelper.php">FlattenResponseHelper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 
     </aside>
 
@@ -315,7 +321,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Collecthor-SurveyjsParser-Interfaces-VariableSetInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\VariableSetInterface">VariableSetInterface</abbr></a></span>
+        <span class="phpdocumentor-signature__type">array&lt;int, <abbr title="\Collecthor\SurveyjsParser\Interfaces\VariableInterface">VariableInterface</abbr>&gt;</span>
     <span class="phpdocumentor-signature__name">$variables</span>
     </code>
 
@@ -348,7 +354,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Helpers/FlattenResponseHelper.php"><a href="files/src-helpers-flattenresponsehelper.html"><abbr title="src/Helpers/FlattenResponseHelper.php">FlattenResponseHelper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
@@ -398,6 +404,54 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_flatten">
+        flatten()
+        <a href="classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#method_flatten" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Helpers/FlattenResponseHelper.php"><a href="files/src-helpers-flattenresponsehelper.html"><abbr title="src/Helpers/FlattenResponseHelper.php">FlattenResponseHelper.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">44</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">flatten</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-Interfaces-RecordInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\RecordInterface">RecordInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$record</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, string|int|null&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$record</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Collecthor-SurveyjsParser-Interfaces-RecordInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\RecordInterface">RecordInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string, string|int|null&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_flattenAll">
         flattenAll()
         <a href="classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#method_flattenAll" class="headerlink"><i class="fas fa-link"></i></a>
@@ -406,7 +460,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Helpers/FlattenResponseHelper.php"><a href="files/src-helpers-flattenresponsehelper.html"><abbr title="src/Helpers/FlattenResponseHelper.php">FlattenResponseHelper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">85</span>
 
     </aside>
 
@@ -414,7 +468,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">flattenAll</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">iterable&lt;string|int, <a href="classes/Collecthor-SurveyjsParser-Interfaces-RecordInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\RecordInterface">RecordInterface</abbr></a>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$records</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">iterable&lt;string|int, array&lt;string, string|int|null&gt;&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">flattenAll</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">iterable&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$records</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">iterable&lt;string|int, array&lt;string, string|int|null&gt;&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -424,7 +478,7 @@
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$records</span>
-                : <span class="phpdocumentor-signature__argument__return-type">iterable&lt;string|int, <a href="classes/Collecthor-SurveyjsParser-Interfaces-RecordInterface.html"><abbr title="\Collecthor\SurveyjsParser\Interfaces\RecordInterface">RecordInterface</abbr></a>&gt;</span>
+                : <span class="phpdocumentor-signature__argument__return-type">iterable&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -554,9 +608,9 @@
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#property_locale">$locale</li>
-                                                    <li class=""><a href="classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#property_titleMap">$titleMap</li>
-                                                    <li class=""><a href="classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#property_variables">$variables</li>
+                                                    <li class=""><a href="classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#property_locale">$locale</a></li>
+                                                    <li class=""><a href="classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#property_titleMap">$titleMap</a></li>
+                                                    <li class=""><a href="classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#property_variables">$variables</a></li>
                                             </ul>
                 </li>
             
@@ -564,6 +618,7 @@
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#method_flatten">flatten()</a></li>
                                             <li class=""><a href="classes/Collecthor-SurveyjsParser-Helpers-FlattenResponseHelper.html#method_flattenAll">flattenAll()</a></li>
                                     </ul>
             </li>
