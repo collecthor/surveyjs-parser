@@ -14,4 +14,9 @@ interface FlattenResponseInterface
      * @return iterable<array<string, string|int|null>>
      */
     public function flattenAll(iterable $records): iterable;
+
+    /**
+     * @return array<string, string|int|null>
+     */
+    public function flatten(RecordInterface $record): array;
 }
