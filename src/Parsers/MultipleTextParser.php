@@ -40,7 +40,7 @@ final readonly class MultipleTextParser implements ElementParserInterface
                 name: $itemName,
                 dataPath: $fullPath,
                 titles: $title,
-                rawConfiguration: $title
+                rawConfiguration: $questionConfig
             );
             $itemNames[] = $itemName;
         }

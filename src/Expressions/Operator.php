@@ -58,7 +58,7 @@ enum Operator: string
     }
 
     /**
-     * @return list<string>;
+     * @return list<string>
      */
     public static function values(): array
     {

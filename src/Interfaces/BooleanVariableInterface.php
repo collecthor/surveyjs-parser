@@ -12,7 +12,7 @@ interface BooleanVariableInterface extends VariableInterface, ClosedVariableInte
     public function getValue(RecordInterface $record): BooleanValueInterface|SpecialValueInterface;
 
     /**
-     * @return int{2}
+     * @return non-negative-int
      */
     public function getNumberOfOptions(): int;
 }

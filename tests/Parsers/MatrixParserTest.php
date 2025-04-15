@@ -12,6 +12,7 @@ use Collecthor\SurveyjsParser\SurveyConfiguration;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use function Collecthor\SurveyjsParser\Tests\support\assertContainsOnlyInstancesOfFixed;
 use function iter\toArray;
 
 #[CoversClass(MatrixParser::class)]
@@ -47,7 +48,7 @@ final class MatrixParserTest extends TestCase
             self::assertInstanceOf(SingleChoiceVariable::class, $variable);
         }
 
-        self::assertContainsOnlyInstancesOf(VariableInterface::class, $result);
+        assertContainsOnlyInstancesOfFixed(VariableInterface::class, $result);
         self::assertEquals("question4 - Row 1", $result[0]->getTitle());
     }
 
@@ -75,7 +76,7 @@ final class MatrixParserTest extends TestCase
 
         $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
 
-        self::assertContainsOnlyInstancesOf(VariableInterface::class, $result);
+        assertContainsOnlyInstancesOfFixed(VariableInterface::class, $result);
         self::assertEquals("question4 - Row 1", $result[0]->getTitle());
         self::assertEquals("question4 - Row 2", $result[1]->getTitle());
         self::assertEquals("question4 - Row 3", $result[2]->getTitle());

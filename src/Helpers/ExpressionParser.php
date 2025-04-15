@@ -214,7 +214,7 @@ class ExpressionParser
             return new UnescapedStringNode($functionName);
         }
         $buffer->readChar('(');
-        while ($buffer->peekChar() != ")") {
+        while ($buffer->peekChar() !== ")") {
             $buffer->consumeWhitespace();
             $arguments[] = $this->parseExpression($buffer);
             $buffer->consumeWhitespace();

@@ -15,7 +15,7 @@ final class FloatValueTest extends TestCase
     use SimpleValueTests;
 
     /**
-     * @return iterable<list<float>>
+     * @return iterable<non-empty-list<float>>
      */
     public static function getValidSamples(): iterable
     {
@@ -23,7 +23,7 @@ final class FloatValueTest extends TestCase
     }
 
     /**
-     * @return iterable<array<mixed>>
+     * @return iterable<non-empty-list<mixed>>
      */
     public static function getInvalidSamples(): iterable
     {

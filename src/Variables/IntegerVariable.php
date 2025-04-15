@@ -50,6 +50,7 @@ final readonly class IntegerVariable implements IntegerVariableInterface
 
     /**
      * Numerical variables are always ordered, they might even be scalar, but that depends on context.
+     * @return Measure::Ordinal
      */
     public function getMeasure(): Measure
     {

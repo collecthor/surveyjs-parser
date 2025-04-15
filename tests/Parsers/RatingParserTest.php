@@ -16,6 +16,7 @@ use Collecthor\SurveyjsParser\Variables\SingleChoiceIntegerVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use function Collecthor\SurveyjsParser\Tests\support\assertContainsOnlyInstancesOfFixed;
 use function iter\toArray;
 
 #[CoversClass(RatingParser::class)]
@@ -39,7 +40,7 @@ final class RatingParserTest extends TestCase
 
         $choices = $variable->getOptions();
         self::assertCount(5, $choices);
-        self::assertContainsOnlyInstancesOf(IntegerValueOption::class, $choices);
+        assertContainsOnlyInstancesOfFixed(IntegerValueOption::class, $choices);
 
         $values = array_map(function (IntegerValueOption $option) {
             return $option->getValue();

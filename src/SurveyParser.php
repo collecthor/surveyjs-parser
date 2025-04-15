@@ -46,7 +46,14 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
                 SurveyConfiguration $surveyConfiguration,
                 array $dataPrefix
             ) {
-                yield from $this->parseElement(config: $questionConfig, surveyConfiguration: $surveyConfiguration, dataPrefix: $dataPrefix);
+                if ($questionConfig === []) {
+                    throw new ParseError("Element JSON must be a dictionary");
+                }
+                yield from $this->parseElement(
+                    config: $questionConfig,
+                    surveyConfiguration: $surveyConfiguration,
+                    dataPrefix: $dataPrefix
+                );
             }
         );
 
@@ -130,7 +137,7 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
     }
 
     /**
-     * @param array<mixed> $config
+     * @param non-empty-array<mixed> $config
      * @param SurveyConfiguration $surveyConfiguration
      * @param list<string> $dataPrefix
      * @return iterable<VariableInterface|DeferredVariable>
@@ -141,7 +148,12 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
             throw new \ParseError("Element JSON must contain 'type' key and it must be a string");
         }
 
-        yield from $this->getParser($config['type'])->parse(root: $this->recursiveParser, questionConfig: $config, surveyConfiguration: $surveyConfiguration, dataPrefix: $dataPrefix);
+        yield from $this->getParser($config['type'])->parse(
+            root: $this->recursiveParser,
+            questionConfig: $config,
+            surveyConfiguration: $surveyConfiguration,
+            dataPrefix: $dataPrefix
+        );
     }
 
     /**
@@ -153,7 +165,7 @@ class SurveyParser implements SurveyParserInterface, ElementParserInterface
     {
         $elements = isset($structure['elements']) && is_iterable($structure['elements']) ? $structure['elements'] : [];
         foreach ($elements as $element) {
-            if (!is_array($element)) {
+            if (!is_array($element) || $element === []) {
                 throw new ParseError("Element JSON must be a dictionary");
             }
             yield from $this->parseElement($element, $surveyConfiguration);

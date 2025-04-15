@@ -13,6 +13,9 @@
         }
     },
     "autoload-dev": {
+        "files": [
+            "tests/support/functions.php"
+        ],
         "psr-4": {
             "Collecthor\\SurveyjsParser\\Tests\\": "tests/"
         }
@@ -25,17 +28,16 @@
     ],
     "require-dev": {
         "symplify/easy-coding-standard": ">= 11",
-        "phpunit/phpunit": "^11",
-        "phpstan/phpstan": "1.11.x-dev",
+        "phpunit/phpunit": "^12",
+        "phpstan/phpstan": "^2",
         "ramsey/conventional-commits": "^1",
         "captainhook/plugin-composer": "^5.3",
         "nikic/iter": "^2",
-        "phpstan/phpstan-phpunit": "^1",
         "phpstan/extension-installer": "^1",
-        "phpstan/phpstan-strict-rules": "^1"
+        "phpstan/phpstan-strict-rules": "^2"
     },
     "require": {
-        "php": ">= 8.2"
+        "php": ">= 8.4"
     },
     "config": {
         "allow-plugins": {

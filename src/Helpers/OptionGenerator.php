@@ -18,7 +18,7 @@ class OptionGenerator
     public static function generateOptionsFromUnitEnum(UnitEnum $example): array
     {
         $mapper = static fn (UnitEnum $case): StringValueOption => new StringValueOption($case->name, [ValueOptionInterface::DEFAULT_LOCALE => $case->name]);
-        return array_values(array_map($mapper, $example::cases()));
+        return array_map($mapper, $example::cases());
     }
 
     /**
