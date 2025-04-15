@@ -15,7 +15,6 @@ trait SimpleValueTests
     {
         $reflection = new \ReflectionClass($this);
 
-        /** @var non-empty-list<mixed> $sample */
         foreach (static::getValidSamples() as $sample) {
             $defaultValue = $sample[0];
             break;
@@ -42,11 +41,11 @@ trait SimpleValueTests
     }
 
     /**
-     * @return iterable<mixed>
+     * @return iterable<non-empty-list<mixed>>
      */
     abstract protected static function getValidSamples(): iterable;
     /**
-     * @return iterable<mixed>
+     * @return iterable<non-empty-list<mixed>>
      */
     abstract protected static function getInvalidSamples(): iterable;
 

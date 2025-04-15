@@ -1,0 +1,7 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Parameter \$questionConfig of method Collecthor\\SurveyjsParser\\ElementParserInterface\:\:parse\(\) expects non\-empty\-array\<mixed\>, non\-empty\-array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/SurveyParser.php

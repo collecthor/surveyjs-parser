@@ -25,6 +25,7 @@ use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use DateTime;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use function Collecthor\SurveyjsParser\Tests\support\assertContainsOnlyInstancesOfFixed;
 use function iter\toArray;
 
 #[CoversClass(MultipleChoiceMatrixParser::class)]
@@ -140,7 +141,7 @@ final class MultipleChoiceMatrixParserTest extends TestCase
         $result = toArray($parser->parse($rootParser, $questionConfig, $surveyConfig));
 
         self::assertCount(16, $result);
-        self::assertContainsOnlyInstancesOf(VariableInterface::class, $result);
+        assertContainsOnlyInstancesOfFixed(VariableInterface::class, $result);
 
         self::assertEquals("question1 - DPD - col1", $result[0]->getTitle());
         self::assertEquals("question1 - DPD - col2", $result[1]->getTitle());
@@ -382,7 +383,7 @@ final class MultipleChoiceMatrixParserTest extends TestCase
             ]
         ], 1, new DateTime(), new DateTime());
 
-        self::assertContainsOnlyInstancesOf(VariableInterface::class, $result);
+        assertContainsOnlyInstancesOfFixed(VariableInterface::class, $result);
 
         $value = $result[0]->getValue($record);
         self::assertInstanceOf(SpecialValueOptionInterface::class, $value);
@@ -432,7 +433,7 @@ final class MultipleChoiceMatrixParserTest extends TestCase
         $surveyConfig = new SurveyConfiguration();
         $result = toArray($parser->parse($this->getRootParser(), $config, $surveyConfig, []));
 
-        self::assertContainsOnlyInstancesOf(SingleChoiceVariable::class, $result);
+        assertContainsOnlyInstancesOfFixed(SingleChoiceVariable::class, $result);
         self::assertCount(6, $result);
         foreach ($result as $variable) {
             self::assertCount(5, $variable->getOptions());

@@ -11,6 +11,7 @@ use Collecthor\SurveyjsParser\Parsers\TextQuestionParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use function Collecthor\SurveyjsParser\Tests\support\assertContainsOnlyInstancesOfFixed;
 use function iter\toArray;
 
 #[CoversClass(DynamicPanelParser::class)]
@@ -93,7 +94,8 @@ final class DynamicPanelParserTest extends TestCase
         $parser = new DynamicPanelParser(['default' => 'row']);
 
         $result = toArray($parser->parse($rootParser, $questionConfig, $surveyConfig));
-        self::assertContainsOnlyInstancesOf(VariableInterface::class, $result);
+
+        assertContainsOnlyInstancesOfFixed(VariableInterface::class, $result);
         self::assertSame("question1 row 0 question2", $result[0]->getTitle());
     }
 }

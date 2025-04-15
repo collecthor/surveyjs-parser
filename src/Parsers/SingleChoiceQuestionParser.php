@@ -43,9 +43,9 @@ final readonly class SingleChoiceQuestionParser implements ElementParserInterfac
                     if ($variable instanceof ClosedVariableInterface) {
                         return new SingleChoiceVariable(
                             name: $name,
-                            options: array_filter($variable->getOptions(), function (ValueOptionInterface $option) {
+                            options: array_values(array_filter($variable->getOptions(), function (ValueOptionInterface $option) {
                                 return !$option instanceof SpecialValueInterface;
-                            }),
+                            })),
                             dataPath: $dataPath,
                             rawConfiguration: $questionConfig,
                             titles: $titles

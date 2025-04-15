@@ -16,7 +16,7 @@ class IntegerValueTest extends TestCase
 
 
     /**
-     * @return iterable<list<int>>
+     * @return iterable<non-empty-list<int>>
      */
     public static function getValidSamples(): iterable
     {
@@ -24,7 +24,7 @@ class IntegerValueTest extends TestCase
     }
 
     /**
-     * @return iterable<mixed>
+     * @return iterable<non-empty-list<mixed>>
      */
     public static function getInvalidSamples(): iterable
     {
