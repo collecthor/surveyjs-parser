@@ -55,9 +55,9 @@ final class FloatVariableTest extends VariableTestBase
     }
 
 
-    protected function getVariableWithName(string $name): VariableInterface
+    protected function getVariableWithName(string $name, array $dataPath = ['path']): VariableInterface
     {
-        return new FloatVariable($name, ['en' => 'English', 'nl' => 'Dutch'], ['path']);
+        return new FloatVariable($name, ['en' => 'English', 'nl' => 'Dutch'], $dataPath);
     }
 
     protected function getVariableWithTitles(array $titles): VariableInterface

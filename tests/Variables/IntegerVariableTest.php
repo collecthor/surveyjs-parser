@@ -53,9 +53,9 @@ class IntegerVariableTest extends VariableTestBase
     }
 
 
-    protected function getVariableWithName(string $name): VariableInterface
+    protected function getVariableWithName(string $name, array $dataPath = ['path']): VariableInterface
     {
-        return new IntegerVariable($name, ['en' => 'English', 'nl' => 'Dutch'], ['path']);
+        return new IntegerVariable($name, ['en' => 'English', 'nl' => 'Dutch'], $dataPath);
     }
 
     protected function getVariableWithTitles(array $titles): VariableInterface

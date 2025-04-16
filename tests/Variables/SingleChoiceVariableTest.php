@@ -116,9 +116,9 @@ class SingleChoiceVariableTest extends VariableTestBase
         return new SingleChoiceVariable("test", options: [new IntegerValueOption(15, ['en' => 'test'])], dataPath: ['path'], rawConfiguration: $rawConfiguration);
     }
 
-    protected function getVariableWithName(string $name): SingleChoiceVariable
+    protected function getVariableWithName(string $name, array $dataPath = ['path']): SingleChoiceVariable
     {
-        return new SingleChoiceVariable($name, options: [new IntegerValueOption(15, ['en' => 'test'])], dataPath: ['path']);
+        return new SingleChoiceVariable($name, options: [new IntegerValueOption(15, ['en' => 'test'])], dataPath: $dataPath);
     }
 
     /**

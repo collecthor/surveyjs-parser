@@ -58,9 +58,9 @@ final class OpenTextVariableTest extends VariableTestBase
         );
     }
 
-    protected function getVariableWithName(string $name): OpenTextVariable
+    protected function getVariableWithName(string $name, array $dataPath = ['path']): OpenTextVariable
     {
-        return new OpenTextVariable($name, dataPath: ['path'], titles: ['en' => 'English', 'nl' => 'Dutch']);
+        return new OpenTextVariable($name, dataPath: $dataPath, titles: ['en' => 'English', 'nl' => 'Dutch']);
     }
 
     protected function getVariableWithTitles(array $titles): VariableInterface

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Interfaces;
 
+use Collecthor\SurveyjsParser\Values\JavascriptFunction;
+
 /**
  * @internal
  */
@@ -29,4 +31,10 @@ interface VariableInterface
     public function getMeasure(): Measure;
 
     public function getRawConfigurationValue(string|int $key): mixed;
+
+    /**
+     * Return a javascript function that takes a data dictionary and extracts the RAW value of the variable.
+     * @return JavascriptFunction
+     */
+    public function getExtractor(): JavascriptFunction;
 }
