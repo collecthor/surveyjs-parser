@@ -8,6 +8,7 @@ use Collecthor\SurveyjsParser\Interfaces\BooleanVariableInterface;
 use Collecthor\SurveyjsParser\Interfaces\Measure;
 use Collecthor\SurveyjsParser\Interfaces\RecordInterface;
 use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
+use Collecthor\SurveyjsParser\Traits\GetExtractor;
 use Collecthor\SurveyjsParser\Traits\GetName;
 use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
@@ -17,7 +18,7 @@ use Collecthor\SurveyjsParser\Values\MissingValue;
 
 final readonly class BooleanVariable implements BooleanVariableInterface
 {
-    use GetName, GetTitle, GetRawConfiguration;
+    use GetName, GetTitle, GetRawConfiguration, GetExtractor;
 
     private BooleanValueOption $yes;
     private BooleanValueOption $no;

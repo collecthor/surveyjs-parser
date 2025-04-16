@@ -16,7 +16,11 @@ abstract class VariableTestBase extends TestCase
      * @return VariableInterface
      */
     abstract protected function getVariableWithRawConfiguration(array $rawConfiguration): VariableInterface;
-    abstract protected function getVariableWithName(string $name): VariableInterface;
+
+    /**
+     * @param non-empty-list<string> $dataPath
+     */
+    abstract protected function getVariableWithName(string $name, array $dataPath = ['path']): VariableInterface;
     /**
      * @param array<string, string> $titles
      */
@@ -63,5 +67,11 @@ abstract class VariableTestBase extends TestCase
             self::assertSame($title, $variable->getTitle($locale));
         }
         self::assertSame($titles[ValueOptionInterface::DEFAULT_LOCALE], $variable->getTitle());
+    }
+
+    final public function testGetExtractor(): void
+    {
+        $variable = $this->getVariableWithName('test12345', ['test', 'def']);
+        self::assertSame('(data) => data["test"]?.["def"] ?? null', (string) $variable->getExtractor());
     }
 }

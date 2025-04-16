@@ -9,6 +9,7 @@ use Collecthor\SurveyjsParser\Interfaces\Measure;
 use Collecthor\SurveyjsParser\Interfaces\RecordInterface;
 use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\TimestampVariableInterface;
+use Collecthor\SurveyjsParser\Traits\GetExtractor;
 use Collecthor\SurveyjsParser\Traits\GetName;
 use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
@@ -18,7 +19,7 @@ use Collecthor\SurveyjsParser\Values\MissingValue;
 
 final readonly class TimestampVariable implements TimestampVariableInterface
 {
-    use GetName, GetTitle, GetRawConfiguration;
+    use GetName, GetTitle, GetRawConfiguration, GetExtractor;
 
     /**
      * @param array<string, string> $titles

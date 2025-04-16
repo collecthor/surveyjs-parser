@@ -102,9 +102,9 @@ final class BooleanVariableTest extends VariableTestBase
         return new BooleanVariable(name: 'test', dataPath: ['path'], rawConfiguration: $rawConfiguration);
     }
 
-    protected function getVariableWithName(string $name): VariableInterface
+    protected function getVariableWithName(string $name, array $dataPath = ['path']): VariableInterface
     {
-        return new BooleanVariable(name: $name, dataPath: ['path']);
+        return new BooleanVariable(name: $name, dataPath: $dataPath);
     }
 
     protected function getVariableWithTitles(array $titles): VariableInterface

@@ -10,6 +10,7 @@ use Collecthor\SurveyjsParser\Interfaces\MultipleChoiceVariableInterface;
 use Collecthor\SurveyjsParser\Interfaces\RecordInterface;
 use Collecthor\SurveyjsParser\Interfaces\SpecialValueInterface;
 use Collecthor\SurveyjsParser\Interfaces\ValueOptionInterface;
+use Collecthor\SurveyjsParser\Traits\GetExtractor;
 use Collecthor\SurveyjsParser\Traits\GetName;
 use Collecthor\SurveyjsParser\Traits\GetRawConfiguration;
 use Collecthor\SurveyjsParser\Traits\GetTitle;
@@ -19,7 +20,7 @@ use Collecthor\SurveyjsParser\Values\MultipleChoiceValue;
 
 final readonly class MultipleChoiceVariable implements MultipleChoiceVariableInterface
 {
-    use GetName, GetTitle, GetRawConfiguration;
+    use GetName, GetTitle, GetRawConfiguration, GetExtractor;
 
     /**
      * We can say this is non-empty, since valueoptions is non-empty, and this is a direct mapping from valueoptions
