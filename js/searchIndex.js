@@ -1421,6 +1421,21 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Traits-GetDisplayValue.html#method_getDisplayValues"
         },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Traits\\GetExtractor",
+            "name": "GetExtractor",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Traits-GetExtractor.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Traits\\GetExtractor\u003A\u003AgetExtractor\u0028\u0029",
+            "name": "getExtractor",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Traits-GetExtractor.html#method_getExtractor"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Traits\\GetExtractor\u003A\u003A\u0024dataPath",
+            "name": "dataPath",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Traits-GetExtractor.html#property_dataPath"
+        },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Traits\\GetName",
             "name": "GetName",
             "summary": "",
@@ -1670,6 +1685,26 @@ Search.appendIndex(
             "name": "value",
             "summary": "",
             "url": "classes/Collecthor-SurveyjsParser-Values-InvalidValue.html#property_value"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\JavascriptFunction",
+            "name": "JavascriptFunction",
+            "summary": "This\u0020is\u0020a\u0020value\u0020object\u0020for\u0020an\u0020anonymous\u0020javascript\u0020function.",
+            "url": "classes/Collecthor-SurveyjsParser-Values-JavascriptFunction.html"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\JavascriptFunction\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-JavascriptFunction.html#method___construct"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\JavascriptFunction\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-JavascriptFunction.html#method___toString"
+        },                {
+            "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\JavascriptFunction\u003A\u003A\u0024definition",
+            "name": "definition",
+            "summary": "",
+            "url": "classes/Collecthor-SurveyjsParser-Values-JavascriptFunction.html#property_definition"
         },                {
             "fqsen": "\\Collecthor\\SurveyjsParser\\Values\\MissingValue",
             "name": "MissingValue",
