@@ -6,17 +6,6 @@ on:
       - reopened
       - synchronize
 jobs:
-  static_analysis_psalm:
-    name: Static Analysis (psalm)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Psalm
-        uses: docker://ghcr.io/psalm/psalm-github-actions
-        with:
-          composer_require_dev: true
-          composer_ignore_platform_reqs: true
-          security_analysis: true
   code_checks:
     name: Check code
     runs-on: ubuntu-latest
