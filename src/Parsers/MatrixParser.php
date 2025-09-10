@@ -7,6 +7,7 @@ namespace Collecthor\SurveyjsParser\Parsers;
 use Collecthor\SurveyjsParser\ElementParserInterface;
 use Collecthor\SurveyjsParser\Exception\ParseError;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
+use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 
 use function Collecthor\SurveyjsParser\Helpers\arrayFormat;
@@ -45,15 +46,27 @@ final readonly class MatrixParser implements ElementParserInterface
                     throw new \InvalidArgumentException("Matrix rows MUST contain a 'value' key with a scalar value");
                 }
 
-                $rowTexts = extractLocalizedTexts($row, defaults: ['default' => (string) $row['value']]);
+                $name = "{$valueName}.{$row['value']}";
+                $dataPath = [...$dataPrefix, $valueName, $row['value']];
 
-                yield new SingleChoiceVariable(
-                    name: "{$valueName}.{$row['value']}",
-                    titles: arrayFormat($titles, " - ", $rowTexts),
-                    options: $answers,
-                    dataPath: [...$dataPrefix, $valueName, $row['value']],
-                    rawConfiguration: $questionConfig
-                );
+                $rowTitles = arrayFormat($titles, " - ", extractLocalizedTexts($row, defaults: ['default' => (string) $row['value']]));
+                if (($questionConfig['cellType'] ?? 'radiogroup') === 'checkbox') {
+                    yield new MultipleChoiceVariable(
+                        name: $name,
+                        dataPath: $dataPath,
+                        options: $answers,
+                        titles: $rowTitles,
+                        rawConfiguration: $questionConfig
+                    );
+                } else {
+                    yield new SingleChoiceVariable(
+                        name: $name,
+                        options: $answers,
+                        dataPath: $dataPath,
+                        rawConfiguration: $questionConfig,
+                        titles: $rowTitles
+                    );
+                }
             }
         }
     }
