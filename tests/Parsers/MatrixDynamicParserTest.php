@@ -11,7 +11,6 @@ use Collecthor\SurveyjsParser\SurveyParser;
 use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\TestCase;
 
 use function iter\toArray;
@@ -66,7 +65,6 @@ final class MatrixDynamicParserTest extends TestCase
         toArray($parser->parse($rootParser, $questionConfig, $surveyConfig));
     }
 
-    #[CoversNothing]
     public function testUseCustomDropdownOptions(): void
     {
         $surveyConfig = new SurveyConfiguration();

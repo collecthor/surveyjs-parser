@@ -56,7 +56,7 @@ final readonly class MultipleChoiceVariable implements MultipleChoiceVariableInt
 
         if (is_array($rawValues)) {
             // Special case, if we have 1 value it might be a special value.
-            if (count($rawValues) === 1) {
+            if (count($rawValues) === 1 && (is_int($rawValues[0]) || is_string($rawValues[0]))) {
                 $value = $this->valueMap[$rawValues[0]];
                 if (DataTypeHelper::valueIsNormal($value)) {
                     return new MultipleChoiceValue($value);

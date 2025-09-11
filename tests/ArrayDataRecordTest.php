@@ -37,9 +37,11 @@ class ArrayDataRecordTest extends TestCase
 
     /**
      * @param array<string, mixed> $exampleData
+     * @param non-empty-list<string> $path
+     *
      */
     #[DataProvider('dataProvider')]
-    public function testAllData(array $exampleData): void
+    public function testAllData(array $exampleData, array $path, mixed $value): void
     {
         $subject = new ArrayDataRecord($exampleData);
         self::assertSame($exampleData, $subject->allData());

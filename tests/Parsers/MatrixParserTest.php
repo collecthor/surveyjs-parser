@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace Collecthor\SurveyjsParser\Tests\Parsers;
 
+use Collecthor\SurveyjsParser\ArrayRecord;
 use Collecthor\SurveyjsParser\Interfaces\ClosedVariableInterface;
 use Collecthor\SurveyjsParser\Interfaces\VariableInterface;
 use Collecthor\SurveyjsParser\Parsers\DummyParser;
 use Collecthor\SurveyjsParser\Parsers\MatrixParser;
 use Collecthor\SurveyjsParser\SurveyConfiguration;
+use Collecthor\SurveyjsParser\Values\MultipleChoiceValue;
+use Collecthor\SurveyjsParser\Variables\MultipleChoiceVariable;
 use Collecthor\SurveyjsParser\Variables\SingleChoiceVariable;
+use DateTime;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use function Collecthor\SurveyjsParser\Tests\support\assertContainsOnlyInstancesOfFixed;
@@ -18,6 +22,47 @@ use function iter\toArray;
 #[CoversClass(MatrixParser::class)]
 final class MatrixParserTest extends TestCase
 {
+    public function testCheckboxCells(): void
+    {
+        $surveyConfig = new SurveyConfiguration();
+        $questionConfig = [
+            "type" => "matrix",
+            "name" => "question4",
+            "cellType" => "checkbox",
+            "columns" => [
+                "c1",
+                "c2",
+                "c3"
+            ],
+            "rows" => [
+                "r1",
+                "r2",
+                "r3",
+                "r4",
+                "r5"
+            ]
+        ];
+
+        $parser = new MatrixParser();
+
+        $result = toArray($parser->parse(new DummyParser(), $questionConfig, $surveyConfig));
+
+        self::assertCount(5, $result);
+
+        foreach ($result as $i => $variable) {
+            self::assertInstanceOf(MultipleChoiceVariable::class, $variable);
+            $rowName = "r" . ($i + 1);
+            $value = $variable->getValue(new ArrayRecord([
+                'question4' => [
+                    $rowName => ['c2', 'c3']
+                ]
+            ], 123, new DateTime(), new DateTime()));
+            self::assertInstanceOf(MultipleChoiceValue::class, $value);
+        }
+
+        assertContainsOnlyInstancesOfFixed(VariableInterface::class, $result);
+        self::assertEquals("question4 - r1", $result[0]->getTitle());
+    }
     public function testVariableCount(): void
     {
         $surveyConfig = new SurveyConfiguration();
